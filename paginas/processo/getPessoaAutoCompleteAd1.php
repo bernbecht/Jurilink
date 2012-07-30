@@ -8,12 +8,11 @@ include '../classes/CFisica.php';
 include '../classes/CJuridica.php';
 include '../classes/CAdvogado.php';
 
-$nome = $_POST['autor_advogado'];
+//$nome = $_POST['autor_advogado'];
 
 
 
-
-
+echo "ois";
 
 
 if ($nome != "" || $nome != "") {
