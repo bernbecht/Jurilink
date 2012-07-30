@@ -1,0 +1,89 @@
+
+
+.barra-titulo{
+    height: 30px;
+    width: 562px;
+    margin: 3px;
+    background-color: #c7bc89;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;   
+}
+
+
+.esquerda{
+    float: left;
+    padding: 0 0 0 10px;
+}
+
+
+.esquerda > h3{    
+    color: #7f7858;
+    text-shadow: 1px 1px 0 white;
+}
+
+
+.direita{
+    float: right;
+    padding: 0 5px 0 0;
+    margin-top:  3px;
+
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0){    /*para o chrome */
+    .direita{
+        margin-top: 2px;
+
+    }
+}
+
+.direita > a{
+    margin-bottom: 5px;
+}
+
+.tabela{
+    margin: 7px  3px 0 3px;
+
+}
+
+.barra_titulo222 [class*="span"] {
+    background-color: #c7bc89;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    min-height: 30px;
+    line-height: 30px;
+}
+
+.inicio-box{
+    padding: 5px;
+}
+
+.autocompleteBox {
+  position:absolute;
+  width:250px;
+  background-color:white;
+  border:1px solid #888;
+  margin:0px;
+  padding:0px;
+ }
+ .autocompleteBox ul {
+  list-style-type:none;
+  margin:0px;
+  padding:0px;
+ }
+ .autocompleteBox ul li.selected { 
+     background-color: #ffb;
+ }
+ .autocompleteBox ul li {
+  list-style-type:none;
+  display:block;
+  margin:0;
+  padding:2px;
+  /* height:32px; */
+  cursor:pointer;
+ }
