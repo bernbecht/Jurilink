@@ -3,6 +3,8 @@ require_once '../template/header.php'; //chama o header
 require_once ( '../config.php');     //chama as configurações de página!
 
 
+session_start();
+if(!isset($_SESSION['usuario'])) header("location:logout.php");
 
 $pesq_uf = pg_exec($conexao1, "select * from uf order by nome");
 $resultado = pg_fetch_object($pesq_uf);
