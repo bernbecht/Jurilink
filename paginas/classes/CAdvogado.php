@@ -37,7 +37,7 @@ class CAdvogado {
             from advogado
             INNER JOIN pessoa 
             ON advogado.id_pessoa = pessoa.id_pessoa 
-            and CAST (advogado.oab AS TEXT) like '{$oab}_%'            
+            and CAST (advogado.oab AS TEXT) like '{$oab}%'            
             ");
 
         $conexao1->closeConexao();

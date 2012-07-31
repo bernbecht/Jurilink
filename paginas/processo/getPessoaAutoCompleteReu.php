@@ -7,7 +7,10 @@ include '../classes/CPessoa.php';
 include '../classes/CFisica.php';
 include '../classes/CJuridica.php';
 
+
+    
 $nome = $_POST['reu'];
+
 
 
 if ($nome != "" || $nome != "") {

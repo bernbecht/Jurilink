@@ -102,6 +102,26 @@ class CPessoa {
         return $resultado->id_pessoa;
     }
 
+    /*Operação Usada pelo AUTOCOMPLETE para procurar id por nome 
+     * e restringir por TIPO.
+     * Usado no AUTOCOMPLETE DA PAGINA DE PROCESSO
+     */
+    public function getPessoaNomeTipo($nome,$t) {
+        $conexao1 = new CConexao();
+        $conexao = $conexao1->novaConexao();
+
+        $sql = pg_exec($conexao, "select * 
+            from pessoa 
+            where nome like '{$nome}%' 
+            and tipo= {$t}
+            ");
+
+        $conexao1->closeConexao();
+
+        return $sql;
+    }
+    
+    
     //Operação Usada pelo AUTOCOMPLETE para procurar id por nome
     public function getPessoaNome($nome) {
         $conexao1 = new CConexao();
@@ -109,7 +129,7 @@ class CPessoa {
 
         $sql = pg_exec($conexao, "select * 
             from pessoa 
-            where nome like '" . $nome . "%' 
+            where nome like '{$nome}%' 
             ");
 
         $conexao1->closeConexao();
@@ -157,6 +177,7 @@ class CPessoa {
         return $resultado->nome;
     }
 
+     //Pega o ID da pessoa pelo nome
     public function getIDNome($nome) {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();

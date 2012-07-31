@@ -8,24 +8,23 @@ include '../classes/CFisica.php';
 include '../classes/CJuridica.php';
 include '../classes/CAdvogado.php';
 
-//$nome = $_POST['autor_advogado'];
+$nome = $_POST['autor_advogado'];
+//$nome ="B";
 
 
-
-echo "ois";
-
-
-if ($nome != "" || $nome != "") {
+if ($nome != "" || $nome != " ") {
 
     $Pessoa = new CPessoa();
     $resultado = NULL;
+    $resultadoF = NULL;
+    $resultadoA = NULL;
     $qtd_id = 0;
 
 
     if (is_numeric($nome)) {
 
         $fisica = new CFisica();
-        $sqlFisica = $fisica->getFisicaCpfRG($nome, 2);
+        $sqlFisica = $fisica->getFisicaCpfRGTipo($nome, 2);
         $resultadoF = pg_fetch_object($sqlFisica);
 
 
@@ -34,7 +33,7 @@ if ($nome != "" || $nome != "") {
         $resultadoA = pg_fetch_object($sqlAd);
     } else {
 
-        $sql = $Pessoa->getPessoaNome($nome);
+        $sql = $Pessoa->getPessoaNomeTipo($nome,2);
         $resultado = pg_fetch_object($sql);
     }
 
@@ -43,22 +42,25 @@ if ($nome != "" || $nome != "") {
     if ($resultado == NULL && $resultadoF == NULL && $resultadoA == NULL) {
         echo "<li>Dado nao Encontrado</li>";
     } else {
-        if ($resultadoF != NULL) {
-            do {
-                echo "<li>" . $resultadoF->nome . "</li>";
-            } while ($resultadoF = pg_fetch_object($sqlFisica));
-        }
 
-        if ($resultadoA != NULL) {
-            do {
-                echo "<li>" . $resultadoA->nome . "</li>";
-            } while ($resultadoA = pg_fetch_object($sqlAd));
-        } 
-        
-       if ($resultado!= NULL) {
-            do {
-                echo "<li>" . $resultado->nome . "</li>";
-            } while ($resultado = pg_fetch_object($sql));
+        if (is_numeric($nome)) {
+            if ($resultadoF != NULL) {
+                do {
+                    echo "<li>" . $resultadoF->nome . "</li>";
+                } while ($resultadoF = pg_fetch_object($sqlFisica));
+            }
+
+            if ($resultadoA != NULL) {
+                do {
+                    echo "<li>" . $resultadoA->nome . "</li>";
+                } while ($resultadoA = pg_fetch_object($sqlAd));
+            }
+        } else {
+            if ($resultado != NULL) {
+                do {
+                    echo "<li>" . $resultado->nome . "</li>";
+                } while ($resultado = pg_fetch_object($sql));
+            }
         }
     }
     echo "</ul>";

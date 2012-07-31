@@ -27,13 +27,14 @@ class CJuridica {
     }
 
     //retorna pesquisa em JURIDICA usando CNPJ
+    //Usado no AUTOCOMPLETE da página de processo
     public function getJuridicaCNPJ($n) {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
 
         $sql = pg_exec($conexao, "select * 
           from juridica 
-          where CAST ( cnpj AS TEXT) like '" . $n . "_%'          
+          where CAST ( cnpj AS TEXT) like '{$n}%'          
           ");
 
         $conexao1->closeConexao();

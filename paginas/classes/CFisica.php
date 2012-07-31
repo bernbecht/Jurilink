@@ -30,19 +30,42 @@ class CFisica {
 
         return $incluir;
     }
-
+    
+    
     //retorna FISICA passando CPF ou RG
-    public function getFisicaCpfRG($n, $t) {
+    //Usado no AUTOCOMPLETE DA PÁGINA DE PROCESSO
+    public function getFisicaCpfRG($n) {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
 
-     
+
         $sql = pg_exec($conexao, "select *  
             from fisica 
             INNER JOIN pessoa 
             ON fisica.id_pessoa = pessoa.id_pessoa 
-            and (CAST ( fisica.rg AS TEXT) like '{$n}_%' 
-            or CAST ( fisica.cpf AS TEXT) like '{$n}_%') 
+            and (CAST ( fisica.rg AS TEXT) like '{$n}%' 
+            or CAST ( fisica.cpf AS TEXT) like '{$n}%') 
+            ");
+
+        $conexao1->closeConexao();
+
+        return $sql;
+    }
+
+    //retorna FISICA passando CPF ou RG
+    //$n é o CPF/RG e o $t é o tipo da pessoa (física ou advogado)
+    //Usado no AUTOCOMPLETE DA PÁGINA DE PROCESSO
+    public function getFisicaCpfRGTipo($n, $t) {
+        $conexao1 = new CConexao();
+        $conexao = $conexao1->novaConexao();
+
+
+        $sql = pg_exec($conexao, "select *  
+            from fisica 
+            INNER JOIN pessoa 
+            ON fisica.id_pessoa = pessoa.id_pessoa 
+            and (CAST ( fisica.rg AS TEXT) like '{$n}%' 
+            or CAST ( fisica.cpf AS TEXT) like '{$n}%') 
             and pessoa.tipo = {$t}
           ");
 

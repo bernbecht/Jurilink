@@ -130,7 +130,7 @@ if ($erro != '') {
     //Pegando IDs dos réus
     $id = $pessoa->getIDPessoaNome($conexao1, $reu);
 
-    //Inclui o réu
+    //Inclui os réus
     if ($id != null) {
         $i = 0;
         $n = count($id);
