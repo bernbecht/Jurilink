@@ -35,6 +35,19 @@
         'getPessoaAutoCompleteAd2.php',
         {tokens: ','}
     );
+        new Ajax.Autocompleter( 
+        'autor_rep_input',
+        'autocompleteAutorRep1',
+        'getPessoAutoCompleteRep1.php',
+        {tokens: ','}
+    );
+        
+        new Ajax.Autocompleter( 
+        'reu_rep_input',
+        'autocompleteAutorRep2',
+        'getPessoAutoCompleteRep2.php',
+        {tokens: ','}
+    );
         
     });      
     

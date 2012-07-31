@@ -106,6 +106,16 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <span  class="help-inline "><a data-toggle="modal" href="#myModal"><i class="icon-plus"></i></a></span> 
                     <div id="autocompleteAdvogado1" class="autocompleteBox"></div>
                 </div>                 
+            </div>
+            
+            <!-- Campo representante autor -->
+            <div id="autor_rep"class="control-group ">
+                <label class="control-label" for="autor">Representante Autor</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="autor_rep_input" name="autor_rep"/>     
+                    <span  class="help-inline "><a data-toggle="modal" href="#myModal"><i class="icon-plus"></i></a></span> 
+                    <div id="autocompleteAutorRep1" class="autocompleteBox"></div>
+                </div>                 
             </div>  
 
             <!-- Campo Reu -->
@@ -125,6 +135,16 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <input type="text" class="input-xlarge" id="reu_ad_input" name="reu_advogado"/>     
                     <span  class="help-inline "><a data-toggle="modal" href="#myModal"><i class="icon-plus"></i></a></span> 
                     <div id="autocompleteAdvogado2" class="autocompleteBox"></div>
+                </div>                 
+            </div>  
+            
+            <!-- Campo representante reu -->
+            <div id="reu_rep"class="control-group ">
+                <label class="control-label" for="autor">Representante Reu</label>
+                <div class="controls">
+                    <input type="text" class="input-xlarge" id="reu_rep_input" name="reu_rep"/>     
+                    <span  class="help-inline "><a data-toggle="modal" href="#myModal"><i class="icon-plus"></i></a></span> 
+                    <div id="autocompleteAutorRep2" class="autocompleteBox"></div>
                 </div>                 
             </div>  
 

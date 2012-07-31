@@ -112,9 +112,9 @@ class CProcesso {
         }
 
         //Faz com que apenas duas casas decimais sejam consideradas
-        $str = number_format($str, 2, '.', ' ');
+        $str = number_format($str, 2, '.', '');
 
-        return (float) $str;
+        return  $str;
     }
 
     /* Valida a Data */
@@ -125,7 +125,7 @@ class CProcesso {
         
     }
     
-    //Valida se é um float com duas casas decimais usando expressão regular
+    //Valida se é um float com duas casas decimais com ',' usando expressão regular
     function validaFloat($num){
         $float = "^([0-9]*\,[0-9]*)$^";
         return preg_match($float, $num);

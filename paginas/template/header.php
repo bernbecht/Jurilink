@@ -4,7 +4,7 @@ session_start();
 if(!isset($_SESSION['usuario'])) header("location:main.php");
 
 ?>
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt">
 
     <head>
         <title>JuriLink ~ Basic</title>       

@@ -17,6 +17,8 @@ $autor = $_POST['autor'];
 $autor_ad = $_POST['autor_advogado'];
 $reu = $_POST['reu'];
 $reu_ad = $_POST['reu_advogado'];
+$autor_rep = $_POST['autor_rep'];
+$reu_rep = $_POST['reu_rep'];
 $erro = "";
 
 $processo = new CProcesso();
@@ -42,7 +44,9 @@ if (!$processo->validaFloat($vc)) {
     $erro.= " valor causa errado";
 } else {
     $vc = $processo->str2num($vc);
+    echo $vc;
 }
+
 
 //Verifica se natureza não é nula. CAMPO OBRIGATÓRIO
 if ($id_n == -1) {
@@ -80,21 +84,32 @@ if ($dj != "") {
     }
 }
 
-if(strlen($autor)<=1){
-    $erro.=" informe um autor válido"; 
+if (strlen($autor) <= 1) {
+    $erro.=" informe um autor válido";
 }
-if(strlen($reu)<=1){
-    $erro.=" informe um réu válido"; 
-}
-
-if(strlen($autor_ad)<=1){
-    $erro.=" informe um advogado do autor válido"; 
+if (strlen($reu) <= 1) {
+    $erro.=" informe um réu válido";
 }
 
-if(strlen($reu_ad)<=1){
-    $erro.=" informe um advogado para reu válido"; 
+if (strlen($autor_ad) <= 1) {
+    $erro.=" informe um advogado do autor válido";
 }
 
+if (strlen($reu_ad) <= 1) {
+    $erro.=" informe um advogado para reu válido";
+}
+
+if (strlen($autor_rep) > 0) {
+    echo $autor_rep;
+    if (is_numeric($autor_rep))
+        $erro.=" Representante do autor nao pode ser soh numeros";
+}
+
+if (strlen($reu_rep) > 0) {
+    echo $reu_rep;
+    if (is_numeric($reu_rep))
+        $erro.=" Representante do reu nao pode ser soh numeros";
+}
 
 if ($erro != '') {
     echo $erro;
@@ -108,9 +123,9 @@ if ($erro != '') {
 
     $incluir = $processo->incluirProcesso($conexao1, $tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j);
 
-    echo  $id_processo = $processo->getIDProcessoNum($conexao1, $nu) . " ";
+    echo $id_processo = $processo->getIDProcessoNum($conexao1, $nu) . " ";
 
-    
+
     //Pegando IDs dos autores
     $id = $pessoa->getIDPessoaNome($conexao1, $autor);
 
@@ -141,7 +156,7 @@ if ($erro != '') {
     } else {
         $incluir = null;
     }
-    
+
     //Pegando IDs dos advogados autores
     $id = $pessoa->getIDPessoaNome($conexao1, $autor_ad);
 
@@ -156,7 +171,7 @@ if ($erro != '') {
     } else {
         $incluir = null;
     }
-    
+
     //Pegando IDs dos advogados réu
     $id = $pessoa->getIDPessoaNome($conexao1, $autor_ad);
 
@@ -174,6 +189,42 @@ if ($erro != '') {
 
 
 
+    if (strlen($autor_rep) > 0) {
+        //Pegando IDs dos representantes autor
+        $id = $pessoa->getIDPessoaNome($conexao1, $autor_rep);        
+
+        //Inclui os representantes do autor
+        if ($id != null) {
+            $i = 0;
+            $n = count($id);
+            while ($i < $n) {
+                $incluir = $processo_pessoa->incluirAutor($conexao1, $id_processo, $id[$i], 2);
+                $i++;
+            }
+        } else {
+            $incluir = null;
+        }
+    }
+    
+    if (strlen($reu_rep) > 0) {
+        //Pegando IDs dos representantes autor
+        $id = $pessoa->getIDPessoaNome($conexao1, $reu_rep);        
+
+        //Inclui os representantes do autor
+        if ($id != null) {
+            $i = 0;
+            $n = count($id);
+            while ($i < $n) {
+                $incluir = $processo_pessoa->incluirReu($conexao1, $id_processo, $id[$i], 2);
+                $i++;
+            }
+        } else {
+            $incluir = null;
+        }
+    }
+
+
+
     if ($incluir) {
         pg_query($conexao1, "commit");
         echo "1";
@@ -183,26 +234,5 @@ if ($erro != '') {
         echo "0";
     }
 }
-
-
-/*
-  $pessoa= new CPessoa();
-  $array_data = explode(',',$autor);
-  $n= count($array_data);
-  $id[$n];
-  $i=0;
-  $correto = true;
-  while($i<$n){
-  if($array_data[$i]!=''){
-  $id[$i] = $pessoa->getIDPessoaNome($array_data[$i]);
-  echo $array_data[$i].$id[$i];
-  }
-  else{
-  echo "Nada cadastrado";
-  $correto= false;
-  }
-  $i++;
-  }
- */
 ?>
 
