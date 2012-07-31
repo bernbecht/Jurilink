@@ -2,8 +2,8 @@
 
 class CConexao {
   protected $Host='localhost';
-  protected $User='postgres';
-  protected $Password='root';
+  protected $User='andreh';
+  protected $Password='senha';
   protected $Porta='5432';
   protected $DbName='jurilink';
   protected $Conexao=null;
