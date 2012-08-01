@@ -310,3 +310,9 @@ $a(document).ready(function(){
    		
 });
 
+//Função para limite de resultados em relações de pessoas físicas, jurídicas e advogados
+function valor(){
+
+document.forms["num_resultados"].submit();
+
+}

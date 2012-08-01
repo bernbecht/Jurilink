@@ -10,6 +10,7 @@ if(!isset($_SESSION['usuario'])) header("location:logout.php");
 /* Aqui limita-se o número de registros por página */
 $limite = 3;
 
+
 if(isset($_POST['limite'])) $limite = $_POST['limite'];
 
 if(isset($_GET['limite'])) $limite = $_GET['limite'];
@@ -41,7 +42,7 @@ $parcial = pg_num_rows($pesq_fisica);
 $cont = $parcial;
 if(isset($_GET['cont'])) $cont = $_GET['cont'];
 if ($cont>$total) $cont = $total;
-echo $cont;
+
 
 
 ?>
