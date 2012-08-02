@@ -1,15 +1,24 @@
 <?php
 require_once '../template/header.php'; //chama o header
-require_once  '../config.php';     //chama as configurações de página!
-include '../operacoes/CPessoa/relacao_pessoas_op.php';
+require_once '../config.php';     //chama as configurações de página!
 
 
-$query = "select pessoa.nome as nome_pessoa, fisica.cpf, fisica.rg, pessoa.email, 
-                pessoa.tel, pessoa.cidade, uf.nome as nome_estado from pessoa, fisica, uf where
-                pessoa.id_pessoa = fisica.id_pessoa and pessoa.id_uf = uf.id_uf order by nome_pessoa 
-                limit $limite offset $offset";
-$pesq_processo = pg_exec($conexao,$query);
+$query = "select numero_unificado, to_char(data_distribuicao, 'DD/MM/YYYY')as data_distribuicao,
+to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, natureza_acao.nome as nome_natureza,
+pautor.nome as autor, preu.nome as reu
+from (((((processo 
+inner join natureza_acao
+on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
+inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel=0)
+inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel=0)
+inner join pessoa preu on reu.id_pessoa = preu.id_pessoa)
+inner join pessoa pautor on autor.id_pessoa = pautor.id_pessoa       
+)";
+
+$pesq_processo = pg_exec($conexao1, $query);
 $resultado = pg_fetch_object($pesq_processo);
+
+
 ?>
 
 <div class="container">
@@ -45,22 +54,21 @@ $resultado = pg_fetch_object($pesq_processo);
                 <th>Natureza</th>
                 <th>Autor(es)</th>
                 <th>R&eacute;u(s)</th>
-                <th>Advogado</th>
                 <th>Tr&acirc;nsito em Julgado</th>
                 <th>A&ccedil;&otilde;es</th>
                 </tr></thead>";
         echo "<tbody>";
         do {
             echo "<tr>	
-                <td>" . $resultado->nome_pessoa . "</td>
-                <td>" . $resultado->cnpj . "</td>
-                <td>" . $resultado->email . "</td>
-                <td>" . $resultado->tel . "</td>
-                <td>" . $resultado->cidade . "</td>
-                <td>" . $resultado->nome_estado . "</td>
+                <td>" . $resultado->numero_unificado . "</td>
+                <td>" . $resultado->data_distribuicao . "</td>
+                <td>" . $resultado->nome_natureza . "</td>
+                <td>" . $resultado->autor . "</td>
+                <td>" . $resultado->reu . "</td>
+                <td>" . $resultado->transito_em_julgado . "</td>
                 <td> ACOES</td>
                 </tr>";
-        } while ($resultado = pg_fetch_object($pesq_juridica));
+        } while ($resultado = pg_fetch_object($pesq_processo));
         echo "</tbody>";
         echo "</table>";
     ?>
