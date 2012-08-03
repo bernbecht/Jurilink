@@ -5,9 +5,10 @@ require_once ( '../config.php');     //chama as configura��es de p�gina!
 
 <!------ Conex�o com o BD e busca comarcas para inser��o do Ju�zo na respectiva -->
 <?php
-$conexao1 = new CConexao();
-$conexao = $conexao1->novaConexao();
-$result = pg_query($conexao, "SELECT id_comarca, nome FROM comarca");
+
+$pesq = pg_query($conexao1, "SELECT id_comarca, nome FROM comarca");
+$result = pg_fetch_object($pesq);
+
 
 if (!$result) {
     echo "Um erro ocorreu.\n";
@@ -31,52 +32,22 @@ if (!$result) {
                     <span  class="help-inline ">*</span>                    
                 </div>
             </div>
-            <div class="span6 drop">
-                <div class="drag">
-                    <div class="barra-titulo">
-                        <div class="esquerda">
-                            <h3>
-                                Comarcas
-                            </h3>
-                        </div>
-                        <div class="direita">
-                            <a class="btn btn-small btn-success" href="#">
-                                <i class="icon-plus icon-white"></i>
-
-                            </a>
-                        </div>
-                    </div>
-                    <div class="tabela"> 
+           <div class="control-group">
+                <label class="control-label" for="comarca">Comarca</label>
+                <div class="controls">                    
+                    <select  name="id_comarca" id="juizo">
+                        <option value="-1">-</option>
                         <?php
-                        echo "<table = 'teste' class=table table-striped table-condensed >";
-                        echo "<thead>";
-                        echo "<tr><th>ID</th><th>Nome</th></tr></thead>";
-                        echo "<tbody>";
-                        while ($row = pg_fetch_row($result)) {
-                            echo "<tr>	
-                                <td>" . $row[0] . "</td>
-                                <td>" . $row[1] . "</td>
-                               <a class=btn btn-small btn-success href='#' onClick='getId2($row[0])'>
-												
-                               <td><i class=icon-ok icon-white></i>
-                              </a>
-		</td>
-	</tr>";
+                        if ($result->id_comarca != NULL) {
+                            do {
+                                echo "<option value=$result->id_comarca>$result->nome</option>";
+                            } while ($result = pg_fetch_object($pesq));
                         }
-                        echo "</tbody>";
-                        echo "</table>";
-                        ?>
-                    </div>
+                        ?>                     
+                    </select>
                 </div>
             </div>
 
-            <div id="id_comarca" class="control-group">
-                <label class="control-label" for="IDComarca">ID Comarca</label>
-                <div class="controls">
-                    <input type="text" class="input-xlarge" id="id_comarca_input" name="idcomarca">                       
-                    <span  class="help-inline ">*</span>                    
-                </div>
-            </div>
             <!--Bot�es do formul�rio -->
             <div class="form-actions">
                 <button  id ="enviar"  type="submit" class="btn btn-primary">Salvar</button>

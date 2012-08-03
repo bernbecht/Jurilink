@@ -1,26 +1,13 @@
 <?php
 require_once '../template/header.php'; //chama o header
-require_once ( '../config.php');     //chama as configurações de página!
+require_once ( '../config.php');     //chama as configuraï¿½ï¿½es de pï¿½gina!
 ?>
-
-				<!------ Conexão com o BD e busca -->
-				<?php 
-					$conexao1 = new CConexao();
-					$conexao = $conexao1->novaConexao();
-					$result = pg_query($conexao, "SELECT id_comarca, nome FROM comarca");
-
-					if (!$result) {
-						echo "Um erro ocorreu.\n";
-						exit;
-					}
-				?>
-
 
 <div class="container">
     <form name = "formulario_natureza_acao" form id="form_nat_acao" class="form-horizontal" method="post" action="../operacoes/CNatureza_acao/incluir_natureza_acao_op.php">
         <fieldset>
 
-            <!--Campos formulário -->
+            <!--Campos formulï¿½rio -->
 
             <legend>Cadastrar nova natureza</legend>
 
@@ -32,7 +19,7 @@ require_once ( '../config.php');     //chama as configurações de página!
                 </div>
             </div>
 			
-			<!--Botões do formulário -->
+			<!--Botï¿½es do formulï¿½rio -->
             <div class="form-actions">
                 <button  id ="enviar"  type="submit" class="btn btn-primary">Salvar</button>
                 <button  type="button" class="btn">Cancelar</button>
@@ -47,5 +34,5 @@ require_once ( '../config.php');     //chama as configurações de página!
 
 <?php
 require_once '../template/scripts.php';
-require_once 'scripts_cadastrar_pessoa.php';
+
 ?>

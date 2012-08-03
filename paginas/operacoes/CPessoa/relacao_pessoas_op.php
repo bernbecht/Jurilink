@@ -1,6 +1,6 @@
 <?php
-include_once '../../classes/CConexao.php';
-include '../classes/CPessoa.php';
+include_once '../classes/CConexao.php';
+include_once '../classes/CPessoa.php';
 
 
  function getPessoas($conexao,$tipo,$limite, $offset){

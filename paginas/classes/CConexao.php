@@ -1,11 +1,11 @@
 <?php
 
 class CConexao {
-  protected $Host='localhost';
-  protected $User='andreh';
+  protected $Host='177.101.20.68';
+  protected $User='jlink';
   protected $Password='senha';
   protected $Porta='5432';
-  protected $DbName='jurilink';
+  protected $DbName='Jlink';
   protected $Conexao=null;
 
     public function __construct(){}

@@ -2,16 +2,15 @@
 include '../../classes/CJuizo.php';
 
 $n = $_POST['nome'];
-$id_c = $_POST['idcomarca'];
+$id_c = $_POST['id_comarca'];
 $erro = "";
 
-//echo $id_c;
 
 if (strlen($n) < 2) {
     $erro.= "nome menos que 2";
 }
 if ($id_c == -1) {
-    $erro.= "ID inválido";
+    $erro.= "ID invalido";
 }
 
 if ($erro != "") {
