@@ -139,7 +139,7 @@ class CPessoa {
 
     //Retorna um array de ID das pessoas dando o nome
     public function getIDPessoaNome($conexao1, $p) {
-
+        $p = str_replace(' ', '', $p);
         $array_data = explode(',', $p);
         $n = count($array_data);
         $i = 0;

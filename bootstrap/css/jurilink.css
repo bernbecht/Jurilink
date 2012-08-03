@@ -87,3 +87,26 @@
   /* height:32px; */
   cursor:pointer;
  }
+ 
+ 
+ /*Caixa no lugar de INPUT*/
+ .box{
+    display: inline-block;
+    width: 260px;
+    height: 18px;
+    padding: 4px;
+    font-size: 13px;
+    line-height: 18px;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+ }
+ 
+ .box span{
+     display: inline-block;
+    
+ } 
+ .error .box {
+     border: 1px solid #B94A48;
+ }

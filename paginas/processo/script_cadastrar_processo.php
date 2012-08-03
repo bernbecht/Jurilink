@@ -5,8 +5,33 @@
 <script type="text/javascript">  
     
     var $a = jQuery.noConflict();
+    
+    function processoAjax(){
+
+
+        /* stop form from submitting normally */
+        event.preventDefault(); 
+        var msg='';
+        $a('.box span').each(function(){
+             msg = msg + $a(this).text()+',';
+            
+        });
+        alert(msg);
+    }
+
+    function validaFormProcessoJS(){
+        var mandar = true;  
+       
         
-     $a(document).ready(function (){              
+        $a("#submit-processo").click(function(){
+            processoAjax();
+        });
+         
+    
+    }    
+    
+        
+    $a(document).ready(function (){              
              
         new Ajax.Autocompleter( 
         'autor_input',
@@ -47,7 +72,10 @@
         'autocompleteAutorRep2',
         'getPessoAutoCompleteRep2.php',
         {tokens: ','}
-    );
+    );        
+        
+        validaFormProcessoJS();       
+        
         
     });      
     

@@ -1,5 +1,5 @@
 <?php
-include_once '../../classes/CConexao.php';
+include_once '../classes/CConexao.php';
 include '../classes/CPessoa.php';
 
 

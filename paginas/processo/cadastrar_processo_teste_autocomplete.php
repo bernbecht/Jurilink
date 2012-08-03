@@ -174,7 +174,27 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <span  class="help-inline "></span>                    
                 </div>
             </div>
-            
+
+            <div id="auto_penhora" class="control-group error">
+                <label class="control-label" for="auto_penhora">Teste</label>
+                <div class="controls">
+                    <div class="box">
+                        <div>
+                            <span>oi</span>  
+                            <span>Opa</span> 
+                            <span>Epa</span>
+                        </div>
+                    </div>   
+                    
+                    <span><button type="button" class="btn btn-small"><b class="caret"></b></button></span>
+                    
+                    
+                    <span  class="help-inline ">*</span>                    
+                </div>
+            </div>
+
+
+
             <!--Botões do formulário -->
             <div class="form-actions">
                 <button  type="submit" id="..submit-processo"class="btn btn-primary">Salvar</button>
