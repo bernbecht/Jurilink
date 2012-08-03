@@ -1,12 +1,35 @@
 <?php
 
 class CConexao {
+  /* -- Configurações André - Estágio --*/
+  /*
   protected $Host='177.101.20.68';
   protected $User='jlink';
   protected $Password='senha';
   protected $Porta='5432';
   protected $DbName='Jlink';
+  protected $Conexao=null; 
+  */
+  /* -- Configurações André--*/
+  
+  protected $Host='localhost';
+  protected $User='andreh';
+  protected $Password='senha';
+  protected $Porta='5432';
+  protected $DbName='jurilink';
   protected $Conexao=null;
+  
+  
+  /* -- Configurações Bernardo--*/
+  /*
+  protected $Host='localhost';
+  protected $User='postgres';
+  protected $Password='root';
+  protected $Porta='5432';
+  protected $DbName='jurilink';
+  protected $Conexao=null;
+  */
+  
 
     public function __construct(){}
     public function  __destruct() {}
