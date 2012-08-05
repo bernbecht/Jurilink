@@ -188,6 +188,54 @@ class CPessoa {
 
         return $sql;
     }
+    
+     public function getPessoas($conexao,$tipo,$limite, $offset) {
+
+        $pesquisa = null;
+        $query = null;
+        $registros = null;
+        switch ($tipo){
+            //Retorna relação de pessoas físicas
+            case 0:
+                $query = "select pessoa.nome as nome_pessoa, fisica.cpf, fisica.rg, pessoa.email, 
+                pessoa.tel, pessoa.cidade, uf.nome as nome_estado from pessoa, fisica, uf where
+                pessoa.id_pessoa = fisica.id_pessoa and pessoa.id_uf = uf.id_uf order by nome_pessoa 
+                limit $limite offset $offset";
+
+                $pesquisa = pg_exec($conexao,$query);
+                
+                $query = "select count (nome) from pessoa, fisica where pessoa.id_pessoa = fisica.id_pessoa";
+                $registros = pg_exec($conexao,$query);
+                
+                return array($pesquisa,$registros);
+                break;
+            
+            //Retorna relação de pessoas jurídicas
+            case 1:
+                $query = "select pessoa.nome as nome_pessoa, juridica.cnpj, pessoa.email, 
+                pessoa.tel, pessoa.cidade, uf.nome as nome_estado from pessoa, juridica, uf where
+                pessoa.id_pessoa = juridica.id_pessoa and pessoa.id_uf = uf.id_uf order by nome_pessoa limit $limite offset $offset";
+
+                $pesquisa = pg_exec($conexao,$query);
+
+                return $pesquisa;
+                break;
+            
+            //Retorna relação de advogados
+            case 2:
+                $query = "select pessoa.nome as nome_pessoa, advogado.flag_func, advogado.oab,
+                fisica.cpf, fisica.rg, pessoa.email, pessoa.tel, pessoa.cidade, uf.nome as nome_estado
+                from advogado, fisica, pessoa, uf
+                where pessoa.id_pessoa = fisica.id_pessoa and pessoa.id_uf = uf.id_uf 
+                and pessoa.id_pessoa = advogado.id_pessoa order by nome_pessoa limit $limite offset $offset";
+
+                $pesquisa = pg_exec($conexao,$query);
+
+                return $pesquisa;
+                break;
+                
+        }
+    }
 
 }
 

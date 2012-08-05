@@ -4,7 +4,7 @@ require_once  '../config.php';     //chama as configurações de página!
 include '../operacoes/CPessoa/relacao_pessoas_op.php';
 
 /**Sessão**/
-session_start();
+//session_start();
 if(!isset($_SESSION['usuario'])) header("location:logout.php");
 
 /* Aqui limita-se o número de registros por página */
@@ -41,7 +41,7 @@ $parcial = pg_num_rows($pesq_fisica);
 $cont = $parcial;
 if(isset($_GET['cont'])) $cont = $_GET['cont'];
 if ($cont>$total) $cont = $total;
-echo $cont;
+
 
 
 ?>
