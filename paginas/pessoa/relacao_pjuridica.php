@@ -3,8 +3,10 @@ require_once '../template/header.php'; //chama o header
 require_once  '../config.php';     //chama as configurações de página!
 include '../operacoes/CPessoa/relacao_pessoas_op.php';
 
+$limite = 10;
+$offset = 0;
 
-$pesq_juridica = getPessoas($conexao1, 1);
+$pesq_juridica = getPessoas($conexao1, 1,$limite,$offset);
 $resultado = pg_fetch_object($pesq_juridica);
 ?>
 

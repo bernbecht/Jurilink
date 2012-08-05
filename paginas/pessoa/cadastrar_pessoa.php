@@ -3,8 +3,6 @@ require_once '../template/header.php'; //chama o header
 require_once ( '../config.php');     //chama as configurações de página!
 
 
-if(!isset($_SESSION['usuario'])) header("location:logout.php");
-
 $pesq_uf = pg_exec($conexao1, "select * from uf order by nome");
 $resultado = pg_fetch_object($pesq_uf);
 ?>
@@ -13,7 +11,6 @@ $resultado = pg_fetch_object($pesq_uf);
 
     <form id="form_pessoa" class="form-horizontal pessoaAjaxForm" method="post" action="../operacoes/CPessoa/incluir_pessoa_rollback_op.php">
         <fieldset>
-
             <!--Campos formulário -->
 
             <legend>Cadastrar nova pessoa</legend>

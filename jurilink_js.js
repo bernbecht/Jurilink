@@ -154,7 +154,7 @@ function validaFormPessoaJS(){
             },
             email:{
                 email: true, 
-                required:true
+                required:false
             }                                
         }         
     }); 

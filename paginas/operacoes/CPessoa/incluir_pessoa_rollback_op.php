@@ -51,9 +51,9 @@ if (!is_numeric($t)) {
     $erro.= "telefone nao eh numero";
 }
 
-if (strlen($em) < 2) {
+/*if (strlen($em) < 2) {
     $erro.= "email menos que 2";
-}
+}*/
 
 if (strlen($b) < 2) {
     $erro.= "Escreva um bairros";
@@ -153,8 +153,8 @@ if ($erro != "") {
     pg_query($conexao, "begin");
 
     $pessoa = new CPessoa();
-    $incluir = $pessoa->incluirPessoa($conexao, $n, $e, $em, $t, $c, $uf, $b, $tipo_pessoa);
-    $id_pessoa = $pessoa->getId($conexao, $em); //pega o id da pessoa com passando o email
+    $incluir = $pessoa->incluirPessoa($conexao, $n, $e, $em,$t, $c, $uf, $b, $tipo_pessoa);
+    $id_pessoa = $pessoa->getId($conexao, $n); //pega o id da pessoa com passando o nome
 
     if ($tipo_pessoa == 0) {
         $fisica = new CFisica();
@@ -179,7 +179,7 @@ if ($erro != "") {
 
     if ($user == 1) {
         $user = new CUsuario();
-        $incluir = $user->incluirUser($conexao, $id_pessoa, $senha);
+        $incluir = $user->incluirUser($conexao, $id_pessoa, $senha, $em);
     }
 
 

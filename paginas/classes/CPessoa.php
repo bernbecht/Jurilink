@@ -17,7 +17,7 @@ class CPessoa {
         
     }
 
-    public function incluirPessoa($conexao, $n, $e, $em, $t, $c, $uf, $b, $tipo) {
+    public function incluirPessoa($conexao, $n, $e, $em,$t, $c, $uf, $b, $tipo) {
         $this->nome = $n;
         $this->endereco = $e;
         $this->email = $em;
@@ -29,8 +29,6 @@ class CPessoa {
         $incluir = null;
 
 
-        // $conexao1 = new CConexao();
-        //  $conexao = $conexao1->novaConexao();
         $incluir = pg_exec($conexao, "insert into pessoa(nome,endereco,tel,cidade,id_uf,email,tipo,bairro)
                          values('"
                 . $this->nome . "','"
@@ -42,9 +40,7 @@ class CPessoa {
                 . $this->tipo . ",'"
                 . $this->bairro . "')");
 
-        // $conexao1->closeConexao();
-
-        return $incluir;
+         return $incluir;
     }
 
     public function incluirPessoa1($n, $e, $em, $t, $c, $uf, $b, $tipo) {
@@ -91,13 +87,12 @@ class CPessoa {
     }
 
     //Retorna o ID da pessoa passando o email
-    public function getId($conexao, $email) {
-        //$conexao1 = new CConexao();
-        //$conexao = $conexao1->novaConexao();
-        $sql = pg_exec($conexao, "select id_pessoa from pessoa where email='" . $email . "'");
+    public function getId($conexao, $nome) {
+ 
+        $sql = pg_exec($conexao, "select id_pessoa from pessoa where nome='" . $nome . "'");
         $resultado = pg_fetch_object($sql);
 
-        //$conexao1->closeConexao();
+ 
 
         return $resultado->id_pessoa;
     }
