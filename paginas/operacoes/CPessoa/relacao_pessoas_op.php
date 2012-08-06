@@ -11,4 +11,25 @@ include_once '../classes/CPessoa.php';
    return $pesquisa;
 }
 
+
+function eUser($conexao, $id_pessoa) {
+    //$user = new CPessoa();
+   $user = new CPessoa();
+    
+    $pesquisa = $user->eUser($conexao,$id_pessoa);
+    
+    return $pesquisa;
+    
+    
+}
+
+function getEmail($conexao,$id_pessoa) {
+    $email = new CPessoa();
+    
+    $pesquisa = $email->getEmail($conexao,$id_pessoa);
+    
+    return $pesquisa;
+    
+}
+
 ?>

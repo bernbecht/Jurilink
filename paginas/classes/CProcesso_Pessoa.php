@@ -1,3 +1,4 @@
+CPROCESSO_PESSOA
 <?php
 
 class CProcesso_Pessoa {
@@ -19,10 +20,10 @@ class CProcesso_Pessoa {
 
         //$conexao = $conexao1->novaConexao();
         $incluir = pg_exec($conexao1, "insert into autor(id_pessoa,id_processo,flag_papel)
-                         values('"                
-                . $this->id_pessoa . "','"
-                . $this->id_processo . "','"
-                . $this->flag_papel . "')");
+                         values(                
+                    $this->id_pessoa,
+                    $this->id_processo,
+                    $this->flag_papel)");
 
         //$conexao1->closeConexao();
         
@@ -41,10 +42,10 @@ class CProcesso_Pessoa {
 
         //$conexao = $conexao1->novaConexao();
         $incluir = pg_exec($conexao1, "insert into reu(id_pessoa,id_processo,flag_papel)
-                         values('"                
-                . $this->id_pessoa . "','"
-                . $this->id_processo . "','"
-                . $this->flag_papel . "')");
+                         values(
+                    {$this->id_pessoa},
+                    {$this->id_processo},
+                    {$this->flag_papel})");
 
         //$conexao1->closeConexao();
         
