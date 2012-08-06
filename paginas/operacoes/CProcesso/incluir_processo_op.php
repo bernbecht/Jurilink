@@ -27,7 +27,7 @@ $processo_pessoa = new CProcesso_Pessoa();
 
 
 // Verificação do tamanho do número unificado. CAMPO OBRIGATÓRIO
-if (strlen($nu) < 1 || strlen($nu) > 21) {
+if (strlen($nu)!= 21) {
     $erro.= " número unificado invalido";
 } else if (!is_numeric($nu)) {
     $erro.= " numero unificado contem soh numeros";

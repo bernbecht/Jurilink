@@ -295,24 +295,46 @@ function validaFormPessoaJS(){
         if(mandar ==true){
             pessoaAjax();
         }
-    });    
+    });        
+}
+
+function pegarHREF(){
     
+    return location.href;
+}
+
+function trocarAbaSubnav(){
+    
+    $a('.aba').click(function(){
+        /*$a('.active').removeClass('active');
+        var classe = $a(this).attr("class");
+        
+        if(classe == "aba drop"){
+            $a(this).parent().parent().parent().addClass('active');
+        }
+        else{
+            $a(this).parent().addClass('active');
+        }*/
+        
+        var msg = pegarHREF();
+        
+        alert(msg);
+       
+    });
 }
 
 //Função de JQUERY
 $a(document).ready(function(){   
     
     validaFormPessoaJS();
-   
-   
-    
-  
+    trocarAbaSubnav();
+     
    		
 });
 
 //Função para limite de resultados em relações de pessoas físicas, jurídicas e advogados
 function valor(){
 
-document.forms["num_resultados"].submit();
+    document.forms["num_resultados"].submit();
 
 }

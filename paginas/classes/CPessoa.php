@@ -31,6 +31,8 @@ class CPessoa {
 
         // $conexao1 = new CConexao();
         //  $conexao = $conexao1->novaConexao();
+        
+        //Insere no Banco e Retorna o id_pessoa
         $incluir = pg_exec($conexao, "insert into pessoa(nome,endereco,tel,cidade,id_uf,email,tipo,bairro)
                          values('"
                 . $this->nome . "','"
@@ -40,11 +42,13 @@ class CPessoa {
                 . $this->uf . ",'"
                 . $this->email . "', "
                 . $this->tipo . ",'"
-                . $this->bairro . "')");
+                . $this->bairro . "') RETURNING id_pessoa");
 
         // $conexao1->closeConexao();
 
-        return $incluir;
+        $resultado = pg_fetch_object($incluir);
+        
+        return $resultado->id_pessoa;
     }
 
     public function incluirPessoa1($n, $e, $em, $t, $c, $uf, $b, $tipo) {
@@ -102,11 +106,12 @@ class CPessoa {
         return $resultado->id_pessoa;
     }
 
-    /*Operação Usada pelo AUTOCOMPLETE para procurar id por nome 
+    /* Operação Usada pelo AUTOCOMPLETE para procurar id por nome 
      * e restringir por TIPO.
      * Usado no AUTOCOMPLETE DA PAGINA DE PROCESSO
      */
-    public function getPessoaNomeTipo($nome,$t) {
+
+    public function getPessoaNomeTipo($nome, $t) {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
 
@@ -120,8 +125,7 @@ class CPessoa {
 
         return $sql;
     }
-    
-    
+
     //Operação Usada pelo AUTOCOMPLETE para procurar id por nome
     public function getPessoaNome($nome) {
         $conexao1 = new CConexao();
@@ -139,31 +143,42 @@ class CPessoa {
 
     //Retorna um array de ID das pessoas dando o nome
     public function getIDPessoaNome($conexao1, $p) {
-        $p = str_replace(' ', '', $p);
+
         $array_data = explode(',', $p);
         $n = count($array_data);
         $i = 0;
 
         while ($i < $n) {
             if ($array_data[$i] != '') {
-                $sql = pg_exec($conexao1, "select * 
+                $array_data[$i] = ltrim($array_data[$i]);
+                $array_data[$i] = rtrim($array_data[$i]);
+              
+            }
+              $i++;
+        }
+
+            $i = 0;
+            while ($i < $n) {
+                if ($array_data[$i] != '') {
+                    $sql = pg_exec($conexao1, "select * 
                         from pessoa 
                         where nome = '{$array_data[$i]}' ");
 
-                $resultado = pg_fetch_object($sql);
+                    $resultado = pg_fetch_object($sql);
 
-                $id[] = $resultado->id_pessoa;
+                    $id[] = $resultado->id_pessoa;
 
-                echo $array_data[$i] . " " . $id[$i] . " ";
-            } else {
-                echo "Nada cadastrado";
-                return null;
+                    echo $array_data[$i] . " " . $id[$i] . " ";
+                } else {
+                    echo "Nada cadastrado";
+                    return null;
+                }
+                $i++;
             }
-            $i++;
-        }
 
-        return $id;
-    }
+            return $id;
+        }
+    
 
     //retorna o nome da pessoa pelo id
     public function getPessoa($id) {
@@ -177,7 +192,7 @@ class CPessoa {
         return $resultado->nome;
     }
 
-     //Pega o ID da pessoa pelo nome
+    //Pega o ID da pessoa pelo nome
     public function getIDNome($nome) {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
@@ -188,13 +203,13 @@ class CPessoa {
 
         return $sql;
     }
-    
-     public function getPessoas($conexao,$tipo,$limite, $offset) {
+
+    public function getPessoas($conexao, $tipo, $limite, $offset) {
 
         $pesquisa = null;
         $query = null;
         $registros = null;
-        switch ($tipo){
+        switch ($tipo) {
             //Retorna relação de pessoas físicas
             case 0:
                 $query = "select pessoa.nome as nome_pessoa, fisica.cpf, fisica.rg, pessoa.email, 
@@ -202,25 +217,25 @@ class CPessoa {
                 pessoa.id_pessoa = fisica.id_pessoa and pessoa.id_uf = uf.id_uf order by nome_pessoa 
                 limit $limite offset $offset";
 
-                $pesquisa = pg_exec($conexao,$query);
-                
+                $pesquisa = pg_exec($conexao, $query);
+
                 $query = "select count (nome) from pessoa, fisica where pessoa.id_pessoa = fisica.id_pessoa";
-                $registros = pg_exec($conexao,$query);
-                
-                return array($pesquisa,$registros);
+                $registros = pg_exec($conexao, $query);
+
+                return array($pesquisa, $registros);
                 break;
-            
+
             //Retorna relação de pessoas jurídicas
             case 1:
                 $query = "select pessoa.nome as nome_pessoa, juridica.cnpj, pessoa.email, 
                 pessoa.tel, pessoa.cidade, uf.nome as nome_estado from pessoa, juridica, uf where
                 pessoa.id_pessoa = juridica.id_pessoa and pessoa.id_uf = uf.id_uf order by nome_pessoa limit $limite offset $offset";
 
-                $pesquisa = pg_exec($conexao,$query);
+                $pesquisa = pg_exec($conexao, $query);
 
                 return $pesquisa;
                 break;
-            
+
             //Retorna relação de advogados
             case 2:
                 $query = "select pessoa.nome as nome_pessoa, advogado.flag_func, advogado.oab,
@@ -229,11 +244,10 @@ class CPessoa {
                 where pessoa.id_pessoa = fisica.id_pessoa and pessoa.id_uf = uf.id_uf 
                 and pessoa.id_pessoa = advogado.id_pessoa order by nome_pessoa limit $limite offset $offset";
 
-                $pesquisa = pg_exec($conexao,$query);
+                $pesquisa = pg_exec($conexao, $query);
 
                 return $pesquisa;
                 break;
-                
         }
     }
 

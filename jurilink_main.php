@@ -46,14 +46,14 @@ if(!isset($_SESSION['usuario'])) header("location:main.php");
 
         <div class="subnav">            
             <ul class="nav nav-pills">
-                <li class="active"><a href="../../jurilink_main.php">Inicio</a></li>
+                <li class="active"><a href="jurilink_main.php">Inicio</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pessoas
                         <b class="caret"></b></a>
                     <ul id="menu1" class="dropdown-menu">
-                        <li><a href="paginas/pessoa/cadastrar_pessoa.php">Clientes</a></li>
+                        <li><a href="paginas/pessoa/relacao_pfisica.php">Fisica</a></li>
+                        <li><a href="#">Juridica</a></li>
                         <li><a href="#">Advogados</a></li>
-                        <li><a href="#">Outros</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">

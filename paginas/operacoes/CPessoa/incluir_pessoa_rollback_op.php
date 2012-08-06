@@ -31,6 +31,7 @@ $comarca = $_POST['comarca'];
 $erro = "";
 
 
+
 if (strlen($n) < 2) {
     $erro.= "nome menos que 2";
 }
@@ -135,6 +136,7 @@ if ($user == 1) {
     }
 }
 
+
 //se os dados estiverem de acordo, prossegue para incluir
 if ($erro != "") {
     echo $erro;
@@ -153,9 +155,14 @@ if ($erro != "") {
     pg_query($conexao, "begin");
 
     $pessoa = new CPessoa();
+    
+    //A funçaõ incluirPessoa retorna o id da pessoa que acaba de ser registrada
     $incluir = $pessoa->incluirPessoa($conexao, $n, $e, $em, $t, $c, $uf, $b, $tipo_pessoa);
-    $id_pessoa = $pessoa->getId($conexao, $em); //pega o id da pessoa com passando o email
+    
+    //$id_pessoa = $pessoa->getId($conexao, $em); //pega o id da pessoa com passando o email
 
+    $id_pessoa = $incluir;
+    
     if ($tipo_pessoa == 0) {
         $fisica = new CFisica();
         $incluir = $fisica->incluirFisica($conexao, $id_pessoa, $cpf, $rg, $comarca);
@@ -185,8 +192,8 @@ if ($erro != "") {
 
     if ($incluir) {
         pg_query($conexao, "commit");
-        echo "1";
-    } else {
+        echo "1"; 
+   } else {
         pg_query($conexao, "rollback");
         pg_close($conexao);
         echo "0";
