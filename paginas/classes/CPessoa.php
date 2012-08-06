@@ -192,7 +192,7 @@ class CPessoa {
         switch ($tipo){
             //Retorna relação de pessoas físicas
             case 0:
-                $query = "select pessoa.nome as nome_pessoa, fisica.cpf, fisica.rg, pessoa.email, 
+                $query = "select  pessoa.id_pessoa, pessoa.nome as nome_pessoa, fisica.cpf, fisica.rg, pessoa.email, 
                 pessoa.tel, pessoa.cidade, uf.nome as nome_estado from pessoa, fisica, uf where
                 pessoa.id_pessoa = fisica.id_pessoa and pessoa.id_uf = uf.id_uf order by nome_pessoa 
                 limit $limite offset $offset";

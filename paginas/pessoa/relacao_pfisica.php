@@ -86,7 +86,7 @@ if ($cont>$total) $cont = $total;
         
         do {
             echo "<tr>	
-                <td>" . $resultado->nome_pessoa . "</td>
+                <td><a href=view_pessoa.php?id=$resultado->id_pessoa>" . $resultado->nome_pessoa . "</a></td>
                 <td>" . $resultado->cpf . "</td>
                 <td>" . $resultado->rg . "</td>
                 <td>" . $resultado->email . "</td>
