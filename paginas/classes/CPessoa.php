@@ -219,7 +219,7 @@ class CPessoa {
 
                 $pesquisa = pg_exec($conexao, $query);
 
-                $query = "select count (nome) from pessoa, fisica where pessoa.id_pessoa = fisica.id_pessoa";
+                $query = "select count (nome) from pessoa, fisica where pessoa.id_pessoa = fisica.id_pessoa and pessoa.tipo = 0";
                 $registros = pg_exec($conexao, $query);
 
                 return array($pesquisa, $registros);
