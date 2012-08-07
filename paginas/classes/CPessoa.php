@@ -214,7 +214,7 @@ class CPessoa {
             case 0:
                 $query = "select pessoa.nome as nome_pessoa, pessoa.id_pessoa, fisica.cpf, fisica.rg, pessoa.email, 
                 pessoa.tel, pessoa.cidade, uf.nome as nome_estado from pessoa, fisica, uf where
-                pessoa.id_pessoa = fisica.id_pessoa and pessoa.id_uf = uf.id_uf order by nome_pessoa 
+                pessoa.id_pessoa = fisica.id_pessoa and pessoa.id_uf = uf.id_uf and pessoa.tipo = 0 order by nome_pessoa 
                 limit $limite offset $offset";
 
                 $pesquisa = pg_exec($conexao, $query);
@@ -229,7 +229,7 @@ class CPessoa {
             case 1:
                 $query = "select pessoa.nome as nome_pessoa, pessoa.id_pessoa, juridica.cnpj, pessoa.email, 
                 pessoa.tel, pessoa.cidade, uf.nome as nome_estado from pessoa, juridica, uf where
-                pessoa.id_pessoa = juridica.id_pessoa and pessoa.id_uf = uf.id_uf order by nome_pessoa limit $limite offset $offset";
+                pessoa.id_pessoa = juridica.id_pessoa and pessoa.id_uf = uf.id_uf and pessoa.tipo = 1 order by nome_pessoa limit $limite offset $offset";
 
                 $pesquisa = pg_exec($conexao, $query);
 
@@ -241,7 +241,7 @@ class CPessoa {
                 $query = "select pessoa.nome as nome_pessoa,pessoa.id_pessoa, advogado.flag_func, advogado.oab,
                 fisica.cpf, fisica.rg, pessoa.email, pessoa.tel, pessoa.cidade, uf.nome as nome_estado
                 from advogado, fisica, pessoa, uf
-                where pessoa.id_pessoa = fisica.id_pessoa and pessoa.id_uf = uf.id_uf 
+                where pessoa.id_pessoa = fisica.id_pessoa and pessoa.id_uf = uf.id_uf and pessoa.tipo = 2 
                 and pessoa.id_pessoa = advogado.id_pessoa order by nome_pessoa limit $limite offset $offset";
 
                 $pesquisa = pg_exec($conexao, $query);
