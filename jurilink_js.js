@@ -1,4 +1,3 @@
-
 //Variável para evitar conflito JQUERY ~ PROTOTYPE
 var $a = jQuery.noConflict();
 
@@ -154,7 +153,7 @@ function validaFormPessoaJS(){
             },
             email:{
                 email: true, 
-                required:false
+                required:true
             }                                
         }         
     }); 
@@ -232,7 +231,7 @@ function validaFormPessoaJS(){
             
     });
         
-    /*-----------------------------------------------*/        
+    /*---------------------------------------------------*/        
     /* Mudança da CSS dos campos quando clicar no SALVAR*/
         
     $a(".submit-pessoa").click(function(){                       
@@ -295,24 +294,53 @@ function validaFormPessoaJS(){
         if(mandar ==true){
             pessoaAjax();
         }
-    });    
+    });        
+}
+
+function pegarHREF(){
+    alert(location.href);
+    return location.href;
+}
+
+function trocarAbaSubnav(){
     
+    var href = location.href;
+      
+    href_split = href.split('/');
+      
+    var pagina = href_split[5];
+    
+    $a('.active').removeClass('active');
+    
+    if(pagina == 'pessoa')
+        $a('#pessoa').addClass('active');
+    
+    else if(pagina == 'processo')
+        $a('#processo').addClass('active');
+     
+    else if(pagina == 'comarca' || pagina == 'juizo' || pagina == 'ato' 
+        || pagina == 'natureza_acao')
+            $a('#dados').addClass('active');
+    
+    else
+        $a('#inicio').addClass('active');    
+ 
 }
 
 //Função de JQUERY
 $a(document).ready(function(){   
     
     validaFormPessoaJS();
-   
-   
+    trocarAbaSubnav();
     
-  
+     
    		
 });
 
 //Função para limite de resultados em relações de pessoas físicas, jurídicas e advogados
 function valor(){
 
-document.forms["num_resultados"].submit();
+    document.forms["num_resultados"].submit();
+
 
 }

@@ -1,7 +1,8 @@
 <?php
 require_once ( 'paginas/config.php');
 session_start();
-if(!isset($_SESSION['usuario'])) header("location:main.php");
+if (!isset($_SESSION['usuario']))
+    header("location:main.php");
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -46,64 +47,34 @@ if(!isset($_SESSION['usuario'])) header("location:main.php");
 
         <div class="subnav">            
             <ul class="nav nav-pills">
-                <li class="active"><a href="../../jurilink_main.php">Inicio</a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pessoas
-                        <b class="caret"></b></a>
-                    <ul id="menu1" class="dropdown-menu">
-                        <li><a href="paginas/pessoa/cadastrar_pessoa.php">Clientes</a></li>
-                        <li><a href="#">Advogados</a></li>
-                        <li><a href="#">Outros</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Processos
-                        <b class="caret"></b></a>
-                    <ul id="menu2" class="dropdown-menu">
-                        <li><a href="paginas/processo/cadastrar_processo.php">Incluir</a></li>
-                        <li><a href="paginas/comarca/excluir_processo.php">Excluir</a></li>
-                        <li><a href="#">Editar</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Comarcas
-                        <b class="caret"></b></a>
-                    <ul id="menu2" class="dropdown-menu">
-                        <li><a href="paginas/comarca/cadastrar_comarca.php">Incluir</a></li>
-                        <li><a href="paginas/comarca/excluir_comarca.php">Excluir</a></li>
-                        <li><a href="#">Editar</a></li>
-                    </ul>
-                </li>
+                <ul class="nav nav-pills">
+                    <li class="active"><a class="aba" href="jurilink_main.php">Inicio</a></li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Juizos
-                        <b class="caret"></b></a>
-                    <ul id="menu3" class="dropdown-menu">
-                        <li><a href="paginas/juizo/cadastrar_juizo.php">Incluir</a></li>
-                        <li><a href="paginas/juizo/excluir_juizo.php">Excluir</a></li>
-                        <li><a href="#">Editar</a></li>
-                    </ul>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pessoas
+                            <b class="caret"></b></a>
+                        <ul id="pessoas_menu_dropdown" class="dropdown-menu">
+                            <li><a class="aba drop" href="paginas/pessoa/relacao_pfisica.php">Fisica</a></li>
+                            <li><a class="aba drop" href="#">Juridica</a></li>
+                            <li><a class="aba drop" href="#">Advogados</a></li>
+                        </ul>
+                    </li>
 
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Natureza
-                        <b class="caret"></b></a>
-                    <ul id="menu3" class="dropdown-menu">
-                        <li><a href="paginas/natureza_acao/cadastrar_natureza_acao.php">Incluir</a></li>
-                        <li><a href="paginas/natureza_acao/excluir_natureza_acao.php">Excluir</a></li>
-                        <li><a href="#">Editar</a></li>
-                    </ul>				
-                </li>
+                    <li><a class="aba" href="paginas/processo/cadastrar_processo.php">Processos</a></li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ato
-                        <b class="caret"></b></a>
-                    <ul id="menu3" class="dropdown-menu">
-                        <li><a href="paginas/ato/cadastrar_ato.php">Incluir</a></li>
-                        <li><a href=#>Excluir</a></li>
-                        <li><a href="#">Editar</a></li>
-                    </ul>
-                </li>
+
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gerenciar Dados
+                            <b class="caret"></b></a>
+                        <ul id="dados_menu_dropdown" class="dropdown-menu">
+                            <li><a class="aba drop" href="paginas/comarca/cadastrar_comarca.php">Comarca</a></li>
+                            <li><a class="aba drop" href="paginas/juizo/cadastrar_juizo.php">Juizo</a></li>
+                            <li><a class="aba drop" href="paginas/natureza_acao/cadastrar_natureza_acao.php">Natureza</a></li>
+                            <li><a class="aba drop" href="paginas/ato/cadastrar_ato.php">Ato</a></li>                        
+                        </ul>
+                    </li>                          
+                </ul>       
             </ul>           
         </div>
 

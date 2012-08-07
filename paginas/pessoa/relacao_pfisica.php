@@ -4,10 +4,11 @@ require_once  '../config.php';     //chama as configurações de página!
 include '../operacoes/CPessoa/relacao_pessoas_op.php';
 
 /**Sessão**/
+//session_start();
 if(!isset($_SESSION['usuario'])) header("location:logout.php");
 
 /* Aqui limita-se o número de registros por página */
-$limite = 4;
+$limite = 3;
 
 if(isset($_POST['limite'])) $limite = $_POST['limite'];
 
@@ -33,15 +34,13 @@ $registros = pg_fetch_object($total);
 
 $total = $registros->count; //Total de registros
 
-
 /*Gerencia botão 'Próximo'*/
 $parcial = pg_num_rows($pesq_fisica);
-
+//echo $parcial;
 
 $cont = $parcial;
 if(isset($_GET['cont'])) $cont = $_GET['cont'];
 if ($cont>$total) $cont = $total;
-
 
 
 
@@ -54,7 +53,7 @@ if ($cont>$total) $cont = $total;
     <hr border ="20px" height ="50px">
     
         <div class ="esquerda">
-        <a class="btn btn-small btn-success" href="#">
+            <a class="btn btn-small btn-success" href="cadastrar_pessoa.php">
             <i class="icon-plus icon-white"></i>
             INCLUIR PESSOA F&Iacute;SICA     
         </a>             
@@ -86,18 +85,12 @@ if ($cont>$total) $cont = $total;
         echo "<tbody>";
         
         do {
-            
             echo "<tr>	
-                <td><a href=view_pessoa.php?id=$resultado->id_pessoa>" . $resultado->nome_pessoa . "</a></td>
+                <td>" . $resultado->nome_pessoa . "</td>
                 <td>" . $resultado->cpf . "</td>
-                <td>" . $resultado->rg . "</td>";
-            if (eUser($conexao1,$resultado->id_pessoa)){
-                $pesq_email = getEmail($conexao1, $resultado->id_pessoa);
-                $email = pg_fetch_object($pesq_email);
-                echo "<td>" . $email->email . "</td>";
-            }
-            else echo "<td> </td>";
-                echo "<td>" . $resultado->tel . "</td>
+                <td>" . $resultado->rg . "</td>
+                <td>" . $resultado->email . "</td>
+                <td>" . $resultado->tel . "</td>
                 <td>" . $resultado->cidade . "</td>
                 <td>" . $resultado->nome_estado . "</td> 
                 <td>ACOES</td>
