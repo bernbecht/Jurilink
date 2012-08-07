@@ -186,7 +186,7 @@ if ($erro != "") {
 
     if ($user == 1) {
         $user = new CUsuario();
-        $incluir = $user->incluirUser($conexao, $id_pessoa, $senha);
+        $incluir = $user->incluirUser($conexao, $id_pessoa, $senha, $em);
     }
 
 

@@ -49,30 +49,30 @@ if(!isset($_SESSION['usuario'])) header("location:main.php");
 
         <div class="subnav">            
             <ul class="nav nav-pills">
-                <li class="active"><a class="aba" href="../../jurilink_main.php">Inicio</a></li>
+                <li class="" id="inicio"><a href="../../jurilink_main.php">Inicio</a></li>
                
-                <li class="dropdown">
+                <li class="dropdown" id="pessoa">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pessoas
                         <b class="caret"></b></a>
                     <ul id="pessoas_menu_dropdown" class="dropdown-menu">
-                        <li><a class="aba drop" href="../pessoa/relacao_pfisica.php">Fisica</a></li>
-                        <li><a class="aba drop" href="#">Juridica</a></li>
-                        <li><a class="aba drop" href="#">Advogados</a></li>
+                        <li><a  href="../pessoa/relacao_pfisica.php">Fisica</a></li>
+                        <li><a  href="#">Juridica</a></li>
+                        <li><a  href="#">Advogados</a></li>
                     </ul>
                 </li>
                 
-                <li><a class="aba" href="../processo/cadastrar_processo.php">Processos</a></li>
+                <li id="processo"><a href="../processo/cadastrar_processo.php">Processos</a></li>
                 
                 
                 
-                <li class="dropdown">
+                <li id="dados" class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gerenciar Dados
                         <b class="caret"></b></a>
                     <ul id="dados_menu_dropdown" class="dropdown-menu">
-                        <li><a class="aba drop" href="../comarca/cadastrar_comarca.php">Comarca</a></li>
-                        <li><a class="aba drop" href="../juizo/cadastrar_juizo.php">Juizo</a></li>
-                        <li><a class="aba drop" href="../natureza_acao/cadastrar_natureza_acao.php">Natureza</a></li>
-                        <li><a class="aba drop" href="../ato/cadastrar_ato.php">Ato</a></li>                        
+                        <li><a  href="../comarca/cadastrar_comarca.php">Comarca</a></li>
+                        <li><a  href="../juizo/cadastrar_juizo.php">Juizo</a></li>
+                        <li><a  href="../natureza_acao/cadastrar_natureza_acao.php">Natureza</a></li>
+                        <li><a  href="../ato/cadastrar_ato.php">Ato</a></li>                        
                     </ul>
                 </li>                          
             </ul>           

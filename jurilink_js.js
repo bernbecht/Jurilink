@@ -299,28 +299,33 @@ function validaFormPessoaJS(){
 }
 
 function pegarHREF(){
-    
+    alert(location.href);
     return location.href;
 }
 
 function trocarAbaSubnav(){
     
-    $a('.aba').click(function(){
-        /*$a('.active').removeClass('active');
-        var classe = $a(this).attr("class");
-        
-        if(classe == "aba drop"){
-            $a(this).parent().parent().parent().addClass('active');
-        }
-        else{
-            $a(this).parent().addClass('active');
-        }*/
-        
-        var msg = pegarHREF();
-        
-        alert(msg);
-       
-    });
+    var href = location.href;
+      
+    href_split = href.split('/');
+      
+    var pagina = href_split[5];
+    
+    $a('.active').removeClass('active');
+    
+    if(pagina == 'pessoa')
+        $a('#pessoa').addClass('active');
+    
+    else if(pagina == 'processo')
+        $a('#processo').addClass('active');
+     
+    else if(pagina == 'comarca' || pagina == 'juizo' || pagina == 'ato' 
+        || pagina == 'natureza_acao')
+            $a('#dados').addClass('active');
+    
+    else
+        $a('#inicio').addClass('active');    
+ 
 }
 
 //Função de JQUERY
@@ -328,6 +333,7 @@ $a(document).ready(function(){
     
     validaFormPessoaJS();
     trocarAbaSubnav();
+    
      
    		
 });
