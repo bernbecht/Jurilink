@@ -115,7 +115,7 @@ if ($cont>$total) $cont = $total;
         </div>
         <div class="span3">
         <form name="num_resultados" action="relacao_pfisica.php" method="post">
-            <select name="limite" onchange="valor()" >
+            <select class ="span1" name="limite" onchange="valor()" >
                 <?php 
                 echo "<option value=$limite>$limite</option>
                 <option value=1>1</option>
