@@ -42,8 +42,6 @@ $cont = $parcial;
 if(isset($_GET['cont'])) $cont = $_GET['cont'];
 if ($cont>$total) $cont = $total;
 
-
-
 ?>
 
 <div class="container">
@@ -67,8 +65,7 @@ if ($cont>$total) $cont = $total;
     <br/>
     <hr border ="20px" height ="50px">
     
-    
-       <div class="tabela"> 
+    <div class="tabela"> 
     <?php 
         echo "<table = 'fisica' class=table table-striped table-condensed >";
         echo "<thead>";
@@ -86,7 +83,7 @@ if ($cont>$total) $cont = $total;
         
         do {
             echo "<tr>	
-                <td><a href=view_pessoa.php?id=$resultado->id_pessoa>" . $resultado->nome_pessoa . "</a></td>
+                <td><a href=view_pessoafisica.php?id=$resultado->id_pessoa>" . $resultado->nome_pessoa . "</a></td>
                 <td>" . $resultado->cpf . "</td>
                 <td>" . $resultado->rg . "</td>
                 <td>" . $resultado->email . "</td>
