@@ -16,7 +16,7 @@ class CUsuario {
         $incluir = null;
 
         $incluir = pg_exec($conexao, "insert into usuario(id_pessoa,senha,email)
-                         values({
+                         values(
                 {$this->id_pessoa},'"
                 . $this->senha . "',
                  '" .$this->email. "')");

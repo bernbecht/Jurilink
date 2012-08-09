@@ -66,7 +66,7 @@ function pegaId(){
     alert(this.id);
 }
 
-
+//Função que manda o form de cadastro de pessoa por AJAX
 function pessoaAjax(){
 
 
@@ -120,6 +120,7 @@ function pessoaAjax(){
     });             
 }
 
+//Função que valida o form de cadastro de uma pessoa
 function validaFormPessoaJS(){
     var mandar = false;      
 
@@ -154,7 +155,8 @@ function validaFormPessoaJS(){
             email:{
                 email: true, 
                 required:true
-            }                                
+            }
+            
         }         
     }); 
         
@@ -227,11 +229,13 @@ function validaFormPessoaJS(){
         else{
             $a("#email").removeClass("control-group error").addClass("control-group");
             mandar = true;
-        }
-            
+        }               
+                   
     });
+      
+       
         
-    /*---------------------------------------------------*/        
+    /*-----------------------------------------------*/        
     /* Mudança da CSS dos campos quando clicar no SALVAR*/
         
     $a(".submit-pessoa").click(function(){                       
@@ -289,25 +293,25 @@ function validaFormPessoaJS(){
         else{
             $a("#email").removeClass("control-group error").addClass("control-group");
             mandar = true;
-        }   
-        
+        }       
+
         if(mandar ==true){
             pessoaAjax();
         }
     });        
 }
 
-function pegarHREF(){
-    alert(location.href);
-    return location.href;
-}
 
+//Função que diz qual NAV está selecionada
 function trocarAbaSubnav(){
     
+    //pega o endereço da pagina
     var href = location.href;
       
+    //separa num array os valores divididos por um '/'
     href_split = href.split('/');
       
+    //pega a PASTA da página  
     var pagina = href_split[5];
     
     $a('.active').removeClass('active');
@@ -320,18 +324,112 @@ function trocarAbaSubnav(){
      
     else if(pagina == 'comarca' || pagina == 'juizo' || pagina == 'ato' 
         || pagina == 'natureza_acao')
-            $a('#dados').addClass('active');
+        $a('#dados').addClass('active');
     
     else
         $a('#inicio').addClass('active');    
  
 }
 
+function validaForm(){
+    $a(".submit-pessoa").click(function(){ 
+        var $form = $a( '.pessoaAjaxForm' ),
+        nome = $form.find( 'input[name="nome"]' ).val(),
+        tipo = $form.find( 'input[name="tipo"]:checked' ).val(),
+        oab = $form.find( 'input[name="oab"]' ).val(),
+        cnpj = $form.find( 'input[name="cnpj"]' ).val(),
+        cpf = $form.find( 'input[name="cpf"]' ).val(),
+        rg = $form.find( 'input[name="rg"]' ).val(),
+        comarca = $form.find( 'input[name="comarca"]' ).val(),
+        cidade = $form.find( 'input[name="cidade"]' ).val(),
+        endereco = $form.find( 'input[name="endereco"]' ).val(),
+        bairro = $form.find( 'input[name="bairro"]' ).val(),
+        estado = $form.find( 'option').filter(':selected' ).val(),
+        tel = $form.find( 'input[name="telefone"]' ).val(),
+        email = $form.find( 'input[name="email"]' ).val(),
+        user = $form.find( 'input[name="userCheckbox"]:checked' ).val(),
+        senha = $form.find( 'input[name="senha"]' ).val();
+        
+       
+        
+        if(nome.length <=2){
+            $a('#nome').removeClass("control-group").addClass("control-group error");  
+        }        
+        else{
+            $a('#nome').removeClass("control-group error").addClass("control-group success");  
+        }
+        
+        if(endereco.length <=2){
+            $a('#endereco').removeClass("control-group").addClass("control-group error");  
+        }        
+        else{
+            $a('#endereco').removeClass("control-group error").addClass("control-group success");  
+        }
+        
+        if(bairro.length <=2){
+            $a('#bairro').removeClass("control-group").addClass("control-group error");  
+        }        
+        else{
+            $a('#bairro').removeClass("control-group error").addClass("control-group success");  
+        }
+        
+        if(cidade.length <=2){
+            $a('#cidade').removeClass("control-group").addClass("control-group error");  
+        }        
+        else{
+            $a('#cidade').removeClass("control-group error").addClass("control-group success");  
+        }
+        
+        if(estado == -1){            
+            $a('#estado').removeClass("control-group").addClass("control-group error");  
+        }        
+        else{
+            $a('#estado').removeClass("control-group error").addClass("control-group success");  
+        }
+        
+        if(tel.length  == 8){            
+            $a('#telefone').removeClass("error").addClass("success");  
+        }   
+        else if (tel.length  == 10){            
+            $a('#telefone').removeClass("error").addClass("success");  
+        }   
+        else{
+            $a('#telefone').removeClass("success").addClass("error");  
+        }
+        
+        if(email.length  > 0){ 
+            if(email.length  < 7)
+                $a('#email').removeClass("success").addClass("error"); 
+            else{
+                $a('#email').removeClass("error").addClass("success");
+            }
+        } 
+        
+        if(email.length  == 0){ 
+            if(email.length  < 7)
+                $a('#email').removeClass("success error");             
+        } 
+        
+        if(user == 1){
+            if(email.length  < 7)
+                $a('#email').removeClass("success").addClass("error"); 
+            else{
+                $a('#email').removeClass("error").addClass("success");
+            }
+        }
+        
+        
+    });       
+}
+
 //Função de JQUERY
 $a(document).ready(function(){   
     
     validaFormPessoaJS();
+    //validaForm();
     trocarAbaSubnav();
+   
+    
     
      
    		
@@ -341,6 +439,5 @@ $a(document).ready(function(){
 function valor(){
 
     document.forms["num_resultados"].submit();
-
 
 }

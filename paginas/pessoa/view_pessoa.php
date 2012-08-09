@@ -38,7 +38,7 @@ else if ($pessoa->tipo == 2){
 
 ?>
 
-<div class ="container">
+<div class ="container content">
     <div class ="esquerda"><h1><?php echo $pessoa->nome; ?>  </h1> </div>
     <div class ="direita">        
         <a class="btn btn-small btn-warning" href="#">

@@ -46,7 +46,7 @@ if ($cont>$total) $cont = $total;
 
 ?>
 
-<div class="container">
+<div class="container content">
     <div class ="esquerda"> <h1>Pessoa F&iacute;sica</h1> </div>
     <br/>
     <br/>

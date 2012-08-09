@@ -7,13 +7,13 @@ $pesq_uf = pg_exec($conexao1, "select * from uf order by nome");
 $resultado = pg_fetch_object($pesq_uf);
 ?>
 
-<div class="container">
+<div class="container content">
 
     <form id="form_pessoa" class="form-horizontal pessoaAjaxForm" method="post" action="../operacoes/CPessoa/incluir_pessoa_rollback_op.php">
         <fieldset>
             <!--Campos formulário -->
 
-            <legend>Cadastrar nova pessoa</legend>
+            <legend><h1>Cadastrar nova pessoa</h1></legend>
 
             <div id="tipo" class="control-group ">
                 <label class="control-label" for="tipo">Tipo</label>

@@ -52,9 +52,15 @@ if (!is_numeric($t)) {
     $erro.= "telefone nao eh numero";
 }
 
-/*if (strlen($em) < 2) {
-    $erro.= "email menos que 2";
-}*/
+/* if (strlen($em) < 2) {
+  $erro.= "email menos que 2";
+  } */
+
+//se for passado um email ele deve ser pelo menos 2
+if (strlen($em) > 0) {
+    if (strlen($em) < 7)
+        $erro.= "email menos que 7";
+}
 
 if (strlen($b) < 2) {
     $erro.= "Escreva um bairros";
@@ -129,13 +135,16 @@ if ($tipo_pessoa == 2) {
     }
 }
 
-//Se for user, confere o tamanho da senha
+//Se for user, confere o tamanho da senha e se foi digitado o email
 if ($user == 1) {
     if (strlen($senha) < 7) {
         $erro.= "senha menor que 8";
     }
-}
 
+    if (strlen($em) < 7) {
+        $erro.= "email menos que 7";
+    }
+}
 
 //se os dados estiverem de acordo, prossegue para incluir
 if ($erro != "") {
@@ -156,13 +165,13 @@ if ($erro != "") {
 
     $pessoa = new CPessoa();
 
-    
+
     //A funçaõ incluirPessoa retorna o id da pessoa que acaba de ser registrada
     $incluir = $pessoa->incluirPessoa($conexao, $n, $e, $em, $t, $c, $uf, $b, $tipo_pessoa);
-    
+
     //$id_pessoa = $pessoa->getId($conexao, $em); //pega o id da pessoa com passando o email
     $id_pessoa = $incluir;
-    
+
     if ($tipo_pessoa == 0) {
         $fisica = new CFisica();
         $incluir = $fisica->incluirFisica($conexao, $id_pessoa, $cpf, $rg, $comarca);
@@ -192,8 +201,8 @@ if ($erro != "") {
 
     if ($incluir) {
         pg_query($conexao, "commit");
-        echo "1"; 
-   } else {
+        echo "1";
+    } else {
         pg_query($conexao, "rollback");
         pg_close($conexao);
         echo "0";

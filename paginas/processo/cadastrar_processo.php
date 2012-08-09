@@ -16,7 +16,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
 ?>
 
 
-<div class="container">
+<div class="container content">
 
     <form name ="form_processo" id="form_processo" class="form-horizontal" method="post" action="../operacoes/CProcesso/incluir_processo_op.php">
         <fieldset>
@@ -164,7 +164,18 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <input type="text" class="input-xlarge" id="deposito_judicial_input" name="deposito_judicial">                       
                     <span  class="help-inline "></span>                    
                 </div>
-            </div>                          
+            </div>    
+
+            <!--    Teste de BOX
+            <div id="senha" class="control-group ">
+                <label class="control-label" for="telefone">Senha</label>
+                <div class="controls">
+                    <div class="box"><span>Ber</span><span>André</span></div>    
+                    <span  class="help-inline ">*</span> 
+                </div>
+            </div>
+            
+            -->
 
             <!-- Campo auto da penhora -->
             <div id="auto_penhora" class="control-group">
@@ -174,7 +185,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <span  class="help-inline "></span>                    
                 </div>
             </div>
-            
+
             <!--Botões do formulário -->
             <div class="form-actions">
                 <button  type="submit" id="..submit-processo"class="btn btn-primary">Salvar</button>
@@ -336,7 +347,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                             <input type="text" class="input-xlarge" id="senha_input" name="senha">    
                             <span  class="help-inline ">*</span> 
                         </div>
-                    </div>
+                    </div>                  
                 </div>               
             </fieldset>
         </form>

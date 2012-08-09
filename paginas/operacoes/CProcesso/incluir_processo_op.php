@@ -173,7 +173,7 @@ if ($erro != '') {
     }
 
     //Pegando IDs dos advogados réu
-    $id = $pessoa->getIDPessoaNome($conexao1, $autor_ad);
+    $id = $pessoa->getIDPessoaNome($conexao1, $reu_ad);
 
     //Inclui o advogado réu 
     if ($id != null) {
