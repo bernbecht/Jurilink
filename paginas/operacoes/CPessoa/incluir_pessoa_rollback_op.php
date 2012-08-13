@@ -95,8 +95,8 @@ if ($tipo_pessoa == 0 || $tipo_pessoa == 2) {
         $erro.= "cpf nao eh numero";
     }
 
-    if (strlen($rg) < 2) {
-        $erro.= "rg menos que 2";
+    if (strlen($rg) < 7) {
+        $erro.= "rg menos que 7";
     }
 
     if (strlen($comarca) < 2) {
@@ -113,8 +113,8 @@ if ($tipo_pessoa == 0 || $tipo_pessoa == 2) {
 if ($tipo_pessoa == 1) {
     $cnpj = $_POST['cnpj'];
 
-    if (strlen($cnpj) < 2) {
-        $erro.= "cnpj menos que 2";
+    if (strlen($cnpj) != 14) {
+        $erro.= "cnpj menos que 14";
     }
 
     if (!is_numeric($cnpj)) {

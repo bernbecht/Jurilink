@@ -76,7 +76,7 @@ function pessoaAjax(){
     /* get some values from elements on the page: */
     var $form = $a( '.pessoaAjaxForm' ),
     nome = $form.find( 'input[name="nome"]' ).val(),
-    tipo = $form.find( 'input[name="tipo"]:checked' ).val(),
+    tipo = $form.find( 'input[name="tipo"]' ).val(),
     oab = $form.find( 'input[name="oab"]' ).val(),
     cnpj = $form.find( 'input[name="cnpj"]' ).val(),
     cpf = $form.find( 'input[name="cpf"]' ).val(),
@@ -92,7 +92,7 @@ function pessoaAjax(){
     senha = $form.find( 'input[name="senha"]' ).val(),        
     url = $form.attr( 'action' );
         
-    //alert(estado);
+    alert(tipo);
         
     $a.post(url,{
         nome:nome,
@@ -335,7 +335,7 @@ function validaForm(){
     $a(".submit-pessoa").click(function(){ 
         var $form = $a( '.pessoaAjaxForm' ),
         nome = $form.find( 'input[name="nome"]' ).val(),
-        tipo = $form.find( 'input[name="tipo"]:checked' ).val(),
+        tipo = $form.find( 'input[name="tipo"]' ).val(),
         oab = $form.find( 'input[name="oab"]' ).val(),
         cnpj = $form.find( 'input[name="cnpj"]' ).val(),
         cpf = $form.find( 'input[name="cpf"]' ).val(),
@@ -350,10 +350,11 @@ function validaForm(){
         user = $form.find( 'input[name="userCheckbox"]:checked' ).val(),
         senha = $form.find( 'input[name="senha"]' ).val();
         
-       
+        var mandar = true;
         
         if(nome.length <=2){
-            $a('#nome').removeClass("control-group").addClass("control-group error");  
+            $a('#nome').removeClass("control-group").addClass("control-group error"); 
+            mandar =false;
         }        
         else{
             $a('#nome').removeClass("control-group error").addClass("control-group success");  
@@ -361,6 +362,7 @@ function validaForm(){
         
         if(endereco.length <=2){
             $a('#endereco').removeClass("control-group").addClass("control-group error");  
+            mandar =false;
         }        
         else{
             $a('#endereco').removeClass("control-group error").addClass("control-group success");  
@@ -368,6 +370,7 @@ function validaForm(){
         
         if(bairro.length <=2){
             $a('#bairro').removeClass("control-group").addClass("control-group error");  
+            mandar =false;
         }        
         else{
             $a('#bairro').removeClass("control-group error").addClass("control-group success");  
@@ -375,6 +378,7 @@ function validaForm(){
         
         if(cidade.length <=2){
             $a('#cidade').removeClass("control-group").addClass("control-group error");  
+            mandar =false;
         }        
         else{
             $a('#cidade').removeClass("control-group error").addClass("control-group success");  
@@ -382,6 +386,7 @@ function validaForm(){
         
         if(estado == -1){            
             $a('#estado').removeClass("control-group").addClass("control-group error");  
+            mandar =false;
         }        
         else{
             $a('#estado').removeClass("control-group error").addClass("control-group success");  
@@ -395,38 +400,176 @@ function validaForm(){
         }   
         else{
             $a('#telefone').removeClass("success").addClass("error");  
+            mandar =false;            
         }
         
-        if(email.length  > 0){ 
-            if(email.length  < 7)
+        /*if(email.length  > 0){ 
+            if(email.length  < 7){
                 $a('#email').removeClass("success").addClass("error"); 
+                mandar =false;
+            }
             else{
                 $a('#email').removeClass("error").addClass("success");
             }
+        } */
+        
+        /*if(email.length  == 0){ 
+            if(email.length  < 7){
+                $a('#email').removeClass("success error");             
+                mandar =false;
+            }
         } 
         
-        if(email.length  == 0){ 
-            if(email.length  < 7)
-                $a('#email').removeClass("success error");             
-        } 
+        if(senha.length  == 0){ 
+            if(email.length  < 7){
+                $a('#senha').removeClass("success error");             
+                mandar =false;
+            }
+        } */
         
         if(user == 1){
-            if(email.length  < 7)
+            if(email.length  < 7){
                 $a('#email').removeClass("success").addClass("error"); 
+                mandar =false;
+            }
             else{
                 $a('#email').removeClass("error").addClass("success");
+            }
+            
+            if(senha.length  < 8){
+                $a('#senha').removeClass("success").addClass("error"); 
+                mandar =false;
+            }
+            else{
+                $a('#senha').removeClass("error").addClass("success");
+            }
+        }
+        else{
+            
+             $a('#senha').removeClass("success error"); 
+            
+            if(email.length  > 0){ 
+                if(email.length  < 7){
+                    $a('#email').removeClass("success").addClass("error"); 
+                    mandar =false;
+                }
+                else{
+                    $a('#email').removeClass("error").addClass("success");
+                }
+            } 
+            else{
+                $a('#email').removeClass("success error");
             }
         }
         
         
+        if($a('#tipo_input').val() == 0 || $a('#tipo_input').val() == 2){
+            
+            var intRegex = /^\d+$/;
+            var floatRegex = /^((\d+(\.\d *)?)|((\d*\.)?\d+))$/;
+            
+            
+            if(cpf.length == 11){
+                if(intRegex.test(cpf) || floatRegex.test(cpf)) {
+                    $a('#cpf-modal').removeClass("error").addClass("success");            
+                }
+            
+                else{
+                    $a('#cpf-modal').removeClass("success").addClass("error");
+                    mandar =false;
+                }
+            }             
+            else{
+                $a('#cpf-modal').removeClass("success").addClass("error");
+                mandar =false;
+            }
+        }
+        
+        if($a('#tipo_input').val() == 0 || $a('#tipo_input').val() == 2){          
+        
+            if(rg.length >=7){
+                if(intRegex.test(rg) || floatRegex.test(rg)) {
+                    $a('#rg-modal').removeClass("error").addClass("success");            
+                }
+            
+                else{
+                    $a('#rg-modal').removeClass("success").addClass("error");
+                    mandar =false;
+                }
+            }             
+            else{
+                $a('#rg-modal').removeClass("success").addClass("error");
+                mandar =false;
+            }
+        }
+        
+        if($a('#tipo_input').val() == 0 || $a('#tipo_input').val() == 2){          
+        
+            if(comarca.length >1){
+                
+                $a('#comarca-modal').removeClass("error").addClass("success");            
+            }                
+                         
+            else{
+                $a('#comarca-modal').removeClass("success").addClass("error");
+                mandar =false;
+            }        
+        }
+        
+        if($a('#tipo_input').val() == 1){
+            
+            var intRegex = /^\d+$/;
+            var floatRegex = /^((\d+(\.\d *)?)|((\d*\.)?\d+))$/;
+            
+            
+            if(cnpj.length == 14){
+                if(intRegex.test(cnpj) || floatRegex.test(cnpj)) {
+                    $a('#cnpj-modal').removeClass("error").addClass("success");            
+                }
+            
+                else{
+                    $a('#cnpj-modal').removeClass("success").addClass("error");
+                    mandar =false;
+                }
+            }             
+            else{
+                $a('#cnpj-modal').removeClass("success").addClass("error");
+                mandar =false;
+            }
+        }
+        
+        if($a('#tipo_input').val() == 2){
+            
+            if(oab.length > 3){
+                if(intRegex.test(oab) || floatRegex.test(oab)){
+                    $a("#oab-modal").removeClass('error').addClass('success');
+                }
+                else{
+                    $a("#oab-modal").removeClass('success').addClass('error');
+                    mandar =false;
+                }
+            }             
+            else{
+                $a('#oab-modal').removeClass("success").addClass("error");
+                mandar =false;
+            }        
+        }
+        
+        if(mandar==true){
+            pessoaAjax();
+        }
+        
+        else{
+            alert(mandar);
+        }
     });       
 }
 
 //Função de JQUERY
 $a(document).ready(function(){   
     
-    validaFormPessoaJS();
-    //validaForm();
+    //validaFormPessoaJS();
+    validaForm();
     trocarAbaSubnav();
    
     

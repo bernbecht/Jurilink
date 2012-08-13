@@ -3,21 +3,21 @@
         
     $a(document).ready(function (){   
         
-       // $a('#rg').show();
-        //$a('#comarca').show();
-       // $a('#cpf').show();
-       // $a('#cnpj').hide();
-       // $a('#oab').hide();
-        
+        $a('#rg-modal').show();
+        $a('#comarcamodal').show();
+        $a('#cpf-modal').show();
+        $a('#cnpj-modal').hide();
+        $a('#oab-modal').hide();
+       
         $a('#tipo_input').val(0);            
         
         
         $a('#fisica').click(function(){
-            $a('#rg').show();
-            $a('#comarca').show();
-            $a('#cpf').show();
-            $a('#cnpj').hide();
-            $a('#oab').hide();
+            $a('#rg-modal').show();
+            $a('#comarca-modal').show();
+            $a('#cpf-modal').show();
+            $a('#cnpj-modal').hide();
+            $a('#oab-modal').hide();
             
             $a('#tipo_input').val(0);
             
@@ -29,11 +29,11 @@
         });
         
         $a('#juridica').click(function(){
-            $a('#rg').hide();
-            $a('#comarca').hide();
-            $a('#cpf').hide();
-            $a('#cnpj').show();
-            $a('#oab').hide();
+            $a('#rg-modal').hide();
+            $a('#comarca-modal').hide();
+            $a('#cpf-modal').hide();
+            $a('#cnpj-modal').show();
+            $a('#oab-modal').hide();
             
             $a(this).addClass('disabled');
             $a('#advogado').removeClass('disabled');
@@ -43,11 +43,11 @@
         });
         
         $a('#advogado').click(function(){
-            $a('#rg').show();
-            $a('#comarca').show();
-            $a('#cpf').show();
-            $a('#cnpj').hide();
-            $a('#oab').show();
+            $a('#rg-modal').show();
+            $a('#comarca-modal').show();
+            $a('#cpf-modal').show();
+            $a('#cnpj-modal').hide();
+            $a('#oab-modal').show();
             
             $a('#tipo_input').val('2');
             
