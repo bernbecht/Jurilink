@@ -107,7 +107,9 @@ else if ($pessoa->tipo == 2){
   </div>
       
       <hr border ="20px" height ="50px">
+     
       <h3> PROCESSOS COM A ADVOCACIA </h3>
+     
       <div class="tabela"> 
     <?php 
         echo "<table = 'processos' class=table table-striped table-condensed >";
@@ -119,12 +121,25 @@ else if ($pessoa->tipo == 2){
                 <th>Autor(es)</th>
                 <th>R&eacute;u(s)</th>
                 <th>Tr&acirc;nsito em Julgado</th>
-                <th>A&ccedil;&otilde;es</th>
+                <th>Advogado</th>
                 </tr></thead>";
         echo "<tbody>";
         echo "</tbody>";
         echo "</table>";
         
+/* --QUERY PARA PROCESSOS DA PESSOA FÍSICA--
+select processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, padv.nome as nome_adv, 
+natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY')as data_distribuicao, processo.valor_causa, padv.id_pessoa as id_advogado,
+preu.nome
+from ((((((processo
+inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
+inner join autor autor1 on processo.id_processo = autor1.id_processo and autor1.id_pessoa = 97 and autor1.flag_papel = 0)
+inner join pessoa pautor on pautor.id_pessoa = autor1.id_pessoa)
+inner join autor advautor on advautor.flag_papel = 1 and advautor.id_processo = processo.id_processo)
+inner join pessoa padv on padv.id_pessoa = advautor.id_pessoa)
+inner join reu on reu.id_processo = processo.id_processo and reu.flag_papel = 0) 
+inner join pessoa preu on preu.id_pessoa = reu.id_pessoa
+*/
      ?>
      </div>
       

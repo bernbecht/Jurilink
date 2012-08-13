@@ -71,8 +71,10 @@ $resultado = pg_fetch_object($pesq_processo);
         } while ($resultado = pg_fetch_object($pesq_processo));
         echo "</tbody>";
         echo "</table>";
+
     ?>
     </div>
+
     
     
 </div>
