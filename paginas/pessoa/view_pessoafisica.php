@@ -25,7 +25,7 @@ natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY')as 
 to_char(processo.valor_causa, 'R$999G999G999D99') as valor_causa, padv.id_pessoa as id_advogado
 from (((((((processo
 inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
-inner join autor autor1 on processo.id_processo = autor1.id_processo and autor1.id_pessoa = 97 and autor1.flag_papel = 0)
+inner join autor autor1 on processo.id_processo = autor1.id_processo and autor1.id_pessoa = $id_pessoa and autor1.flag_papel = 0)
 inner join pessoa pautor on pautor.id_pessoa = autor1.id_pessoa)
 inner join autor advautor on advautor.flag_papel = 1 and advautor.id_processo = processo.id_processo)
 inner join pessoa padv on padv.id_pessoa = advautor.id_pessoa)
@@ -49,7 +49,7 @@ inner join usuario on padv.id_pessoa = usuario.id_pessoa order by data_distribui
 $pesq_proc_reu_advocacia = pg_query($conexao1,$query);
 ?>
 
-<div class ="container">
+<div class ="container content">
     <div class ="esquerda"><h1><?php echo $pessoa->nome; ?>  </h1> </div>
     <div class ="direita">        
         <a class="btn btn-small btn-warning" href="#">
@@ -144,7 +144,7 @@ $pesq_proc_reu_advocacia = pg_query($conexao1,$query);
                     }while ($processos_advocacia = pg_fetch_object($pesq_proc_autor_advocacia));
         }
         
-       if (pg_num_rows($pesq_proc_reu_advocacia)>0) {
+       /*if (pg_num_rows($pesq_proc_reu_advocacia)>0) {
             $processos_advocacia = pg_fetch_object($pesq_proc_reu_advocacia);
         do {
             echo "<tr>	
@@ -157,7 +157,7 @@ $pesq_proc_reu_advocacia = pg_query($conexao1,$query);
                 <td>" . $processos_advocacia->valor_causa . "</td> 
                 </tr>";
             }while ($processos_advocacia = pg_fetch_object($pesq_proc_reu_advocacia));
-        }
+        }*/
        
         echo "</tbody>";
         echo "</table>";
