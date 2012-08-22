@@ -16,9 +16,9 @@ $pesq_uf = pg_query($conexao1,$query);
 $estado = pg_fetch_object($pesq_uf);
 
 
-$query = "SELECT * FROM fisica WHERE fisica.id_pessoa = $id_pessoa";
-$pesq_fisica = pg_query($conexao1,$query);
-$fisica = pg_fetch_object($pesq_fisica);
+$query = "SELECT * FROM juridica WHERE juridica.id_pessoa = $id_pessoa";
+$pesq_juridica = pg_query($conexao1,$query);
+$juridica = pg_fetch_object($pesq_juridica);
 
 $query = "select processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
 natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, 
@@ -110,21 +110,14 @@ $pesq_proc_reu_c_advocacia = pg_query($conexao1,$query);
     <div class="span2"><?php echo $pessoa->endereco ?></div>    
     
     <?php
-        echo "<div class='span2 offset1'><b>RG</b></div>
-        <div class='span2'>$fisica->rg</div>";
+        echo "<div class='span2 offset1'><b>CNPJ</b></div>
+        <div class='span2'>$juridica->cnpj</div>";
     
     ?>
   
     <div class="span2 offset1"><?php echo "<b>Bairro</b>" ?></div>
     <div class="span2"><?php echo $pessoa->bairro ?></div>
-    
-    <div class="span2 offset1"><?php echo "<b>CPF/CNPJ</b>" ?></div>
-    <div class="span2">
-        <?php
-        echo $fisica->cpf;
-        ?>
-    </div>
-  
+      
     <div class="span2 offset1"><?php echo "<b>Cidade</b>" ?></div>
     <div class="span2"><?php echo $pessoa->cidade ?></div>
     

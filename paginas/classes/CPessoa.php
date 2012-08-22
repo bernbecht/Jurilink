@@ -233,7 +233,10 @@ class CPessoa {
 
                 $pesquisa = pg_exec($conexao, $query);
 
-                return $pesquisa;
+                $query = "select count (nome) from pessoa, juridica where pessoa.id_pessoa = juridica.id_pessoa and pessoa.tipo = 1";
+                $registros = pg_exec($conexao, $query);
+
+                return array($pesquisa, $registros);
                 break;
 
             //Retorna relação de advogados
@@ -246,8 +249,11 @@ class CPessoa {
 
                 $pesquisa = pg_exec($conexao, $query);
 
-                return $pesquisa;
-                break;
+                $query = "select count (nome) from pessoa, advogado where pessoa.id_pessoa = advogado.id_pessoa and pessoa.tipo = 2";
+                $registros = pg_exec($conexao, $query);
+
+                return array($pesquisa, $registros);
+                break;        
         }
     }
 

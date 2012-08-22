@@ -54,9 +54,9 @@ if (!isset($_SESSION['usuario']))
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pessoas
                             <b class="caret"></b></a>
                         <ul id="pessoas_menu_dropdown" class="dropdown-menu">
-                            <li><a class="aba drop" href="paginas/pessoa/relacao_pfisica.php">Fisica</a></li>
-                            <li><a class="aba drop" href="#">Juridica</a></li>
-                            <li><a class="aba drop" href="#">Advogados</a></li>
+                            <li><a class="aba drop" href="paginas/pessoa/relacao_pfisica.php">F&iacute;sica</a></li>
+                            <li><a class="aba drop" href="paginas/pessoa/relacao_pjuridica.php">Jur&iacute;dica</a></li>
+                            <li><a class="aba drop" href="paginas/pessoa/relacao_advogados.php">Advogados</a></li>
                         </ul>
                     </li>
 

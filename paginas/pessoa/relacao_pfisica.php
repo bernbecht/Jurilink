@@ -98,7 +98,7 @@ if ($cont>$total) $cont = $total;
     ?>
     </div>
         <div class ="row">
-        <div class = span2>
+        <div class = "span2 offset3">
             <?php
                 if ($offset>0)
                     echo "<a class= btn btn-small href=relacao_pfisica.php?offset=".($offset-$limite)."&limite=$limite>";
@@ -110,7 +110,7 @@ if ($cont>$total) $cont = $total;
             ?>
            
         </div>
-        <div class="span3">
+        <div class="span2">
         <form name="num_resultados" action="relacao_pfisica.php" method="post">
             <select class ="span1" name="limite" onchange="valor()" >
                 <?php 
