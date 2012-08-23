@@ -10,14 +10,14 @@ $pesq_juridica = getPessoas($conexao1, 1,$limite,$offset);
 $resultado = pg_fetch_object($pesq_juridica);
 ?>
 
-<div class="container">
+<div class="container content">
     <div class ="esquerda"> <h1>Pessoa Jur&iacute;dica</h1> </div>
     <br/>
     <br/>
     <hr border ="20px" height ="50px">
     
         <div class ="esquerda">
-        <a class="btn btn-small btn-success" href="#">
+            <a class="btn btn-small btn-success" href="cadastrar_pjuridica.php">
             <i class="icon-plus icon-white"></i>
             INCLUIR PESSOA JUR&Iacute;DICA     
         </a>             

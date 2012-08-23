@@ -51,7 +51,7 @@ if ($cont>$total) $cont = $total;
     <hr border ="20px" height ="50px">
     
         <div class ="esquerda">
-            <a class="btn btn-small btn-success" href="cadastrar_pessoa.php">
+            <a class="btn btn-small btn-success" href="cadastrar_pfisica.php">
             <i class="icon-plus icon-white"></i>
             INCLUIR PESSOA F&Iacute;SICA     
         </a>             

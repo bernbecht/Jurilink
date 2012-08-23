@@ -14,8 +14,8 @@ $resultado = pg_fetch_object($pesq_uf);
         <fieldset>
             <!--Campos formulário -->
 
-            <legend><h1>Cadastrar Nova Pessoa Fisica</h1></legend> 
-
+            <legend><h1>Cadastrar Nova Advogado</h1></legend> 
+            
             <div id="msg_resultado"></div>
 
             <div class="row">
@@ -66,7 +66,19 @@ $resultado = pg_fetch_object($pesq_uf);
                 </div>
             </div>
 
-            <div class="row">             
+            <div class="row">
+                <div class="span5" >                    
+                    <div id="oab" class="control-group">
+                        <label class="control-label" for="oab">OAB</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge aviso" id="oab_input" name="oab">                       
+                            <span  class="help-inline ">Minimo 4 digitos</span>                    
+                        </div>
+                    </div>                                 
+                </div>
+
+                <div class="divisor_maior"></div>
+
                 <div class="span5" >
                     <div id="endereco"class="control-group">
                         <label class="control-label" for="endereco">Endereco</label>
@@ -76,8 +88,10 @@ $resultado = pg_fetch_object($pesq_uf);
                         </div>
                     </div>                    
                 </div>
-                <div class="divisor_maior"></div>               
+            </div>
 
+
+            <div class="row">
                 <div class="span5" >
                     <div id="bairro"class="control-group">
                         <label class="control-label" for="bairro">Bairro</label>
@@ -88,11 +102,8 @@ $resultado = pg_fetch_object($pesq_uf);
                     </div>                    
                 </div>
 
+                <div class="divisor_maior"></div>
 
-            </div>
-
-
-            <div class="row">
                 <div class="span5" >
                     <div id="cidade" class="control-group">
                         <label class="control-label" for="cidade">Cidade</label>
@@ -100,11 +111,12 @@ $resultado = pg_fetch_object($pesq_uf);
                             <input type="text" class="input-xlarge aviso" id="cidade_input" name="cidade">       
                             <span  class="help-inline "></span> 
                         </div>
-                    </div>                      
+                    </div>               
                 </div>
+            </div>
 
-                <div class="divisor_maior"></div>
 
+            <div class="row">
                 <div class="span5" >
                     <div id="estado" class="control-group">
                         <label class="control-label" for="Estado">Estado</label>
@@ -121,25 +133,23 @@ $resultado = pg_fetch_object($pesq_uf);
                             </select>
                             <span  class="help-inline "></span>
                         </div>
-                    </div>               
+                    </div>                        
                 </div>
-            </div>
 
+                <div class="divisor"></div>
 
-            <div class="row">
-                <div class="span5" >
+                <div class="span5" >                    
                     <div id="telefone" class="control-group ">
                         <label class="control-label" for="telefone">Telefone</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge aviso" id="telefone_input" name="telefone">    
                             <span  class="help-inline ">Apenas digitos</span> 
                         </div>
-                    </div>                       
-                </div>
-
-                <div class="divisor"></div>
-
-                <div class="span5" >                    
+                    </div>
+                </div> 
+            </div>
+            <div class="row">
+                <div class="span5">
                     <div id="email" class="control-group">
                         <label class="control-label" for="email">Email</label>
                         <div class="controls">                        
@@ -148,9 +158,9 @@ $resultado = pg_fetch_object($pesq_uf);
                             </div>
                             <span class="help-inline"></span>
                         </div>
-                    </div>  
-                </div> 
-            </div>           
+                    </div>                         
+                </div>
+            </div>
 
 
             <div class="row">
@@ -180,17 +190,16 @@ $resultado = pg_fetch_object($pesq_uf);
             </div> 
 
 
-            <input value="0" type="hidden" class="input-xlarge" id="tipo_input" name="tipo">  
+            <input value="2" type="hidden" class="input-xlarge" id="tipo_input" name="tipo">  
 
             <!--Botões do formulário -->
             <div class="form-actions">
                 <button  id ="enviar"  type="button" class="btn btn-primary submit-pessoa">Salvar</button>
                 <button  id ="enviar"  type="button" class="btn btn-primary submit-outra-pessoa">Salvar e Adicionar Outro</button>
                 <button  type="button" class="btn cancelar">Cancelar</button>
-                
             </div>
 
-
+            
 
         </fieldset>
 

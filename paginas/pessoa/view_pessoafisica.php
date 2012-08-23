@@ -49,7 +49,7 @@ inner join usuario on padv.id_pessoa = usuario.id_pessoa order by data_distribui
 $pesq_proc_reu_advocacia = pg_query($conexao1,$query);
 ?>
 
-<div class ="container">
+<div class ="container content">
     <div class ="esquerda"><h1><?php echo $pessoa->nome; ?>  </h1> </div>
     <div class ="direita">        
         <a class="btn btn-small btn-warning" href="#">

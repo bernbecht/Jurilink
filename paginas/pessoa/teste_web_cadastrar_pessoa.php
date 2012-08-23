@@ -79,7 +79,7 @@ $resultado = pg_fetch_object($pesq_uf);
                                 }
                                 ?>                     
                             </select>
-                            <span  class="help-inline "><i class="icon-search"></i></span>
+                            <span  class="help-inline "></span>
                         </div>
                     </div>
 
@@ -87,7 +87,7 @@ $resultado = pg_fetch_object($pesq_uf);
                         <label class="control-label" for="telefone">Telefone</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="telefone_input" name="telefone">    
-                            <span  class="help-inline ">*</span> 
+                            <span  class="help-inline ">Apenas digitos</span> 
                         </div>
                     </div>
 
@@ -105,42 +105,42 @@ $resultado = pg_fetch_object($pesq_uf);
                 
 
                 <div class="span5" style="border-left: 1px solid #000;">
-                    <div id="cnpj-modal" class="control-group">
+                    <div id="cnpj" class="control-group">
                         <label class="control-label" for="cnpj">CNPJ</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="cnpj_input" name="cnpj">                       
-                            <span  class="help-inline ">*</span>                    
+                            <span  class="help-inline ">Apenas digitos</span>                    
                         </div>
                     </div>
 
-                    <div id="cpf-modal" class="control-group">
+                    <div id="cpf" class="control-group">
                         <label class="control-label" for="cpf">CPF</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="cpf_input" name="cpf">                       
-                            <span  class="help-inline ">*</span>                    
+                            <span  class="help-inline ">Apenas digitos</span>                    
                         </div>
                     </div>
 
-                    <div id="rg-modal" class="control-group">
+                    <div id="rg" class="control-group">
                         <label class="control-label" for="rg">RG</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="rg_input" name="rg">                       
-                            <span  class="help-inline ">*</span>                    
+                            <span  class="help-inline ">Apenas digitos</span>                    
                         </div>
                     </div>
 
-                    <div id="comarca-modal" class="control-group">
+                    <div id="comarca" class="control-group">
                         <label class="control-label" for="rg">Orgao Expedidor</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="comarca_input" name="comarca">                       
-                            <span  class="help-inline ">*</span>                    
+                            <span  class="help-inline ">Mínimo 2 caracteres</span>                    
                         </div>
                     </div>
-                    <div id="oab-modal" class="control-group">
+                    <div id="oab" class="control-group">
                         <label class="control-label" for="oab">OAB</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="oab_input" name="oab">                       
-                            <span  class="help-inline ">*</span>                    
+                            <span  class="help-inline ">Mínimo 4 dígitos</span>                    
                         </div>
                     </div>
                 </div>

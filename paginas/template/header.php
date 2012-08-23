@@ -56,8 +56,8 @@ if(!isset($_SESSION['usuario'])) header("location:main.php");
                         <b class="caret"></b></a>
                     <ul id="pessoas_menu_dropdown" class="dropdown-menu">
                         <li><a  href="../pessoa/relacao_pfisica.php">Fisica</a></li>
-                        <li><a  href="#">Juridica</a></li>
-                        <li><a  href="#">Advogados</a></li>
+                        <li><a  href="../pessoa/relacao_pjuridica.php">Juridica</a></li>
+                        <li><a  href="../pessoa/cadastrar_padvogado.php">Advogados</a></li>
                     </ul>
                 </li>
                 
