@@ -3,7 +3,7 @@ require_once '../template/header.php'; //chama o header
 require_once '../config.php';     //chama as configurações de página!
 
 
-$query = "select numero_unificado, to_char(data_distribuicao, 'DD/MM/YYYY')as data_distribuicao,
+$query = "select processo.id_processo, numero_unificado, to_char(data_distribuicao, 'DD/MM/YYYY')as data_distribuicao,
 to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, natureza_acao.nome as nome_natureza,
 pautor.nome as autor, preu.nome as reu
 from (((((processo 
@@ -12,8 +12,8 @@ on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
 inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel=0)
 inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel=0)
 inner join pessoa preu on reu.id_pessoa = preu.id_pessoa)
-inner join pessoa pautor on autor.id_pessoa = pautor.id_pessoa       
-)";
+inner join pessoa pautor on autor.id_pessoa = pautor.id_pessoa)
+order by data_distribuicao";
 
 $pesq_processo = pg_exec($conexao1, $query);
 $resultado = pg_fetch_object($pesq_processo);
@@ -21,14 +21,14 @@ $resultado = pg_fetch_object($pesq_processo);
 
 ?>
 
-<div class="container">
+<div class="container content">
     <div class ="esquerda"> <h1>Processos</h1> </div>
     <br/>
     <br/>
     <hr border ="20px" height ="50px">
     
         <div class ="esquerda">
-        <a class="btn btn-small btn-success" href="#">
+        <a class="btn btn-small btn-success" href="cadastrar_processo.php">
             <i class="icon-plus icon-white"></i>
             INCLUIR PROCESSO     
         </a>             
@@ -60,7 +60,7 @@ $resultado = pg_fetch_object($pesq_processo);
         echo "<tbody>";
         do {
             echo "<tr>	
-                <td>" . $resultado->numero_unificado . "</td>
+                <td><a href=view_processo.php?id=$resultado->id_processo>" . $resultado->numero_unificado . "</a></td>
                 <td>" . $resultado->data_distribuicao . "</td>
                 <td>" . $resultado->nome_natureza . "</td>
                 <td>" . $resultado->autor . "</td>

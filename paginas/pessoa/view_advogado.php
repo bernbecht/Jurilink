@@ -20,7 +20,7 @@ $query = "SELECT * FROM fisica WHERE fisica.id_pessoa = $id_pessoa";
 $pesq_fisica = pg_query($conexao1,$query);
 $fisica = pg_fetch_object($pesq_fisica);
 
-$query = "select processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
+$query = "SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
 natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, 
 to_char(processo.valor_causa, 'R$999G999G999D99') as valor_causa, padv.id_pessoa as id_advogado
 from (((((((processo
@@ -32,14 +32,11 @@ inner join pessoa padv on padv.id_pessoa = advautor.id_pessoa)
 inner join reu on reu.id_processo = processo.id_processo and reu.flag_papel = 0) 
 inner join pessoa preu on preu.id_pessoa = reu.id_pessoa)
 inner join advogado on padv.id_pessoa = advogado.id_pessoa and advogado.id_pessoa = $id_pessoa
-order by data_distribuicao";
-$pesq_proc_autor_advocacia = pg_query($conexao1,$query);
-$processos_advocacia = pg_fetch_object($pesq_proc_autor_advocacia);
-
-$query = "SELECT processo.id_processo, processo.numero_unificado, preu.nome as nome_reu, padv.nome as nome_adv, natureza_acao.nome as nome_natureza,
-pautor.nome as nome_autor, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, to_char(processo.valor_causa, 'R$999G999G999D99') as valor_causa,
-padv.id_pessoa as id_advogado from 
-(((((((processo
+UNION
+SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
+natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, 
+to_char(processo.valor_causa, 'R$999G999G999D99') as valor_causa, padv.id_pessoa as id_advogado
+from(((((((processo
 inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
 inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel = 0)
 inner join pessoa preu on preu.id_pessoa = reu.id_pessoa)
@@ -49,7 +46,9 @@ inner join autor on autor.id_processo = processo.id_processo and autor.flag_pape
 inner join pessoa pautor on pautor.id_pessoa = autor.id_pessoa)
 inner join advogado on padv.id_pessoa = advogado.id_pessoa  and advogado.id_pessoa = $id_pessoa
 order by data_distribuicao";
-$pesq_proc_reu_advocacia = pg_query($conexao1,$query);
+$pesq_proc_advocacia = pg_query($conexao1,$query);
+$processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
+
 
 ?>
 
@@ -133,7 +132,7 @@ $pesq_proc_reu_advocacia = pg_query($conexao1,$query);
             </tr>
         </thead>";
         echo "<tbody>";
-        if (pg_num_rows($pesq_proc_autor_advocacia)>0){
+        if (pg_num_rows($pesq_proc_advocacia)>0){
             do {
                 echo "<tr>	
                     <td>" . $processos_advocacia->data_distribuicao . "</a></td>
@@ -145,24 +144,8 @@ $pesq_proc_reu_advocacia = pg_query($conexao1,$query);
                     <td>" . $processos_advocacia->valor_causa . "</td> 
                     </tr>";
 
-                    }while ($processos_advocacia = pg_fetch_object($pesq_proc_autor_advocacia));
+                    }while ($processos_advocacia = pg_fetch_object($pesq_proc_advocacia));
         }
-        
-       if (pg_num_rows($pesq_proc_reu_advocacia)>0) {
-            $processos_advocacia = pg_fetch_object($pesq_proc_reu_advocacia);
-        do {
-            echo "<tr>	
-                <td>" . $processos_advocacia->data_distribuicao . "</a></td>
-                <td>" . $processos_advocacia->numero_unificado . "</td>
-                <td>" . $processos_advocacia->nome_natureza . "</td>
-                <td>" . $processos_advocacia->nome_autor . "</td>
-                <td>" . $processos_advocacia->nome_reu . "</td>
-                <td>" . $processos_advocacia->nome_adv . "</td>
-                <td>" . $processos_advocacia->valor_causa . "</td> 
-                </tr>";
-            }while ($processos_advocacia = pg_fetch_object($pesq_proc_reu_advocacia));
-        }
-       
         echo "</tbody>";
         echo "</table>";
         
