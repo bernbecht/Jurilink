@@ -5,6 +5,8 @@ require_once  '../config.php';     //chama as configurações de página!
 //GET para ID do processo
 if(isset($_GET['id'])) $id_processo = $_GET['id'];
 
+/** TRATAMENTO DE PROCESSOS COM MAIS DE UM AUTOR OU RÉU**/
+
 $query = "SELECT count(*) from autor where id_processo = $id_processo and flag_papel = 0";
 $pesq_num_autores = pg_exec($conexao1,$query);
 $num_autores = pg_fetch_object($pesq_num_autores);
@@ -14,31 +16,128 @@ $pesq_num_reus = pg_exec($conexao1,$query);
 $num_reus = pg_fetch_object($pesq_num_reus);
 
 if ($num_autores->count == 1 and $num_reus->count == 1){
-$query = "SELECT processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padvautor.nome as nome_adv_autor, padvreu.nome as nome_adv_reu,
-natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, to_char(valor_causa, 'R$999G999G999D99') as valor_causa, 
-to_char(deposito_judicial, 'R$999G999G999D99') as deposito_judicial, juizo.nome as nome_juizo, to_char(auto_penhora, 'R$999G999G999D99') as auto_penhora,
-comarca.nome as nome_comarca, to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, preu.id_pessoa as id_reu, pautor.id_pessoa as id_autor,
-padvautor.id_pessoa as id_advogado_autor, padvreu.id_pessoa as id_advogado_reu,pautor.tipo as tipo_autor, preu.tipo as tipo_reu
-from ((((((((((processo
-inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
-/*Busca nome do Autor*/
-inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel = 0)
-inner join pessoa pautor on pautor.id_pessoa = autor.id_pessoa)
-/*Busca nome do Réu*/
-inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel = 0)
-inner join pessoa preu on preu.id_pessoa = reu.id_pessoa)
-/*Busca advogado do autor*/
-inner join autor autor_adv on autor_adv.id_processo = processo.id_processo and autor_adv.flag_papel = 1)
-inner join pessoa padvautor on padvautor.id_pessoa = autor_adv.id_pessoa)
-/*Busca advogado do réu*/
-inner join reu reu_adv on reu_adv.id_processo = processo.id_processo and reu_adv.flag_papel = 1)
-inner join pessoa padvreu on padvreu.id_pessoa = reu_adv.id_pessoa)
-/*Busca Juízo*/
-inner join juizo on processo.id_juizo = juizo.id_juizo)
-/*Busca comarca*/
-inner join comarca on comarca.id_comarca = juizo.id_comarca
-order by data_distribuicao";
+    $query = "SELECT processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padvautor.nome as nome_adv_autor, padvreu.nome as nome_adv_reu,
+    natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, to_char(valor_causa, 'R$999G999G999D99') as valor_causa, 
+    to_char(deposito_judicial, 'R$999G999G999D99') as deposito_judicial, juizo.nome as nome_juizo, to_char(auto_penhora, 'R$999G999G999D99') as auto_penhora,
+    comarca.nome as nome_comarca, to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, preu.id_pessoa as id_reu, pautor.id_pessoa as id_autor,
+    padvautor.id_pessoa as id_advogado_autor, padvreu.id_pessoa as id_advogado_reu,pautor.tipo as tipo_autor, preu.tipo as tipo_reu
+    from ((((((((((processo
+    inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
+    /*Busca nome do Autor*/
+    inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel = 0)
+    inner join pessoa pautor on pautor.id_pessoa = autor.id_pessoa)
+    /*Busca nome do Réu*/
+    inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel = 0)
+    inner join pessoa preu on preu.id_pessoa = reu.id_pessoa)
+    /*Busca advogado do autor*/
+    inner join autor autor_adv on autor_adv.id_processo = processo.id_processo and autor_adv.flag_papel = 1)
+    inner join pessoa padvautor on padvautor.id_pessoa = autor_adv.id_pessoa)
+    /*Busca advogado do réu*/
+    inner join reu reu_adv on reu_adv.id_processo = processo.id_processo and reu_adv.flag_papel = 1)
+    inner join pessoa padvreu on padvreu.id_pessoa = reu_adv.id_pessoa)
+    /*Busca Juízo*/
+    inner join juizo on processo.id_juizo = juizo.id_juizo)
+    /*Busca comarca*/
+    inner join comarca on comarca.id_comarca = juizo.id_comarca
+    order by data_distribuicao";
 }
+else if ($num_autores->count > 1 && $num_reus->count == 1){
+    $query = "SELECT pessoa.nome, pessoa.tipo, pessoa.id_pessoa from (processo
+    inner join autor on autor.id_processo = processo.id_processo and autor.flag_papel = 0 and processo.id_processo = 40)
+    inner join pessoa on pessoa.id_pessoa = autor.id_pessoa";
+    
+    $pesq_autores = pg_exec($conexao1,$query);
+    $autores = pg_fetch_object($pesq_autores);
+
+    
+    $query = "SELECT processo.numero_unificado,preu.nome as nome_reu ,padvautor.nome as nome_adv_autor, padvreu.nome as nome_adv_reu,
+    natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, to_char(valor_causa, 'R$999G999G999D99') as valor_causa, 
+    to_char(deposito_judicial, 'R$999G999G999D99') as deposito_judicial, juizo.nome as nome_juizo, to_char(auto_penhora, 'R$999G999G999D99') as auto_penhora,
+    comarca.nome as nome_comarca, to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, padvautor.id_pessoa as id_advogado_autor, padvreu.id_pessoa as id_advogado_reu,
+    preu.tipo as tipo_reu, preu.id_pessoa as id_reu
+    from ((((((((processo
+    inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
+    /*Busca nome do réu*/
+    inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel = 0)
+    inner join pessoa preu on preu.id_pessoa = reu.id_pessoa)
+    /*Busca advogado do autor*/
+    inner join autor autor_adv on autor_adv.id_processo = processo.id_processo and autor_adv.flag_papel = 1)
+    inner join pessoa padvautor on padvautor.id_pessoa = autor_adv.id_pessoa)
+    /*Busca advogado do réu*/
+    inner join reu reu_adv on reu_adv.id_processo = processo.id_processo and reu_adv.flag_papel = 1)
+    inner join pessoa padvreu on padvreu.id_pessoa = reu_adv.id_pessoa)
+    /*Busca Juízo*/
+    inner join juizo on processo.id_juizo = juizo.id_juizo)
+    /*Busca comarca*/
+    inner join comarca on comarca.id_comarca = juizo.id_comarca
+    order by data_distribuicao";
+}
+
+else if ($num_autores->count == 1 && $num_reus->count > 1){
+    $query = "SELECT pessoa.nome, pessoa.tipo, pessoa.id_pessoa from (processo
+    inner join reu on reu.id_processo = processo.id_processo and reu.flag_papel = 0 and processo.id_processo = $id_processo)
+    inner join pessoa on pessoa.id_pessoa = reu.id_pessoa";
+    
+    $pesq_reus = pg_exec($conexao1,$query);
+    $reus = pg_fetch_object($pesq_reus);
+   
+    $query = "SELECT processo.numero_unificado,pautor.nome as nome_autor ,padvautor.nome as nome_adv_autor, padvreu.nome as nome_adv_reu,
+    natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, to_char(valor_causa, 'R$999G999G999D99') as valor_causa, 
+    to_char(deposito_judicial, 'R$999G999G999D99') as deposito_judicial, juizo.nome as nome_juizo, to_char(auto_penhora, 'R$999G999G999D99') as auto_penhora,
+    comarca.nome as nome_comarca, to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, padvautor.id_pessoa as id_advogado_autor, padvreu.id_pessoa as id_advogado_reu,
+    pautor.tipo as tipo_autor, pautor.id_pessoa as id_autor
+    from ((((((((processo
+    inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
+    /*Busca nome do autor*/
+    inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel = 0)
+    inner join pessoa pautor on pautor.id_pessoa = autor.id_pessoa)
+    /*Busca advogado do autor*/
+    inner join autor autor_adv on autor_adv.id_processo = processo.id_processo and autor_adv.flag_papel = 1)
+    inner join pessoa padvautor on padvautor.id_pessoa = autor_adv.id_pessoa)
+    /*Busca advogado do réu*/
+    inner join reu reu_adv on reu_adv.id_processo = processo.id_processo and reu_adv.flag_papel = 1)
+    inner join pessoa padvreu on padvreu.id_pessoa = reu_adv.id_pessoa)
+    /*Busca Juízo*/
+    inner join juizo on processo.id_juizo = juizo.id_juizo)
+    /*Busca comarca*/
+    inner join comarca on comarca.id_comarca = juizo.id_comarca
+    order by data_distribuicao";
+}
+
+else if ($num_autores->count > 1 && $num_reus->count > 1){
+    $query = "SELECT pessoa.nome, pessoa.tipo, pessoa.id_pessoa from (processo
+    inner join autor on autor.id_processo = processo.id_processo and autor.flag_papel = 0 and processo.id_processo = 40)
+    inner join pessoa on pessoa.id_pessoa = autor.id_pessoa";
+    
+    $pesq_autores = pg_exec($conexao1,$query);
+    $autores = pg_fetch_object($pesq_autores);
+    
+    $query = "SELECT pessoa.nome, pessoa.tipo, pessoa.id_pessoa from (processo
+    inner join reu on reu.id_processo = processo.id_processo and reu.flag_papel = 0 and processo.id_processo = $id_processo)
+    inner join pessoa on pessoa.id_pessoa = reu.id_pessoa";
+    
+    $pesq_reus = pg_exec($conexao1,$query);
+    $reus = pg_fetch_object($pesq_reus);
+    
+    $query = "SELECT processo.numero_unificado,padvautor.nome as nome_adv_autor, padvreu.nome as nome_adv_reu,
+    natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, to_char(valor_causa, 'R$999G999G999D99') as valor_causa, 
+    to_char(deposito_judicial, 'R$999G999G999D99') as deposito_judicial, juizo.nome as nome_juizo, to_char(auto_penhora, 'R$999G999G999D99') as auto_penhora,
+    comarca.nome as nome_comarca, to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, padvautor.id_pessoa as id_advogado_autor, padvreu.id_pessoa as id_advogado_reu
+    from ((((((processo
+    inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
+    /*Busca advogado do autor*/
+    inner join autor autor_adv on autor_adv.id_processo = processo.id_processo and autor_adv.flag_papel = 1)
+    inner join pessoa padvautor on padvautor.id_pessoa = autor_adv.id_pessoa)
+    /*Busca advogado do réu*/
+    inner join reu reu_adv on reu_adv.id_processo = processo.id_processo and reu_adv.flag_papel = 1)
+    inner join pessoa padvreu on padvreu.id_pessoa = reu_adv.id_pessoa)
+    /*Busca Juízo*/
+    inner join juizo on processo.id_juizo = juizo.id_juizo)
+    /*Busca comarca*/
+    inner join comarca on comarca.id_comarca = juizo.id_comarca
+    order by data_distribuicao";
+}
+
 $pesq_processo = pg_exec($conexao1,$query);
 $processo = pg_fetch_object($pesq_processo);
 
@@ -67,20 +166,52 @@ $processo = pg_fetch_object($pesq_processo);
     <div class="span2 offset1"><?php echo "<b>Autor(es)</b>" ?></div>
     <div class="span2">
         <?php
+        if ($num_autores->count == 1){
             if ($processo->tipo_autor == 0)
                 echo  "<a href=../pessoa/view_pessoafisica.php?id=$processo->id_autor>".$processo->nome_autor."</a>";
             else if ($processo->tipo_autor == 1)
                 echo  "<a href=../pessoa/view_pessoajuridica.php?id=$processo->id_autor>".$processo->nome_autor."</a>";
+        }
+        else{
+            $a = 0;
+            while ($a!=$num_autores->count){
+                if ($autores->tipo == 0)
+                echo  "<a href=../pessoa/view_pessoafisica.php?id=$autores->id_pessoa>".$autores->nome."</a>";
+            else if ($autores->tipo == 1)
+                echo  "<a href=../pessoa/view_pessoajuridica.php?id=$autores->id_pessoa>".$autores->nome."</a>";
+            $autores = pg_fetch_object($pesq_autores);
+            $a++;
+            if ($a!=$num_autores->count)
+                echo ", ";
+            }
+            
+        }
         ?>
     </div>
         
     <div class="span2 offset1"><?php echo "<b>R&eacute;u(s)</b>" ?></div>
     <div class="span2">
         <?php
+        if ($num_reus->count == 1){
             if ($processo->tipo_reu == 0)
                 echo  "<a href=../pessoa/view_pessoafisica.php?id=$processo->id_reu>".$processo->nome_reu."</a>";
             else if ($processo->tipo_reu == 1)
                 echo  "<a href=../pessoa/view_pessoajuridica.php?id=$processo->id_reu>".$processo->nome_reu."</a>";
+        }
+        else{
+            $r = 0;
+            while ($r!=$num_reus->count){
+                if ($reus->tipo == 0)
+                echo  "<a href=../pessoa/view_pessoafisica.php?id=$reus->id_pessoa>".$reus->nome."</a>";
+            else if ($reus->tipo == 1)
+                echo  "<a href=../pessoa/view_pessoajuridica.php?id=$reus->id_pessoa>".$reus->nome."</a>";
+            $reus = pg_fetch_object($pesq_reus);
+            $r++;
+            if ($r!=$num_reus->count)
+                echo ", ";
+            }
+            
+        }
         ?>
     </div>
     
