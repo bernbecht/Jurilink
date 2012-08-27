@@ -1,4 +1,3 @@
-CPROCESSO_PESSOA
 <?php
 
 class CProcesso_Pessoa {

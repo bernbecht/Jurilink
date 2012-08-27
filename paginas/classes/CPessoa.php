@@ -31,7 +31,6 @@ class CPessoa {
 
         // $conexao1 = new CConexao();
         //  $conexao = $conexao1->novaConexao();
-        
         //Insere no Banco e Retorna o id_pessoa
         $incluir = pg_exec($conexao, "insert into pessoa(nome,endereco,tel,cidade,id_uf,email,tipo,bairro)
                          values('"
@@ -47,7 +46,7 @@ class CPessoa {
         // $conexao1->closeConexao();
 
         $resultado = pg_fetch_object($incluir);
-        
+
         return $resultado->id_pessoa;
     }
 
@@ -152,33 +151,37 @@ class CPessoa {
             if ($array_data[$i] != '') {
                 $array_data[$i] = ltrim($array_data[$i]);
                 $array_data[$i] = rtrim($array_data[$i]);
-              
             }
-              $i++;
+            $i++;
         }
 
-            $i = 0;
-            while ($i < $n) {
-                if ($array_data[$i] != '') {
-                    $sql = pg_exec($conexao1, "select * 
+        $i = 0;
+        while ($i < $n) {
+            if ($array_data[$i] != '') {
+                $sql = pg_exec($conexao1, "select * 
                         from pessoa 
                         where nome = '{$array_data[$i]}' ");
 
-                    $resultado = pg_fetch_object($sql);
+                $resultado = pg_fetch_object($sql);
+                if (!$resultado->id_pessoa) {
+                    //echo "ERRADO";
+                    return -1;
+                } else {
+                    //$resultado = pg_fetch_object($sql);
 
                     $id[] = $resultado->id_pessoa;
-
-                    echo $array_data[$i] . " " . $id[$i] . " ";
-                } else {
-                    echo "Nada cadastrado";
-                    return null;
+                    //echo $resultado;
+                    //echo $array_data[$i] . " " . $id[$i] . " ";
                 }
-                $i++;
+            } else {
+                //echo "Nada cadastrado";
+                return null;
             }
-
-            return $id;
+            $i++;
         }
-    
+
+        return $id;
+    }
 
     //retorna o nome da pessoa pelo id
     public function getPessoa($id) {

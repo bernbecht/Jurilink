@@ -154,9 +154,9 @@ $resultado = pg_fetch_object($pesq_uf);
                         <label class="control-label" for="email">Email</label>
                         <div class="controls">                        
                             <div class="input-prepend">
-                                <span class="add-on"><i class="icon-envelope"></i></span><input class="input-large" id="email_input" name="email" type="text">
-                            </div>
-                            <span class="help-inline"></span>
+                                <span class="add-on"><i class="icon-envelope"></i></span><input class="input-large" id="email_input" name="email" type="text" />
+                                <span class="help-inline"></span>
+                            </div>                            
                         </div>
                     </div>                         
                 </div>

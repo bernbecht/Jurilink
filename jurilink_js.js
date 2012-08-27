@@ -66,6 +66,23 @@ function pegaId(){
     alert(this.id);
 }
 
+//faz uma pagina inteira subir
+function subirPagina(){
+    $a('body,html').animate({
+        scrollTop: 0
+    }, 500);
+    return false;
+}
+
+//faz uma pagina inteira subir
+function subirModal(){
+    $a('.modal-body').animate({
+        scrollTop: 0
+    }, 500);
+    return false;
+}
+
+
 //função que limpa formulário. Deve ser mandado o form como parâmetro
 function limparForm(form){
     
@@ -196,7 +213,9 @@ function pessoaAjax(modalidade){
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa<b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
                 
-                limparForm('.pessoaAjaxForm');
+                //limparForm('.pessoaAjaxForm');
+                
+                subirPagina();
         
                 //pega o endereço da pagina
                 var href = location.href;
@@ -219,6 +238,7 @@ function pessoaAjax(modalidade){
                 //alert("Else 0");
                 //alert(data);
                 msgErroBD(data);
+                subirPagina();
                                
             }
         }
@@ -228,16 +248,19 @@ function pessoaAjax(modalidade){
                 //alert("FOI"); 
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa <b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar                
-                limparForm('.pessoaAjaxForm');       
+                limparForm('.pessoaAjaxForm');
+                subirPagina();
                   
             }
             else{
                 //alert("Else 1");
                 //alert(data);
                 msgErroBD(data);
+                subirPagina();
             }
         }
         
+        //modalidade de modal
         else if(modalidade==2){
             if(data==1){
                 //alert("FOI"); 
@@ -274,12 +297,22 @@ function pessoaAjax(modalidade){
                 
                 else if(pessoa==5){
                     $a('#reu_rep_input').val(nome_campo);
-                }            
+                }
+                
+                subirModal();
+                
+                setTimeout(function() {
+                    $a('#myModal').modal('toggle');
+
+                }, 2000);   
+               
             }
             else{
-                //alert("Else 1");
+               //alert("Else 1");
                 //alert(data);
                 msgErroBD(data);
+                subirModal();
+                
             }
         }
         
@@ -616,7 +649,7 @@ function validaFormPessoaSubmit(){
     if($a('#tipo_input').val() == 0 || $a('#tipo_input').val() == 2){           
                         
         if(cpf.length == 11){
-            if(intRegex.test(cpf) || floatRegex.test(cpf)) {
+            if(intRegex.test(cpf)) {
                 $a('#cpf').removeClass("error").addClass("");            
             }
             
@@ -697,6 +730,8 @@ function validaFormPessoaSubmit(){
         }        
     }       
     
+    
+    
     return mandar;
     
 }
@@ -730,6 +765,7 @@ function validaFormPessoaJS(){
     //Apertar o botão para incluir 1 pessoa
     $a(".submit-pessoa").click(function(){ 
         var mandar = validaFormPessoaSubmit();  
+        subirPagina();
         if(mandar==true){
             pessoaAjax(0);
         }
@@ -742,6 +778,7 @@ function validaFormPessoaJS(){
     //Apertar o botão para incluir + 1 pessoa
     $a(".submit-outra-pessoa").click(function(){ 
         var mandar = validaFormPessoaSubmit();  
+        subirPagina();
         if(mandar==true){
             pessoaAjax(1); 
         }
@@ -755,6 +792,7 @@ function validaFormPessoaJS(){
     //Apertar o botão para incluir 1 pessoa no modal
     $a(".submit-pessoa-modal").click(function(){       
         var mandar = validaFormPessoaSubmit();  
+        subirModal();
         if(mandar==true){
             pessoaAjax(2);
         }

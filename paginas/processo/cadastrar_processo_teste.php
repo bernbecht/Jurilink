@@ -28,7 +28,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
             <div id="msg_resultado_processo">
                 <div class="alert alert-block fade in">
                     <button type="button" class="close" data-dismiss="alert">x</button>
-                    <p>Todos os itens com a tarja <b>amarela</b> sao obrigatorios</p></div>
+                    <p>Todos os itens com a tarja <b>amarela</b> sao obrigatorios.</p></div>
             </div>          
 
             <div class="row">                
@@ -49,7 +49,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="data_distribuicao" class="control-group">
                         <label class="control-label" for="data distribuicao">Data Distribuicao</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="data_dist_input" name="data_distribuicao">                       
+                            <input type="text" value="12/12/2010" class="input-xlarge aviso" id="data_dist_input" name="data_distribuicao">                       
                             <span  class="help-inline ">Digite no formato dd/dd/aaaa Ex: 12/10/2010</span>                    
                         </div>
                     </div>
@@ -104,7 +104,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="valor_causa"class="control-group ">
                         <label class="control-label" for="valor_causa">Valor da causa</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="valor_causa_input" name="valor_causa">     
+                            <input type="text" value="1,00" class="input-xlarge aviso" id="valor_causa_input" name="valor_causa">     
                             <span  class="help-inline ">O valor deve ter vigula Ex: 1200,00</span> 
                         </div>
                     </div>      
@@ -120,7 +120,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="autor"class="control-group ">
                         <label class="control-label" for="autor">Autor</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="autor_input" name="autor"/>     
+                            <input type="text" value="And SA" class="input-xlarge aviso" id="autor_input" name="autor"/>     
                             <span class="help-inline "><a class="pessoa-modal" data-toggle="modal" href="#myModal"><i id="autor-modal" class="icon-plus"></i></a></span> 
                             <div id="autocompleteAutor" class="autocompleteBox"></div>
                         </div>                 
@@ -132,7 +132,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="autor_advogado"class="control-group ">
                         <label class="control-label" for="ad1">Advogado do Autor</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="autor_ad_input" name="autor_advogado"/>     
+                            <input type="text" value="Advogado ad" class="input-xlarge aviso" id="autor_ad_input" name="autor_advogado"/>     
                             <span  class="help-inline "><a class="pessoa-modal" data-toggle="modal" href="#myModal"><i id="autor-ad-modal" class="icon-plus"></i></a></span> 
                             <div id="autocompleteAdvogado1" class="autocompleteBox"></div>
                         </div>                 
@@ -164,7 +164,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="reu"class="control-group ">
                         <label class="control-label" for="reu">Reu</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="reu_input" name="reu"/>     
+                            <input type="text" value="Pink" class="input-xlarge aviso" id="reu_input" name="reu"/>     
                             <span  class="help-inline "><a class="pessoa-modal" data-toggle="modal" href="#myModal"><i id="reu-modal" class="icon-plus"></i></a></span> 
                             <div id="autocompleteReu" class="autocompleteBox"></div>
                         </div>                 
@@ -176,7 +176,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="reu_advogado"class="control-group ">
                         <label class="control-label" for="ad2">Advogado do Reu</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="reu_ad_input" name="reu_advogado"/>     
+                            <input type="text" value="Advogado ad" class="input-xlarge aviso" id="reu_ad_input" name="reu_advogado"/>     
                             <span  class="help-inline "><a class="pessoa-modal" data-toggle="modal" href="#myModal"><i id="reu-ad-modal" class="icon-plus"></i></a></span> 
                             <div id="autocompleteAdvogado2" class="autocompleteBox"></div>
                         </div>                 
@@ -220,7 +220,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="deposito_judicial" class="control-group">
                         <label class="control-label" for="deposito judicial">Deposito Judicial</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="deposito_judicial_input" name="deposito_judicial">                       
+                            <input type="text" value="12,00" class="input-xlarge" id="deposito_judicial_input" name="deposito_judicial">                       
                             <span  class="help-inline ">O valor deve ter vigula Ex: 1200,00</span>                    
                         </div>
                     </div>   
@@ -235,7 +235,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                         <label class="control-label" for="auto_penhora">Auto da Penhora</label>
                         <div class="controls">
                             <div class="input-prepend">
-                                <span class="add-on"><i class="icon-envelope"></i></span><input type="text" class="input-large" id="auto_penhora_input" name="auto_penhora" />                       
+                                <span class="add-on"><i class="icon-envelope"></i></span><input value="12,00" type="text" class="input-large" id="auto_penhora_input" name="auto_penhora" />                       
                                 <span  class="help-inline ">O valor deve ter vigula Ex: 1200,00</span>
                             </div>
                         </div>
@@ -260,8 +260,9 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
             <!--Botões do formulário -->
             <div class="form-actions">
                 <button  type="button" id="submit-processo"class="btn btn-primary">Salvar</button>
-                <button  type="button" id="..submit-outro-processo"class="btn btn-primary">Salvar e Adicionar Outro</button>
-                <button  type="button" class="btn opa">Cancelar</button>
+                <button  type="button" id="submit-outro-processo"class="btn btn-primary">Salvar e Adicionar Outro</button>
+                <button  type="button" class="btn cancelar-processo">Cancelar</button>
+                
             </div>
         </fieldset>
     </form>
@@ -286,7 +287,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div class="controls">
                         <button type="button" class="btn btn-primary disabled" id="fisica">Fisica</button>
                         <button type="button" class="btn btn-primary" id="juridica">Juridica</button>
-                        <button type="button" class="btn btn-primary" id="advogado">Advogado</button>
+                        
                     </div>
                 </div>
 

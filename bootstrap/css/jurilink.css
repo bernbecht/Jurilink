@@ -10,6 +10,7 @@ body{
     /*box-shadow: 1px 0px 10px #67666A;*/
     /*box-shadow: 5px 5px rgba(0,0,0,0.2);*/
     box-shadow:  1px 1px 10px #888;
+    margin-bottom: 50px;
 }
 
 .barra-titulo{
@@ -168,3 +169,15 @@ form legend h1{
     color: #404040;
 }
 
+
+.divisor_horizontal{
+    width: 1170px;
+    display: block;
+    display: block;
+    float: left;
+    height:1px;  
+    margin: 30px 0 40px 0px;
+    overflow: hidden;
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
+}
