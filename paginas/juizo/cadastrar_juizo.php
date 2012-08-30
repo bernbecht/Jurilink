@@ -17,10 +17,9 @@ if (!$result) {
 ?>
 
 
-<div class="container">
+<div class="container content">
     <form name = "formulario_juizo" form id="form_juizo" class="form-horizontal" method="post" action="../operacoes/CJuizo/incluir_juizo_op.php">
         <fieldset>
-
             <!--Campos formul�rio -->
 
             <legend>Cadastrar novo Juizo</legend>
@@ -29,7 +28,7 @@ if (!$result) {
                 <label class="control-label" for="Nome">Nome</label>
                 <div class="controls">
                     <input type="text" class="input-xlarge" id="nome_input" name="nome">                       
-                    <span  class="help-inline ">*</span>                    
+                    <span  class="help-inline "></span>                    
                 </div>
             </div>
            <div class="control-group">

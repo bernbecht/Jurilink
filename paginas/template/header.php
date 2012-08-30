@@ -55,9 +55,15 @@ if(!isset($_SESSION['usuario'])) header("location:main.php");
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pessoas
                         <b class="caret"></b></a>
                     <ul id="pessoas_menu_dropdown" class="dropdown-menu">
+<<<<<<< HEAD
                         <li><a  href="../pessoa/relacao_pfisica.php">F&iacute;sica</a></li>
                         <li><a  href="../pessoa/relacao_pjuridica.php">Jur&iacute;dica</a></li>
                         <li><a  href="../pessoa/relacao_advogados.php">Advogados</a></li>
+=======
+                        <li><a  href="../pessoa/relacao_pfisica.php">Fisica</a></li>
+                        <li><a  href="../pessoa/relacao_pjuridica.php">Juridica</a></li>
+                        <li><a  href="../pessoa/cadastrar_padvogado.php">Advogados</a></li>
+>>>>>>> webDesing
                     </ul>
                 </li>
                 

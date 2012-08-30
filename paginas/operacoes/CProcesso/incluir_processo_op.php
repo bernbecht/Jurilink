@@ -1,9 +1,22 @@
 <?php
 
+ini_set('display_errors', 0);
 include '../../classes/CPessoa.php';
 include '../../classes/CProcesso.php';
 include '../../classes/CProcesso_Pessoa.php';
 include '../../config.php';
+
+function mandarBD($conexao1, $incluir, $db_error) {
+    if ($incluir) {
+        pg_query($conexao1, "commit");
+        echo "1";
+    } else {
+        pg_query($conexao1, "rollback");
+        pg_close($conexao1);
+        echo $db_error;
+    }    
+    exit();
+}
 
 $tej = $_POST['transito_em_julgado']; //pode ser nulo
 $dd = $_POST['data_distribuicao'];
@@ -27,7 +40,7 @@ $processo_pessoa = new CProcesso_Pessoa();
 
 
 // Verificação do tamanho do número unificado. CAMPO OBRIGATÓRIO
-if (strlen($nu)!= 21) {
+if (strlen($nu) != 21) {
     $erro.= " número unificado invalido";
 } else if (!is_numeric($nu)) {
     $erro.= " numero unificado contem soh numeros";
@@ -44,7 +57,7 @@ if (!$processo->validaFloat($vc)) {
     $erro.= " valor causa errado";
 } else {
     $vc = $processo->str2num($vc);
-    echo $vc;
+    //echo $vc;
 }
 
 
@@ -100,13 +113,13 @@ if (strlen($reu_ad) <= 1) {
 }
 
 if (strlen($autor_rep) > 0) {
-    echo $autor_rep;
+    //echo $autor_rep;
     if (is_numeric($autor_rep))
         $erro.=" Representante do autor nao pode ser soh numeros";
 }
 
 if (strlen($reu_rep) > 0) {
-    echo $reu_rep;
+    //echo $reu_rep;
     if (is_numeric($reu_rep))
         $erro.=" Representante do reu nao pode ser soh numeros";
 }
@@ -122,116 +135,149 @@ if ($erro != '') {
     pg_query($conexao1, "begin");
 
     $incluir = $processo->incluirProcesso($conexao1, $tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j);
-
-    echo $id_processo = $processo->getIDProcessoNum($conexao1, $nu) . " ";
-
-
-    //Pegando IDs dos autores
-    $id = $pessoa->getIDPessoaNome($conexao1, $autor);
-
-    //Inclui o autor
-    if ($id != null) {
-        $i = 0;
-        $n = count($id);
-        while ($i < $n) {
-            $incluir = $processo_pessoa->incluirAutor($conexao1, $id_processo, $id[$i], 0);
-            $i++;
-        }
+    if (!$incluir) {
+        $db_error = pg_last_error($conexao1);
     } else {
-        $incluir = null;
-    }
+        $id_processo = $incluir;
 
-
-    //Pegando IDs dos réus
-    $id = $pessoa->getIDPessoaNome($conexao1, $reu);
-
-    //Inclui os réus
-    if ($id != null) {
-        $i = 0;
-        $n = count($id);
-        while ($i < $n) {
-            $incluir = $processo_pessoa->incluirReu($conexao1, $id_processo, $id[$i], 0);
-            $i++;
+        //echo $id_processo;
+        //Pegando IDs dos autores
+        $id = $pessoa->getIDPessoaNome($conexao1, $autor);
+        if ($id == -1) {
+            $db_error = "ERRADO AUTOR";
+            $incluir = false;
+            mandarBD($conexao1, $incluir, $db_error);
         }
-    } else {
-        $incluir = null;
-    }
 
-    //Pegando IDs dos advogados autores
-    $id = $pessoa->getIDPessoaNome($conexao1, $autor_ad);
-
-    //Inclui o advogado do autor
-    if ($id != null) {
-        $i = 0;
-        $n = count($id);
-        while ($i < $n) {
-            $incluir = $processo_pessoa->incluirAutor($conexao1, $id_processo, $id[$i], 1);
-            $i++;
-        }
-    } else {
-        $incluir = null;
-    }
-
-    //Pegando IDs dos advogados réu
-    $id = $pessoa->getIDPessoaNome($conexao1, $reu_ad);
-
-    //Inclui o advogado réu 
-    if ($id != null) {
-        $i = 0;
-        $n = count($id);
-        while ($i < $n) {
-            $incluir = $processo_pessoa->incluirReu($conexao1, $id_processo, $id[$i], 1);
-            $i++;
-        }
-    } else {
-        $incluir = null;
-    }
-
-
-
-    if (strlen($autor_rep) > 0) {
-        //Pegando IDs dos representantes autor
-        $id = $pessoa->getIDPessoaNome($conexao1, $autor_rep);        
-
-        //Inclui os representantes do autor
-        if ($id != null) {
+        //Inclui o autor
+        if ($id != -1) {
             $i = 0;
             $n = count($id);
             while ($i < $n) {
-                $incluir = $processo_pessoa->incluirAutor($conexao1, $id_processo, $id[$i], 2);
+                $incluir = $processo_pessoa->incluirAutor($conexao1, $id_processo, $id[$i], 0);
+                $i++;
+                if (!$incluir) {
+                    //$db_error.=" ".pg_last_error($conexao1);
+                }
+            }
+        } else {
+            $incluir = null;
+        }
+
+
+        //Pegando IDs dos réus
+        $id = $pessoa->getIDPessoaNome($conexao1, $reu);
+        if ($id == -1) {
+            $db_error = "ERRADO REU";
+            $incluir = false;
+            mandarBD($conexao1, $incluir, $db_error);
+        }
+
+        //Inclui os réus
+        if ($id != -1) {
+            $i = 0;
+            $n = count($id);
+            while ($i < $n) {
+                $incluir = $processo_pessoa->incluirReu($conexao1, $id_processo, $id[$i], 0);
                 $i++;
             }
         } else {
             $incluir = null;
+        }
+
+        //Pegando IDs dos advogados autores
+        $id = $pessoa->getIDPessoaNome($conexao1, $autor_ad);
+        if ($id == -1) {
+            $db_error = "ERRADO ADVOGADO AUTOR";
+            $incluir = false;
+            mandarBD($conexao1, $incluir, $db_error);
+        }
+
+        //Inclui o advogado do autor
+        if ($id != -1) {
+            $i = 0;
+            $n = count($id);
+            while ($i < $n) {
+                $incluir = $processo_pessoa->incluirAutor($conexao1, $id_processo, $id[$i], 1);
+                $i++;
+            }
+        } else {
+            $incluir = null;
+        }
+
+        //Pegando IDs dos advogados réu
+        $id = $pessoa->getIDPessoaNome($conexao1, $reu_ad);
+        if ($id == -1) {
+            $db_error = "ERRADO ADVOGADO REU";
+            $incluir = false;
+            mandarBD($conexao1, $incluir, $db_error);
+        }
+
+
+        //Inclui o advogado réu 
+        if ($id != -1) {
+            $i = 0;
+            $n = count($id);
+            while ($i < $n) {
+                $incluir = $processo_pessoa->incluirReu($conexao1, $id_processo, $id[$i], 1);
+                $i++;
+            }
+        } else {
+            $incluir = null;
+        }
+
+        if (strlen($autor_rep) > 0) {
+            //Pegando IDs dos representantes autor
+            $id = $pessoa->getIDPessoaNome($conexao1, $autor_rep);
+            if ($id == -1) {
+                $db_error = "ERRADO REPRESENTANTE AUTOR";
+                $incluir = false;
+                mandarBD($conexao1, $incluir, $db_error);
+            }
+
+            //Inclui os representantes do autor
+            if ($id != -1) {
+                $i = 0;
+                $n = count($id);
+                while ($i < $n) {
+                    $incluir = $processo_pessoa->incluirAutor($conexao1, $id_processo, $id[$i], 2);
+                    $i++;
+                }
+            } else {
+                $incluir = null;
+            }
+        }
+
+        if (strlen($reu_rep) > 0) {
+            //Pegando IDs dos representantes autor
+            $id = $pessoa->getIDPessoaNome($conexao1, $reu_rep);
+            if ($id == -1) {
+                $db_error = "ERRADO REPRESENTANTE REU";
+                $incluir = false;
+                mandarBD($conexao1, $incluir, $db_error);
+            }
+
+            //Inclui os representantes do autor
+            if ($id != -1) {
+                $i = 0;
+                $n = count($id);
+                while ($i < $n) {
+                    $incluir = $processo_pessoa->incluirReu($conexao1, $id_processo, $id[$i], 2);
+                    $i++;
+                }
+            } else {
+                $incluir = null;
+            }
         }
     }
     
-    if (strlen($reu_rep) > 0) {
-        //Pegando IDs dos representantes autor
-        $id = $pessoa->getIDPessoaNome($conexao1, $reu_rep);        
-
-        //Inclui os representantes do autor
-        if ($id != null) {
-            $i = 0;
-            $n = count($id);
-            while ($i < $n) {
-                $incluir = $processo_pessoa->incluirReu($conexao1, $id_processo, $id[$i], 2);
-                $i++;
-            }
-        } else {
-            $incluir = null;
-        }
-    }
-
-
-
     if ($incluir) {
         pg_query($conexao1, "commit");
         echo "1";
     } else {
         pg_query($conexao1, "rollback");
         pg_close($conexao1);
-        echo "0";
+        echo $db_error;
     }
 }
 ?>

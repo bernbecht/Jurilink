@@ -57,11 +57,13 @@ class CProcesso {
                 . $this->auto_penhora . ","
                 . $this->valor_causa . ",'"
                 . $this->id_natureza . "','"
-                . $this->id_juizo . "')");
+                . $this->id_juizo . "') RETURNING id_processo");
+        
+        $resultado = pg_fetch_object($incluir);
 
         //$conexao1->closeConexao();
         
-        return $incluir;
+        return $resultado->id_processo;
     }
 
     public function excluirProcesso($id_processo) {

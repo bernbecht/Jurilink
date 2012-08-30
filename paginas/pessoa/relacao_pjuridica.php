@@ -51,7 +51,7 @@ if ($cont>$total) $cont = $total;
     <hr border ="20px" height ="50px">
     
         <div class ="esquerda">
-        <a class="btn btn-small btn-success" href="#">
+            <a class="btn btn-small btn-success" href="cadastrar_pjuridica.php">
             <i class="icon-plus icon-white"></i>
             INCLUIR PESSOA JUR&Iacute;DICA     
         </a>             

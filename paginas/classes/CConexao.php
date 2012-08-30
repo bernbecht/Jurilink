@@ -12,7 +12,6 @@ class CConexao {
   */
   /* -- Configurações André--*/
   
-   
   protected $Host='localhost';
   protected $User='andreh';
   protected $Password='senha';

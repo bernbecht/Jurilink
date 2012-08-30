@@ -1,6 +1,6 @@
 <?php
 
-//ini_set('display_errors', 0);
+ini_set('display_errors', 0);
 
 include '../../classes/CPessoa.php';
 
@@ -175,9 +175,15 @@ if ($erro != "") {
     if ($tipo_pessoa == 0) {
         $fisica = new CFisica();
         $incluir = $fisica->incluirFisica($conexao, $id_pessoa, $cpf, $rg, $comarca);
+        if(!$incluir){
+            $db_error = pg_last_error($conexao);
+        }
     } else if ($tipo_pessoa == 1) {
         $juridica = new CJuridica();
         $incluir = $juridica->incluirJuridica($conexao, $id_pessoa, $cnpj);
+        if(!$incluir){
+            $db_error.=" ". pg_last_error($conexao);
+        }
     } else if ($tipo_pessoa == 2) {
 
         if ($user == 1)
@@ -186,16 +192,24 @@ if ($erro != "") {
         else
             $flag = "false";
 
-
         $fisica = new CFisica();
         $incluir = $fisica->incluirFisica($conexao, $id_pessoa, $cpf, $rg, $comarca);
+        if(!$incluir){
+            $db_error = pg_last_error($conexao);           
+        }
         $advogado = new CAdvogado();
         $incluir = $advogado->incluirAdvogado($conexao, $id_pessoa, $oab, $flag);
+        if(!$incluir){
+            $db_error.=" ". pg_last_error($conexao);
+        }
     }
 
-    if ($user == 1) {
-        $user = new CUsuario();
+    if ($user == 1) { 
+       $user = new CUsuario();
         $incluir = $user->incluirUser($conexao, $id_pessoa, $senha, $em);
+        if(!$incluir){
+            $db_error.= " ". pg_last_error($conexao);
+        }
     }
 
 
@@ -205,7 +219,7 @@ if ($erro != "") {
     } else {
         pg_query($conexao, "rollback");
         pg_close($conexao);
-        echo "0";
+        echo $db_error;
     }
 }
 ?>

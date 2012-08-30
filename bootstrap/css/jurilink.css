@@ -5,11 +5,12 @@ body{
 
 .content{
     background-color: #FFF;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
     /*box-shadow: 1px 0px 10px #67666A;*/
     /*box-shadow: 5px 5px rgba(0,0,0,0.2);*/
     box-shadow:  1px 1px 10px #888;
+    margin-bottom: 50px;
 }
 
 .barra-titulo{
@@ -76,33 +77,38 @@ body{
 }
 
 .autocompleteBox {
-  position:absolute;
-  width:250px;
-  background-color:white;
-  border:1px solid #888;
-  margin:0px;
-  padding:0px;
- }
- .autocompleteBox ul {
-  list-style-type:none;
-  margin:0px;
-  padding:0px;
- }
- .autocompleteBox ul li.selected { 
-     background-color: #ffb;
- }
- .autocompleteBox ul li {
-  list-style-type:none;
-  display:block;
-  margin:0;
-  padding:2px;
-  /* height:32px; */
-  cursor:pointer;
- }
- 
- 
- /*Caixa no lugar de INPUT*/
- .box{
+    position:absolute;
+    width:250px;
+    background-color:white;
+    border:1px solid #888;
+    margin:0px;
+    padding:0px;
+}
+.autocompleteBox ul {
+    list-style-type:none;
+    margin:0px;
+    padding:0px;
+}
+.autocompleteBox ul li.selected { 
+    background-color: #ffb;
+}
+.autocompleteBox ul li {
+    list-style-type:none;
+    display:block;
+    margin:0;
+    padding:2px;
+    /* height:32px; */
+    cursor:pointer;
+}
+
+/*Faz com que o titulo de um form não bata na divisão*/
+form legend h1{
+    margin-bottom: 10px;
+}
+
+
+/*Caixa no lugar de INPUT*/
+.box{
     display: inline-block;
     width: 260px;
     height: 18px;
@@ -114,12 +120,64 @@ body{
     -webkit-border-radius: 3px;
     -moz-border-radius: 3px;
     background-color: #FFF;
- }
- 
- .box span{
-     display: inline-block;
-    
- } 
- .error .box {
-     border: 1px solid #B94A48;
- }
+}
+
+.box span{
+    display: inline-block;
+
+} 
+.error .box {
+    border: 1px solid #B94A48;
+}
+
+/*Cor dos campos obrigatórios*/
+.aviso{
+    /*color: #C09853;*/
+    border-color: #FFBF00;
+}
+
+.divisor{   
+    display: block;
+    float: left;
+    height:46px;
+    width: 1px;
+    margin: 0 0 0 70px;
+    overflow: hidden;
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
+}
+
+.divisor_maior{   
+    display: block;
+    float: left;
+    height:64px;
+    width: 1px;
+    margin: 0 0 0 70px;
+    overflow: hidden;
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
+}
+
+.help-inline{
+    font-size: 10px;
+}
+
+.control-group label{
+    font-weight: bold;    
+    font-size: 13px;
+    line-height: 18px;    
+    color: #404040;
+}
+
+
+.divisor_horizontal{
+    width: 1170px;
+    display: block;
+    display: block;
+    float: left;
+    height:1px;  
+    margin: 30px 0 40px 0px;
+    overflow: hidden;
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
+}
