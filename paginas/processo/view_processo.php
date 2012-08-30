@@ -22,7 +22,7 @@ if ($num_autores->count == 1 and $num_reus->count == 1){
     comarca.nome as nome_comarca, to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, preu.id_pessoa as id_reu, pautor.id_pessoa as id_autor,
     padvautor.id_pessoa as id_advogado_autor, padvreu.id_pessoa as id_advogado_reu,pautor.tipo as tipo_autor, preu.tipo as tipo_reu
     from ((((((((((processo
-    inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
+    inner join natureza_acao on processo.id_processo = $id_processo and processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
     /*Busca nome do Autor*/
     inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel = 0)
     inner join pessoa pautor on pautor.id_pessoa = autor.id_pessoa)
@@ -43,7 +43,7 @@ if ($num_autores->count == 1 and $num_reus->count == 1){
 }
 else if ($num_autores->count > 1 && $num_reus->count == 1){
     $query = "SELECT pessoa.nome, pessoa.tipo, pessoa.id_pessoa from (processo
-    inner join autor on autor.id_processo = processo.id_processo and autor.flag_papel = 0 and processo.id_processo = 40)
+    inner join autor on autor.id_processo = processo.id_processo and autor.flag_papel = 0 and processo.id_processo = $id_processo)
     inner join pessoa on pessoa.id_pessoa = autor.id_pessoa";
     
     $pesq_autores = pg_exec($conexao1,$query);
@@ -56,7 +56,7 @@ else if ($num_autores->count > 1 && $num_reus->count == 1){
     comarca.nome as nome_comarca, to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, padvautor.id_pessoa as id_advogado_autor, padvreu.id_pessoa as id_advogado_reu,
     preu.tipo as tipo_reu, preu.id_pessoa as id_reu
     from ((((((((processo
-    inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
+    inner join natureza_acao on processo.id_processo = $id_processo and processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
     /*Busca nome do réu*/
     inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel = 0)
     inner join pessoa preu on preu.id_pessoa = reu.id_pessoa)
@@ -87,7 +87,7 @@ else if ($num_autores->count == 1 && $num_reus->count > 1){
     comarca.nome as nome_comarca, to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, padvautor.id_pessoa as id_advogado_autor, padvreu.id_pessoa as id_advogado_reu,
     pautor.tipo as tipo_autor, pautor.id_pessoa as id_autor
     from ((((((((processo
-    inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
+    inner join natureza_acao on processo.id_processo = $id_processo and processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
     /*Busca nome do autor*/
     inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel = 0)
     inner join pessoa pautor on pautor.id_pessoa = autor.id_pessoa)
@@ -106,7 +106,7 @@ else if ($num_autores->count == 1 && $num_reus->count > 1){
 
 else if ($num_autores->count > 1 && $num_reus->count > 1){
     $query = "SELECT pessoa.nome, pessoa.tipo, pessoa.id_pessoa from (processo
-    inner join autor on autor.id_processo = processo.id_processo and autor.flag_papel = 0 and processo.id_processo = 40)
+    inner join autor on autor.id_processo = processo.id_processo and autor.flag_papel = 0 and processo.id_processo = $id_processo)
     inner join pessoa on pessoa.id_pessoa = autor.id_pessoa";
     
     $pesq_autores = pg_exec($conexao1,$query);
@@ -124,7 +124,7 @@ else if ($num_autores->count > 1 && $num_reus->count > 1){
     to_char(deposito_judicial, 'R$999G999G999D99') as deposito_judicial, juizo.nome as nome_juizo, to_char(auto_penhora, 'R$999G999G999D99') as auto_penhora,
     comarca.nome as nome_comarca, to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, padvautor.id_pessoa as id_advogado_autor, padvreu.id_pessoa as id_advogado_reu
     from ((((((processo
-    inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
+    inner join natureza_acao on processo.id_processo = $id_processo and processo.id_natureza_acao = natureza_acao.id_natureza_acao) /*Busca nome da natureza da ação*/
     /*Busca advogado do autor*/
     inner join autor autor_adv on autor_adv.id_processo = processo.id_processo and autor_adv.flag_papel = 1)
     inner join pessoa padvautor on padvautor.id_pessoa = autor_adv.id_pessoa)
@@ -145,12 +145,16 @@ $processo = pg_fetch_object($pesq_processo);
 
 <div class ="container content">
     <div class ="esquerda"><h1> PROCESSO  </h1> </div>
-    <div class ="direita">        
-        <a class="btn btn-small btn-warning" href="#">
-            <i class="icon-pencil icon-white"></i>
-            EDITAR     
+    <?php
+     if ($_SESSION['tipo_usuario'] == 2){
+      echo " <div class =direita>        
+        <a class=btn btn-small btn-warning href=#>
+            <i class=icon-pencil icon-white></i>
+            EDITAR    
         </a>             
-        </div>
+        </div>";
+     }
+     ?>
     
    
     <br/>
@@ -167,18 +171,31 @@ $processo = pg_fetch_object($pesq_processo);
     <div class="span2">
         <?php
         if ($num_autores->count == 1){
-            if ($processo->tipo_autor == 0)
-                echo  "<a href=../pessoa/view_pessoafisica.php?id=$processo->id_autor>".$processo->nome_autor."</a>";
-            else if ($processo->tipo_autor == 1)
-                echo  "<a href=../pessoa/view_pessoajuridica.php?id=$processo->id_autor>".$processo->nome_autor."</a>";
+            if ($processo->tipo_autor == 0){
+                if ($_SESSION['tipo_usuario'] == 2)
+                    echo  "<a href=../pessoa/view_pessoafisica.php?id=$processo->id_autor>".$processo->nome_autor."</a>";
+                else echo $processo->nome_autor;
+            }
+            else if ($processo->tipo_autor == 1){
+                   if ($_SESSION['tipo_usuario'] == 2)
+                    echo  "<a href=../pessoa/view_pessoajuridica.php?id=$processo->id_autor>".$processo->nome_autor."</a>";
+                   else echo $processo->nome_autor;
+            }
         }
         else{
             $a = 0;
             while ($a!=$num_autores->count){
-                if ($autores->tipo == 0)
-                echo  "<a href=../pessoa/view_pessoafisica.php?id=$autores->id_pessoa>".$autores->nome."</a>";
-            else if ($autores->tipo == 1)
-                echo  "<a href=../pessoa/view_pessoajuridica.php?id=$autores->id_pessoa>".$autores->nome."</a>";
+                if ($autores->tipo == 0){
+                    if ($_SESSION['tipo_usuario'] == 2)
+                        echo  "<a href=../pessoa/view_pessoafisica.php?id=$autores->id_pessoa>".$autores->nome."</a>";
+                    else echo $autores->nome;
+                }
+            else if ($autores->tipo == 1){
+                if ($_SESSION['tipo_usuario'] == 2)
+                    echo  "<a href=../pessoa/view_pessoajuridica.php?id=$autores->id_pessoa>".$autores->nome."</a>";
+                else echo $autores->nome; 
+                
+            }
             $autores = pg_fetch_object($pesq_autores);
             $a++;
             if ($a!=$num_autores->count)
@@ -193,18 +210,30 @@ $processo = pg_fetch_object($pesq_processo);
     <div class="span2">
         <?php
         if ($num_reus->count == 1){
-            if ($processo->tipo_reu == 0)
-                echo  "<a href=../pessoa/view_pessoafisica.php?id=$processo->id_reu>".$processo->nome_reu."</a>";
-            else if ($processo->tipo_reu == 1)
-                echo  "<a href=../pessoa/view_pessoajuridica.php?id=$processo->id_reu>".$processo->nome_reu."</a>";
+            if ($processo->tipo_reu == 0){
+                if ($_SESSION['tipo_usuario'] == 2)
+                   echo  "<a href=../pessoa/view_pessoafisica.php?id=$processo->id_reu>".$processo->nome_reu."</a>";
+                else echo $processo->nome_reu;
+            }
+            else if ($processo->tipo_reu == 1){
+                if ($_SESSION['tipo_usuario'] == 2)
+                    echo  "<a href=../pessoa/view_pessoajuridica.php?id=$processo->id_reu>".$processo->nome_reu."</a>";
+                else echo $processo->nome_reu;
+            }
         }
         else{
             $r = 0;
             while ($r!=$num_reus->count){
-                if ($reus->tipo == 0)
-                echo  "<a href=../pessoa/view_pessoafisica.php?id=$reus->id_pessoa>".$reus->nome."</a>";
-            else if ($reus->tipo == 1)
-                echo  "<a href=../pessoa/view_pessoajuridica.php?id=$reus->id_pessoa>".$reus->nome."</a>";
+                if ($reus->tipo == 0){
+                    if ($_SESSION['tipo_usuario'] == 2)
+                        echo  "<a href=../pessoa/view_pessoafisica.php?id=$reus->id_pessoa>".$reus->nome."</a>";
+                    echo  $reus->nome;
+                }
+            else if ($reus->tipo == 1){
+                if ($_SESSION['tipo_usuario'] == 2)
+                    echo  "<a href=../pessoa/view_pessoajuridica.php?id=$reus->id_pessoa>".$reus->nome."</a>";
+                else echo  $reus->nome;
+            }
             $reus = pg_fetch_object($pesq_reus);
             $r++;
             if ($r!=$num_reus->count)
@@ -216,10 +245,23 @@ $processo = pg_fetch_object($pesq_processo);
     </div>
     
     <div class="span2 offset1"><?php echo "<b>Advogado Autor(es)</b>" ?></div>
-    <div class="span2"><?php echo "<a href=../pessoa/view_advogado.php?id=$processo->id_advogado_autor>".$processo->nome_adv_autor."</a>" ?></div>
+    <div class="span2">
+        <?php
+        if ($_SESSION['tipo_usuario'] == 2)
+            echo "<a href=../pessoa/view_advogado.php?id=$processo->id_advogado_autor>".$processo->nome_adv_autor."</a>";
+        else echo $processo->nome_adv_autor;
+           
+        ?>
+    </div>
 
     <div class="span2 offset1"><?php echo "<b>Advogado R&eacute;u(s)</b>" ?></div>
-    <div class="span2"><?php echo "<a href=../pessoa/view_advogado.php?id=$processo->id_advogado_reu>".$processo->nome_adv_reu."</a>" ?></div>
+    <div class="span2">
+        <?php 
+        if ($_SESSION['tipo_usuario'] == 2)
+            echo "<a href=../pessoa/view_advogado.php?id=$processo->id_advogado_reu>".$processo->nome_adv_reu."</a>";
+        else echo $processo->nome_adv_reu;
+        ?>
+    </div>
     
     <div class="span2 offset1"><?php echo "<b>Valor da Causa</b>" ?></div>
     <div class="span2"><?php echo $processo->valor_causa; ?></div>
@@ -245,12 +287,16 @@ $processo = pg_fetch_object($pesq_processo);
       <hr border ="20px" height ="50px">
      
        <div class ="esquerda"> <h1> ATOS </h1> </div>
-       <div class ="direita">        
-        <a class="btn btn-small btn-success" href="#">
-            <i class="icon-plus icon-white"></i>
-            INCLUIR ATO     
+     <?php
+     if ($_SESSION['tipo_usuario'] == 2){
+      echo " <div class =direita>        
+        <a class=btn btn-small btn-success href=#>
+            <i class=icon-plus icon-white></i>
+            INCLUIR ATO    
         </a>             
-        </div>
+        </div>";
+     }
+     ?>
   
       <div class="tabela"> 
     <?php 
@@ -288,12 +334,16 @@ $processo = pg_fetch_object($pesq_processo);
       
       <hr border ="20px" height ="50px">
      <div class ="esquerda"> <h1> AUDI&Ecirc;NCIAS </h1> </div>
-       <div class ="direita">        
-        <a class="btn btn-small btn-success" href="#">
-            <i class="icon-plus icon-white"></i>
+     <?php
+     if ($_SESSION['tipo_usuario'] == 2){
+      echo " <div class =direita>        
+        <a class=btn btn-small btn-success href=#>
+            <i class=icon-plus icon-white></i>
             INCLUIR AUDI&Ecirc;NCIA     
         </a>             
-        </div>
+        </div>";
+     }
+     ?>
   
       <div class="tabela"> 
     <?php 
@@ -326,13 +376,8 @@ $processo = pg_fetch_object($pesq_processo);
 */              
         echo "</tbody>";
         echo "</table>";
-       
-
-     ?>
-     
-      
-      
-
+    ?>
+    
 </div>
 </div>
 

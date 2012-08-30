@@ -30,12 +30,18 @@ if (isset($_POST['usuario'])) {
 
 
     $query = "SELECT id_pessoa, tipo FROM pessoa WHERE email = '$usuario'";
-    $result = pg_exec($conexao1, $query);
-    while ($row = pg_fetch_row($result)) {
-        $_SESSION['id_usuario'] = $row[0];
-        $_SESSION['tipo_usuario'] = $row[1];
-    }
-    header("location:jurilink_main.php");
+    $pesq = pg_query($conexao1, $query);
+    $resultado = pg_fetch_object($pesq);
+    
+    $_SESSION['id_usuario'] = $resultado->id_pessoa;
+    $_SESSION['tipo_usuario'] = $resultado->tipo;
+    
+    echo $_SESSION['tipo_usuario'];
+    
+    if ($_SESSION['tipo_usuario'] == 2)
+        header("location:jurilink_main.php");
+    else if ($_SESSION['tipo_usuario'] == 0 or $_SESSION['tipo_usuario'] == 1)
+        header("location:paginas/pessoa/view_user.php");
 
 }
 ?>

@@ -158,7 +158,7 @@ $pesq_proc_c_advocacia = pg_query($conexao1,$query);
             do {
                 echo "<tr>	
                     <td>" . $processos_advocacia->data_distribuicao . "</a></td>
-                    <td>" . $processos_advocacia->numero_unificado . "</td>
+                    <td><a href=../processo/view_processo.php?id=$processos_advocacia->id_processo>" . $processos_advocacia->numero_unificado . "</a></td>
                     <td>" . $processos_advocacia->nome_natureza . "</td>
                     <td>" . $processos_advocacia->nome_autor . "</td>
                     <td>" . $processos_advocacia->nome_reu . "</td>
@@ -202,7 +202,7 @@ $pesq_proc_c_advocacia = pg_query($conexao1,$query);
             do {
                 echo "<tr>	
                     <td>" . $processos_advocacia->data_distribuicao . "</a></td>
-                    <td>" . $processos_advocacia->numero_unificado . "</td>
+                    <td><a href=../processo/view_processo.php?id=$processos_advocacia->id_processo>" . $processos_advocacia->numero_unificado . "</a></td>
                     <td>" . $processos_advocacia->nome_natureza . "</td>
                     <td>" . $processos_advocacia->nome_autor . "</td>
                     <td>" . $processos_advocacia->nome_reu . "</td>
