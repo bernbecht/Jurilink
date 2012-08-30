@@ -60,7 +60,7 @@ if (!isset($_SESSION['usuario']))
                         </ul>
                     </li>
 
-                    <li><a class="aba" href="paginas/processo/cadastrar_processo.php">Processos</a></li>
+                    <li><a class="aba" href="paginas/processo/relacao_processos.php">Processos</a></li>
 
 
 
