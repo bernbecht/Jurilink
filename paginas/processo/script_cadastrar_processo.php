@@ -402,7 +402,7 @@
                     
                     subirPagina();
                     
-                    limparForm('#form_processo');
+                    //limparForm('#form_processo');
                     
                     var url = '../jurilink_main.php';
                     

@@ -401,12 +401,14 @@ h6 {
     text-transform: uppercase;
 }
 .page-header {
+    color: #5A5A5A;
     padding-bottom: 17px;
     margin: 18px 0;
     border-bottom: 1px solid #eeeeee;
 }
 .page-header h1 {
-    line-height: 1;
+    line-height: 40px;
+    font-size: 36px;
 }
 ul,
 ol {
@@ -2442,6 +2444,7 @@ input[type="submit"].btn.btn-mini {
     -moz-border-radius: 4px;
     border-radius: 4px;
     color: #c09853;
+    font-size: 14px;
 }
 .alert-heading {
     color: inherit;

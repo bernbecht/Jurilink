@@ -48,7 +48,7 @@ if (!isset($_SESSION['usuario']))
         <div class="subnav">            
             <ul class="nav nav-pills">
                 <ul class="nav nav-pills">
-                    <li class="active"><a class="aba" href="jurilink_main.php">Inicio</a></li>
+                    <li class="active" id="inicio"><a class="aba" href="jurilink_main.php">Inicio</a></li>
 
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pessoas
@@ -56,11 +56,11 @@ if (!isset($_SESSION['usuario']))
                         <ul id="pessoas_menu_dropdown" class="dropdown-menu">
                             <li><a class="aba drop" href="paginas/pessoa/relacao_pfisica.php">F&iacute;sica</a></li>
                             <li><a class="aba drop" href="paginas/pessoa/relacao_pjuridica.php">Jur&iacute;dica</a></li>
-                            <li><a class="aba drop" href="paginas/pessoa/relacao_advogados.php">Advogados</a></li>
+                            <li><a class="aba drop" href="paginas/pessoa/relacao_advogado.php">Advogados</a></li>
                         </ul>
                     </li>
 
-                    <li><a class="aba" href="paginas/processo/cadastrar_processo.php">Processos</a></li>
+                    <li><a class="aba" href="paginas/processo/relacao_processos.php">Processos</a></li>
 
 
 

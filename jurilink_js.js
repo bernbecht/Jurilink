@@ -66,6 +66,13 @@ function pegaId(){
     alert(this.id);
 }
 
+function initFormPessoa(){
+    $a("#nome_input").focus();
+    $a('#senha').hide();
+    
+    
+}
+
 //faz uma pagina inteira subir
 function subirPagina(){
     $a('body,html').animate({
@@ -224,7 +231,7 @@ function pessoaAjax(modalidade){
                 href_split = href.split('_');
         
                 //alert(href_split);
-                var url = "relacao_"+href_split[1];
+                var url = "relacao_"+href_split[1]+".php";
                 //alert(url);   
                            
                 setTimeout(function() {
@@ -249,6 +256,7 @@ function pessoaAjax(modalidade){
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa <b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar                
                 limparForm('.pessoaAjaxForm');
+                initFormPessoa();
                 subirPagina();
                   
             }
@@ -308,7 +316,7 @@ function pessoaAjax(modalidade){
                
             }
             else{
-               //alert("Else 1");
+                //alert("Else 1");
                 //alert(data);
                 msgErroBD(data);
                 subirModal();
@@ -820,6 +828,22 @@ function habilitarSenha(){
         }
     }); 
 }
+
+function botaoMaximizar(){
+    
+   
+    $a(".maximizar").click(function(){
+        
+        var classe = $a(this).find("i").attr("class");
+        
+        if(classe == "icon-plus"){
+            $a(this).find("i").removeClass("icon-plus").addClass("icon-minus");
+        }
+        else{
+            $a(this).find("i").removeClass("icon-minus").addClass("icon-plus");
+        }
+    });
+}
    
 
 //Função de JQUERY
@@ -828,11 +852,9 @@ $a(document).ready(function(){
     
     validaFormPessoaJS();
     trocarAbaSubnav();
+    initFormPessoa();
+    botaoMaximizar();
     habilitarSenha();
-    $a('.clear-form').click(function(){
-        alert('limpar');
-        limparForm('.pessoaAjaxForm');  
-    });
     
      
    		

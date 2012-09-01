@@ -260,7 +260,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
             <!--Botões do formulário -->
             <div class="form-actions">
                 <button  type="button" id="submit-processo"class="btn btn-primary">Salvar</button>
-                <button  type="button" id="..submit-outro-processo"class="btn btn-primary">Salvar e Adicionar Outro</button>
+                <button  type="button" id="submit-outro-processo"class="btn btn-primary">Salvar e Adicionar Outro</button>
                 <button  type="button" class="btn opa">Cancelar</button>
             </div>
         </fieldset>

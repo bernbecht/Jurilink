@@ -14,7 +14,7 @@ $resultado = pg_fetch_object($pesq_uf);
         <fieldset>
             <!--Campos formulário -->
 
-            <legend><h1>Cadastrar Nova Advogado</h1></legend> 
+            <legend><h1>Cadastrar Novo Advogado</h1></legend> 
             
             <div id="msg_resultado"></div>
 
@@ -183,7 +183,7 @@ $resultado = pg_fetch_object($pesq_uf);
                         <label class="control-label" for="telefone">Senha</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="senha_input" name="senha">    
-                            <span  class="help-inline "></span> 
+                            <span  class="help-inline ">Minimo de 7 digitos alfanumericos</span> 
                         </div>
                     </div> 
                 </div>

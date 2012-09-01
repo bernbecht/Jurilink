@@ -50,7 +50,7 @@ if ($cont>$total) $cont = $total;
     <hr border ="20px" height ="50px">
     
         <div class ="esquerda">
-        <a class="btn btn-small btn-success" href="#">
+            <a class="btn btn-small btn-success" href="cadastrar_padvogado.php">
             <i class="icon-plus icon-white"></i>
             INCLUIR ADVOGADO     
         </a>             
@@ -66,7 +66,7 @@ if ($cont>$total) $cont = $total;
 
     <div class="tabela"> 
     <?php 
-        echo "<table = 'advogados' class=table table-striped table-condensed >";
+        echo "<table = 'advogado' class=table table-striped table-condensed >";
         echo "<thead>";
         echo "<tr>
                 <th>Nome</th>
@@ -105,7 +105,7 @@ if ($cont>$total) $cont = $total;
         <div class = "span2 offset3">
             <?php
                 if ($offset>0)
-                    echo "<a class= btn btn-small href=relacao_advogados.php?offset=".($offset-$limite)."&limite=$limite>";
+                    echo "<a class= btn btn-small href=relacao_advogado.php?offset=".($offset-$limite)."&limite=$limite>";
                 else echo "<a class= btn btn-small disabled>";
                 echo "<i class=icon-chevron-left></i>
                         Anterior
@@ -115,7 +115,7 @@ if ($cont>$total) $cont = $total;
            
         </div>
         <div class="span2">
-        <form name="num_resultados" action="relacao_advogados.php" method="post">
+        <form name="num_resultados" action="relacao_advogado.php" method="post">
             <select class ="span1" name="limite" onchange="valor()" >
                 <?php 
                 echo "<option value=$limite>$limite</option>
@@ -134,7 +134,7 @@ if ($cont>$total) $cont = $total;
         <div class = span4>
         <?php
         if ($cont<$total)
-         echo "<a class= btn btn-small href=relacao_advogados.php?offset=".($limite+$offset)."&limite=$limite&cont=".($cont+$parcial).">";
+         echo "<a class= btn btn-small href=relacao_advogado.php?offset=".($limite+$offset)."&limite=$limite&cont=".($cont+$parcial).">";
         else echo "<a class= btn btn-small disabled>";
        echo "Pr&oacute;ximo
             <i class=icon-chevron-right></i>

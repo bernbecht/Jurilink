@@ -57,12 +57,12 @@ if(!isset($_SESSION['usuario'])) header("location:main.php");
                     <ul id="pessoas_menu_dropdown" class="dropdown-menu">
                         <li><a  href="../pessoa/relacao_pfisica.php">F&iacute;sica</a></li>
                         <li><a  href="../pessoa/relacao_pjuridica.php">Jur&iacute;dica</a></li>
-                        <li><a  href="../pessoa/relacao_advogados.php">Advogados</a></li>
+                        <li><a  href="../pessoa/relacao_advogado.php">Advogados</a></li>
 
                     </ul>
                 </li>
                 
-                <li id="processo"><a href="../processo/cadastrar_processo.php">Processos</a></li>
+                <li id="processo"><a href="../processo/relacao_processos.php">Processos</a></li>
                 
                 
                 

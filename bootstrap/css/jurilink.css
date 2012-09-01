@@ -27,7 +27,7 @@ body{
 
 .esquerda{
     float: left;
-    padding: 0 0 0 10px;
+    padding: 0 0 0 0px;
 }
 
 
@@ -171,8 +171,7 @@ form legend h1{
 
 
 .divisor_horizontal{
-    width: 1170px;
-    display: block;
+    width: 100%;
     display: block;
     float: left;
     height:1px;  
@@ -180,4 +179,56 @@ form legend h1{
     overflow: hidden;
     background-color: #E5E5E5;
     border-bottom: 1px solid white;
+}
+
+.header-pagina{
+    color: #5A5A5A;
+    padding-bottom: 0px;
+    margin: 0 0 18px 0;
+    
+        
+}
+
+.header-pagina h1 {
+    line-height: 40px;
+    font-size: 36px;
+    
+}
+
+
+.divisor_horizontal_view{
+    width: 100%;
+    display: block;
+    float: left;
+    height:1px;  
+    margin: 0px 0 18px 0px;
+    overflow: hidden;
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
+}
+
+
+.view_pessoa p{
+    margin-top: 9px;
+}
+
+.view_pessoa_legenda p{
+    font-weight: bold;
+    font-size: 14px;
+    
+    
+}
+
+.row_view{
+    margin-top: 40px;
+}
+
+.opa{
+    margin-top: 30px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.centro{
+    text-align: center;
 }
