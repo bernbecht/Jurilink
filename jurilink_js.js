@@ -165,9 +165,11 @@ function msgErroBD(data){
 
 //Função que manda o form de cadastro de pessoa por AJAX
 function pessoaAjax(modalidade){
-        
+    
+    
     /* get some values from elements on the page: */
     var $form = $a( '.pessoaAjaxForm' ),
+    id_pessoa = $form.find( 'input[name="id_pessoa"]' ).val(),
     nome = $form.find( 'input[name="nome"]' ).val(),
     tipo = $form.find( 'input[name="tipo"]' ).val(),
     oab = $form.find( 'input[name="oab"]' ).val(),
@@ -182,13 +184,14 @@ function pessoaAjax(modalidade){
     tel = $form.find( 'input[name="telefone"]' ).val(),
     email = $form.find( 'input[name="email"]' ).val(),
     user = $form.find( 'input[name="userCheckbox"]:checked' ).val(),
-    senha = $form.find( 'input[name="senha"]' ).val(),        
+    senha = $form.find( 'input[name="senha"]' ).val(),    
     url = $form.attr( 'action' );
         
     //alert(modalidade);      
-       
+    
        
     $a.post(url,{
+        id_pessoa:id_pessoa,
         nome:nome,
         tipo:tipo,
         oab:oab,
@@ -205,11 +208,10 @@ function pessoaAjax(modalidade){
         userCheckbox:user,
         senha:senha
     },function(data){ 
-        //alert(data);
+        alert(data);   
+        
         if(modalidade==0){
-            //alert("modo 0");
             if(data==1){
-                //alert("If 0"); 
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa<b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
                 
@@ -555,7 +557,8 @@ function validaFormPessoaSubmit(){
     tel = $form.find( 'input[name="telefone"]' ).val(),
     email = $form.find( 'input[name="email"]' ).val(),
     user = $form.find( 'input[name="userCheckbox"]:checked' ).val(),
-    senha = $form.find( 'input[name="senha"]' ).val();
+    senha = $form.find( 'input[name="senha"]' ).val(),
+    id_pessoa = $form.find('input[name="id_pessoa"]').val();
         
     var mandar = true;
         
@@ -773,7 +776,19 @@ function validaFormPessoaJS(){
         else{
         //alert(mandar);            
         }
-    });    
+    });   
+    $a(".edit-pessoa").click(function(){ 
+        var mandar = validaFormPessoaSubmit();  
+        subirPagina();
+        if(mandar==true){
+            pessoaAjax(0);
+        }
+        
+        else{
+        //alert(mandar);            
+        }
+    });
+    
     
     //Apertar o botão para incluir + 1 pessoa
     $a(".submit-outra-pessoa").click(function(){ 

@@ -17,6 +17,7 @@ $resultado = pg_fetch_object($pesq_uf);
             <legend><h1>Cadastrar Nova Pessoa Fisica</h1></legend> 
 
             <div id="msg_resultado"></div>
+            <br/>
 
             <div class="row">
                 <div class="span5" >
