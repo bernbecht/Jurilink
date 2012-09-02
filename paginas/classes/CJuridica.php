@@ -7,6 +7,19 @@ class CJuridica {
     protected $id_pessoa;
     protected $cnpj;
 
+    public function editarJuridica($conexao, $id_pessoa, $cnpj) {
+        $this->id_pessoa = $id_pessoa;
+        $this->cnpj = $cnpj;
+        
+        //pg_query($conexao,"UPDATE juridica SET rg = '000000000' WHERE fisica.id_pessoa = ".$this->id_pessoa." ");
+        
+        $query = "UPDATE juridica SET cnpj = '".$this->cnpj."' WHERE juridica.id_pessoa = ".$this->id_pessoa." ";
+
+        $editar = pg_query($conexao, $query);
+        
+        return $editar;
+        
+    }
     public function incluirJuridica($conexao,$cod_pessoa, $c) {
 
         $this->id_pessoa = $cod_pessoa;

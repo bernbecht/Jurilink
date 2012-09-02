@@ -84,7 +84,9 @@ $pesq_proc_c_advocacia = pg_query($conexao1,$query);
 <div class ="container content">
     <div class ="esquerda"><h1><?php echo $pessoa->nome; ?>  </h1> </div>
     <div class ="direita">        
-        <a class="btn btn-small btn-warning" href="#">
+        <?php
+        echo "<a href=editar_pjuridica.php?id=$id_pessoa class='btn btn-small btn-warning' >"
+        ?>
             <i class="icon-pencil icon-white"></i>
             EDITAR     
         </a>             

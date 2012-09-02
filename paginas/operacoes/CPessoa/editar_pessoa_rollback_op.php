@@ -27,10 +27,7 @@ $senha = $_POST['senha'];
 $b = $_POST['bairro'];
 $comarca = $_POST['comarca'];
 
-
 $erro = "";
-
-echo $uf;
 
 
 
@@ -152,6 +149,9 @@ if ($erro != "") {
     $conexao1 = new CConexao();
 
     $conexao = $conexao1->novaConexao();
+    
+    $pesq_user = pg_query($conexao, "select count (*) from usuario where usuario.id_pessoa = $id_pessoa");
+    $e_user = pg_fetch_object($pesq_user);
 
 
 
@@ -163,7 +163,7 @@ if ($erro != "") {
     pg_query($conexao, "begin");
 
     $pessoa = new CPessoa();
-
+    
     $editar = $pessoa->editarPessoa($conexao,$id_pessoa,$n,$e,$em,$t,$c,$uf,$b,$tipo_pessoa);
 
     if ($tipo_pessoa == 0) {
@@ -174,7 +174,7 @@ if ($erro != "") {
         }
     } else if ($tipo_pessoa == 1) {
         $juridica = new CJuridica();
-        $editar = $juridica->incluirJuridica($conexao, $id_pessoa, $cnpj);
+        $editar = $juridica->editarJuridica($conexao, $id_pessoa, $cnpj);
         if(!$editar){
             $db_error.=" ". pg_last_error($conexao);
         }
@@ -197,14 +197,34 @@ if ($erro != "") {
             $db_error.=" ". pg_last_error($conexao);
         }
     }
-
-    /*if ($user == 1) { 
-       $user = new CUsuario();
-        $editar = $user->incluirUser($conexao, $id_pessoa, $senha, $em);
-        if(!$incluir){
-            $db_error.= " ". pg_last_error($conexao);
+    
+   
+    if ($user == 1){ 
+        if (!$e_user->count){
+            $user = new CUsuario();
+            $editar = $user->incluirUser($conexao, $id_pessoa, $senha, $em);
+            if(!$editar){
+                $db_error.= " ". pg_last_error($conexao);
+            }
         }
-    }*/
+        else {
+            $user = new CUsuario();
+            $editar = $user->editarUser($conexao, $id_pessoa, $senha);
+            if(!$editar){
+                $db_error.= " ". pg_last_error($conexao);
+            }
+        
+        }
+        
+    }
+    else {
+        if ($e_user->count){
+            $editar = excluirUser($conexao,$id_pessoa);
+            if(!$editar){
+                $db_error.= " ". pg_last_error($conexao);
+            }
+        }
+    }
 
 
     if ($editar) {

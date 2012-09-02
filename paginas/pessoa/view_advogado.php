@@ -55,7 +55,9 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
 <div class ="container content">
     <div class ="esquerda"><h1><?php echo $pessoa->nome; ?>  </h1> </div>
     <div class ="direita">        
-        <a class="btn btn-small btn-warning" href="#">
+        <?php
+        echo "<a href=editar_advogado.php?id=$id_pessoa class='btn btn-small btn-warning' >"
+        ?>
             <i class="icon-pencil icon-white"></i>
             EDITAR     
         </a>             

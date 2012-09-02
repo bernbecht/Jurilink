@@ -5,6 +5,7 @@ require_once ( '../config.php');     //chama as configurações de página!
 
 $pesq_uf = pg_exec($conexao1, "select * from uf order by nome");
 $resultado = pg_fetch_object($pesq_uf);
+
 ?>
 
 <div class="container content">   

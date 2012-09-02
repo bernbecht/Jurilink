@@ -8,6 +8,28 @@ class CUsuario {
     protected $email;
     protected $senha;
 
+    public function editarUser($conexao, $id_pessoa, $s, $em) {
+        $this->id_pessoa = $id_pessoa;
+        $this->senha = $s;
+        $editar = null;
+        
+        $query = "UPDATE usuario SET senha = ".$this->senha."WHERE id_pessoa = ".$this->id_pessoa."";
+        
+        $editar = pg_query($conexao,$query);
+        return $editar;
+        
+    }
+    
+    public function excluirUser($conexao,$id_pessoa){
+        $this->id_pessoa = $id_pessoa;
+        $excluir = null;
+        
+        $query = "DELETE from usuario WHERE id_pessoa =".$this->id_pessoa."";
+        $excluir = pg_query($conexao,$query);
+        return $excluir;
+        
+    }
+    
     public function incluirUser($conexao, $id_pessoa, $s, $em) {
 
         $this->id_pessoa = $id_pessoa;
