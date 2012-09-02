@@ -172,9 +172,11 @@ function msgErroBD(data){
 
 //Função que manda o form de cadastro de pessoa por AJAX
 function pessoaAjax(modalidade){
-        
+    
+    
     /* get some values from elements on the page: */
     var $form = $a( '.pessoaAjaxForm' ),
+    id_pessoa = $form.find( 'input[name="id_pessoa"]' ).val(),
     nome = $form.find( 'input[name="nome"]' ).val(),
     tipo = $form.find( 'input[name="tipo"]' ).val(),
     oab = $form.find( 'input[name="oab"]' ).val(),
@@ -188,14 +190,15 @@ function pessoaAjax(modalidade){
     estado = $form.find( 'option').filter(':selected' ).val(),
     tel = $form.find( 'input[name="telefone"]' ).val(),
     email = $form.find( 'input[name="email"]' ).val(),
-    user = $form.find( 'input[name="userCheckbox"]:checked' ).val(),
-    senha = $form.find( 'input[name="senha"]' ).val(),        
+    user = $form.find( 'input[name="userCheckbox"]:checked' ).val(),      
     url = $form.attr( 'action' );
+    //senha = $form.find( 'input[name="senha"]' ).val(),  
         
     //alert(modalidade);      
-       
+    
        
     $a.post(url,{
+        id_pessoa:id_pessoa,
         nome:nome,
         tipo:tipo,
         oab:oab,
@@ -209,14 +212,13 @@ function pessoaAjax(modalidade){
         estado:estado,
         telefone:tel,
         email:email,
-        userCheckbox:user,
-        senha:senha
+        userCheckbox:user
+        //senha:senha
     },function(data){ 
-        //alert(data);
+        //alert(data);   
+        
         if(modalidade==0){
-            //alert("modo 0");
             if(data==1){
-                //alert("If 0"); 
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa<b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
                 
@@ -238,7 +240,7 @@ function pessoaAjax(modalidade){
                     limparForm('.pessoaAjaxForm');
                     $a(window.document.location).attr('href',url);
 
-                }, 2000);          
+                }, 4000);          
             }
             
             else{
@@ -312,7 +314,7 @@ function pessoaAjax(modalidade){
                 setTimeout(function() {
                     $a('#myModal').modal('toggle');
 
-                }, 2000);   
+                }, 4000);   
                
             }
             else{
@@ -328,216 +330,7 @@ function pessoaAjax(modalidade){
     
 }
 
-//Função que valida o form de cadastro de uma pessoa
-function validaFormPessoa12312(){
-    var mandar = false;      
 
-    var form_validate= $a(".pessoaAjaxForm").validate({         
-        /* showErrors: function(errorMap, errorList) {
-                // Do nothing here
-            },*/
-        submitHandler: function(form) {
-            $(form).ajaxSubmit();
-        },
-            
-        rules:{
-            nome:{
-                required: true, 
-                minlength: 2
-            },
-            endereco:{
-                required: true, 
-                minlength: 2
-            },
-            cidade:{
-                required: true, 
-                minlength: 2
-            },
-            estado:{
-                  
-            },
-            telefone:{
-                required: true, 
-                minlength: 2
-            },
-            email:{
-                email: true, 
-                required:true
-            }
-            
-        }         
-    }); 
-        
-        
-    /*Eventos OnBlur para conferir dados*/
-    $a("#nome_input").blur(function(){          
-        if(form_validate.element("#nome_input")==false){
-            $a("#nome").removeClass("control-group").addClass("control-group error");          
-            mandar = false;
-        }                  
-        else{
-            $a("#nome").removeClass("control-group error").addClass("control-group");
-            mandar = true;
-        }
-            
-    });
-      
-    $a("#endereco_input").blur(function(){          
-        if(form_validate.element("#endereco_input")==false){
-            $a("#endereco").removeClass("control-group").addClass("control-group error");    
-            mandar = false;
-        }           
-        else{
-            $a("#endereco").removeClass("control-group error").addClass("control-group");
-            mandar = true;
-        }
-            
-    });
-
-    $a("#cidade_input").blur(function(){          
-        if(form_validate.element("#cidade_input")==false){
-            $a("#cidade").removeClass("control-group").addClass("control-group error");         
-            mandar = false;
-        }           
-        else{
-            $a("#cidade").removeClass("control-group error").addClass("control-group");
-            mandar = true;
-        }
-            
-    });
-        
-    $a("#estado_input").blur(function(){          
-        if(form_validate.element("#estado_input")==false){
-            $a("#estado").removeClass("control-group").addClass("control-group error");    
-            mandar = false;
-        }
-        else{               
-            $a("#estado").removeClass("control-group error").addClass("control-group");
-            mandar = true;
-        }
-            
-    });
-        
-    $a("#telefone_input").blur(function(){          
-        if(form_validate.element("#telefone_input")==false){
-            $a("#telefone").removeClass("control-group").addClass("control-group error");   
-            mandar = false;
-        }       
-        else{
-            $a("#telefone").removeClass("control-group error").addClass("control-group");
-        }
-            
-    });
-        
-    $a("#email_input").blur(function(){          
-        if(form_validate.element("#email_input")==false){
-            $a("#email").removeClass("control-group").addClass("control-group error");       
-            mandar = false;
-        }      
-        else{
-            $a("#email").removeClass("control-group error").addClass("control-group");
-            mandar = true;
-        }               
-                   
-    });
-      
-       
-        
-    /*-----------------------------------------------*/        
-    /* Mudança da CSS dos campos quando clicar no SALVAR*/
-        
-    $a(".submit-pessoa").click(function(){                       
-                     
-        if(form_validate.element("#nome_input")==false){
-            $a("#nome").removeClass("control-group").addClass("control-group error");          
-            mandar = false;
-        }                  
-        else{
-            $a("#nome").removeClass("control-group error").addClass("control-group");
-            mandar = true;
-        }           
-             
-      
-        if(form_validate.element("#endereco_input")==false){
-            $a("#endereco").removeClass("control-group").addClass("control-group error");    
-            mandar = false;
-        }           
-        else{
-            $a("#endereco").removeClass("control-group error").addClass("control-group");
-            mandar = true;
-        }          
-                    
-        if(form_validate.element("#cidade_input")==false){
-            $a("#cidade").removeClass("control-group").addClass("control-group error");         
-            mandar = false;
-        }           
-        else{
-            $a("#cidade").removeClass("control-group error").addClass("control-group");
-            mandar = true;
-        }           
-                     
-        if(form_validate.element("#estado_input")==false){
-            $a("#estado").removeClass("control-group").addClass("control-group error");    
-            mandar = false;
-        }
-        else{               
-            $a("#estado").removeClass("control-group error").addClass("control-group");
-            mandar = true;
-        }          
-                   
-                    
-        if(form_validate.element("#telefone_input")==false){
-            $a("#telefone").removeClass("control-group").addClass("control-group error");   
-            mandar = false;
-        }       
-        else{
-            $a("#telefone").removeClass("control-group error").addClass("control-group");
-        }        
-               
-        if(form_validate.element("#email_input")==false){
-            $a("#email").removeClass("control-group").addClass("control-group error");       
-            mandar = false;
-        }      
-        else{
-            $a("#email").removeClass("control-group error").addClass("control-group");
-            mandar = true;
-        }       
-
-        if(mandar ==true){
-            pessoaAjax();
-        }
-    });        
-}
-
-
-//Função que diz qual NAV está selecionada
-function trocarAbaSubnav(){
-    
-    //pega o endereço da pagina
-    var href = location.href;
-      
-    //separa num array os valores divididos por um '/'
-    href_split = href.split('/');
-      
-    //pega a PASTA da página  
-    var pagina = href_split[5];
-    
-    $a('.active').removeClass('active');
-    
-    if(pagina == 'pessoa')
-        $a('#pessoa').addClass('active');
-    
-    else if(pagina == 'processo')
-        $a('#processo').addClass('active');
-     
-    else if(pagina == 'comarca' || pagina == 'juizo' || pagina == 'ato' 
-        || pagina == 'natureza_acao')
-        $a('#dados').addClass('active');
-    
-    else
-        $a('#inicio').addClass('active');    
- 
-}
 
 /*Função que valida o form de Pessoa no evento SUBMIT*/
 function validaFormPessoaSubmit(){
@@ -563,7 +356,8 @@ function validaFormPessoaSubmit(){
     tel = $form.find( 'input[name="telefone"]' ).val(),
     email = $form.find( 'input[name="email"]' ).val(),
     user = $form.find( 'input[name="userCheckbox"]:checked' ).val(),
-    senha = $form.find( 'input[name="senha"]' ).val();
+    senha = $form.find( 'input[name="senha"]' ).val(),
+    id_pessoa = $form.find('input[name="id_pessoa"]').val();
         
     var mandar = true;
         
@@ -627,17 +421,17 @@ function validaFormPessoaSubmit(){
             $a('#email').removeClass("error").addClass("");
         }
             
-        if(senha.length  < 8){
+        /*if(senha.length  < 8){
             $a('#senha').removeClass("").addClass("error"); 
             mandar =false;
         }
         else{
             $a('#senha').removeClass("error").addClass("");
-        }
+        }*/
     }
     else{
             
-        $a('#senha').removeClass("success error"); 
+        //$a('#senha').removeClass("success error"); 
             
         if(email.length  > 0){ 
             if(email.length  < 7){
@@ -781,7 +575,19 @@ function validaFormPessoaJS(){
         else{
         //alert(mandar);            
         }
-    });    
+    });   
+    $a(".edit-pessoa").click(function(){ 
+        var mandar = validaFormPessoaSubmit();  
+        subirPagina();
+        if(mandar==true){
+            pessoaAjax(0);
+        }
+        
+        else{
+        //alert(mandar);            
+        }
+    });
+    
     
     //Apertar o botão para incluir + 1 pessoa
     $a(".submit-outra-pessoa").click(function(){ 

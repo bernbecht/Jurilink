@@ -142,17 +142,7 @@ $resultado = pg_fetch_object($pesq_uf);
                 </div>
             </div> 
 
-            <div class="row">
-                <div class="span5" >
-                    <div id="senha" class="control-group ">
-                        <label class="control-label" for="telefone">Senha</label>
-                        <div class="controls">
-                            <input type="text" class="input-xlarge" id="senha_input" name="senha">    
-                            <span  class="help-inline ">Minimo de 7 digitos alfanumericos</span> 
-                        </div>
-                    </div> 
-                </div>
-            </div> 
+            
 
 
             <input value="1" type="hidden" class="input-xlarge" id="tipo_input" name="tipo">  
