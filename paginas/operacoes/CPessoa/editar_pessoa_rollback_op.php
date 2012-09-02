@@ -187,12 +187,12 @@ if ($erro != "") {
             $flag = "false";
 
         $fisica = new CFisica();
-        $editar = $fisica->incluirFisica($conexao, $id_pessoa, $cpf, $rg, $comarca);
+        $editar = $fisica->editarFisica($conexao, $id_pessoa, $cpf, $rg, $comarca);
         if(!$editar){
             $db_error = pg_last_error($conexao);           
         }
         $advogado = new CAdvogado();
-        $editar = $advogado->incluirAdvogado($conexao, $id_pessoa, $oab, $flag);
+        $editar = $advogado->editarAdvogado($conexao, $id_pessoa, $oab, $flag);
         if(!$editar){
             $db_error.=" ". pg_last_error($conexao);
         }

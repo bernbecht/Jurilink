@@ -153,12 +153,12 @@ $processo = pg_fetch_object($pesq_processo);
     <div class ="esquerda"><h1> PROCESSO  </h1> </div>
     <?php
      if ($_SESSION['tipo_usuario'] == 2){
-      echo '<div class=direita>        
-        <a class="btn btn-warning btn-small" href="#">
-            <i class="icon-pencil icon-white"></i>
+      echo "<div class=direita>        
+        <a class='btn btn-warning btn-small' href='editar_processo.php?id=$id_processo'>
+            <i class='icon-pencil icon-white'></i>
             EDITAR    
         </a>             
-        </div>';
+        </div>";
      }
      ?>
     

@@ -6,7 +6,7 @@ require_once  '../config.php';     //chama as configurações de página!
 if(isset($_GET['id'])) $id_pessoa = $_GET['id'];
 
 //Coleta dados de pessoa do banco para mostrar na tela
-$query = "SELECT * FROM pessoa WHERE id_pessoa = $id_pessoa";
+$query = "SELECT * FROM pessoa, advogado WHERE pessoa.id_pessoa = $id_pessoa and advogado.id_pessoa = pessoa.id_pessoa";
 $pesq_pessoa = pg_query($conexao1,$query);
 $pessoa = pg_fetch_object($pesq_pessoa);
 
@@ -85,9 +85,13 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
         <div class='span2'>$fisica->rg</div>";
     
     ?>
+    
   
     <div class="span2 offset1"><?php echo "<b>Bairro</b>" ?></div>
     <div class="span2"><?php echo $pessoa->bairro ?></div>
+    
+    <div class="span2 offset1"><?php echo "<b>OAB</b>" ?></div>
+    <div class="span2"><?php echo $pessoa->oab ?></div>
     
     <div class="span2 offset1"><?php echo "<b>CPF/CNPJ</b>" ?></div>
     <div class="span2">

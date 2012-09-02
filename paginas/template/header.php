@@ -58,7 +58,7 @@ if ($_SESSION['tipo_usuario'] != 2) header("location:../../logout.php");
                     <ul id="pessoas_menu_dropdown" class="dropdown-menu">
                         <li><a  href="../pessoa/relacao_pfisica.php">F&iacute;sica</a></li>
                         <li><a  href="../pessoa/relacao_pjuridica.php">Jur&iacute;dica</a></li>
-                        <li><a  href="../pessoa/relacao_advogados.php">Advogados</a></li>
+                        <li><a  href="../pessoa/relacao_advogado.php">Advogados</a></li>
 
                     </ul>
                 </li>

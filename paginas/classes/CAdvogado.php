@@ -7,7 +7,19 @@ class CAdvogado {
     protected $oab;
     protected $flag;
 
+    public function editarAdvogado($conexao, $id_pessoa, $oab, $flag) {
+        $this->id_pessoa = $id_pessoa;
+        $this->oab = $oab;
+        $this->flag = $flag;
+                
+        $query = "UPDATE advogado SET oab = '".$this->oab."', flag_func = '".$this->flag."'
+            WHERE advogado.id_pessoa = ".$this->id_pessoa." ";
 
+        $editar = pg_query($conexao, $query);
+        
+        return $editar;
+        
+    }
     public function incluirAdvogado($conexao, $id, $o,$f){
         $this->id_pessoa= $id;
         $this->oab=$o;
