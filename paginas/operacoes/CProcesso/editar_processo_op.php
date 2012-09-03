@@ -17,8 +17,7 @@ function mandarBD($conexao1, $editar, $db_error) {
     }    
     exit();
 }
-
-$id_processo = $_POST['id_processo']; //pode ser nulo
+$id_processo = $_POST['id_processo'];
 $tej = $_POST['transito_em_julgado']; //pode ser nulo
 $dd = $_POST['data_distribuicao'];
 $dj = $_POST['deposito_judicial']; //pode ser nulo
@@ -135,7 +134,7 @@ if ($erro != '') {
     //procedimento para ROLLBACK
     pg_query($conexao1, "begin");
 
-    $editar = $processo->editarProcesso($conexao1,$id_processo, $tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j);
+    $editar = $processo->editarProcesso($conexao1, $id_processo, $tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j);
     if (!$editar) {
         $db_error = pg_last_error($conexao1);
     } else {
@@ -155,7 +154,7 @@ if ($erro != '') {
                 $editar = $processo_pessoa->editarAutor($conexao1, $id_processo, $id[$i], 0);
                 $i++;
                 if (!$editar) {
-                    //$db_error.=" ".pg_last_error($conexao1);
+                    $db_error.=" ".pg_last_error($conexao1);
                 }
             }
         } else {

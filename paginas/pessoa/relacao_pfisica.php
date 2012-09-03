@@ -4,7 +4,6 @@ require_once  '../config.php';     //chama as configurações de página!
 include '../operacoes/CPessoa/relacao_pessoas_op.php';
 
 /**Sessão**/
-//session_start();
 if(!isset($_SESSION['usuario'])) header("location:logout.php");
 
 /* Aqui limita-se o número de registros por página */

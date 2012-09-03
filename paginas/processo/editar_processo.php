@@ -52,7 +52,7 @@ $reus = pg_fetch_object($pesq_reu);
 /*Seleciona dados do processo e advogados do autor e do réu*/
 $query = "SELECT processo.numero_unificado, padvautor.nome as nome_adv_autor, padvreu.nome as nome_adv_reu,
     natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, trim(to_char(valor_causa, '999999999D99')) as valor_causa, 
-    trim(to_char(deposito_judicial, '999G999G999D99')) as deposito_judicial, juizo.nome as nome_juizo, trim(to_char(auto_penhora, '999999999D99')) as auto_penhora,
+    trim(to_char(deposito_judicial, '999999999D99')) as deposito_judicial, juizo.nome as nome_juizo, trim(to_char(auto_penhora, '999999999D99')) as auto_penhora,
     comarca.nome as nome_comarca, to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, padvautor.id_pessoa as id_advogado_autor, 
     padvreu.id_pessoa as id_advogado_reu,processo.id_juizo, processo.id_natureza_acao
     from ((((((processo
@@ -77,7 +77,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
 
 <div class="container content">
 
-    <form name ="form_processo" id="form_processo" class="form-horizontal" method="post" action="../operacoes/CProcesso/incluir_processo_op.php">
+    <form name ="form_processo" id="form_processo" class="form-horizontal" method="post" action="../operacoes/CProcesso/editar_processo_op.php">
         <fieldset>
 
             <!--Campos formulário -->

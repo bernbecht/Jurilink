@@ -154,11 +154,10 @@ class CPessoa {
 
     //Retorna um array de ID das pessoas dando o nome
     public function getIDPessoaNome($conexao1, $p) {
-
         $array_data = explode(',', $p);
         $n = count($array_data);
         $i = 0;
-
+        
         while ($i < $n) {
             if ($array_data[$i] != '') {
                 $array_data[$i] = ltrim($array_data[$i]);
@@ -166,17 +165,20 @@ class CPessoa {
             }
             $i++;
         }
+        
 
         $i = 0;
+        
         while ($i < $n) {
             if ($array_data[$i] != '') {
-                $sql = pg_exec($conexao1, "select * 
+                $sql = pg_query($conexao1, "select * 
                         from pessoa 
                         where nome = '{$array_data[$i]}' ");
-
+                 
                 $resultado = pg_fetch_object($sql);
+                //echo $resultado->nome." ";
+
                 if (!$resultado->id_pessoa) {
-                    //echo "ERRADO";
                     return -1;
                 } else {
                     //$resultado = pg_fetch_object($sql);

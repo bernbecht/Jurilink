@@ -46,9 +46,11 @@ class CProcesso {
         if ($this->deposito_judicial == "")
             $this->deposito_judicial = "NULL";
         
-        $query = "UPDATE processo SET numero_unificado = '".$this->numero_unificado."', transito_em_julgado = '".$this->transito_em_julgado."',
-            data_distribuicao = '".$this->data_distribuicao."', deposito_judicial = '".$this->deposito_judicial."',auto_penhora =".$this->auto_penhora.",
-            valor_causa = '".$this->valor_causa."',id_natureza_acao = '".$this->id_natureza."',id_juizo = '".$this->id_juizo."' WHERE processo.id_processo = $this->id_processo";
+        //pg_query($conexao,"UPDATE processo SET numero_unificado = '000000000000000000000' WHERE processo.id_processo = $this->id_processo");
+        
+        $query = "UPDATE processo SET numero_unificado = '".$this->numero_unificado."', transito_em_julgado = ".$this->transito_em_julgado.",
+            data_distribuicao = '".$this->data_distribuicao."', deposito_judicial = ".$this->deposito_judicial.",auto_penhora =".$this->auto_penhora.",
+            valor_causa = ".$this->valor_causa.",id_natureza_acao = '".$this->id_natureza."',id_juizo = '".$this->id_juizo."' WHERE processo.id_processo = $this->id_processo";
         
         $editar = pg_query($conexao,$query);
         return $editar;
