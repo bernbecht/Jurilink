@@ -85,6 +85,7 @@
         var dataRegex = /^([0-9]{2}\/[0-9]{2}\/[0-9]{4})$/;
         
         var $form = $a( '#form_processo' ),
+        id_processo = $form.find( 'input[name="id_processo"]' ).val(),
         num = $form.find( 'input[name="numero_unificado"]' ).val(),
         distribuicao = $form.find( 'input[name="data_distribuicao"]' ).val(),
         causa = $form.find( 'input[name="valor_causa"]' ).val(),
@@ -358,6 +359,7 @@
     function processoAjax(modalidade){
         
         var $form = $a( '#form_processo' ),
+        id_processo = $form.find( 'input[name="id_processo"]' ).val(),
         num = $form.find( 'input[name="numero_unificado"]' ).val(),
         distribuicao = $form.find( 'input[name="data_distribuicao"]' ).val(),
         causa = $form.find( 'input[name="valor_causa"]' ).val(),
@@ -377,6 +379,7 @@
         //alert(modalidade);
         
         $a.post(url,{
+            id_processo:id_processo,
             transito_em_julgado:transito,
             data_distribuicao:distribuicao,
             deposito_judicial:deposito,
@@ -393,7 +396,7 @@
             reu_rep:reu_rep           
         
         }, function(data){             
-            
+            alert(data);
             if(modalidade == 1){
                 if(data==1){
                     //alert("OK");
@@ -414,7 +417,8 @@
                     }, 2000);  
                 }
                 else{
-                    //$a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>'+data+'</p></div>').appendTo('#msg_resultado_processo');
+                    
+                    $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>'+data+'</p></div>').appendTo('#msg_resultado_processo');
                     msgErroProcessoBD(data);
                     subirPagina();;
                 }
@@ -422,7 +426,6 @@
             
             else if(modalidade ==2){
                 if(data==1){
-                    //alert("OK");
                     $a('.alert').remove();
                     $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O processo <b>'+num+'</b> foi inserido no sistema com sucesso.</p></div>').appendTo('#msg_resultado_processo');
                     
@@ -432,7 +435,7 @@
                     
                 }
                 else{
-                    //$a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>'+data+'</p></div>').appendTo('#msg_resultado_processo');
+                    $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>'+data+'</p></div>').appendTo('#msg_resultado_processo');
                     msgErroProcessoBD(data);
                     subirPagina();;
                 }
