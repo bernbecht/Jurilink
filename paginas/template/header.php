@@ -1,7 +1,8 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['usuario'])) header("location:main.php");
+if(!isset($_SESSION['usuario'])) header("location:../../logout.php");
+if ($_SESSION['tipo_usuario'] != 2) header("location:../../logout.php");
 
 ?>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt">

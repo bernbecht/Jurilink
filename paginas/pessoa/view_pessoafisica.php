@@ -6,8 +6,12 @@ require_once '../classes/CFisica.php';
 $fisica_processo = new CFisica();
 
 //GET para ID da pessoa
-if (isset($_GET['id']))
+if (isset($_GET['id'])){
     $id_pessoa = $_GET['id'];
+    $_SESSION['id'] = $id_pessoa;
+}else{
+    $id_pessoa = $_SESSION['id'];
+}
 
 //Coleta dados de pessoa do banco para mostrar na tela
 $query = "SELECT * FROM pessoa WHERE id_pessoa = $id_pessoa";
@@ -24,11 +28,11 @@ $query = "SELECT * FROM fisica WHERE fisica.id_pessoa = $id_pessoa";
 $pesq_fisica = pg_query($conexao1, $query);
 $fisica = pg_fetch_object($pesq_fisica);
 
-/* Pega os 3 processos com*/
+/* Pega os 3 processos com */
 $pesq_proc_advocacia = $fisica_processo->getProcessosFisicaComAdvocacia($id_pessoa);
 $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
 
-/* Pega os 3 processos contra*/
+/* Pega os 3 processos contra */
 $pesq_proc_c_advocacia = $fisica_processo->getProcessosFisicaContraAdvocacia($id_pessoa);
 $processos_c_advocacia = pg_fetch_object($pesq_proc_c_advocacia);
 
@@ -45,7 +49,10 @@ $user = pg_fetch_object($pesq_user);
             </div>
         </div>
         <div class="direita">
-            <a class="btn btn-small btn-warning" href="#">
+            <a>
+                <?php
+                echo "<a href='editar_pfisica.php?id={$id_pessoa}' class='btn btn-small btn-warning' >";
+                ?>
                 <i class="icon-pencil icon-white"></i>
                 EDITAR     
             </a>
@@ -149,9 +156,9 @@ $user = pg_fetch_object($pesq_user);
                     <th>Advogado</th>
                     <th>Valor da Causa</th>
                     </tr>
-                    </thead>";                    
+                    </thead>";
                     echo "<tbody>";
-                    
+
                     do {
                         echo "<tr>	
                     <td>" . $processos_advocacia->data_distribuicao . "</td>
@@ -163,7 +170,7 @@ $user = pg_fetch_object($pesq_user);
                     <td>" . $processos_advocacia->valor_causa . "</td> 
                     </tr>";
                     } while ($processos_advocacia = pg_fetch_object($pesq_proc_advocacia));
-                    
+
                     echo "</tbody>";
                     echo "</table>";
                     echo "<p class='centro'><button id='todos_processos_com' class='btn btn-primary'>Ver todos os Processos</button></p>";
@@ -195,7 +202,7 @@ $user = pg_fetch_object($pesq_user);
                 <?php
                 if (pg_num_rows($pesq_proc_c_advocacia) > 0) {
 
-                    echo "<table = 'processos_contra' class='table table-striped ' >";
+                    echo "<table class='table table-striped ' >";
                     echo "<thead>";
                     echo "<tr>
                 <th>Data Distribui&ccedil;&atilde;o</th>

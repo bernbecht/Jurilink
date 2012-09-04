@@ -29,7 +29,8 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                 <div class="alert alert-block fade in">
                     <button type="button" class="close" data-dismiss="alert">x</button>
                     <p>Todos os itens com a tarja <b>amarela</b> sao obrigatorios</p></div>
-            </div>          
+            </div>   
+            <br/>
 
             <div class="row">                
 
@@ -235,7 +236,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                         <label class="control-label" for="auto_penhora">Auto da Penhora</label>
                         <div class="controls">
                             <div class="input-prepend">
-                                <span class="add-on"><i class="icon-envelope"></i></span><input type="text" class="input-large" id="auto_penhora_input" name="auto_penhora" />                       
+                                <input type="text" class="input-large" id="auto_penhora_input" name="auto_penhora" />                       
                                 <span  class="help-inline ">O valor deve ter vigula Ex: 1200,00</span>
                             </div>
                         </div>

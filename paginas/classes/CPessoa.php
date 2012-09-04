@@ -12,11 +12,32 @@ class CPessoa {
     protected $uf;
     protected $bairro;
     protected $tipo;
+    protected $id_pessoa;
 
     function CPessoa() {
         
     }
 
+    public function editarPessoa($conexao,$id_pessoa, $n, $e, $em, $t, $c, $uf, $b, $tipo) {
+        $this->nome = $n;
+        $this->endereco = $e;
+        $this->email = $em;
+        $this->telefone = $t;
+        $this->cidade = $c;
+        $this->uf = $uf;
+        $this->bairro = $b;
+        $this->tipo = $tipo;
+        $this->id_pessoa = $id_pessoa;
+        $editar = null;
+        
+        $query = "UPDATE pessoa SET nome = '".$this->nome."', endereco = '".$this->endereco."',
+            tel = '".$this->telefone."', cidade = '".$this->cidade."',id_uf =".$this->uf.",
+            email = '".$this->email."',bairro = '".$this->bairro."' WHERE pessoa.id_pessoa = $this->id_pessoa";
+        
+        $editar = pg_query($conexao,$query);
+        return $editar;
+    }
+    
     public function incluirPessoa($conexao, $n, $e, $em, $t, $c, $uf, $b, $tipo) {
         $this->nome = $n;
         $this->endereco = $e;
@@ -28,9 +49,6 @@ class CPessoa {
         $this->tipo = $tipo;
         $incluir = null;
 
-
-        // $conexao1 = new CConexao();
-        //  $conexao = $conexao1->novaConexao();
         //Insere no Banco e Retorna o id_pessoa
         $incluir = pg_exec($conexao, "insert into pessoa(nome,endereco,tel,cidade,id_uf,email,tipo,bairro)
                          values('"
@@ -42,8 +60,6 @@ class CPessoa {
                 . $this->email . "', "
                 . $this->tipo . ",'"
                 . $this->bairro . "') RETURNING id_pessoa");
-
-        // $conexao1->closeConexao();
 
         $resultado = pg_fetch_object($incluir);
 
@@ -95,12 +111,8 @@ class CPessoa {
 
     //Retorna o ID da pessoa passando o email
     public function getId($conexao, $email) {
-        //$conexao1 = new CConexao();
-        //$conexao = $conexao1->novaConexao();
         $sql = pg_exec($conexao, "select id_pessoa from pessoa where email='" . $email . "'");
         $resultado = pg_fetch_object($sql);
-
-        //$conexao1->closeConexao();
 
         return $resultado->id_pessoa;
     }

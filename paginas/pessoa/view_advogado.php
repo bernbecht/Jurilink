@@ -10,8 +10,8 @@ if (isset($_GET['id']))
     $id_pessoa = $_GET['id'];
 
 //Coleta dados de pessoa do banco para mostrar na tela
-$query = "SELECT * FROM pessoa WHERE id_pessoa = $id_pessoa";
-$pesq_pessoa = pg_query($conexao1, $query);
+$query = "SELECT * FROM pessoa, advogado WHERE pessoa.id_pessoa = $id_pessoa and advogado.id_pessoa = pessoa.id_pessoa";
+$pesq_pessoa = pg_query($conexao1,$query);
 $pessoa = pg_fetch_object($pesq_pessoa);
 
 //Estado

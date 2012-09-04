@@ -1,5 +1,6 @@
 <?php
-require_once '../template/header.php'; //chama o header
+
+require_once '../template/header_user.php'; //chama o header
 require_once  '../config.php';     //chama as configurações de página!
 
 
@@ -61,12 +62,7 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
 
 <div class ="container content">
     <div class ="esquerda"><h1><?php echo $pessoa->nome; ?>  </h1> </div>
-    <div class ="direita">        
-        <a class="btn btn-small btn-warning" href="#">
-            <i class="icon-pencil icon-white"></i>
-            EDITAR     
-        </a>             
-        </div>
+
     
     
     <br/>
@@ -136,7 +132,7 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
             do {
                 echo "<tr>	
                     <td>" . $processos_advocacia->data_distribuicao . "</td>
-                    <td><a href=../processo/view_processo.php?id=$processos_advocacia->id_processo>" . $processos_advocacia->numero_unificado . "</a></td>
+                    <td><a href=../processo/view_processo.php?id=$processos_advocacia->id_processo&user=1>" . $processos_advocacia->numero_unificado . "</a></td>
                     <td>" . $processos_advocacia->nome_natureza . "</td>
                     <td>" . $processos_advocacia->nome_autor . "</td>
                     <td>" . $processos_advocacia->nome_reu . "</td>

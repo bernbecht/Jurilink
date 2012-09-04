@@ -1,6 +1,12 @@
 <?php
-require_once '../template/header.php'; //chama o header
+
 require_once  '../config.php';     //chama as configurações de página!
+
+if(!isset($_GET['user']))
+    require_once '../template/header.php'; //chama o header
+else 
+    include '../template/header_user.php'; //chama o header
+
 
 //GET para ID do processo
 if(isset($_GET['id'])) $id_processo = $_GET['id'];
@@ -147,9 +153,9 @@ $processo = pg_fetch_object($pesq_processo);
     <div class ="esquerda"><h1> PROCESSO  </h1> </div>
     <?php
      if ($_SESSION['tipo_usuario'] == 2){
-      echo " <div class =direita>        
-        <a class=btn btn-small btn-warning href=#>
-            <i class=icon-pencil icon-white></i>
+      echo "<div class=direita>        
+        <a class='btn btn-warning btn-small' href='editar_processo.php?id=$id_processo'>
+            <i class='icon-pencil icon-white'></i>
             EDITAR    
         </a>             
         </div>";
@@ -289,12 +295,12 @@ $processo = pg_fetch_object($pesq_processo);
        <div class ="esquerda"> <h1> ATOS </h1> </div>
      <?php
      if ($_SESSION['tipo_usuario'] == 2){
-      echo " <div class =direita>        
-        <a class=btn btn-small btn-success href=#>
-            <i class=icon-plus icon-white></i>
+      echo ' <div class =direita>        
+        <a class="btn btn-small btn-success" href="#">
+            <i class="icon-plus icon-white"></i>
             INCLUIR ATO    
         </a>             
-        </div>";
+        </div>';
      }
      ?>
   
@@ -336,12 +342,12 @@ $processo = pg_fetch_object($pesq_processo);
      <div class ="esquerda"> <h1> AUDI&Ecirc;NCIAS </h1> </div>
      <?php
      if ($_SESSION['tipo_usuario'] == 2){
-      echo " <div class =direita>        
-        <a class=btn btn-small btn-success href=#>
-            <i class=icon-plus icon-white></i>
+      echo '<div class =direita>        
+        <a class="btn btn-small btn-success" href="#">
+            <i class="icon-plus icon-white"></i>
             INCLUIR AUDI&Ecirc;NCIA     
         </a>             
-        </div>";
+        </div>';
      }
      ?>
   

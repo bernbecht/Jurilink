@@ -8,6 +8,7 @@
         var url = 'pega_processos_com.php';
         
         
+        
         $a('#todos_processos_com').click(function(){            
             //alert(id);            
             $a.post(url,{
@@ -50,6 +51,7 @@
         todosProcessosCom();
         todosProcessosContra();
        
+      // alert("OI");
  
  
     

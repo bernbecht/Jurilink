@@ -8,6 +8,24 @@ class CFisica {
     protected $rg;
     protected $orgao_expedidor;
 
+    
+    public function editarFisica($conexao, $id_pessoa, $c, $r, $oe) {
+        $this->id_pessoa = $id_pessoa;
+        $this->cpf = $c;
+        $this->rg = $r;
+        $this->orgao_expedidor = $oe;
+        
+        pg_query($conexao,"UPDATE fisica SET rg = '000000000' WHERE fisica.id_pessoa = ".$this->id_pessoa." ");
+        
+        $query = "UPDATE fisica SET cpf = '".$this->cpf."', rg = '".$this->rg."',
+            orgao_expedidor = '".$this->orgao_expedidor."' WHERE fisica.id_pessoa = ".$this->id_pessoa." ";
+
+        $editar = pg_query($conexao, $query);
+        
+        return $editar;
+        
+    }
+     
     public function incluirFisica($conexao, $id_pessoa, $c, $r, $oe) {
 
         $this->id_pessoa = $id_pessoa;

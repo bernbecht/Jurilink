@@ -172,9 +172,11 @@ function msgErroBD(data){
 
 //Função que manda o form de cadastro de pessoa por AJAX
 function pessoaAjax(modalidade){
-        
     
+    
+    /* get some values from elements on the page: */
     var $form = $a( '.pessoaAjaxForm' ),
+    id_pessoa = $form.find( 'input[name="id_pessoa"]' ).val(),
     nome = $form.find( 'input[name="nome"]' ).val(),
     tipo = $form.find( 'input[name="tipo"]' ).val(),
     oab = $form.find( 'input[name="oab"]' ).val(),
@@ -188,15 +190,15 @@ function pessoaAjax(modalidade){
     estado = $form.find( 'option').filter(':selected' ).val(),
     tel = $form.find( 'input[name="telefone"]' ).val(),
     email = $form.find( 'input[name="email"]' ).val(),
-    user = $form.find( 'input[name="userCheckbox"]:checked' ).val(),           
+    user = $form.find( 'input[name="userCheckbox"]:checked' ).val(),      
     url = $form.attr( 'action' );
+    //senha = $form.find( 'input[name="senha"]' ).val(),  
+        
+    //alert(modalidade);      
     
-    var id_pessoa = $a('#id').val();
-     
-    alert(id_pessoa);      
-       
        
     $a.post(url,{
+        id_pessoa:id_pessoa,
         nome:nome,
         tipo:tipo,
         oab:oab,
@@ -210,15 +212,13 @@ function pessoaAjax(modalidade){
         estado:estado,
         telefone:tel,
         email:email,
-        userCheckbox:user,
-        id_pessoa:id_pessoa
-        
+        userCheckbox:user
+        //senha:senha
     },function(data){ 
-        alert(data);
+        //alert(data);   
+        
         if(modalidade==0){
-            //alert("modo 0");
             if(data==1){
-                //alert("If 0"); 
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa<b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
                 
@@ -240,7 +240,7 @@ function pessoaAjax(modalidade){
                     limparForm('.pessoaAjaxForm');
                     $a(window.document.location).attr('href',url);
 
-                }, 3000);          
+                }, 4000);          
             }
             
             else{
@@ -314,7 +314,7 @@ function pessoaAjax(modalidade){
                 setTimeout(function() {
                     $a('#myModal').modal('toggle');
 
-                }, 3000);   
+                }, 4000);   
                
             }
             else{
@@ -326,79 +326,11 @@ function pessoaAjax(modalidade){
             }
         }
         
-         else if(modalidade==3){
-            alert("modo 0");
-            if(data==1){
-                //alert("If 0"); 
-                $a('.alert').remove();
-                $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa <b>'+nome+'</b> foi editada no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
-                
-                //limparForm('.pessoaAjaxForm');
-                
-                subirPagina();
-        
-                //pega o endereço da pagina
-                 href = location.href;
-      
-                //separa num array os valores divididos por um '_'        
-                href_split = href.split('_');
-        
-                //alert(href_split);
-                 url = "relacao_"+href_split[1]+".php";
-                //alert(url);   
-                           
-                setTimeout(function() {
-                    limparForm('.pessoaAjaxForm');
-                    $a(window.document.location).attr('href',url);
-
-                }, 3000);          
-            }
-            
-            else{
-                //alert("Else 0");
-                //alert(data);
-                msgErroBD(data);
-                subirPagina();
-                               
-            }
-        }
-        
-        
-        
-        
     });  
     
 }
 
 
-//Função que diz qual NAV está selecionada
-function trocarAbaSubnav(){
-    
-    //pega o endereço da pagina
-    var href = location.href;
-      
-    //separa num array os valores divididos por um '/'
-    href_split = href.split('/');
-      
-    //pega a PASTA da página  
-    var pagina = href_split[5];
-    
-    $a('.active').removeClass('active');
-    
-    if(pagina == 'pessoa')
-        $a('#pessoa').addClass('active');
-    
-    else if(pagina == 'processo')
-        $a('#processo').addClass('active');
-     
-    else if(pagina == 'comarca' || pagina == 'juizo' || pagina == 'ato' 
-        || pagina == 'natureza_acao')
-        $a('#dados').addClass('active');
-    
-    else
-        $a('#inicio').addClass('active');    
- 
-}
 
 /*Função que valida o form de Pessoa no evento SUBMIT*/
 function validaFormPessoaSubmit(){
@@ -424,7 +356,8 @@ function validaFormPessoaSubmit(){
     tel = $form.find( 'input[name="telefone"]' ).val(),
     email = $form.find( 'input[name="email"]' ).val(),
     user = $form.find( 'input[name="userCheckbox"]:checked' ).val(),
-    senha = $form.find( 'input[name="senha"]' ).val();
+    senha = $form.find( 'input[name="senha"]' ).val(),
+    id_pessoa = $form.find('input[name="id_pessoa"]').val();
         
     var mandar = true;
         
@@ -488,11 +421,17 @@ function validaFormPessoaSubmit(){
             $a('#email').removeClass("error").addClass("");
         }
             
-        
+        /*if(senha.length  < 8){
+            $a('#senha').removeClass("").addClass("error"); 
+            mandar =false;
+        }
+        else{
+            $a('#senha').removeClass("error").addClass("");
+        }*/
     }
     else{
             
-         
+        //$a('#senha').removeClass("success error"); 
             
         if(email.length  > 0){ 
             if(email.length  < 7){
@@ -636,7 +575,19 @@ function validaFormPessoaJS(){
         else{
         //alert(mandar);            
         }
-    });    
+    });   
+    $a(".edit-pessoa").click(function(){ 
+        var mandar = validaFormPessoaSubmit();  
+        subirPagina();
+        if(mandar==true){
+            pessoaAjax(0);
+        }
+        
+        else{
+        //alert(mandar);            
+        }
+    });
+    
     
     //Apertar o botão para incluir + 1 pessoa
     $a(".submit-outra-pessoa").click(function(){ 
@@ -664,19 +615,6 @@ function validaFormPessoaJS(){
         //alert(mandar);            
         }
     }); 
-    
-    //Apertar o botão para editar uma pessoa
-    $a(".edit-pessoa").click(function(){ 
-        var mandar = validaFormPessoaSubmit();  
-        subirPagina();
-        if(mandar==true){
-            pessoaAjax(3);
-        }
-        
-        else{
-        //alert(mandar);            
-        }
-    });
 }
 
 function habilitarSenha(){
