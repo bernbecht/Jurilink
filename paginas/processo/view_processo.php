@@ -210,6 +210,7 @@ $processo = pg_fetch_object($pesq_processo);
             
         }
         ?>
+        
     </div>
         
     <div class="span2 offset1"><?php echo "<b>R&eacute;u(s)</b>" ?></div>
@@ -218,13 +219,13 @@ $processo = pg_fetch_object($pesq_processo);
         if ($num_reus->count == 1){
             if ($processo->tipo_reu == 0){
                 if ($_SESSION['tipo_usuario'] == 2)
-                   echo  "<a href=../pessoa/view_pessoafisica.php?id=$processo->id_reu>".$processo->nome_reu."</a>";
+                    echo  "<a href=../pessoa/view_pessoafisica.php?id=$processo->id_reu>".$processo->nome_reu."</a>";
                 else echo $processo->nome_reu;
             }
             else if ($processo->tipo_reu == 1){
-                if ($_SESSION['tipo_usuario'] == 2)
+                   if ($_SESSION['tipo_usuario'] == 2)
                     echo  "<a href=../pessoa/view_pessoajuridica.php?id=$processo->id_reu>".$processo->nome_reu."</a>";
-                else echo $processo->nome_reu;
+                   else echo $processo->nome_reu;
             }
         }
         else{
@@ -233,12 +234,13 @@ $processo = pg_fetch_object($pesq_processo);
                 if ($reus->tipo == 0){
                     if ($_SESSION['tipo_usuario'] == 2)
                         echo  "<a href=../pessoa/view_pessoafisica.php?id=$reus->id_pessoa>".$reus->nome."</a>";
-                    echo  $reus->nome;
+                    else echo $reus->nome;
                 }
             else if ($reus->tipo == 1){
                 if ($_SESSION['tipo_usuario'] == 2)
                     echo  "<a href=../pessoa/view_pessoajuridica.php?id=$reus->id_pessoa>".$reus->nome."</a>";
-                else echo  $reus->nome;
+                else echo $reus->nome; 
+                
             }
             $reus = pg_fetch_object($pesq_reus);
             $r++;
@@ -248,6 +250,7 @@ $processo = pg_fetch_object($pesq_processo);
             
         }
         ?>
+        
     </div>
     
     <div class="span2 offset1"><?php echo "<b>Advogado Autor(es)</b>" ?></div>

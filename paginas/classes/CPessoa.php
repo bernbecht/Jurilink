@@ -165,8 +165,6 @@ class CPessoa {
             }
             $i++;
         }
-        
-
         $i = 0;
         
         while ($i < $n) {
@@ -176,8 +174,7 @@ class CPessoa {
                         where nome = '{$array_data[$i]}' ");
                  
                 $resultado = pg_fetch_object($sql);
-                //echo $resultado->nome." ";
-
+                
                 if (!$resultado->id_pessoa) {
                     return -1;
                 } else {
@@ -188,7 +185,7 @@ class CPessoa {
                     //echo $array_data[$i] . " " . $id[$i] . " ";
                 }
             } else {
-                //echo "Nada cadastrado";
+                echo "Nada cadastrado";
                 return null;
             }
             $i++;

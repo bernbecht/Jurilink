@@ -129,36 +129,38 @@ if ($erro != '') {
 } else {
 
     //variável que vai nos dizer se foi incluído ou não
-    $editar = null;
+    $incluir = null;
 
     //procedimento para ROLLBACK
     pg_query($conexao1, "begin");
 
-    $editar = $processo->editarProcesso($conexao1, $id_processo, $tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j);
-    if (!$editar) {
+    $incluir = $processo->editarProcesso($conexao1, $id_processo,$tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j);
+    if (!$incluir) {
         $db_error = pg_last_error($conexao1);
     } else {
+        
         //Pegando IDs dos autores
         $id = $pessoa->getIDPessoaNome($conexao1, $autor);
         if ($id == -1) {
             $db_error = "ERRADO AUTOR";
-            $editar = false;
-            mandarBD($conexao1, $editar, $db_error);
+            $incluir = false;
+            mandarBD($conexao1, $incluir, $db_error);
         }
 
         //Inclui o autor
         if ($id != -1) {
             $i = 0;
             $n = count($id);
+            $processo_pessoa->excluirParte($conexao1,$id_processo,0,0);
             while ($i < $n) {
-                $editar = $processo_pessoa->editarAutor($conexao1, $id_processo, $id[$i], 0);
+                $incluir = $processo_pessoa->incluirAutor($conexao1, $id_processo, $id[$i], 0);
                 $i++;
-                if (!$editar) {
-                    $db_error.=" ".pg_last_error($conexao1);
+                if (!$incluir) {
+                    //$db_error.=" ".pg_last_error($conexao1);
                 }
             }
         } else {
-            $editar = null;
+            $incluir = null;
         }
 
 
@@ -166,48 +168,50 @@ if ($erro != '') {
         $id = $pessoa->getIDPessoaNome($conexao1, $reu);
         if ($id == -1) {
             $db_error = "ERRADO REU";
-            $editar = false;
-            mandarBD($conexao1, $editar, $db_error);
+            $incluir = false;
+            mandarBD($conexao1, $incluir, $db_error);
         }
 
         //Inclui os réus
         if ($id != -1) {
             $i = 0;
             $n = count($id);
+            $processo_pessoa->excluirParte($conexao1,$id_processo,0,1);
             while ($i < $n) {
-                $editar = $processo_pessoa->editarReu($conexao1, $id_processo, $id[$i], 0);
+                $incluir = $processo_pessoa->incluirReu($conexao1, $id_processo, $id[$i], 0);
                 $i++;
             }
         } else {
-            $editar = null;
+            $incluir = null;
         }
 
         //Pegando IDs dos advogados autores
         $id = $pessoa->getIDPessoaNome($conexao1, $autor_ad);
         if ($id == -1) {
             $db_error = "ERRADO ADVOGADO AUTOR";
-            $editar = false;
-            mandarBD($conexao1, $editar, $db_error);
+            $incluir = false;
+            mandarBD($conexao1, $incluir, $db_error);
         }
 
         //Inclui o advogado do autor
         if ($id != -1) {
             $i = 0;
             $n = count($id);
+            $processo_pessoa->excluirParte($conexao1,$id_processo,1,0);
             while ($i < $n) {
-                $editar = $processo_pessoa->editarAutor($conexao1, $id_processo, $id[$i], 1);
+                $incluir = $processo_pessoa->incluirAutor($conexao1, $id_processo, $id[$i], 1);
                 $i++;
             }
         } else {
-            $editar = null;
+            $incluir = null;
         }
 
         //Pegando IDs dos advogados réu
         $id = $pessoa->getIDPessoaNome($conexao1, $reu_ad);
         if ($id == -1) {
             $db_error = "ERRADO ADVOGADO REU";
-            $editar = false;
-            mandarBD($conexao1, $editar, $db_error);
+            $incluir = false;
+            mandarBD($conexao1, $incluir, $db_error);
         }
 
 
@@ -215,12 +219,13 @@ if ($erro != '') {
         if ($id != -1) {
             $i = 0;
             $n = count($id);
+            $processo_pessoa->excluirParte($conexao1,$id_processo,1,1);
             while ($i < $n) {
-                $editar = $processo_pessoa->editarReu($conexao1, $id_processo, $id[$i], 1);
+                $incluir = $processo_pessoa->incluirReu($conexao1, $id_processo, $id[$i], 1);
                 $i++;
             }
         } else {
-            $editar = null;
+            $incluir = null;
         }
 
         if (strlen($autor_rep) > 0) {
@@ -228,20 +233,21 @@ if ($erro != '') {
             $id = $pessoa->getIDPessoaNome($conexao1, $autor_rep);
             if ($id == -1) {
                 $db_error = "ERRADO REPRESENTANTE AUTOR";
-                $editar = false;
-                mandarBD($conexao1, $editar, $db_error);
+                $incluir = false;
+                mandarBD($conexao1, $incluir, $db_error);
             }
 
             //Inclui os representantes do autor
             if ($id != -1) {
                 $i = 0;
                 $n = count($id);
+                $processo_pessoa->excluirParte($conexao1,$id_processo,2,0);
                 while ($i < $n) {
-                    $editar = $processo_pessoa->editarAutor($conexao1, $id_processo, $id[$i], 2);
+                    $incluir = $processo_pessoa->incluirAutor($conexao1, $id_processo, $id[$i], 2);
                     $i++;
                 }
             } else {
-                $editar = null;
+                $incluir = null;
             }
         }
 
@@ -250,25 +256,26 @@ if ($erro != '') {
             $id = $pessoa->getIDPessoaNome($conexao1, $reu_rep);
             if ($id == -1) {
                 $db_error = "ERRADO REPRESENTANTE REU";
-                $editar = false;
-                mandarBD($conexao1, $editar, $db_error);
+                $incluir = false;
+                mandarBD($conexao1, $incluir, $db_error);
             }
 
-            //Inclui os representantes do autor
+            //Inclui os representantes do réu
             if ($id != -1) {
                 $i = 0;
                 $n = count($id);
+                $processo_pessoa->excluirParte($conexao1,$id_processo,2,1);
                 while ($i < $n) {
-                    $editar = $processo_pessoa->editarReu($conexao1, $id_processo, $id[$i], 2);
+                    $incluir = $processo_pessoa->incluirReu($conexao1, $id_processo, $id[$i], 2);
                     $i++;
                 }
             } else {
-                $editar = null;
+                $incluir = null;
             }
         }
     }
     
-    if ($editar) {
+    if ($incluir) {
         pg_query($conexao1, "commit");
         echo "1";
     } else {
@@ -278,4 +285,3 @@ if ($erro != '') {
     }
 }
 ?>
-

@@ -5,28 +5,36 @@ class CProcesso_Pessoa {
     protected $id_processo;
     protected $id_pessoa;
     protected $flag_papel;
-
+    protected $tipo;
    
+    public function excluirParte($conexao,$id_processo,$flag,$tipo){
+        $this->id_processo = $id_processo;
+        $this->id_pessoa = $id_pessoa;
+        $this->flag_papel = $flag;
+        $this->tipo = $tipo; //tipo 0 autor, 1 reu
+        
+        if ($this->tipo == 0)
+            $query = "DELETE FROM autor WHERE flag_papel = $this->flag_papel and id_processo = $this->id_processo";
+        if ($this->tipo == 1)
+            $query = "DELETE FROM reu WHERE flag_papel = $this->flag_papel and id_processo = $this->id_processo";
+        
+        $excluir = pg_query($conexao,$query);
+       
+        
+    }
+    
     public function editarReu($conexao,$id_processo,$pessoa,$flag){
         $this->id_processo = $id_processo;
         $this->id_pessoa = $pessoa;
         $this->flag_papel = $flag;
         $editar = null;
-        
-        $query = "SELECT COUNT (*) FROM reu WHERE reu.id_pessoa = $this->id_pessoa and reu.flag_papel = $this->flag_papel and reu.id_processo = $this->id_processo";
-        $pesq_cont = pg_query($conexao,$query);
-        $cont = pg_fetch_object($pesq_cont);
-        
-        if($cont->count == 1){
-            $query = "UPDATE reu SET id_pessoa = '".$this->id_pessoa."' WHERE reu.id_processo = $this->id_processo and reu.flag_papel = $this->flag_papel";
-        }
-        else {
-            $query = "insert into reu(id_pessoa,id_processo,flag_papel)
+
+        $query = "insert into reu(id_pessoa,id_processo,flag_papel)
                          values(                
                     {$this->id_pessoa},
                     {$this->id_processo},
                     {$this->flag_papel})";
-        }
+        
         $editar = pg_query($conexao,$query);
         return $editar;
         
@@ -38,20 +46,12 @@ class CProcesso_Pessoa {
         $this->flag_papel = $flag;
         $editar = null;
         
-        $query = "SELECT COUNT (*) FROM autor WHERE autor.id_pessoa = $this->id_pessoa and autor.flag_papel = $this->flag_papel and autor.id_processo = $this->id_processo";
-        $pesq_cont = pg_query($conexao,$query);
-        $cont = pg_fetch_object($pesq_cont);
-        
-        if($cont->count){
-            $query = "UPDATE autor SET id_pessoa = '".$this->id_pessoa."' WHERE autor.id_processo = $this->id_processo and autor.flag_papel = $this->flag_papel";
-         }
-        else {
-            $query = "insert into autor(id_pessoa,id_processo,flag_papel)
+        $query = "insert into autor(id_pessoa,id_processo,flag_papel)
                          values(                
                     {$this->id_pessoa},
                     {$this->id_processo},
                     {$this->flag_papel})";
-        }
+        
         $editar = pg_query($conexao,$query);
         return $editar;
         
