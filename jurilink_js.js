@@ -163,6 +163,26 @@ function msgErroBD(data){
     }    
 }
 
+
+function atoAjax(modalidade){
+    var $form = $a( '.AtoAjaxForm' ),
+    id_ato = $form.find( 'option').filter(':selected' ).val(),
+    id_processo = $form.find( 'input[name="id_processo"]' ).val(),
+    url = $form.attr( 'action' );
+    
+    $a.post(url,{
+        id_ato:id_ato,
+        id_processo:id_processo
+    },function(data){ 
+        alert(data);
+        if (modalidade == 0){
+            $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa <b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar                
+        }
+    });
+    
+    
+}
+
 //Função que manda o form de cadastro de pessoa por AJAX
 function pessoaAjax(modalidade){
     
@@ -533,6 +553,30 @@ function trocarAbaSubnav(){
  
 }
 
+/*Função que valida o form de ato no evento submit*/
+function validaFormAtoSubmit(){
+    $a('.alert').remove();
+    
+    var intRegex = /^\d+$/;
+    var floatRegex = /^((\d+(\.\d *)?)|((\d*\.)?\d+))$/;
+    
+    var $form = $a( '.AtoAjaxForm' ),
+    id_ato = $form.find( 'option').filter(':selected' ).val(),
+    id_processo = $form.find( 'input[name="id_processo"]' ).val();
+    var mandar = true;
+        
+    if(id_ato == -1){            
+        $a('#ato').removeClass("control-group").addClass("control-group error");  
+        mandar =false;
+    }
+    
+    if(id_processo == -1){            
+        $a('#id_processo').removeClass("control-group").addClass("control-group error");  
+        mandar =false;
+    }
+    
+    return mandar;
+}
 /*Função que valida o form de Pessoa no evento SUBMIT*/
 function validaFormPessoaSubmit(){
     
@@ -835,7 +879,24 @@ function habilitarSenha(){
         }
     }); 
 }
-   
+
+function validaFormAtoJS(){
+    
+    //Apertar o botão para atualizar ato no modal de view_processo.php
+    $a(".submit-ato-modal").click(function(){       
+        var mandar = validaFormAtoSubmit();  
+        if(mandar==true){
+            atoAjax(0);
+        }
+        
+        else{
+        //alert(mandar);            
+        }
+    });
+    
+    
+}
+
 
 //Função de JQUERY
 $a(document).ready(function(){   
@@ -844,6 +905,7 @@ $a(document).ready(function(){
     validaFormPessoaJS();
     trocarAbaSubnav();
     habilitarSenha();
+    validaFormAtoJS();
     $a('.clear-form').click(function(){
         alert('limpar');
         limparForm('.pessoaAjaxForm');  

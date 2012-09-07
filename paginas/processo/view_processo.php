@@ -11,6 +11,8 @@ else
 //GET para ID do processo
 if(isset($_GET['id'])) $id_processo = $_GET['id'];
 
+
+
 /** TRATAMENTO DE PROCESSOS COM MAIS DE UM AUTOR OU RÉU**/
 
 $query = "SELECT count(*) from autor where id_processo = $id_processo and flag_papel = 0";
@@ -146,6 +148,16 @@ else if ($num_autores->count > 1 && $num_reus->count > 1){
 
 $pesq_processo = pg_exec($conexao1,$query);
 $processo = pg_fetch_object($pesq_processo);
+
+$query = "SELECT * from ato";
+$pesq_ato = pg_query ($conexao1,$query);
+$ato = pg_fetch_object($pesq_ato);
+
+/*Pesquisa atos do processo*/
+$query = "SELECT to_char(data_atualizacao,'dd/mm/yyyy') as data_atualizacao, nome, previsao, descricao,flag_cliente from processo_ato inner join ato on
+processo_ato.id_processo = $id_processo and processo_ato.id_ato = ato.id_ato order by data_atualizacao";
+$pesq_ato_proc = pg_query($conexao1,$query);
+$ato_proc = pg_fetch_object($pesq_ato_proc);
 
 ?>
 
@@ -296,17 +308,16 @@ $processo = pg_fetch_object($pesq_processo);
       <hr border ="20px" height ="50px">
      
        <div class ="esquerda"> <h1> ATOS </h1> </div>
-     <?php
+    <?php
      if ($_SESSION['tipo_usuario'] == 2){
-      echo ' <div class =direita>        
-        <a class="btn btn-small btn-success" href="#">
-            <i class="icon-plus icon-white"></i>
+      echo " <div class =direita>        
+        <a class='btn btn-small btn-success pessoa-modal' data-toggle='modal' href='#myModal'><i id='reu-modal' class='icon-plus icon-white'></i>
             INCLUIR ATO    
         </a>             
-        </div>';
+        </div>";
      }
-     ?>
-  
+     ?> 
+ 
       <div class="tabela"> 
     <?php 
         echo "<table = 'ato' class=table table-striped table-condensed >";
@@ -314,23 +325,31 @@ $processo = pg_fetch_object($pesq_processo);
         echo "<tr>
                 <th>Ato</th>
                 <th>Data de Modifica&ccedil;&atilde;o</th>
+                <th>Descri&ccedil;&atilde;o</th>
              </tr>
         </thead>";
-        echo "<tbody>";/*
-        if (pg_num_rows($pesq_proc_advocacia)>0){
+        echo "<tbody>";
+        if (pg_num_rows($pesq_ato_proc)>0){
             do {
+                if ($_SESSION['tipo_usuario'] == 2){
                 echo "<tr>	
-                    <td>" . $processos_advocacia->data_distribuicao . "</a></td>
-                    <td>" . $processos_advocacia->numero_unificado . "</td>
-                    <td>" . $processos_advocacia->nome_natureza . "</td>
-                    <td>" . $processos_advocacia->nome_autor . "</td>
-                    <td>" . $processos_advocacia->nome_reu . "</td>
-                    <td>" . $processos_advocacia->nome_adv . "</td>
-                    <td>" . $processos_advocacia->valor_causa . "</td> 
+                    <td>" . $ato_proc->nome . "</a></td>
+                    <td>" . $ato_proc->data_atualizacao . "</td>
+                    <td>" . $ato_proc->descricao . "</td>
                     </tr>";
-
-                    }while ($processos_advocacia = pg_fetch_object($pesq_proc_advocacia));
-        }*/
+                }
+                else if($_SESSION['tipo_usuario'] == 1 || $_SESSION['tipo_usuario'] == 0){
+                    if ($ato_proc->flag_cliente == 't'){
+                         echo "<tr>	
+                            <td>" . $ato_proc->nome . "</a></td>
+                            <td>" . $ato_proc->data_atualizacao . "</td>
+                            <td>" . $ato_proc->descricao . "</td>
+                            </tr>";        
+                    }
+                    
+                }
+           }while ($ato_proc = pg_fetch_object($pesq_ato_proc));
+        }
         
         echo "</tbody>";
         echo "</table>";
@@ -389,6 +408,49 @@ $processo = pg_fetch_object($pesq_processo);
     
 </div>
 </div>
+
+<!-- MODAL para CADASTRO DE PESSOA-->
+<div id="myModal" class="modal hide">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h3>Atualizar Ato</h3>
+    </div>
+    <div class="modal-body">
+        <form id="form_atualiza_ato" class="form-horizontal AtoAjaxForm" method="post" action="../operacoes/CProcesso_ato/incluir_processo_ato_op.php">
+            <fieldset>
+                <!--Campos formulário --> 
+
+                <div id="msg_resultado"></div>
+                
+                <div id="ato" class="control-group">
+                    <label class="control-label" for="Ato">Atos</label>
+                    <div class="controls">                    
+                        <select  name="ato" id="ato_input" class="aviso">
+                            <option value="-1">-</option>
+                            <?php
+                            if ($ato->id_ato != NULL) {
+                                do {
+                                    echo "<option value=$ato->id_ato>$ato->nome</option>";
+                                } while ($ato = pg_fetch_object($pesq_ato));
+                            }
+                            ?>                     
+                        </select>
+                        <span  class="help-inline "></span>
+                    </div>
+                </div>
+
+                <input type="hidden" class="input-xlarge" id="tipo_input" name="tipo"> 
+                <input type="hidden" class="input-xlarge" id="id_processo" name="id_processo" value =<?php echo "$id_processo"?>>    
+
+                </div>
+            </fieldset>
+        </form> 
+
+        <div class="modal-footer"> 
+            <a href="#" class="btn cancelar-modal" data-dismiss="modal">Close</a>
+            <button  id ="enviar"  type="button" class="btn btn-primary submit-ato-modal">Salvar</button>
+        </div>
+    </div>
 
 </body>
 </html>
