@@ -155,11 +155,11 @@ $ato = pg_fetch_object($pesq_ato);
 
 /*Pesquisa atos do processo*/
 $query = "SELECT to_char(data_atualizacao,'dd/mm/yyyy') as data_atualizacao, nome, previsao, descricao,flag_cliente from processo_ato inner join ato on
-processo_ato.id_processo = $id_processo and processo_ato.id_ato = ato.id_ato order by data_atualizacao";
+processo_ato.id_processo = $id_processo and processo_ato.id_ato = ato.id_ato order by data_atualizacao desc";
 $pesq_ato_proc = pg_query($conexao1,$query);
 $ato_proc = pg_fetch_object($pesq_ato_proc);
 
-$query = "SELECT to_char(data,'dd/mm/yyyy') as data, local, tipo from audiencia where audiencia.id_processo = $id_processo";
+$query = "SELECT to_char(data,'dd/mm/yyyy') as data, local, tipo, id_audiencia from audiencia where audiencia.id_processo = $id_processo order by id_audiencia desc";
 $pesq_audiencias = pg_query($conexao1,$query);
 $audiencia = pg_fetch_object($pesq_audiencias);
 
