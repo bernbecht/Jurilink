@@ -56,7 +56,7 @@ if (!isset($_SESSION['usuario']))
                         <ul id="pessoas_menu_dropdown" class="dropdown-menu">
                             <li><a class="aba drop" href="paginas/pessoa/relacao_pfisica.php">F&iacute;sica</a></li>
                             <li><a class="aba drop" href="paginas/pessoa/relacao_pjuridica.php">Jur&iacute;dica</a></li>
-                            <li><a class="aba drop" href="paginas/pessoa/relacao_advogado.php">Advogados</a></li>
+                            <li><a class="aba drop" href="paginas/pessoa/relacao_padvogado.php">Advogados</a></li>
                         </ul>
                     </li>
 

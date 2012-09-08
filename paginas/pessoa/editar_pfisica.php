@@ -197,7 +197,7 @@ $e_user = pg_fetch_object($pesq_user);
             <!--Botões do formulário -->
             <div class="form-actions">
                 <button  id ="enviar"  type="button" class="btn btn-primary edit-pessoa">Salvar</button>
-                <button  type="button" class="btn cancelar">Cancelar</button>
+                <a href="view_pessoafisica.php?id=<?php echo $id_pessoa ?>"><button  type="button" class="btn">Cancelar</button></a
                 
             </div>
 

@@ -36,6 +36,10 @@ body{
     text-shadow: 1px 1px 0 white;
 }
 
+.esquerda > h1{
+    margin-bottom: 10px;
+}
+
 
 .direita{
     float: right;
@@ -231,4 +235,18 @@ form legend h1{
 
 .centro{
     text-align: center;
+    
+}.paginacao{
+    margin-bottom: 20px;
+}
+
+.paginacao select{
+    margin-bottom: 0;
+    margin-right: 20px;
+    
+}
+
+.paginacao button{
+    margin-right: 20px;
+    
 }

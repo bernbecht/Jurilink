@@ -9,9 +9,14 @@ $advogado_processo = new CAdvogado();
 if (isset($_GET['id']))
     $id_pessoa = $_GET['id'];
 
+$endereco = $_SERVER ['REQUEST_URI'];
+
+
+
+
 //Coleta dados de pessoa do banco para mostrar na tela
 $query = "SELECT * FROM pessoa, advogado WHERE pessoa.id_pessoa = $id_pessoa and advogado.id_pessoa = pessoa.id_pessoa";
-$pesq_pessoa = pg_query($conexao1,$query);
+$pesq_pessoa = pg_query($conexao1, $query);
 $pessoa = pg_fetch_object($pesq_pessoa);
 
 //Estado
@@ -19,16 +24,16 @@ $query = "SELECT uf.nome as nome_estado FROM uf,pessoa WHERE id_pessoa = $id_pes
 $pesq_uf = pg_query($conexao1, $query);
 $estado = pg_fetch_object($pesq_uf);
 
-
+//Pegar dados físicos
 $query = "SELECT * FROM fisica WHERE fisica.id_pessoa = $id_pessoa";
 $pesq_fisica = pg_query($conexao1, $query);
 $fisica = pg_fetch_object($pesq_fisica);
 
-
+//pega os processos desse advogado
 $pesq_proc_advocacia = $advogado_processo->getProcessosAdvogado($id_pessoa);
 $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
 
-/* Pra saber se a pessoa é user */
+//Pra saber se a pessoa é user 
 $pesq_user = pg_exec($conexao1, "select count (id_pessoa) from usuario where usuario.id_pessoa = $id_pessoa");
 $user = pg_fetch_object($pesq_user);
 ?>
@@ -42,7 +47,15 @@ $user = pg_fetch_object($pesq_user);
             </div>
         </div>
         <div class="direita">
-            <a class="btn btn-small btn-warning" href="#">
+            <a>
+                <a href='relacao_padvogado.php' class='btn btn-small' >
+                
+                VOLTAR    
+            </a>
+            <a>
+                <?php
+                echo "<a href='editar_advogado.php?id={$id_pessoa}' class='btn btn-small btn-warning' >";
+                ?>
                 <i class="icon-pencil icon-white"></i>
                 EDITAR     
             </a>
@@ -118,7 +131,7 @@ $user = pg_fetch_object($pesq_user);
 
     <div class="row row_view">
         <div class="esquerda">
-            <h2>Processos com a Advocacia</h2>
+            <h2>Processos</h2>
         </div>
         <div class="direita">
 

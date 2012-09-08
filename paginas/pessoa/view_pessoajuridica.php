@@ -44,7 +44,15 @@ $user = pg_fetch_object($pesq_user);
             </div>
         </div>
         <div class="direita">
-            <a class="btn btn-small btn-warning" href="#">
+            <a>
+                <a href='relacao_pjuridica.php' class='btn btn-small' >
+                
+                VOLTAR    
+            </a>
+            <a>
+                <?php
+                echo "<a href='editar_pjuridica.php?id={$id_pessoa}' class='btn btn-small btn-warning' >";
+                ?>
                 <i class="icon-pencil icon-white"></i>
                 EDITAR     
             </a>

@@ -196,27 +196,15 @@ $e_user = pg_fetch_object($pesq_user);
                         </div>                    
                     </div>
                 </div>
-            </div> 
-
-            <div class="row">
-                <div class="span5" >
-                    <div id="senha" class="control-group ">
-                        <label class="control-label" for="telefone">Senha</label>
-                        <div class="controls">
-                            <input type="text" class="input-xlarge" id="senha_input" name="senha">    
-                            <span  class="help-inline "></span> 
-                        </div>
-                    </div> 
-                </div>
-            </div> 
+            </div>             
 
 
             <input value="2" type="hidden" class="input-xlarge" id="tipo_input" name="tipo">  
 
             <!--Botões do formulário -->
             <div class="form-actions">
-                <button  id ="enviar"  type="button" class="btn btn-primary submit-pessoa">Salvar</button>
-                <button  type="button" class="btn cancelar">Cancelar</button>
+                <button  id ="enviar"  type="button" class="btn btn-primary edit-pessoa">Salvar</button>
+                <a href="view_advogado.php?id=<?php echo $id_pessoa ?>"><button  type="button" class="btn">Cancelar</button></a>
             </div>
 
             
@@ -227,7 +215,14 @@ $e_user = pg_fetch_object($pesq_user);
 
 </div> <!-- container -->
 
+<input id="id" type="hidden" value="<?php echo $id_pessoa ?>"/>
+
+
+</body>
+
 <?php
 require_once '../template/scripts.php';
 require_once 'scripts_cadastrar_pessoa.php';
 ?>
+
+</html>

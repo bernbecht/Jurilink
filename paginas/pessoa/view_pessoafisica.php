@@ -50,6 +50,11 @@ $user = pg_fetch_object($pesq_user);
         </div>
         <div class="direita">
             <a>
+                <a href='relacao_pfisica.php' class='btn btn-small' >
+                
+                VOLTAR    
+            </a>
+            <a>
                 <?php
                 echo "<a href='editar_pfisica.php?id={$id_pessoa}' class='btn btn-small btn-warning' >";
                 ?>

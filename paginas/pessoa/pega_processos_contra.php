@@ -1,5 +1,9 @@
 <?php
 
+/*CÓDIGO QUE RECEBE UMA REQUISIÇÃO AJAX DO VIEW_PESSOA PARA 
+ * PEGAR OS PROCESSOS TOTAIS CONTRA A ADVOCACIA
+ */
+
 require_once '../classes/CFisica.php';
 require_once '../classes/CJuridica.php';
 

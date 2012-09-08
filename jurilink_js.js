@@ -193,7 +193,7 @@ function pessoaAjax(modalidade){
     
     var id_pessoa = $a('#id').val();
      
-    alert(id_pessoa);      
+    //alert(tipo);      
        
        
     $a.post(url,{
@@ -214,7 +214,9 @@ function pessoaAjax(modalidade){
         id_pessoa:id_pessoa
         
     },function(data){ 
-        alert(data);
+        //alert(data);
+        
+        //modalidade de adicionar 1 pessoa
         if(modalidade==0){
             //alert("modo 0");
             if(data==1){
@@ -252,6 +254,7 @@ function pessoaAjax(modalidade){
             }
         }
         
+        //modalidade de adicionar outra pessoa
         else if(modalidade==1){
             if(data==1){
                 //alert("FOI"); 
@@ -326,8 +329,9 @@ function pessoaAjax(modalidade){
             }
         }
         
-         else if(modalidade==3){
-            alert("modo 0");
+        //modalidade de editar uma pessoa
+        else if(modalidade==3){
+            //alert("modo 0");
             if(data==1){
                 //alert("If 0"); 
                 $a('.alert').remove();
@@ -338,17 +342,27 @@ function pessoaAjax(modalidade){
                 subirPagina();
         
                 //pega o endereço da pagina
-                 href = location.href;
+                href = location.href;
       
                 //separa num array os valores divididos por um '_'        
-                href_split = href.split('_');
-        
-                //alert(href_split);
-                 url = "relacao_"+href_split[1]+".php";
-                //alert(url);   
+                href_split = href.split('?');
+                
+                href_aux = href_split[0].split('_');
+                
+                //alert(href_aux[1]);
+                
+                if(href_aux[1] == 'pfisica.php')
+                    url = "view_pessoafisica.php?"+href_split[1];
+                
+                else if(href_aux[1] == 'pjuridica.php')
+                    url = "view_pessoajuridica.php?"+href_split[1];
+                else
+                    url = "view_advogado.php?"+href_split[1];
+                 
+                  //alert(url);
                            
                 setTimeout(function() {
-                    limparForm('.pessoaAjaxForm');
+                    //limparForm('.pessoaAjaxForm');
                     $a(window.document.location).attr('href',url);
 
                 }, 3000);          

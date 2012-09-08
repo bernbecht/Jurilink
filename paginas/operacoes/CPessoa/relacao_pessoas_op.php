@@ -3,10 +3,10 @@ include_once '../classes/CConexao.php';
 include_once '../classes/CPessoa.php';
 
 
- function getPessoas($conexao,$tipo,$limite, $offset){
+ function getPessoas($tipo,$limite, $offset){
    $relacao_pessoa = new CPessoa();
    
-   $pesquisa = $relacao_pessoa -> getPessoas($conexao,$tipo,$limite,$offset);
+   $pesquisa = $relacao_pessoa -> getPessoas($tipo,$limite,$offset);
    
    return $pesquisa;
 }

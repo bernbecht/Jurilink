@@ -12,9 +12,12 @@ class CAdvogado {
         $this->id_pessoa = $id_pessoa;
         $this->oab = $oab;
         $this->flag = $flag;
+        
+        
                 
-        $query = "UPDATE advogado SET oab = '".$this->oab."', flag_func = '".$this->flag."'
-            WHERE advogado.id_pessoa = ".$this->id_pessoa." ";
+        $query = "UPDATE advogado SET oab = '".$this->oab."', 
+            flag_func = {$this->flag}
+            WHERE id_pessoa = {$this->id_pessoa}";
 
         $editar = pg_query($conexao, $query);
         

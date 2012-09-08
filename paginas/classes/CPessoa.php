@@ -219,8 +219,10 @@ class CPessoa {
         return $sql;
     }
 
-    public function getPessoas($conexao, $tipo, $limite, $offset) {
-
+    public function getPessoas($tipo, $limite, $offset) {
+        $conexao1 = new CConexao();
+        $conexao = $conexao1->novaConexao();
+        
         $pesquisa = null;
         $query = null;
         $registros = null;
