@@ -60,6 +60,7 @@ if ($_SESSION['tipo_usuario'] != 2) header("location:../../logout.php");
                         <li><a  href="../pessoa/relacao_pjuridica.php">Jur&iacute;dica</a></li>
                         <li><a  href="../pessoa/relacao_padvogado.php">Advogados</a></li>
 
+
                     </ul>
                 </li>
                 

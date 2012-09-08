@@ -60,9 +60,6 @@ $comarca = $_POST['comarca'];
 
 $erro = "";
 
-
-
-
 if (strlen($n) < 2) {
     $erro.= "nome menos que 2";
 }
@@ -181,8 +178,7 @@ if ($erro != "") {
     $conexao1 = new CConexao();
 
     $conexao = $conexao1->novaConexao();
-
-    
+   
     $user_editar = new CUsuario();
     
     $ehUser = $user_editar->ehUser($id_pessoa);
@@ -195,8 +191,6 @@ if ($erro != "") {
         $ehUser = 1;      
         //echo "eh user!";
     }
-
-
     //variável que vai nos dizer se foi editado ou não
     $editar = null;
 
@@ -242,7 +236,6 @@ if ($erro != "") {
 
 
     if ($user == 1) {
-        //echo"USER1";
         if ($ehUser == 0) {
 
             $editar = $user_editar->incluirUser($conexao, $id_pessoa, $senha, $em);

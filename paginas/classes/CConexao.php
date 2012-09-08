@@ -11,16 +11,16 @@ class CConexao {
   protected $Conexao=null; 
   */
   /* -- Configurações André--*/
-  /*
+  
   protected $Host='localhost';
   protected $User='andreh';
   protected $Password='senha';
   protected $Porta='5432';
   protected $DbName='jurilink';
   protected $Conexao=null;
-  */
   
-  /* -- Configurações Bernardo--*/
+  
+  /* -- Configurações Bernardo--
  
   protected $Host='localhost';
   protected $User='postgres';
@@ -28,7 +28,7 @@ class CConexao {
   protected $Porta='5432';
   protected $DbName='jurilink2';  
   protected $Conexao=null;
-  
+  */
   
 
     public function __construct(){}

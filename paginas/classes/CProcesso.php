@@ -13,11 +13,49 @@ class CProcesso {
     protected $id_natureza;
     protected $id_juizo;
     protected $descrição;
-
+    protected $id_processo;
+            
     function CProcesso() {
         
     }
+    
+    public function editarProcesso($conexao,$id_processo,$tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j) {
+        $this->id_processo = $id_processo;
+        $this->transito_em_julgado = $tej;
+        $this->data_distribuicao = $dd;
+        $this->deposito_judicial = $dj;
+        $this->numero_unificado = $nu;
+        $this->auto_penhora = $ap;
+        $this->valor_causa = $vc;
+        $this->id_natureza = $id_n;
+        $this->id_juizo = $id_j;
+        $editar->null;
+        
+          //tratamento de DATA NULA
+        if ($this->transito_em_julgado == "")
+            $this->transito_em_julgado = "NULL";
+        else {
+            $this->transito_em_julgado = "'" . $this->transito_em_julgado . "'";
+        }
 
+         //tratamento de auto da penhora
+        if ($this->auto_penhora == "")
+            $this->auto_penhora = "NULL";
+
+        //tratamento judicial
+        if ($this->deposito_judicial == "")
+            $this->deposito_judicial = "NULL";
+        
+        //pg_query($conexao,"UPDATE processo SET numero_unificado = '000000000000000000000' WHERE processo.id_processo = $this->id_processo");
+        
+        $query = "UPDATE processo SET numero_unificado = '".$this->numero_unificado."', transito_em_julgado = ".$this->transito_em_julgado.",
+            data_distribuicao = '".$this->data_distribuicao."', deposito_judicial = ".$this->deposito_judicial.",auto_penhora =".$this->auto_penhora.",
+            valor_causa = ".$this->valor_causa.",id_natureza_acao = '".$this->id_natureza."',id_juizo = '".$this->id_juizo."' WHERE processo.id_processo = $this->id_processo";
+        
+        $editar = pg_query($conexao,$query);
+        return $editar;
+        
+    }
     public function incluirProcesso($conexao1,$tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j) {
         $this->transito_em_julgado = $tej;
         $this->data_distribuicao = $dd;

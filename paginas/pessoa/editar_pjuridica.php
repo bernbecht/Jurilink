@@ -4,7 +4,6 @@ require_once ( '../config.php');     //chama as configurações de página!
 //GET para ID da pessoa
 if (isset($_GET['id']))
     $id_pessoa = $_GET['id'];
-
 $pesq_uf = pg_exec($conexao1, "select * from uf order by nome");
 $resultado = pg_fetch_object($pesq_uf);
 
@@ -26,7 +25,6 @@ $e_user = pg_fetch_object($pesq_user);
             <!--Campos formulário -->
 
             <legend><h1>Editar Pessoa Juridica</h1></legend> 
-
             <div id="msg_resultado"></div>
             <br/>
             <div class="controls">
@@ -91,7 +89,6 @@ $e_user = pg_fetch_object($pesq_user);
                             <span  class="help-inline "></span> 
                         </div>
                     </div>
-
                 </div>
 
                 <div class="divisor_maior"></div>
@@ -101,12 +98,12 @@ $e_user = pg_fetch_object($pesq_user);
                         <label class="control-label" for="Estado">Estado</label>
                         <div class="controls">                    
                             <select  name="estado" id="estado_input" class="aviso">
-                                <?php echo "<option value= $uf_pessoa->id_uf>$uf_pessoa->nome</option>"; ?>
+                                <?php echo "<option value= $uf_pessoa->id_uf>$uf_pessoa->nome</option>";?>
                                 <?php
                                 if ($resultado->id_uf != NULL) {
                                     do {
-                                        if ($resultado->id_uf != $uf_pessoa->id_uf)
-                                            echo "<option value=$resultado->id_uf>$resultado->nome</option>";
+                                        if ($resultado->id_uf!=$uf_pessoa->id_uf)
+                                        echo "<option value=$resultado->id_uf>$resultado->nome</option>";
                                     } while ($resultado = pg_fetch_object($pesq_uf));
                                 }
                                 ?>                     
@@ -165,26 +162,25 @@ $e_user = pg_fetch_object($pesq_user);
                 </div>
             </div>  
 
-
-
-
-            <input value="1" type="hidden" class="input-xlarge" id="tipo_input" name="tipo">  
+           <input value="1" type="hidden" class="input-xlarge" id="tipo_input" name="tipo">  
 
             <!--Botões do formulário -->
             <div class="form-actions">
                 <button  id ="enviar"  type="button" class="btn btn-primary edit-pessoa">Salvar</button>
-                <a href="view_pessoajuridica.php?id=<?php echo $id_pessoa ?>"><button  type="button" class="btn">Cancelar</button></a>
-            </div>            
+<                <a href="view_pessoajuridica.php?id=<?php echo $id_pessoa ?>"><button  type="button" class="btn">Cancelar</button></a>
+=           </div>            
 
         </fieldset>
 
     </form> 
 
 </div> <!-- container -->
+
 <input id="id" type="hidden" value="<?php echo $id_pessoa ?>"/>
 </body>
 <?php
-require_once '../template/scripts.php';
-require_once 'scripts_cadastrar_pessoa.php';
+    require_once '../template/scripts.php';
+    require_once 'scripts_cadastrar_pessoa.php';
 ?>
 </html>
+

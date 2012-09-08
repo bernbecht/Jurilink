@@ -13,8 +13,9 @@ class CUsuario {
         $this->senha = $s;
         $editar = null;
         
-        $query = "UPDATE usuario SET senha = '".$this->senha."' 
+       $query = "UPDATE usuario SET senha = '".$this->senha."' 
             WHERE id_pessoa = ".$this->id_pessoa."";
+
         
         $editar = pg_query($conexao,$query);
         return $editar;
@@ -25,7 +26,6 @@ class CUsuario {
         $this->id_pessoa = $id_pessoa;
         $excluir = null;
         
-        //echo "OPS";
         $query = "DELETE from usuario WHERE id_pessoa =".$this->id_pessoa."";
         $excluir = pg_query($conexao,$query);
         return $excluir;

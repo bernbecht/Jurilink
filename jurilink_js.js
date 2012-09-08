@@ -170,11 +170,50 @@ function msgErroBD(data){
     }    
 }
 
+
+function atoAjax(modalidade){
+    var $form = $a( '.AtoAjaxForm' ),
+    id_ato = $form.find( 'option').filter(':selected' ).val(),
+    id_processo = $form.find( 'input[name="id_processo"]' ).val(),
+    url = $form.attr( 'action' );
+    
+    $a.post(url,{
+        id_ato:id_ato,
+        id_processo:id_processo
+    },function(data){ 
+        if (modalidade == 0){
+            $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa <b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar                
+        }
+    });
+    
+    
+}
+
+function audienciaAjax(modalidade){
+    var $form = $a( '.AudienciaAjaxForm' ),
+    id_processo = $form.find( 'input[name="id_processo"]' ).val(),
+    tipo_audiencia = $form.find( 'input[name="tipo_audiencia"]' ).val(),
+    data_audiencia = $form.find( 'input[name="data_audiencia"]' ).val(),
+    local = $form.find( 'input[name="local"]' ).val(),
+    url = $form.attr( 'action' );
+    
+    $a.post(url,{
+        id_processo:id_processo,
+        tipo_audiencia:tipo_audiencia,
+        data_audiencia:data_audiencia,
+        local:local
+    },function(data){ 
+        if (modalidade == 0){
+            $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A audiencia foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar                
+        }
+    });
+    
+}
+
 //Função que manda o form de cadastro de pessoa por AJAX
 function pessoaAjax(modalidade){
-        
-    
     var $form = $a( '.pessoaAjaxForm' ),
+    id_pessoa = $form.find( 'input[name="id_pessoa"]' ).val(),
     nome = $form.find( 'input[name="nome"]' ).val(),
     tipo = $form.find( 'input[name="tipo"]' ).val(),
     oab = $form.find( 'input[name="oab"]' ).val(),
@@ -197,6 +236,7 @@ function pessoaAjax(modalidade){
        
        
     $a.post(url,{
+        id_pessoa:id_pessoa,
         nome:nome,
         tipo:tipo,
         oab:oab,
@@ -214,13 +254,8 @@ function pessoaAjax(modalidade){
         id_pessoa:id_pessoa
         
     },function(data){ 
-        //alert(data);
-        
-        //modalidade de adicionar 1 pessoa
         if(modalidade==0){
-            //alert("modo 0");
             if(data==1){
-                //alert("If 0"); 
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa<b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
                 
@@ -414,6 +449,78 @@ function trocarAbaSubnav(){
  
 }
 
+/*Função que valida o form de ato no evento submit*/
+function validaFormAtoSubmit(){
+    $a('.alert').remove();
+    
+    var intRegex = /^\d+$/;
+    var floatRegex = /^((\d+(\.\d *)?)|((\d*\.)?\d+))$/;
+    
+    var $form = $a( '.AtoAjaxForm' ),
+    id_ato = $form.find( 'option').filter(':selected' ).val(),
+    id_processo = $form.find( 'input[name="id_processo"]' ).val();
+    var mandar = true;
+        
+    if(id_ato == -1){            
+        $a('#ato').removeClass("control-group").addClass("control-group error");  
+        mandar =false;
+    }
+    
+    if(id_processo == -1){            
+        $a('#id_processo').removeClass("control-group").addClass("control-group error");  
+        mandar =false;
+    }
+    
+    return mandar;
+}
+
+function validaFormAudienciaSubmit(){
+    $a('.alert').remove();
+    
+    var dataRegex = /^([0-9]{2}\/[0-9]{2}\/[0-9]{4})$/;
+    
+    var $form = $a('.AudienciaAjaxForm'),
+    tipo_audiencia = $form.find( 'input[name="tipo_audiencia"]' ).val(),
+    data_audiencia = $form.find( 'input[name="data_audiencia"]' ).val(),
+    local = $form.find( 'input[name="local"]' ).val(),
+    id_processo = $form.find( '.input[name="id_processo"]' ).val();
+    
+    var mandar = true;
+    
+    if(tipo_audiencia.length <=2){
+        $a('#tipo_audiencia').removeClass("control-group").addClass("control-group error"); 
+        mandar =false;
+    }        
+    else{
+        $a('#tipo_audiencia').removeClass("control-group error").addClass("control-group");  
+    }
+        
+    /*********************************************************************************************************/
+    if(dataRegex.test(data_audiencia)) {
+            $a('#data_audiencia').removeClass("error");             
+        }
+        else{
+            $a('#data_audiencia').removeClass("").addClass("error");
+            if(focus==false){
+                $a('#data_audiencia_input').focus();
+                focus=true;
+            }
+            mandar =false;
+        }
+        
+        
+    
+    if(local.length <=2){
+        $a('#local').removeClass("control-group").addClass("control-group error"); 
+        mandar =false;
+    }        
+    else{
+        $a('#local').removeClass("control-group error").addClass("control-group");  
+    }
+
+    return mandar;
+}
+
 /*Função que valida o form de Pessoa no evento SUBMIT*/
 function validaFormPessoaSubmit(){
     
@@ -438,7 +545,8 @@ function validaFormPessoaSubmit(){
     tel = $form.find( 'input[name="telefone"]' ).val(),
     email = $form.find( 'input[name="email"]' ).val(),
     user = $form.find( 'input[name="userCheckbox"]:checked' ).val(),
-    senha = $form.find( 'input[name="senha"]' ).val();
+    senha = $form.find( 'input[name="senha"]' ).val(),
+    id_pessoa = $form.find('input[name="id_pessoa"]').val();
         
     var mandar = true;
         
@@ -505,9 +613,6 @@ function validaFormPessoaSubmit(){
         
     }
     else{
-            
-         
-            
         if(email.length  > 0){ 
             if(email.length  < 7){
                 $a('#email').removeClass("").addClass("error"); 
@@ -613,6 +718,26 @@ function validaFormPessoaSubmit(){
     
 }
 
+function validaFormAudienciaJS(){  
+    $a(".cancelar-modal").click(function(){
+        limparForm('.AudienciaAjaxForm');
+        
+    });
+    //Apertar o botão para incluir audiencia via modal
+
+    $a(".submit-audiencia-modal").click(function(){       
+        var mandar = validaFormAudienciaSubmit();  
+        subirModal();
+        if(mandar==true){
+            audienciaAjax(0);
+        }
+        
+        else{
+        //alert(mandar);            
+        }
+    }); 
+}
+
 //Função que contém os eventos para validação do cadastro de uma pessoa
 function validaFormPessoaJS(){  
     
@@ -650,7 +775,19 @@ function validaFormPessoaJS(){
         else{
         //alert(mandar);            
         }
-    });    
+    });   
+    $a(".edit-pessoa").click(function(){ 
+        var mandar = validaFormPessoaSubmit();  
+        subirPagina();
+        if(mandar==true){
+            pessoaAjax(0);
+        }
+        
+        else{
+        //alert(mandar);            
+        }
+    });
+    
     
     //Apertar o botão para incluir + 1 pessoa
     $a(".submit-outra-pessoa").click(function(){ 
@@ -728,6 +865,23 @@ function botaoMaximizar(){
 }
    
 
+function validaFormAtoJS(){
+    
+    //Apertar o botão para atualizar ato no modal de view_processo.php
+    $a(".submit-ato-modal").click(function(){       
+        var mandar = validaFormAtoSubmit();  
+        if(mandar==true){
+            atoAjax(0);
+        }
+        
+        else{
+        //alert(mandar);            
+        }
+    });
+    
+    
+}
+
 //Função de JQUERY
 $a(document).ready(function(){   
     
@@ -737,9 +891,12 @@ $a(document).ready(function(){
     initFormPessoa();
     botaoMaximizar();
     habilitarSenha();
-    
-     
-   		
+    validaFormAtoJS();
+    validaFormAudienciaJS();
+    $a('.clear-form').click(function(){
+        alert('limpar');
+        limparForm('.pessoaAjaxForm');  
+    });
 });
 
 //Função para limite de resultados em relações de pessoas físicas, jurídicas e advogados

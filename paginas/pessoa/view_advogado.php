@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
 require_once '../template/header.php'; //chama o header
 require_once '../config.php';     //chama as configurações de página!

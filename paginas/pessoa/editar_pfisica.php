@@ -30,7 +30,7 @@ $e_user = pg_fetch_object($pesq_user);
             <legend><h1>Editar Pessoa F&iacute;sica</h1></legend> 
 
             <div id="msg_resultado"></div>
-            
+            <br/>
             <div class="controls">
                 <input type="hidden" class="input-xlarge aviso" id="id_input" name="id_pessoa" value= "<?php echo $id_pessoa ?>">
             </div>
@@ -189,9 +189,6 @@ $e_user = pg_fetch_object($pesq_user);
                 </div>
             </div> 
 
-           
-
-
             <input value="0" type="hidden" class="input-xlarge" id="tipo_input" name="tipo">  
 
             <!--Botões do formulário -->
@@ -211,9 +208,10 @@ $e_user = pg_fetch_object($pesq_user);
 
 <input id="id" type="hidden" value="<?php echo $id_pessoa ?>"/>
 </body>
+
 <?php
 require_once '../template/scripts.php';
 require_once 'scripts_cadastrar_pessoa.php';
 ?>
-
 </html>
+

@@ -216,13 +216,11 @@ $e_user = pg_fetch_object($pesq_user);
 </div> <!-- container -->
 
 <input id="id" type="hidden" value="<?php echo $id_pessoa ?>"/>
-
-
 </body>
+
 
 <?php
 require_once '../template/scripts.php';
 require_once 'scripts_cadastrar_pessoa.php';
 ?>
-
 </html>
