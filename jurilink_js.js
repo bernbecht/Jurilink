@@ -174,12 +174,32 @@ function atoAjax(modalidade){
         id_ato:id_ato,
         id_processo:id_processo
     },function(data){ 
-        alert(data);
         if (modalidade == 0){
             $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa <b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar                
         }
     });
     
+    
+}
+
+function audienciaAjax(modalidade){
+    var $form = $a( '.AudienciaAjaxForm' ),
+    id_processo = $form.find( 'input[name="id_processo"]' ).val(),
+    tipo_audiencia = $form.find( 'input[name="tipo_audiencia"]' ).val(),
+    data_audiencia = $form.find( 'input[name="data_audiencia"]' ).val(),
+    local = $form.find( 'input[name="local"]' ).val(),
+    url = $form.attr( 'action' );
+    
+    $a.post(url,{
+        id_processo:id_processo,
+        tipo_audiencia:tipo_audiencia,
+        data_audiencia:data_audiencia,
+        local:local
+    },function(data){ 
+        if (modalidade == 0){
+            $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A audiencia foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar                
+        }
+    });
     
 }
 
@@ -577,6 +597,54 @@ function validaFormAtoSubmit(){
     
     return mandar;
 }
+
+function validaFormAudienciaSubmit(){
+    $a('.alert').remove();
+    
+    var dataRegex = /^([0-9]{2}\/[0-9]{2}\/[0-9]{4})$/;
+    
+    var $form = $a('.AudienciaAjaxForm'),
+    tipo_audiencia = $form.find( 'input[name="tipo_audiencia"]' ).val(),
+    data_audiencia = $form.find( 'input[name="data_audiencia"]' ).val(),
+    local = $form.find( 'input[name="local"]' ).val(),
+    id_processo = $form.find( '.input[name="id_processo"]' ).val();
+    
+    var mandar = true;
+    
+    if(tipo_audiencia.length <=2){
+        $a('#tipo_audiencia').removeClass("control-group").addClass("control-group error"); 
+        mandar =false;
+    }        
+    else{
+        $a('#tipo_audiencia').removeClass("control-group error").addClass("control-group");  
+    }
+        
+    /*********************************************************************************************************/
+    if(dataRegex.test(data_audiencia)) {
+            $a('#data_audiencia').removeClass("error");             
+        }
+        else{
+            $a('#data_audiencia').removeClass("").addClass("error");
+            if(focus==false){
+                $a('#data_audiencia_input').focus();
+                focus=true;
+            }
+            mandar =false;
+        }
+        
+        
+    
+    if(local.length <=2){
+        $a('#local').removeClass("control-group").addClass("control-group error"); 
+        mandar =false;
+    }        
+    else{
+        $a('#local').removeClass("control-group error").addClass("control-group");  
+    }
+
+    return mandar;
+}
+
 /*Função que valida o form de Pessoa no evento SUBMIT*/
 function validaFormPessoaSubmit(){
     
@@ -783,6 +851,26 @@ function validaFormPessoaSubmit(){
     
 }
 
+function validaFormAudienciaJS(){  
+    $a(".cancelar-modal").click(function(){
+        limparForm('.AudienciaAjaxForm');
+        
+    });
+    //Apertar o botão para incluir audiencia via modal
+
+    $a(".submit-audiencia-modal").click(function(){       
+        var mandar = validaFormAudienciaSubmit();  
+        subirModal();
+        if(mandar==true){
+            audienciaAjax(0);
+        }
+        
+        else{
+        //alert(mandar);            
+        }
+    }); 
+}
+
 //Função que contém os eventos para validação do cadastro de uma pessoa
 function validaFormPessoaJS(){  
     
@@ -906,6 +994,7 @@ $a(document).ready(function(){
     trocarAbaSubnav();
     habilitarSenha();
     validaFormAtoJS();
+    validaFormAudienciaJS();
     $a('.clear-form').click(function(){
         alert('limpar');
         limparForm('.pessoaAjaxForm');  

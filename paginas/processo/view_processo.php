@@ -159,6 +159,11 @@ processo_ato.id_processo = $id_processo and processo_ato.id_ato = ato.id_ato ord
 $pesq_ato_proc = pg_query($conexao1,$query);
 $ato_proc = pg_fetch_object($pesq_ato_proc);
 
+$query = "SELECT to_char(data,'dd/mm/yyyy') as data, local, tipo from audiencia where audiencia.id_processo = $id_processo";
+$pesq_audiencias = pg_query($conexao1,$query);
+$audiencia = pg_fetch_object($pesq_audiencias);
+
+
 ?>
 
 <div class ="container content">
@@ -358,18 +363,16 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
      ?>
      </div>
       
-      
-      
+             
       <hr border ="20px" height ="50px">
      <div class ="esquerda"> <h1> AUDI&Ecirc;NCIAS </h1> </div>
-     <?php
+    <?php
      if ($_SESSION['tipo_usuario'] == 2){
-      echo '<div class =direita>        
-        <a class="btn btn-small btn-success" href="#">
-            <i class="icon-plus icon-white"></i>
-            INCLUIR AUDI&Ecirc;NCIA     
+      echo " <div class =direita>        
+        <a class='btn btn-small btn-success audiencia-modal' data-toggle='modal' href='#audienciaModal'><i id='audiencia-modal' class='icon-plus icon-white'></i>
+            INCLUIR AUDI&Ecirc;NCIA    
         </a>             
-        </div>';
+        </div>";
      }
      ?>
   
@@ -384,24 +387,19 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
             </tr>
         </thead>";
         echo "<tbody>";
-        /*
-        if (pg_num_rows($pesq_proc_c_advocacia)>0){
-            $processos_advocacia = pg_fetch_object($pesq_proc_c_advocacia);
-            
+        
+        if (pg_num_rows($pesq_audiencias)>0){
+                       
             do {
                 echo "<tr>	
-                    <td>" . $processos_advocacia->data_distribuicao . "</a></td>
-                    <td>" . $processos_advocacia->numero_unificado . "</td>
-                    <td>" . $processos_advocacia->nome_natureza . "</td>
-                    <td>" . $processos_advocacia->nome_autor . "</td>
-                    <td>" . $processos_advocacia->nome_reu . "</td>
-                    <td>" . $processos_advocacia->nome_adv . "</td>
-                    <td>" . $processos_advocacia->valor_causa . "</td> 
+                    <td>" . $audiencia->data . "</a></td>
+                    <td>" . $audiencia->local . "</td>
+                    <td>" . $audiencia->tipo . "</td>
                     </tr>";
 
-                    }while ($processos_advocacia = pg_fetch_object($pesq_proc_c_advocacia));
+                    }while ($audiencia = pg_fetch_object($pesq_audiencias));
         }
-*/              
+              
         echo "</tbody>";
         echo "</table>";
     ?>
@@ -409,7 +407,7 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
 </div>
 </div>
 
-<!-- MODAL para CADASTRO DE PESSOA-->
+<!-- MODAL para ATUALIZAÇÃO DE ATOS-->
 <div id="myModal" class="modal hide">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">x</button>
@@ -447,8 +445,59 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
         </form> 
 
         <div class="modal-footer"> 
-            <a href="#" class="btn cancelar-modal" data-dismiss="modal">Close</a>
+            <a href="#" class="btn cancelar-modal" data-dismiss="modal">Cancelar</a>
             <button  id ="enviar"  type="button" class="btn btn-primary submit-ato-modal">Salvar</button>
+        </div>
+    </div>
+
+<!-- MODAL para ATUALIZAÇÃO DE AUDIENCIAS-->
+<div id="audienciaModal" class="modal hide">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">x</button>
+        <h3>Incluir Audi&ecirc;ncia</h3>
+    </div>
+    <div class="modal-body">
+        <form id="form_atualiza_audiencia" class="form-horizontal AudienciaAjaxForm" method="post" action="../operacoes/CAudiencia/incluir_audiencia_op.php">
+            <fieldset>
+                <!--Campos formulário --> 
+
+                <div id="msg_resultado"></div>
+                
+                <div id="tipo_audiencia" class="control-group ">
+                    <label class="control-label" for="tipo_audiencia">Tipo</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge aviso" id="tipo_audiencia_input" name="tipo_audiencia">    
+                        <span  class="help-inline "></span> 
+                    </div>
+                </div>
+                
+                
+                <div id="local" class="control-group ">
+                    <label class="control-label" for="local">Local</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge aviso" id="local_input" name="local">    
+                        <span  class="help-inline "></span> 
+                    </div>
+                </div>
+                
+                 <div id="data_audiencia" class="control-group">
+                        <label class="control-label" for="data_audiencia">Data</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge aviso" id="data_audiencia_input" name="data_audiencia">                       
+                            <span  class="help-inline ">Digite no formato dd/mm/aaaa Ex: 08/12/1990</span>                    
+                        </div>
+                    </div>
+                
+                <input type="hidden" class="input-xlarge" id="tipo_input" name="tipo"> 
+                <input type="hidden" class="input-xlarge" id="id_processo" name="id_processo" value =<?php echo "$id_processo"?>>    
+
+                </div>
+            </fieldset>
+        </form> 
+
+        <div class="modal-footer"> 
+            <a href="#" class="btn cancelar-modal" data-dismiss="modal">Cancelar</a>
+            <button  id ="enviar"  type="button" class="btn btn-primary submit-audiencia-modal">Salvar</button>
         </div>
     </div>
 
