@@ -44,9 +44,9 @@ $user = pg_fetch_object($pesq_user);
             </div>
         </div>
         <div class="direita">
-            <a>
-                <a href='relacao_pjuridica.php' class='btn btn-small' >
-                
+
+            <a href='relacao_pjuridica.php' class='btn btn-small' >
+
                 VOLTAR    
             </a>
             <a>

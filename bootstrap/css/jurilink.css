@@ -5,7 +5,7 @@ body{
 
 .content{
     background-color: #FFF;
-    padding: 10px;
+    padding: 10px 20px;
     border-radius: 5px;
     /*box-shadow: 1px 0px 10px #67666A;*/
     /*box-shadow: 5px 5px rgba(0,0,0,0.2);*/
@@ -249,4 +249,13 @@ form legend h1{
 .paginacao button{
     margin-right: 20px;
     
+}
+
+.view_processo_campo_vazio{
+    height: 18px;
+}
+
+.maximizar{
+    height: 28px;
+    margin-bottom: 5px;
 }

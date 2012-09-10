@@ -14,12 +14,12 @@ class CProcesso {
     protected $id_juizo;
     protected $descrição;
     protected $id_processo;
-            
+
     function CProcesso() {
         
     }
-    
-    public function editarProcesso($conexao,$id_processo,$tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j) {
+
+    public function editarProcesso($conexao, $id_processo, $tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j) {
         $this->id_processo = $id_processo;
         $this->transito_em_julgado = $tej;
         $this->data_distribuicao = $dd;
@@ -30,33 +30,33 @@ class CProcesso {
         $this->id_natureza = $id_n;
         $this->id_juizo = $id_j;
         $editar->null;
-        
-          //tratamento de DATA NULA
+
+        //tratamento de DATA NULA
         if ($this->transito_em_julgado == "")
             $this->transito_em_julgado = "NULL";
         else {
             $this->transito_em_julgado = "'" . $this->transito_em_julgado . "'";
         }
 
-         //tratamento de auto da penhora
+        //tratamento de auto da penhora
         if ($this->auto_penhora == "")
             $this->auto_penhora = "NULL";
 
         //tratamento judicial
         if ($this->deposito_judicial == "")
             $this->deposito_judicial = "NULL";
-        
+
         //pg_query($conexao,"UPDATE processo SET numero_unificado = '000000000000000000000' WHERE processo.id_processo = $this->id_processo");
-        
-        $query = "UPDATE processo SET numero_unificado = '".$this->numero_unificado."', transito_em_julgado = ".$this->transito_em_julgado.",
-            data_distribuicao = '".$this->data_distribuicao."', deposito_judicial = ".$this->deposito_judicial.",auto_penhora =".$this->auto_penhora.",
-            valor_causa = ".$this->valor_causa.",id_natureza_acao = '".$this->id_natureza."',id_juizo = '".$this->id_juizo."' WHERE processo.id_processo = $this->id_processo";
-        
-        $editar = pg_query($conexao,$query);
+
+        $query = "UPDATE processo SET numero_unificado = '" . $this->numero_unificado . "', transito_em_julgado = " . $this->transito_em_julgado . ",
+            data_distribuicao = '" . $this->data_distribuicao . "', deposito_judicial = " . $this->deposito_judicial . ",auto_penhora =" . $this->auto_penhora . ",
+            valor_causa = " . $this->valor_causa . ",id_natureza_acao = '" . $this->id_natureza . "',id_juizo = '" . $this->id_juizo . "' WHERE processo.id_processo = $this->id_processo";
+
+        $editar = pg_query($conexao, $query);
         return $editar;
-        
     }
-    public function incluirProcesso($conexao1,$tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j) {
+
+    public function incluirProcesso($conexao1, $tej, $dd, $dj, $nu, $ap, $vc, $id_n, $id_j) {
         $this->transito_em_julgado = $tej;
         $this->data_distribuicao = $dd;
         $this->deposito_judicial = $dj;
@@ -75,7 +75,7 @@ class CProcesso {
             $this->transito_em_julgado = "'" . $this->transito_em_julgado . "'";
         }
 
-         //tratamento de auto da penhora
+        //tratamento de auto da penhora
         if ($this->auto_penhora == "")
             $this->auto_penhora = "NULL";
 
@@ -84,9 +84,8 @@ class CProcesso {
             $this->deposito_judicial = "NULL";
 
         //$conexao1 = new CConexao();
-
         //$conexao = $conexao1->novaConexao();
-        $incluir=pg_exec($conexao1, "insert into processo(transito_em_julgado,data_distribuicao,deposito_judicial,numero_unificado,auto_penhora,valor_causa,id_natureza_acao,id_juizo)
+        $incluir = pg_exec($conexao1, "insert into processo(transito_em_julgado,data_distribuicao,deposito_judicial,numero_unificado,auto_penhora,valor_causa,id_natureza_acao,id_juizo)
                   values("
                 . $this->transito_em_julgado . ",'" /* Não colocamos as aspas pq o campo pode ser nulo, mesmo sendo date */
                 . $this->data_distribuicao . "',"
@@ -96,11 +95,11 @@ class CProcesso {
                 . $this->valor_causa . ",'"
                 . $this->id_natureza . "','"
                 . $this->id_juizo . "') RETURNING id_processo");
-        
+
         $resultado = pg_fetch_object($incluir);
 
         //$conexao1->closeConexao();
-        
+
         return $resultado->id_processo;
     }
 
@@ -118,9 +117,9 @@ class CProcesso {
 
     /* Passa o número e pega o ID do processo */
 
-    public function getIDProcessoNum($conexao1,$num) {
-       // $conexao1 = new CConexao();
-       // $conexao = $conexao1->novaConexao();
+    public function getIDProcessoNum($conexao1, $num) {
+        // $conexao1 = new CConexao();
+        // $conexao = $conexao1->novaConexao();
 
         $sql = pg_exec($conexao1, "select id_processo from processo where numero_unificado = " . $num . " ");
         $resultado = pg_fetch_object($sql);
@@ -154,21 +153,62 @@ class CProcesso {
         //Faz com que apenas duas casas decimais sejam consideradas
         $str = number_format($str, 2, '.', '');
 
-        return  $str;
+        return $str;
     }
 
     /* Valida a Data */
+
     function ValidaData($dat) {
         $padrao_data = "^([0-9]{2}\/[0-9]{2}\/[0-9]{4})$^";
-        
+
         return preg_match($padrao_data, $dat);
-        
     }
-    
+
     //Valida se é um float com duas casas decimais com ',' usando expressão regular
-    function validaFloat($num){
+    function validaFloat($num) {
         $float = "^([0-9]*\,[0-9]*)$^";
         return preg_match($float, $num);
+    }
+
+    function getProcessoRelacao($limite, $offset) {
+        $conexao = new CConexao();
+        $conexao1 = $conexao->novaConexao();
+
+        
+
+        $query = "select processo.id_processo, numero_unificado, to_char(data_distribuicao, 'DD/MM/YYYY')as data_distribuicao,
+            to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, natureza_acao.nome as nome_natureza,
+            pautor.nome as autor, preu.nome as reu
+            from (((((processo 
+            inner join natureza_acao
+            on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
+            inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel=0)
+            inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel=0)
+            inner join pessoa preu on reu.id_pessoa = preu.id_pessoa)
+            inner join pessoa pautor on autor.id_pessoa = pautor.id_pessoa)
+            order by data_distribuicao limit $limite offset $offset";
+
+        $pesq_processo = pg_exec($conexao1, $query);
+        //$resultado = pg_fetch_object($pesq_processo);
+
+
+        $query = "select processo.id_processo, numero_unificado, to_char(data_distribuicao, 'DD/MM/YYYY')as data_distribuicao,
+            to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, natureza_acao.nome as nome_natureza,
+            pautor.nome as autor, preu.nome as reu
+            from (((((processo 
+            inner join natureza_acao
+            on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
+            inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel=0)
+            inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel=0)
+            inner join pessoa preu on reu.id_pessoa = preu.id_pessoa)
+            inner join pessoa pautor on autor.id_pessoa = pautor.id_pessoa)
+            order by data_distribuicao";
+        
+        
+        $pesq_total = pg_query($conexao1, $query);
+       $total = pg_num_rows($pesq_total);
+        
+        return array($pesq_processo, $total);
     }
 
 }

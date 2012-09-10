@@ -396,7 +396,7 @@
             reu_rep:reu_rep           
         
         }, function(data){             
-            alert(data);
+            // alert(data);
             if(modalidade == 1){
                 if(data==1){
                     //alert("OK");
@@ -442,15 +442,58 @@
             
             }
             
-        });
+            else if(modalidade ==3){
+                if(data==1){
+                    $a('.alert').remove();
+                    $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O processo <b>'+num+'</b> foi editado no sistema com sucesso.</p></div>').appendTo('#msg_resultado_processo');
+                    
+                    subirPagina();
+                  
+                    //pega o endereço da pagina
+                    href = location.href;
+      
+                    //separa num array os valores divididos por um '_'        
+                    href_split = href.split('?');                
+               
+                    url = 'view_processo.php?'+href_split[1];                
+                                          
+                    setTimeout(function() {                   
+                        $a(window.document.location).attr('href',url);
+
+                    }, 3000);                  
+                                
+                }
+                else{
+                    $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>'+data+'</p></div>').appendTo('#msg_resultado_processo');
+                    msgErroProcessoBD(data);
+                    subirPagina();;
+                }               
+
+            }//else 3
+            
+        });       
         
-        
-    }
+    }//function
+    
 
     //Função que contém os eventos para validação do cadastro de uum processo
     function validaFormProcessoJS(){        
+    
+    
+        //botao que cancela  as operações do formulário de cadastro
+        //redireciona para a página anterior
+        $a(".cancelar-processo").click(function(){
+        
+            limparForm('#form_processo');
+        
+            var url = 'relacao_processos.php';
+            
+            
+            $a(window.document.location).attr('href',url);
+        });
                
         $a("#submit-processo").click(function(){
+            //alert("Chamou");
             var mandar = validaFormProcessoSubmit();  
             //alert(mandar);
             if(mandar == true){
@@ -468,6 +511,18 @@
             if(mandar == true){
                 //alert("Tr00");
                 processoAjax(2);
+            }
+            else{
+                
+            }
+        });
+        
+        $a("#editar-processo").click(function(){
+            var mandar = validaFormProcessoSubmit();  
+            //alert(mandar);
+            if(mandar == true){
+                //alert("Tr00");
+                processoAjax(3);
             }
             else{
                 

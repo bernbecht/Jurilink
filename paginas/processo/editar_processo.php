@@ -317,8 +317,8 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
 
             <!--Botões do formulário -->
             <div class="form-actions">
-                <button  type="button" id="submit-processo"class="btn btn-primary">Salvar</button>
-                <button  type="button" class="btn opa">Cancelar</button>
+                <button  type="button" id="editar-processo"class="btn btn-primary">Salvar</button>
+                <a class="btn" href="view_processo.php?id=<?php echo $id_processo?>">Cancelar</a>
             </div>
         </fieldset>
     </form>

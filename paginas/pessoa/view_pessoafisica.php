@@ -49,7 +49,7 @@ $user = pg_fetch_object($pesq_user);
             </div>
         </div>
         <div class="direita">
-            <a>
+         
                 <a href='relacao_pfisica.php' class='btn btn-small' >
                 
                 VOLTAR    

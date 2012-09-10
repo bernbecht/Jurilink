@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <?php
 require_once '../template/header.php'; //chama o header
 require_once '../config.php';     //chama as configurações de página!
@@ -48,7 +48,7 @@ $user = pg_fetch_object($pesq_user);
             </div>
         </div>
         <div class="direita">
-            <a>
+           
                 <a href='relacao_padvogado.php' class='btn btn-small' >
                 
                 VOLTAR    

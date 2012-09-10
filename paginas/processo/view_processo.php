@@ -1,29 +1,28 @@
 <?php
+require_once '../config.php';     //chama as configurações de página!
 
-require_once  '../config.php';     //chama as configurações de página!
-
-if(!isset($_GET['user']))
+if (!isset($_GET['user']))
     require_once '../template/header.php'; //chama o header
-else 
+else
     include '../template/header_user.php'; //chama o header
 
-
+    
 //GET para ID do processo
-if(isset($_GET['id'])) $id_processo = $_GET['id'];
+if (isset($_GET['id']))
+    $id_processo = $_GET['id'];
 
 
 
-/** TRATAMENTO DE PROCESSOS COM MAIS DE UM AUTOR OU RÉU**/
-
+/** TRATAMENTO DE PROCESSOS COM MAIS DE UM AUTOR OU RÉU* */
 $query = "SELECT count(*) from autor where id_processo = $id_processo and flag_papel = 0";
-$pesq_num_autores = pg_exec($conexao1,$query);
+$pesq_num_autores = pg_exec($conexao1, $query);
 $num_autores = pg_fetch_object($pesq_num_autores);
 
 $query = "SELECT count(*) from reu where id_processo = $id_processo and flag_papel = 0";
-$pesq_num_reus = pg_exec($conexao1,$query);
+$pesq_num_reus = pg_exec($conexao1, $query);
 $num_reus = pg_fetch_object($pesq_num_reus);
 
-if ($num_autores->count == 1 and $num_reus->count == 1){
+if ($num_autores->count == 1 and $num_reus->count == 1) {
     $query = "SELECT processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padvautor.nome as nome_adv_autor, padvreu.nome as nome_adv_reu,
     natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, to_char(valor_causa, 'R$999G999G999D99') as valor_causa, 
     to_char(deposito_judicial, 'R$999G999G999D99') as deposito_judicial, juizo.nome as nome_juizo, to_char(auto_penhora, 'R$999G999G999D99') as auto_penhora,
@@ -48,16 +47,15 @@ if ($num_autores->count == 1 and $num_reus->count == 1){
     /*Busca comarca*/
     inner join comarca on comarca.id_comarca = juizo.id_comarca
     order by data_distribuicao";
-}
-else if ($num_autores->count > 1 && $num_reus->count == 1){
+} else if ($num_autores->count > 1 && $num_reus->count == 1) {
     $query = "SELECT pessoa.nome, pessoa.tipo, pessoa.id_pessoa from (processo
     inner join autor on autor.id_processo = processo.id_processo and autor.flag_papel = 0 and processo.id_processo = $id_processo)
     inner join pessoa on pessoa.id_pessoa = autor.id_pessoa";
-    
-    $pesq_autores = pg_exec($conexao1,$query);
+
+    $pesq_autores = pg_exec($conexao1, $query);
     $autores = pg_fetch_object($pesq_autores);
 
-    
+
     $query = "SELECT processo.numero_unificado,preu.nome as nome_reu ,padvautor.nome as nome_adv_autor, padvreu.nome as nome_adv_reu,
     natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, to_char(valor_causa, 'R$999G999G999D99') as valor_causa, 
     to_char(deposito_judicial, 'R$999G999G999D99') as deposito_judicial, juizo.nome as nome_juizo, to_char(auto_penhora, 'R$999G999G999D99') as auto_penhora,
@@ -79,16 +77,14 @@ else if ($num_autores->count > 1 && $num_reus->count == 1){
     /*Busca comarca*/
     inner join comarca on comarca.id_comarca = juizo.id_comarca
     order by data_distribuicao";
-}
-
-else if ($num_autores->count == 1 && $num_reus->count > 1){
+} else if ($num_autores->count == 1 && $num_reus->count > 1) {
     $query = "SELECT pessoa.nome, pessoa.tipo, pessoa.id_pessoa from (processo
     inner join reu on reu.id_processo = processo.id_processo and reu.flag_papel = 0 and processo.id_processo = $id_processo)
     inner join pessoa on pessoa.id_pessoa = reu.id_pessoa";
-    
-    $pesq_reus = pg_exec($conexao1,$query);
+
+    $pesq_reus = pg_exec($conexao1, $query);
     $reus = pg_fetch_object($pesq_reus);
-   
+
     $query = "SELECT processo.numero_unificado,pautor.nome as nome_autor ,padvautor.nome as nome_adv_autor, padvreu.nome as nome_adv_reu,
     natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, to_char(valor_causa, 'R$999G999G999D99') as valor_causa, 
     to_char(deposito_judicial, 'R$999G999G999D99') as deposito_judicial, juizo.nome as nome_juizo, to_char(auto_penhora, 'R$999G999G999D99') as auto_penhora,
@@ -110,23 +106,21 @@ else if ($num_autores->count == 1 && $num_reus->count > 1){
     /*Busca comarca*/
     inner join comarca on comarca.id_comarca = juizo.id_comarca
     order by data_distribuicao";
-}
-
-else if ($num_autores->count > 1 && $num_reus->count > 1){
+} else if ($num_autores->count > 1 && $num_reus->count > 1) {
     $query = "SELECT pessoa.nome, pessoa.tipo, pessoa.id_pessoa from (processo
     inner join autor on autor.id_processo = processo.id_processo and autor.flag_papel = 0 and processo.id_processo = $id_processo)
     inner join pessoa on pessoa.id_pessoa = autor.id_pessoa";
-    
-    $pesq_autores = pg_exec($conexao1,$query);
+
+    $pesq_autores = pg_exec($conexao1, $query);
     $autores = pg_fetch_object($pesq_autores);
-    
+
     $query = "SELECT pessoa.nome, pessoa.tipo, pessoa.id_pessoa from (processo
     inner join reu on reu.id_processo = processo.id_processo and reu.flag_papel = 0 and processo.id_processo = $id_processo)
     inner join pessoa on pessoa.id_pessoa = reu.id_pessoa";
-    
-    $pesq_reus = pg_exec($conexao1,$query);
+
+    $pesq_reus = pg_exec($conexao1, $query);
     $reus = pg_fetch_object($pesq_reus);
-    
+
     $query = "SELECT processo.numero_unificado,padvautor.nome as nome_adv_autor, padvreu.nome as nome_adv_reu,
     natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, to_char(valor_causa, 'R$999G999G999D99') as valor_causa, 
     to_char(deposito_judicial, 'R$999G999G999D99') as deposito_judicial, juizo.nome as nome_juizo, to_char(auto_penhora, 'R$999G999G999D99') as auto_penhora,
@@ -146,266 +140,322 @@ else if ($num_autores->count > 1 && $num_reus->count > 1){
     order by data_distribuicao";
 }
 
-$pesq_processo = pg_exec($conexao1,$query);
+$pesq_processo = pg_exec($conexao1, $query);
 $processo = pg_fetch_object($pesq_processo);
 
 $query = "SELECT * from ato";
-$pesq_ato = pg_query ($conexao1,$query);
+$pesq_ato = pg_query($conexao1, $query);
 $ato = pg_fetch_object($pesq_ato);
 
-/*Pesquisa atos do processo*/
+/* Pesquisa atos do processo */
 $query = "SELECT to_char(data_atualizacao,'dd/mm/yyyy') as data_atualizacao, nome, previsao, descricao,flag_cliente from processo_ato inner join ato on
 processo_ato.id_processo = $id_processo and processo_ato.id_ato = ato.id_ato order by data_atualizacao desc";
-$pesq_ato_proc = pg_query($conexao1,$query);
+$pesq_ato_proc = pg_query($conexao1, $query);
 $ato_proc = pg_fetch_object($pesq_ato_proc);
 
-$query = "SELECT to_char(data,'dd/mm/yyyy') as data, local, tipo, id_audiencia from audiencia where audiencia.id_processo = $id_processo order by id_audiencia desc";
-$pesq_audiencias = pg_query($conexao1,$query);
-$audiencia = pg_fetch_object($pesq_audiencias);
 
 
 ?>
 
-<div class ="container content">
-    <div class ="esquerda"><h1> PROCESSO  </h1> </div>
-    <?php
-     if ($_SESSION['tipo_usuario'] == 2){
-      echo "<div class=direita>        
-        <a class='btn btn-warning btn-small' href='editar_processo.php?id=$id_processo'>
-            <i class='icon-pencil icon-white'></i>
-            EDITAR    
-        </a>             
-        </div>";
-     }
-     ?>
-    
-   
-    <br/>
-      <br/>
-      <hr border ="20px" height ="50px">
-  <div class="row show-grid">
-          <div class="span2 offset1"><?php echo "<b>Data Distribui&ccedil;&atilde;o</b>" ?></div>
-    <div class="span2"><?php echo $processo->data_distribuicao; ?></div>
-    
-    <div class="span2 offset1"><?php echo "<b>Tr&acirc;nsito em Julgado</b>" ?></div>
-    <div class="span2"><?php  echo $processo->transito_em_julgado; ?></div>
-        
-    <div class="span2 offset1"><?php echo "<b>Autor(es)</b>" ?></div>
-    <div class="span2">
-        <?php
-        if ($num_autores->count == 1){
-            if ($processo->tipo_autor == 0){
-                if ($_SESSION['tipo_usuario'] == 2)
-                    echo  "<a href=../pessoa/view_pessoafisica.php?id=$processo->id_autor>".$processo->nome_autor."</a>";
-                else echo $processo->nome_autor;
-            }
-            else if ($processo->tipo_autor == 1){
-                   if ($_SESSION['tipo_usuario'] == 2)
-                    echo  "<a href=../pessoa/view_pessoajuridica.php?id=$processo->id_autor>".$processo->nome_autor."</a>";
-                   else echo $processo->nome_autor;
-            }
-        }
-        else{
-            $a = 0;
-            while ($a!=$num_autores->count){
-                if ($autores->tipo == 0){
-                    if ($_SESSION['tipo_usuario'] == 2)
-                        echo  "<a href=../pessoa/view_pessoafisica.php?id=$autores->id_pessoa>".$autores->nome."</a>";
-                    else echo $autores->nome;
-                }
-            else if ($autores->tipo == 1){
-                if ($_SESSION['tipo_usuario'] == 2)
-                    echo  "<a href=../pessoa/view_pessoajuridica.php?id=$autores->id_pessoa>".$autores->nome."</a>";
-                else echo $autores->nome; 
-                
-            }
-            $autores = pg_fetch_object($pesq_autores);
-            $a++;
-            if ($a!=$num_autores->count)
-                echo ", ";
-            }
-            
-        }
-        ?>
-        
-    </div>
-        
-    <div class="span2 offset1"><?php echo "<b>R&eacute;u(s)</b>" ?></div>
-    <div class="span2">
-        <?php
-        if ($num_reus->count == 1){
-            if ($processo->tipo_reu == 0){
-                if ($_SESSION['tipo_usuario'] == 2)
-                    echo  "<a href=../pessoa/view_pessoafisica.php?id=$processo->id_reu>".$processo->nome_reu."</a>";
-                else echo $processo->nome_reu;
-            }
-            else if ($processo->tipo_reu == 1){
-                   if ($_SESSION['tipo_usuario'] == 2)
-                    echo  "<a href=../pessoa/view_pessoajuridica.php?id=$processo->id_reu>".$processo->nome_reu."</a>";
-                   else echo $processo->nome_reu;
-            }
-        }
-        else{
-            $r = 0;
-            while ($r!=$num_reus->count){
-                if ($reus->tipo == 0){
-                    if ($_SESSION['tipo_usuario'] == 2)
-                        echo  "<a href=../pessoa/view_pessoafisica.php?id=$reus->id_pessoa>".$reus->nome."</a>";
-                    else echo $reus->nome;
-                }
-            else if ($reus->tipo == 1){
-                if ($_SESSION['tipo_usuario'] == 2)
-                    echo  "<a href=../pessoa/view_pessoajuridica.php?id=$reus->id_pessoa>".$reus->nome."</a>";
-                else echo $reus->nome; 
-                
-            }
-            $reus = pg_fetch_object($pesq_reus);
-            $r++;
-            if ($r!=$num_reus->count)
-                echo ", ";
-            }
-            
-        }
-        ?>
-        
-    </div>
-    
-    <div class="span2 offset1"><?php echo "<b>Advogado Autor(es)</b>" ?></div>
-    <div class="span2">
-        <?php
-        if ($_SESSION['tipo_usuario'] == 2)
-            echo "<a href=../pessoa/view_advogado.php?id=$processo->id_advogado_autor>".$processo->nome_adv_autor."</a>";
-        else echo $processo->nome_adv_autor;
-           
-        ?>
+
+<div class="container content">
+    <div class="row">        
+        <div class="esquerda">
+            <div class="header-pagina">            
+                <h1>Processo <?php echo $processo->numero_unificado ?></h1>
+            </div>
+        </div>
+        <div class="direita">           
+            <a href='relacao_processos.php' class='btn btn-small'>                
+                VOLTAR    
+            </a>
+            <a href='<?php echo "editar_processo.php?id={$id_processo}";
+?>' class="btn btn-warning btn-small">
+                <i class="icon-pencil icon-white"></i>
+                EDITAR     
+            </a>
+        </div>
     </div>
 
-    <div class="span2 offset1"><?php echo "<b>Advogado R&eacute;u(s)</b>" ?></div>
-    <div class="span2">
-        <?php 
-        if ($_SESSION['tipo_usuario'] == 2)
-            echo "<a href=../pessoa/view_advogado.php?id=$processo->id_advogado_reu>".$processo->nome_adv_reu."</a>";
-        else echo $processo->nome_adv_reu;
-        ?>
-    </div>
-    
-    <div class="span2 offset1"><?php echo "<b>Valor da Causa</b>" ?></div>
-    <div class="span2"><?php echo $processo->valor_causa; ?></div>
-    
-    <div class="span2 offset1"><?php echo "<b>Natureza</b>" ?></div>
-    <div class="span2"><?php echo $processo->nome_natureza; ?></div>
-    
-    <div class="span2 offset1"><?php echo "<b>Dep&oacute;sito Judicial</b>" ?></div>
-    <div class="span2"><?php echo $processo->deposito_judicial; ?></div>
-    
-    <div class="span2 offset1"><?php echo "<b>Ju&iacute;zo</b>" ?></div>
-    <div class="span2"><?php echo $processo->nome_juizo; ?></div>
-    
-    <div class="span2 offset1"><?php echo "<b>Auto da Penhora</b>" ?></div>
-    <div class="span2"><?php echo $processo->auto_penhora; ?></div>
-    
-    <div class="span2 offset1"><?php echo "<b>Comarca</b>" ?></div>
-    <div class="span2"><?php echo $processo->nome_comarca; ?></div>
-    
-  
-  </div>
-      
-      <hr border ="20px" height ="50px">
-     
-       <div class ="esquerda"> <h1> ATOS </h1> </div>
-    <?php
-     if ($_SESSION['tipo_usuario'] == 2){
-      echo " <div class =direita>        
-        <a class='btn btn-small btn-success pessoa-modal' data-toggle='modal' href='#myModal'><i id='reu-modal' class='icon-plus icon-white'></i>
-            INCLUIR ATO    
-        </a>             
-        </div>";
-     }
-     ?> 
- 
-      <div class="tabela"> 
-    <?php 
-        echo "<table = 'ato' class=table table-striped table-condensed >";
-        echo "<thead>";
-        echo "<tr>
-                <th>Ato</th>
-                <th>Data de Modifica&ccedil;&atilde;o</th>
-                <th>Descri&ccedil;&atilde;o</th>
-             </tr>
-        </thead>";
-        echo "<tbody>";
-        if (pg_num_rows($pesq_ato_proc)>0){
-            do {
-                if ($_SESSION['tipo_usuario'] == 2){
-                echo "<tr>	
-                    <td>" . $ato_proc->nome . "</a></td>
-                    <td>" . $ato_proc->data_atualizacao . "</td>
-                    <td>" . $ato_proc->descricao . "</td>
-                    </tr>";
-                }
-                else if($_SESSION['tipo_usuario'] == 1 || $_SESSION['tipo_usuario'] == 0){
-                    if ($ato_proc->flag_cliente == 't'){
-                         echo "<tr>	
-                            <td>" . $ato_proc->nome . "</a></td>
-                            <td>" . $ato_proc->data_atualizacao . "</td>
-                            <td>" . $ato_proc->descricao . "</td>
-                            </tr>";        
+    <div class="divisor_horizontal_view"></div>
+
+    <div class="row show-grid">
+        <div class="span2 offset1">
+            <div class="view_pessoa">
+                <div class="view_pessoa_legenda">
+                    <p>Data de Distribuicao</p>
+                    <p>Autor(es)</p>
+                    <?php
+                    if ($num_autores->count > 1) {
+                        $i = 1;
+                        while ($i < $num_autores->count) {
+                            echo"<p class='view_processo_campo_vazio'></p>";
+                            $i++;
+                        }
                     }
-                    
-                }
-           }while ($ato_proc = pg_fetch_object($pesq_ato_proc));
-        }
-        
-        echo "</tbody>";
-        echo "</table>";
-        
+                    ?>
+                    <p>Advogado Autor(es)</p>
+                    <p>Valor da causa</p>
+                    <p>Deposito Judicial</p>
+                    <p>Auto da Penhora</p>
 
-     ?>
-     </div>
-      
-             
-      <hr border ="20px" height ="50px">
-     <div class ="esquerda"> <h1> AUDI&Ecirc;NCIAS </h1> </div>
-    <?php
-     if ($_SESSION['tipo_usuario'] == 2){
-      echo " <div class =direita>        
-        <a class='btn btn-small btn-success audiencia-modal' data-toggle='modal' href='#audienciaModal'><i id='audiencia-modal' class='icon-plus icon-white'></i>
-            INCLUIR AUDI&Ecirc;NCIA    
-        </a>             
-        </div>";
-     }
-     ?>
-  
-      <div class="tabela"> 
-    <?php 
-        echo "<table = 'audiencia' class=table table-striped table-condensed >";
-        echo "<thead>";
-        echo "<tr>
-                <th>Data</th>
-                <th>Local</th>
-                <th>Tipo</th>
-            </tr>
-        </thead>";
-        echo "<tbody>";
-        
-        if (pg_num_rows($pesq_audiencias)>0){
-                       
-            do {
-                echo "<tr>	
-                    <td>" . $audiencia->data . "</a></td>
-                    <td>" . $audiencia->local . "</td>
-                    <td>" . $audiencia->tipo . "</td>
-                    </tr>";
+                </div>                
+            </div>
+        </div>
 
-                    }while ($audiencia = pg_fetch_object($pesq_audiencias));
-        }
-              
-        echo "</tbody>";
-        echo "</table>";
-    ?>
-    
-</div>
-</div>
+        <div class="span3">
+            <div class="view_pessoa">
+                <div class="view_pessoa_dados">
+
+                    <!-- Campo DATA DIST -->
+                    <p><?php echo $processo->data_distribuicao; ?></p>
+
+                    <!-- Campo AUTOR -->
+                    <?php
+                    if ($num_autores->count == 1) {
+                        if ($processo->tipo_autor == 0) {
+                            if ($_SESSION['tipo_usuario'] == 2)
+                                echo "<p><a href=../pessoa/view_pessoafisica.php?id=$processo->id_autor>" . $processo->nome_autor . "</a></p>";
+                            else
+                                echo $processo->nome_autor;
+                        }
+                        else if ($processo->tipo_autor == 1) {
+                            if ($_SESSION['tipo_usuario'] == 2)
+                                echo "<p><a href=../pessoa/view_pessoajuridica.php?id=$processo->id_autor>" . $processo->nome_autor . "</a></p>";
+                            else
+                                echo $processo->nome_autor;
+                        }
+                    }
+                    else {
+                        $a = 0;
+                        while ($a != $num_autores->count) {
+                            if ($autores->tipo == 0) {
+                                if ($_SESSION['tipo_usuario'] == 2)
+                                    echo "<p><a href=../pessoa/view_pessoafisica.php?id=$autores->id_pessoa>" . $autores->nome . "</a></p>";
+                                else
+                                    echo $autores->nome;
+                            }
+                            else if ($autores->tipo == 1) {
+                                if ($_SESSION['tipo_usuario'] == 2)
+                                    echo "<p><a href=../pessoa/view_pessoajuridica.php?id=$autores->id_pessoa>" . $autores->nome . "</a></p>";
+                                else
+                                    echo $autores->nome;
+                            }
+                            $autores = pg_fetch_object($pesq_autores);
+                            $a++;
+                        }
+                    }
+                    ?>
+
+                    <!-- Campo AD AUTOR -->
+                    <p> 
+                        <?php
+                        if ($_SESSION['tipo_usuario'] == 2)
+                            echo "<a href=../pessoa/view_advogado.php?id=$processo->id_advogado_autor>" . $processo->nome_adv_autor . "</a>";
+                        else
+                            echo $processo->nome_adv_autor;
+                        ?> 
+                    </p>
+
+                    <p><?php echo $processo->valor_causa; ?></p>
+
+                    <!-- Campo DEPOSITO -->
+                    <?php
+                    if ($processo->deposito_judicial != '') {
+                        echo '<p>' . $processo->deposito_judicial . '</p>';
+                    } else {
+                        echo"<p class='view_processo_campo_vazio'></p>";
+                    }
+                    ?>
+
+                    <!-- Campo DEPOSITO -->
+                    <?php
+                    if ($processo->deposito_judicial != '') {
+                        echo '<p>' . $processo->deposito_judicial . '</p>';
+                    } else {
+                        echo"<p class='view_processo_campo_vazio'></p>";
+                    }
+                    ?>
+
+                </div>                
+            </div>
+        </div>
+
+        <div class="span2">
+            <div class="view_pessoa">
+                <div class="view_pessoa_legenda">
+                    <p>Transito em Julgado</p>
+                    <p>Reu(s)</p>  
+                    <p>Advogado Reu(s)</p>
+                    <p>Natureza</p>                    
+                    <p>Juizo</p>
+                    <p>Comarca</p>
+                </div>                
+            </div>
+        </div>
+
+        <div class="span3">
+            <div class="view_pessoa">
+                <div class="view_pessoa_dados">
+
+                    <!-- Campo TRANSITO -->
+                    <?php
+                    if ($processo->transito_em_julgado != '') {
+                        echo '<p>' . $processo->transito_em_julgado . '</p>';
+                    } else {
+                        echo"<p class='view_processo_campo_vazio'></p>";
+                    }
+                    ?>
+
+                    <!-- Campo REU -->
+
+                    <?php
+                    if ($num_reus->count == 1) {
+                        if ($processo->tipo_reu == 0) {
+                            if ($_SESSION['tipo_usuario'] == 2)
+                                echo "<p><a href=../pessoa/view_pessoafisica.php?id=$processo->id_reu>" . $processo->nome_reu . "</a></p>";
+                            else
+                                echo $processo->nome_reu;
+                        }
+                        else if ($processo->tipo_reu == 1) {
+                            if ($_SESSION['tipo_usuario'] == 2)
+                                echo "<p><a href=../pessoa/view_pessoajuridica.php?id=$processo->id_reu>" . $processo->nome_reu . "</a></p>";
+                            else
+                                echo $processo->nome_reu;
+                        }
+                    }
+                    else {
+                        $r = 0;
+                        while ($r != $num_reus->count) {
+                            if ($reus->tipo == 0) {
+                                if ($_SESSION['tipo_usuario'] == 2)
+                                    echo "<p><a href=../pessoa/view_pessoafisica.php?id=$reus->id_pessoa>" . $reus->nome . "</a></p>";
+                                else
+                                    echo $reus->nome;
+                            }
+                            else if ($reus->tipo == 1) {
+                                if ($_SESSION['tipo_usuario'] == 2)
+                                    echo "<p><a href=../pessoa/view_pessoajuridica.php?id=$reus->id_pessoa>" . $reus->nome . "</a></p>";
+                                else
+                                    echo $reus->nome;
+                            }
+                            $reus = pg_fetch_object($pesq_reus);
+                            $r++;
+                        }
+                    }
+                    ?>
+
+                    <!-- Campo ADV REU -->
+
+                    <p>
+                        <?php
+                        if ($_SESSION['tipo_usuario'] == 2)
+                            echo "<a href=../pessoa/view_advogado.php?id=$processo->id_advogado_reu>" . $processo->nome_adv_reu . "</a>";
+                        else
+                            echo $processo->nome_adv_reu;
+                        ?>
+                    </p>
+
+                    <!-- Campo NATUREZA -->
+
+                    <?php
+                    if ($processo->nome_natureza != '') {
+                        echo '<p>' . $processo->nome_natureza . '</p>';
+                    } else {
+                        echo"<p class='view_processo_campo_vazio'></p>";
+                    }
+                    ?>
+
+                    <!-- Campo JUIZO -->
+
+                    <?php
+                    if ($processo->nome_juizo != '') {
+                        echo '<p>' . $processo->nome_juizo . '</p>';
+                    } else {
+                        echo"<p class='view_processo_campo_vazio'></p>";
+                    }
+                    ?>
+
+                    <!-- Campo COMARCA -->
+
+                    <?php
+                    if ($processo->nome_comarca != '') {
+                        echo '<p>' . $processo->nome_comarca . '</p>';
+                    } else {
+                        echo"<p class='view_processo_campo_vazio'></p>";
+                    }
+                    ?>
+
+                </div>                
+            </div>
+        </div>
+    </div><!-- ROW -->
+
+    <div class="row row_view">
+        <div class="esquerda">
+            <h2>Atos do Processo</h2>
+        </div>
+        <div class="direita">
+            <?php
+            if ($_SESSION['tipo_usuario'] == 2) {
+                echo "      
+                <a class='btn btn-small btn-success pessoa-modal' data-toggle='modal' href='#myModal'><i id='reu-modal' class='icon-plus icon-white'></i>
+                    INCLUIR ATO    
+                </a> ";
+            }
+            ?>            
+
+            <button type="button" id="max_ato" class="btn btn-small maximizar" data-toggle="collapse" data-target="#tabela_ato">
+                <i class="icon-minus"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="divisor_horizontal_view"></div>
+
+    <div class="row">
+
+        <div id="tabela_ato" class="collapse in">
+            <div class="tabela_at"> 
+                
+            </div>
+        </div>
+
+    </div><!-- ROW -->
+
+
+    <div class="row row_view">
+        <div class="esquerda">
+            <h2>Atos do Processo</h2>
+        </div>
+        <div class="direita">
+            <?php
+            if ($_SESSION['tipo_usuario'] == 2) {
+                echo "      
+                <a class='btn btn-small btn-success audiencia-modal' data-toggle='modal' href='#audienciaModal'><i id='audiencia-modal' class='icon-plus icon-white'></i>
+                    INCLUIR AUDI&Ecirc;NCIA    
+                </a>";
+            }
+            ?>          
+
+            <button type="button" id="max_audiencia" class="btn btn-small maximizar" data-toggle="collapse" data-target="#tabela_audiencia">
+                <i class="icon-minus"></i>
+            </button>
+        </div>
+    </div>
+
+    <div class="divisor_horizontal_view"></div>
+
+    <div class="row">
+        <div id='tabela_audiencia' class="collapse in">
+            <div class="tabela_aud">                
+                
+            </div>
+        </div>
+    </div><!-- ROW -->
+
+</div><!-- container -->
+
 
 <!-- MODAL para ATUALIZAÇÃO DE ATOS-->
 <div id="myModal" class="modal hide">
@@ -418,8 +468,8 @@ $audiencia = pg_fetch_object($pesq_audiencias);
             <fieldset>
                 <!--Campos formulário --> 
 
-                <div id="msg_resultado"></div>
-                
+                <div id="msg_resultado_ato"></div>
+
                 <div id="ato" class="control-group">
                     <label class="control-label" for="Ato">Atos</label>
                     <div class="controls">                    
@@ -438,7 +488,7 @@ $audiencia = pg_fetch_object($pesq_audiencias);
                 </div>
 
                 <input type="hidden" class="input-xlarge" id="tipo_input" name="tipo"> 
-                <input type="hidden" class="input-xlarge" id="id_processo" name="id_processo" value =<?php echo "$id_processo"?>>    
+                <input type="hidden" class="input-xlarge" id="id_processo" name="id_processo" value =<?php echo "$id_processo" ?>>    
 
                 </div>
             </fieldset>
@@ -450,60 +500,62 @@ $audiencia = pg_fetch_object($pesq_audiencias);
         </div>
     </div>
 
-<!-- MODAL para ATUALIZAÇÃO DE AUDIENCIAS-->
-<div id="audienciaModal" class="modal hide">
-    <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">x</button>
-        <h3>Incluir Audi&ecirc;ncia</h3>
-    </div>
-    <div class="modal-body">
-        <form id="form_atualiza_audiencia" class="form-horizontal AudienciaAjaxForm" method="post" action="../operacoes/CAudiencia/incluir_audiencia_op.php">
-            <fieldset>
-                <!--Campos formulário --> 
+    <!-- MODAL para ATUALIZAÇÃO DE AUDIENCIAS-->
+    <div id="audienciaModal" class="modal hide">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <h3>Incluir Audi&ecirc;ncia</h3>
+        </div>
+        <div class="modal-body">
+            <form id="form_atualiza_audiencia" class="form-horizontal AudienciaAjaxForm" method="post" action="../operacoes/CAudiencia/incluir_audiencia_op.php">
+                <fieldset>
+                    <!--Campos formulário --> 
 
-                <div id="msg_resultado"></div>
-                
-                <div id="tipo_audiencia" class="control-group ">
-                    <label class="control-label" for="tipo_audiencia">Tipo</label>
-                    <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="tipo_audiencia_input" name="tipo_audiencia">    
-                        <span  class="help-inline "></span> 
+                    <div id="msg_resultado_audiencia"></div>
+
+                    <div id="tipo_audiencia" class="control-group ">
+                        <label class="control-label" for="tipo_audiencia">Tipo</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge aviso" id="tipo_audiencia_input" name="tipo_audiencia">    
+                            <span  class="help-inline "></span> 
+                        </div>
                     </div>
-                </div>
-                
-                
-                <div id="local" class="control-group ">
-                    <label class="control-label" for="local">Local</label>
-                    <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="local_input" name="local">    
-                        <span  class="help-inline "></span> 
+
+
+                    <div id="local" class="control-group ">
+                        <label class="control-label" for="local">Local</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge aviso" id="local_input" name="local">    
+                            <span  class="help-inline "></span> 
+                        </div>
                     </div>
-                </div>
-                
-                 <div id="data_audiencia" class="control-group">
+
+                    <div id="data_audiencia" class="control-group">
                         <label class="control-label" for="data_audiencia">Data</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge aviso" id="data_audiencia_input" name="data_audiencia">                       
                             <span  class="help-inline ">Digite no formato dd/mm/aaaa Ex: 08/12/1990</span>                    
                         </div>
                     </div>
-                
-                <input type="hidden" class="input-xlarge" id="tipo_input" name="tipo"> 
-                <input type="hidden" class="input-xlarge" id="id_processo" name="id_processo" value =<?php echo "$id_processo"?>>    
 
-                </div>
-            </fieldset>
-        </form> 
+                    <input type="hidden" class="input-xlarge" id="tipo_input" name="tipo"> 
+                    <input type="hidden" class="input-xlarge" id="id_processo" name="id_processo" value =<?php echo "$id_processo" ?>>    
 
-        <div class="modal-footer"> 
-            <a href="#" class="btn cancelar-modal" data-dismiss="modal">Cancelar</a>
-            <button  id ="enviar"  type="button" class="btn btn-primary submit-audiencia-modal">Salvar</button>
+                    </div>
+                </fieldset>
+            </form> 
+
+            <div class="modal-footer"> 
+                <a href="#" class="btn cancelar-modal" data-dismiss="modal">Cancelar</a>
+                <button  id ="enviar"  type="button" class="btn btn-primary submit-audiencia-modal">Salvar</button>
+            </div>
         </div>
-    </div>
-
-</body>
-</html>
-<?php
-require_once '../template/scripts.php'; //chama scripts comuns as paginas
-
-?>
+        
+        <input type='hidden' id='id' value="<?php echo $id_processo?>"
+        
+        </body>
+        </html>
+        <?php
+        require_once '../template/scripts.php'; //chama scripts comuns as paginas
+        require_once 'script_view_processo.php';
+        ?>

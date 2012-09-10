@@ -180,9 +180,19 @@ function atoAjax(modalidade){
     $a.post(url,{
         id_ato:id_ato,
         id_processo:id_processo
-    },function(data){ 
+    },function(data){         
         if (modalidade == 0){
-            $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa <b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar                
+            $a('<div id="alert_ato" class="alert alert-success fade in"><p>O ato foi inserido no sistema com sucesso.</p></div>').appendTo('#msg_resultado_ato'); // appendTo é pra por em algum lugar                
+            
+            //espera um tempo e desliga a modal
+            setTimeout(function() {
+                $a('#myModal').modal('toggle');
+                limparForm('#form_atualiza_ato');
+                $a('#alert_ato').remove();
+                location.reload();
+            }, 2500);
+        
+           
         }
     });
     
@@ -204,7 +214,18 @@ function audienciaAjax(modalidade){
         local:local
     },function(data){ 
         if (modalidade == 0){
-            $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A audiencia foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar                
+            $a('<div id="alert_audiencia" class="alert alert-success fade in"><p>A audiencia foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado_audiencia'); // appendTo é pra por em algum lugar                
+            
+            //espera um tempo e desliga a modal
+            setTimeout(function() {
+                $a('#audienciaModal').modal('toggle');
+                limparForm('#form_atualiza_audiencia');
+                $a('#alert_audiencia').remove();
+                $a(window.document.location).attr('href',url);
+                location.reload();
+            }, 2500);
+            
+            
         }
     });
     
@@ -394,7 +415,7 @@ function pessoaAjax(modalidade){
                 else
                     url = "view_advogado.php?"+href_split[1];
                  
-                  //alert(url);
+                //alert(url);
                            
                 setTimeout(function() {
                     //limparForm('.pessoaAjaxForm');
@@ -451,7 +472,7 @@ function trocarAbaSubnav(){
 
 /*Função que valida o form de ato no evento submit*/
 function validaFormAtoSubmit(){
-    $a('.alert').remove();
+    $a('#alert_ato').remove();
     
     var intRegex = /^\d+$/;
     var floatRegex = /^((\d+(\.\d *)?)|((\d*\.)?\d+))$/;
@@ -475,7 +496,7 @@ function validaFormAtoSubmit(){
 }
 
 function validaFormAudienciaSubmit(){
-    $a('.alert').remove();
+    $a('#alert_audiencia').remove();
     
     var dataRegex = /^([0-9]{2}\/[0-9]{2}\/[0-9]{4})$/;
     
@@ -497,16 +518,16 @@ function validaFormAudienciaSubmit(){
         
     /*********************************************************************************************************/
     if(dataRegex.test(data_audiencia)) {
-            $a('#data_audiencia').removeClass("error");             
+        $a('#data_audiencia').removeClass("error");             
+    }
+    else{
+        $a('#data_audiencia').removeClass("").addClass("error");
+        if(focus==false){
+            $a('#data_audiencia_input').focus();
+            focus=true;
         }
-        else{
-            $a('#data_audiencia').removeClass("").addClass("error");
-            if(focus==false){
-                $a('#data_audiencia_input').focus();
-                focus=true;
-            }
-            mandar =false;
-        }
+        mandar =false;
+    }
         
         
     
