@@ -351,8 +351,24 @@
                 $a('#numero_unificado').removeClass("control-group").addClass("control-group error");
                 $a('#numero_unificado_input').focus();
             }
+            else if(data_split[11]=='"num_unificado_index"'){
+                $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Numero Unificado</b> ja esta em uso.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('#numero_unificado').removeClass("control-group").addClass("control-group error");
+                $a('#numero_unificado_input').focus();
+            }
+             else if(data_split[2]=='Trânsito'){
+                $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Transito em Julgado</b> nao pode ser maior que a data atual.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('#transito_em_julgado').removeClass("control-group").addClass("control-group error");
+                $a('#tej_input').focus();
+            }
+            
+            else if(data_split[2]=='Data'){
+                $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Transito em Julgado</b> nao pode ser menor que a <b>Data de Distribuicao</b></p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('#transito_em_julgado').removeClass("control-group").addClass("control-group error");
+                $a('#tej_input').focus();
+            }
             else
-                $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>'+data_split[11]+'</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>'+data+'</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
         }
     }
     
@@ -418,7 +434,7 @@
                 }
                 else{
                     
-                    $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>'+data+'</p></div>').appendTo('#msg_resultado_processo');
+                   
                     msgErroProcessoBD(data);
                     subirPagina();;
                 }
@@ -431,11 +447,15 @@
                     
                     subirPagina();
                     
-                    limparForm('#form_processo');                    
+                    limparForm('#form_processo'); 
+                    
+                    $a('#numero_unificado_input').focus();
+                    
+                    
                     
                 }
                 else{
-                    $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>'+data+'</p></div>').appendTo('#msg_resultado_processo');
+                    
                     msgErroProcessoBD(data);
                     subirPagina();;
                 }
@@ -464,7 +484,7 @@
                                 
                 }
                 else{
-                    $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>'+data+'</p></div>').appendTo('#msg_resultado_processo');
+                    
                     msgErroProcessoBD(data);
                     subirPagina();;
                 }               

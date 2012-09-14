@@ -129,6 +129,18 @@ class CProcesso {
         return $resultado->id_processo;
     }
 
+    public function getProcesso($id) {
+        $conexao = new CConexao();
+        $conexao1 = $conexao->novaConexao();
+
+        $sql = pg_exec($conexao1, "select * from processo where id_processo = " . $id . " ");
+        $resultado = pg_fetch_object($sql);
+
+        //$conexao1->closeConexao();
+
+        return $resultado;
+    }
+
     //Valida um inteiro
     function ValidaNum($num) {
         if ($num == "") {
@@ -174,7 +186,7 @@ class CProcesso {
         $conexao = new CConexao();
         $conexao1 = $conexao->novaConexao();
 
-        
+
 
         $query = "select processo.id_processo, numero_unificado, to_char(data_distribuicao, 'DD/MM/YYYY')as data_distribuicao,
             to_char(transito_em_julgado, 'DD/MM/YYYY') as transito_em_julgado, natureza_acao.nome as nome_natureza,
@@ -203,11 +215,11 @@ class CProcesso {
             inner join pessoa preu on reu.id_pessoa = preu.id_pessoa)
             inner join pessoa pautor on autor.id_pessoa = pautor.id_pessoa)
             order by data_distribuicao";
-        
-        
+
+
         $pesq_total = pg_query($conexao1, $query);
-       $total = pg_num_rows($pesq_total);
-        
+        $total = pg_num_rows($pesq_total);
+
         return array($pesq_processo, $total);
     }
 

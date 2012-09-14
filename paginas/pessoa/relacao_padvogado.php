@@ -13,7 +13,7 @@ require_once '../config.php';     //chama as configurações de página!
     <div class="row">
         <div class ="esquerda"> 
             <a href="cadastrar_padvogado.php">
-                <button type="button" class="btn btn-success">
+                <button type="button" class="btn btn-small btn-success">
                     <i class="icon-plus icon-white"></i>
                     INCLUIR PESSOA ADVOGADO       
                 </button>
@@ -28,7 +28,7 @@ require_once '../config.php';     //chama as configurações de página!
         <br/>
     </div>
 
-    <div class="row">
+    <div class="row row_relacao">
         <div id="tabela_container">
             <div id="tabela"> 
                 

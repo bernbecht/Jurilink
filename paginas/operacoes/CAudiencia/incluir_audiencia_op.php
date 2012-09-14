@@ -1,6 +1,8 @@
 <?php
 
-include '../../classes/CAudiencia.php';
+require_once '../../classes/CAudiencia.php';
+
+require_once '../../config.php';
 
 
 $id_processo = $_POST['id_processo'];
@@ -17,7 +19,13 @@ if ($erro != "") {
 else {
     $audiencia = new CAudiencia();
     
-    $audiencia->incluirAudiencia($data_audiencia, $local, $tipo, $id_processo);
-    
+    $sql= $audiencia->incluirAudiencia($data_audiencia, $local, $tipo, $id_processo);
+     
+    if($sql){
+        echo 1;
+    }
+    else{
+        echo 0;
+    }
 }
 ?>

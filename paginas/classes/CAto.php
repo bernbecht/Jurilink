@@ -1,6 +1,6 @@
 <?php
 
-include 'CConexao.php';
+require_once 'CConexao.php';
 
 class CAto {
     
@@ -56,6 +56,19 @@ class CAto {
 
         $conexao1->closeConexao();
         
+    }
+    
+    public function getAtoID($id_ato){
+        $conexao1 = new CConexao();
+        $conexao = $conexao1->novaConexao();
+        
+        $query = 'Select * from ato where id_ato ='.$id_ato;
+        
+        $sql = pg_exec($conexao, $query);
+        
+        $fetch = pg_fetch_object($sql);
+        
+        return $fetch;
     }
             
  

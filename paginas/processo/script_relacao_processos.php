@@ -1,5 +1,8 @@
 <script type="text/javascript">
     
+    //SCRIPT QUE COMANDA A PAGINA DE RELAÇÃO DE PROCESSOS
+    //FAZ A PROCURA DOS PROCESSOS POR AJAX
+    
     var frente = true;
     var tras = true;
     
@@ -9,10 +12,7 @@
             var limite = $a('#limite :selected').val();         
             var url = 'get_relacao_processos.php';
             var modalidade = 0;            
-          
-            
-            //alert("oi");
-            
+                      
          
             $a.post(url,{
                 limite:limite,
@@ -20,11 +20,8 @@
                 
             }, function(data){
                 
-                //alert(data);
-                
                 split_data = data.split('!');
                 
-                //alert(split_data[1]);
                 
                 $a('#tabela').remove();
                 $a(split_data[0]).appendTo('#tabela_container');
@@ -36,10 +33,8 @@
                 }
                 else{
                     $a('#botao_proximo').removeClass('disabled');
-                    frente = true;
-                    
-                }
-                
+                    frente = true;                    
+                }                
                 if(split_data[1]==2){
                     //alert('deu 2 setar');
                     $a('#botao_anterior').addClass('disabled');  
@@ -53,8 +48,7 @@
             });
         });     
                 
-    }
-    
+    }//FUNCTION    
     
     function irPraFrente(){
        
@@ -102,10 +96,8 @@
                 });
             }
 
-        });     
-              
-                
-    }
+        });        
+    }//fuinction
     
     function irPraTras(){
        
@@ -152,11 +144,8 @@
                 
                 });
             }
-
-        });     
-              
-                
-    }
+        });       
+    }//function
     
     
     
@@ -166,46 +155,47 @@
         var tipo = $a('#tipo').val();            
         var url = 'get_relacao_processos.php';
         var modalidade = -1;
-            
-        //alert("oi");
-            
-         
+        
         $a.post(url,{
             limite:limite,
             modalidade:modalidade
                 
         }, function(data){
-            //alert(data);
-            split_data = data.split('!');
-                
-            //alert(split_data[1]);
-                
-            $a('#tabela').remove();
-            $a(split_data[0]).appendTo('#tabela_container');
-                
-            if(split_data[2]==1){
-                //alert('deu 1 load');
-                $a('#botao_proximo').addClass('disabled');
-                frente = false;
-            }
+            
+            //se tiver nenhum processo, mostre
+            if(data==0){
+                 $a('<div id="alert_ato" class="alert alert-info fade in"><p><h4>Nao ha <b>processos</b> cadastrados.</h4></p></div>').appendTo('#tabela_container'); // appendTo é pra por em algum lugar                
+            }            
             else{
-                $a('#botao_proximo').removeClass('disabled');
-                frente = true;
-            }
+                split_data = data.split('!');
                 
-            if(split_data[1]==2){
-                //alert('deu 2 load');
-                $a('#botao_anterior').addClass('disabled');  
-                tras= false;
-            }
-            else{
-                $a('#botao_anterior').removeClass('disabled');
-                tras= true;
+                //alert(split_data[1]);
+                
+                $a('#tabela').remove();
+                $a(split_data[0]).appendTo('#tabela_container');
+                
+                if(split_data[2]==1){
+                    //alert('deu 1 load');
+                    $a('#botao_proximo').addClass('disabled');
+                    frente = false;
+                }
+                else{
+                    $a('#botao_proximo').removeClass('disabled');
+                    frente = true;
+                }
+                
+                if(split_data[1]==2){
+                    //alert('deu 2 load');
+                    $a('#botao_anterior').addClass('disabled');  
+                    tras= false;
+                }
+                else{
+                    $a('#botao_anterior').removeClass('disabled');
+                    tras= true;
+                }
             }
                 
         });
-
-        
     }
     
     $a(document).ready(function (){   
@@ -213,9 +203,6 @@
         setarLimite();
         irPraFrente();
         irPraTras();
-       
- 
-    
     }); 
 
 </script>

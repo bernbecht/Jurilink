@@ -1,13 +1,13 @@
 
 <?php
 
-require_once ( 'paginas/config.php');
+require_once 'paginas/config.php';
 
 
-session_start();
 
 if (isset($_POST['usuario'])) {
     $senha = $_POST['senha'];
+    //$senha = md5($senha);
     $usuario = $_POST['usuario'];
 
     $query = "SELECT nome 
@@ -37,8 +37,9 @@ if (isset($_POST['usuario'])) {
     $_SESSION['tipo_usuario'] = $resultado->tipo;
     
     echo $_SESSION['tipo_usuario'];
+     echo $_SESSION['id_usuario'];
     
-    if ($_SESSION['tipo_usuario'] == 2)
+   if ($_SESSION['tipo_usuario'] == 2)
         header("location:jurilink_main.php");
     else if ($_SESSION['tipo_usuario'] == 0 or $_SESSION['tipo_usuario'] == 1)
         header("location:paginas/pessoa/view_user.php");

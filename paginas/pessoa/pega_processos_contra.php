@@ -9,8 +9,9 @@ require_once '../classes/CJuridica.php';
 
 $id_pessoa = $_POST['id_pessoa'];
 $href = $_POST['href'];
+$tipo_pessoa = $_POST['tipo_pessoa'];
 
-if ($href == 'pessoafisica') {
+if ($href == 'pessoafisica' || $tipo_pessoa== 0) {
     $fisica = new CFisica();
 
     $processo = $fisica->getProcessosFisicaContraTotal($id_pessoa);
@@ -44,7 +45,7 @@ if ($href == 'pessoafisica') {
     echo "</tbody>";
     echo "</table>";
     echo "<p class='centro'><button id='todos_processos_contra' class='btn btn-primary'>Ver todos os Processos</button></p>";
-} else if ($href == 'pessoajuridica') {
+} else if ($href == 'pessoajuridica' || $tipo_pessoa== 1) {
     $fisica = new CJuridica();
 
     $processo = $fisica->getProcessosJuridicaContraAdvocaciaTotal($id_pessoa);

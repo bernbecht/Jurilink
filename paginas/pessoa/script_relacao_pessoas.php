@@ -177,34 +177,37 @@
                 
         }, function(data){
           
-            split_data = data.split('!');
+            if(data==0){
+              $a('<div id="alert_ato" class="alert alert-info fade in"><p><h4>Nao ha <b>pessoas</b> cadastradas.</h4></p></div>').appendTo('#tabela_container'); // appendTo é pra por em algum lugar                
+            }
+            else{
+                split_data = data.split('!');
        
-            $a('#tabela').remove();
-            $a(split_data[0]).appendTo('#tabela_container');
+                $a('#tabela').remove();
+                $a(split_data[0]).appendTo('#tabela_container');
                 
-            if(split_data[2]==1){
+                if(split_data[2]==1){
         
-                $a('#botao_proximo').addClass('disabled'); 
-                frente = false;
-            }
-            else{
-                $a('#botao_proximo').removeClass('disabled');
-                frente = true;
-            }
+                    $a('#botao_proximo').addClass('disabled'); 
+                    frente = false;
+                }
+                else{
+                    $a('#botao_proximo').removeClass('disabled');
+                    frente = true;
+                }
                 
-            if(split_data[1]==2){
+                if(split_data[1]==2){
               
-                $a('#botao_anterior').addClass('disabled');  
-                tras = false;
-            }
-            else{
-                $a('#botao_anterior').removeClass('disabled');
-                tras =  true;
+                    $a('#botao_anterior').addClass('disabled');  
+                    tras = false;
+                }
+                else{
+                    $a('#botao_anterior').removeClass('disabled');
+                    tras =  true;
+                }
             }
                 
         });
-
-        
     }
     
     $a(document).ready(function (){   

@@ -25,7 +25,14 @@ $e_user = pg_fetch_object($pesq_user);
         <fieldset>
             <!--Campos formulário -->
 
-            <legend><h1>Editar Advogado</h1></legend> 
+            <legend>
+                <div class="esquerda">
+                    <h1>CEditar Advogado</h1>
+                </div>
+                <div id="loading_content">  
+                    
+                </div>                
+            </legend> 
             
             <div id="msg_resultado"></div>
             <br/>

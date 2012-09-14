@@ -1,9 +1,9 @@
 <?php
 require_once '../template/header.php'; //chama o header
 require_once ( '../config.php');     //chama as configurações de página!
-
 //GET para ID da pessoa
-if(isset($_GET['id'])) $id_pessoa = $_GET['id'];
+if (isset($_GET['id']))
+    $id_pessoa = $_GET['id'];
 
 
 $pesq_uf = pg_exec($conexao1, "select * from uf order by nome");
@@ -17,7 +17,6 @@ $pessoa = pg_fetch_object($pesq_pessoa);
 
 $pesq_user = pg_exec($conexao1, "select count (*) from usuario where usuario.id_pessoa = $id_pessoa");
 $e_user = pg_fetch_object($pesq_user);
-
 ?>
 
 <div class="container content">   
@@ -27,7 +26,14 @@ $e_user = pg_fetch_object($pesq_user);
         <fieldset>
             <!--Campos formulário -->
 
-            <legend><h1>Editar Pessoa F&iacute;sica</h1></legend> 
+            <legend>
+                <div class="esquerda">
+                    <h1>Editar Pessoa F&iacute;sica</h1>
+                </div>
+                <div id="loading_content">  
+                    
+                </div>                
+            </legend> 
 
             <div id="msg_resultado"></div>
             <br/>
@@ -125,12 +131,12 @@ $e_user = pg_fetch_object($pesq_user);
                         <label class="control-label" for="Estado">Estado</label>
                         <div class="controls">                    
                             <select  name="estado" id="estado_input" class="aviso">
-                                <?php echo "<option value= $uf_pessoa->id_uf>$uf_pessoa->nome</option>";?>
+                                <?php echo "<option value= $uf_pessoa->id_uf>$uf_pessoa->nome</option>"; ?>
                                 <?php
                                 if ($resultado->id_uf != NULL) {
                                     do {
-                                        if ($resultado->id_uf!=$uf_pessoa->id_uf)
-                                        echo "<option value=$resultado->id_uf>$resultado->nome</option>";
+                                        if ($resultado->id_uf != $uf_pessoa->id_uf)
+                                            echo "<option value=$resultado->id_uf>$resultado->nome</option>";
                                     } while ($resultado = pg_fetch_object($pesq_uf));
                                 }
                                 ?>                     
@@ -176,12 +182,13 @@ $e_user = pg_fetch_object($pesq_user);
                         <div class="controls">
                             <label class="checkbox">
                                 <?php
-                                    if ($e_user->count)
-                                        echo "<input type='hidden' name='box1' value='0' />
+                                if ($e_user->count)
+                                    echo "<input type='hidden' name='box1' value='0' />
                                             <input type='checkbox' name='userCheckbox' id='userCheckbox' value='1' CHECKED>";
-                                    else echo "<input type='hidden' name='userCheckbox' value='0' />
+                                else
+                                    echo "<input type='hidden' name='userCheckbox' value='0' />
                                         <input type='checkbox' name='userCheckbox' id='userCheckbox' value='1'>";
-                                  ?>
+                                ?>
                                 A pessoa cadastrada tera acesso ao sistema
                             </label>
                         </div>                    
@@ -193,9 +200,10 @@ $e_user = pg_fetch_object($pesq_user);
 
             <!--Botões do formulário -->
             <div class="form-actions">
-                <button  id ="enviar"  type="button" class="btn btn-primary edit-pessoa">Salvar</button>
-                <a href="view_pessoafisica.php?id=<?php echo $id_pessoa ?>"><button  type="button" class="btn">Cancelar</button></a
-                
+                <button  id ="enviar"  type="button" class="btn btn-primary edit-pessoa" >Salvar</button>
+                <a href="view_pessoafisica.php?id=<?php echo $id_pessoa ?>"><button  type="button" class="btn">Cancelar</button></a>
+
+
             </div>
 
 

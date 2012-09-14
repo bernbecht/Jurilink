@@ -1,10 +1,12 @@
 <?php
 require_once '../config.php';     //chama as configurações de página!
 
-if (!isset($_GET['user']))
+if ($_SESSION['tipo_usuario'] == 2)
     require_once '../template/header.php'; //chama o header
 else
     include '../template/header_user.php'; //chama o header
+
+
 
     
 //GET para ID do processo
@@ -152,9 +154,6 @@ $query = "SELECT to_char(data_atualizacao,'dd/mm/yyyy') as data_atualizacao, nom
 processo_ato.id_processo = $id_processo and processo_ato.id_ato = ato.id_ato order by data_atualizacao desc";
 $pesq_ato_proc = pg_query($conexao1, $query);
 $ato_proc = pg_fetch_object($pesq_ato_proc);
-
-
-
 ?>
 
 
@@ -165,16 +164,19 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
                 <h1>Processo <?php echo $processo->numero_unificado ?></h1>
             </div>
         </div>
-        <div class="direita">           
+        <?php
+        if ($_SESSION['tipo_usuario'] == 2)
+            echo " <div class='direita'>           
             <a href='relacao_processos.php' class='btn btn-small'>                
                 VOLTAR    
             </a>
-            <a href='<?php echo "editar_processo.php?id={$id_processo}";
-?>' class="btn btn-warning btn-small">
-                <i class="icon-pencil icon-white"></i>
+            <a href='editar_processo.php?id=$id_processo' class='btn btn-warning btn-small'>
+                <i class='icon-pencil icon-white'></i>
                 EDITAR     
             </a>
-        </div>
+        </div>";
+        ?>
+
     </div>
 
     <div class="divisor_horizontal_view"></div>
@@ -417,7 +419,7 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
 
         <div id="tabela_ato" class="collapse in">
             <div class="tabela_at"> 
-                
+
             </div>
         </div>
 
@@ -426,7 +428,7 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
 
     <div class="row row_view">
         <div class="esquerda">
-            <h2>Atos do Processo</h2>
+            <h2>Audiencias</h2>
         </div>
         <div class="direita">
             <?php
@@ -449,7 +451,7 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
     <div class="row">
         <div id='tabela_audiencia' class="collapse in">
             <div class="tabela_aud">                
-                
+
             </div>
         </div>
     </div><!-- ROW -->
@@ -550,10 +552,10 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
                 <button  id ="enviar"  type="button" class="btn btn-primary submit-audiencia-modal">Salvar</button>
             </div>
         </div>
-        
-        <input type='hidden' id='id' value="<?php echo $id_processo?>"
-        
-        </body>
+
+        <input type='hidden' id='id' value="<?php echo $id_processo ?>"
+
+               </body>
         </html>
         <?php
         require_once '../template/scripts.php'; //chama scripts comuns as paginas

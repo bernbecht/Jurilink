@@ -10,8 +10,9 @@ require_once '../classes/CAdvogado.php';
 
 $id_pessoa = $_POST['id_pessoa'];
 $href = $_POST['href'];
+$tipo_pessoa = $_POST['tipo_pessoa'];
 
-if ($href == 'pessoafisica') {
+if ($href == 'pessoafisica' || $tipo_pessoa== 0) {
     $fisica = new CFisica();
 
     $processo = $fisica->getProcessosFisicaComAdvocaciaTotal($id_pessoa);
@@ -46,7 +47,7 @@ if ($href == 'pessoafisica') {
     echo "</table>";
     echo "<p class='centro'><button id='todos_processos_com' class='btn btn-primary'>Ver todos os Processos</button></p>";
 }
-else if ($href == 'pessoajuridica') {
+else if ($href == 'pessoajuridica' || $tipo_pessoa== 1) {
     $fisica = new CJuridica();
 
     $processo = $fisica->getProcessosJuridicaComAdvocaciaTotal($id_pessoa);
@@ -82,7 +83,7 @@ else if ($href == 'pessoajuridica') {
     echo "<p class='centro'><button id='todos_processos_com' class='btn btn-primary'>Ver todos os Processos</button></p>";
 }
 
-else if ($href == 'advogado') {
+else if ($href == 'advogado' || $tipo_pessoa== 2) {
     $fisica = new CAdvogado();
 
     $processo = $fisica->getProcessosAdvogadoTotal($id_pessoa);

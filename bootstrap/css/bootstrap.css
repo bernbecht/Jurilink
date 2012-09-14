@@ -1864,6 +1864,7 @@ table .span24 {
     color: #ffffff;
     text-decoration: none;
     background-color: #0088cc;
+    
 }
 .dropdown.open {
     *z-index: 1000;

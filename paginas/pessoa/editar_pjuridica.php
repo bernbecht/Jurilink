@@ -23,8 +23,16 @@ $e_user = pg_fetch_object($pesq_user);
     <form id="form_pessoa" class="form-horizontal pessoaAjaxForm" method="post" action="../operacoes/CPessoa/editar_pessoa_rollback_op.php">
         <fieldset>
             <!--Campos formulário -->
-
-            <legend><h1>Editar Pessoa Juridica</h1></legend> 
+            
+            <legend>
+                <div class="esquerda">
+                    <h1>Editar Pessoa Juridica</h1>
+                </div>
+                <div id="loading_content">  
+                    
+                </div>                
+            </legend> 
+            
             <div id="msg_resultado"></div>
             <br/>
             <div class="controls">

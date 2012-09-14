@@ -162,6 +162,16 @@ function msgErroBD(data){
         $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>RG</b> digitado e invalido.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#rg').removeClass("").addClass("error");
     }
+    
+    else if(data == 'email_editar'){
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Nao foi possivel mandar um <b>E-MAIL</b> de confirmação de usuario. As alterações não serão gravadas.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        
+    }
+    
+    else if(data == 'email_incluir'){
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Nao foi possivel mandar um <b>E-MAIL</b> de confirmação de usuario. O usuario nao sera incluido.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        
+    }
                 
     else{
         $a('<div class="alert alert-error fade in">'+data_split+'</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
@@ -177,23 +187,34 @@ function atoAjax(modalidade){
     id_processo = $form.find( 'input[name="id_processo"]' ).val(),
     url = $form.attr( 'action' );
     
+    $a('.submit-ato-modal').attr('disabled','disabled');
+    $a(".submit-ato-modal").addClass('disabled');
+    
     $a.post(url,{
         id_ato:id_ato,
         id_processo:id_processo
-    },function(data){         
-        if (modalidade == 0){
+    },function(data){ 
+        if (data == 1){
             $a('<div id="alert_ato" class="alert alert-success fade in"><p>O ato foi inserido no sistema com sucesso.</p></div>').appendTo('#msg_resultado_ato'); // appendTo é pra por em algum lugar                
             
             //espera um tempo e desliga a modal
             setTimeout(function() {
+                loadAtos();
                 $a('#myModal').modal('toggle');
                 limparForm('#form_atualiza_ato');
                 $a('#alert_ato').remove();
-                location.reload();
-            }, 2500);
+                $a('.submit-ato-modal').removeAttr('disabled');
+                $a(".submit-ato-modal").removeClass('disabled');                
+            }, 2000); 
+        }//if
         
-           
+        else{
+            $a('<div id="alert_ato" class="alert alert-danger fade in"><p>'+data+'</p></div>').appendTo('#msg_resultado_ato'); // appendTo é pra por em algum lugar                
+            $a('.submit-ato-modal').removeAttr('disabled');
+            $a(".submit-ato-modal").removeClass('disabled');
         }
+        
+        
     });
     
     
@@ -207,25 +228,40 @@ function audienciaAjax(modalidade){
     local = $form.find( 'input[name="local"]' ).val(),
     url = $form.attr( 'action' );
     
+    $a('.submit-audiencia-modal').attr('disabled','disabled');
+    $a(".submit-audiencia-modal").addClass('disabled');
+    
+    
+    
+    
+    
     $a.post(url,{
         id_processo:id_processo,
         tipo_audiencia:tipo_audiencia,
         data_audiencia:data_audiencia,
         local:local
-    },function(data){ 
-        if (modalidade == 0){
+    },function(data){        
+
+        if (data==1){
             $a('<div id="alert_audiencia" class="alert alert-success fade in"><p>A audiencia foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado_audiencia'); // appendTo é pra por em algum lugar                
             
             //espera um tempo e desliga a modal
             setTimeout(function() {
+                loadAudiencia();
                 $a('#audienciaModal').modal('toggle');
                 limparForm('#form_atualiza_audiencia');
-                $a('#alert_audiencia').remove();
-                $a(window.document.location).attr('href',url);
-                location.reload();
-            }, 2500);
-            
-            
+                $a('#alert_audiencia').remove();                
+                $a('.submit-audiencia-modal').removeAttr('disabled');
+                $a(".submit-audiencia-modal").removeClass('disabled');    
+                
+            }, 2000);
+        }//if
+        else{
+           
+            $a('<div id="alert_audiencia" class="alert alert-danger fade in"><p>Nao foi possivel inserir audiencia. Verifique se a <b>data da audiencia</b> eh anterior a <b>data de distribuicao.</b></p></div>').appendTo('#msg_resultado_audiencia'); // appendTo é pra por em algum lugar                
+        
+            $a('.submit-audiencia-modal').removeAttr('disabled');
+            $a(".submit-audiencia-modal").removeClass('disabled');
         }
     });
     
@@ -253,7 +289,8 @@ function pessoaAjax(modalidade){
     
     var id_pessoa = $a('#id').val();
      
-    //alert(tipo);      
+    $a('<img id="loading_img" src="../../bootstrap/img/loading.gif" height="36" width="36" />').appendTo('#loading_content'); // appendTo é pra por em algum lugar                
+    
        
        
     $a.post(url,{
@@ -275,10 +312,14 @@ function pessoaAjax(modalidade){
         id_pessoa:id_pessoa
         
     },function(data){ 
+        
+        $a('#loading_img').remove();
+        
         if(modalidade==0){
             if(data==1){
+            
                 $a('.alert').remove();
-                $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa<b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+                $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa <b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
                 
                 //limparForm('.pessoaAjaxForm');
                 
@@ -291,11 +332,13 @@ function pessoaAjax(modalidade){
                 href_split = href.split('_');
         
                 //alert(href_split);
-                var url = "relacao_"+href_split[1]+".php";
+                var url = "relacao_"+href_split[1];
                 //alert(url);   
                            
                 setTimeout(function() {
                     limparForm('.pessoaAjaxForm');
+                    $a('.submit-pessoa').removeAttr('disabled');
+                    $a(".submit-pessoa").removeClass('disabled');
                     $a(window.document.location).attr('href',url);
 
                 }, 3000);          
@@ -305,6 +348,8 @@ function pessoaAjax(modalidade){
                 //alert("Else 0");
                 //alert(data);
                 msgErroBD(data);
+                $a('.submit-pessoa').removeAttr('disabled');
+                $a(".submit-pessoa").removeClass('disabled');
                 subirPagina();
                                
             }
@@ -313,18 +358,22 @@ function pessoaAjax(modalidade){
         //modalidade de adicionar outra pessoa
         else if(modalidade==1){
             if(data==1){
-                //alert("FOI"); 
+                
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa <b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar                
                 limparForm('.pessoaAjaxForm');
                 initFormPessoa();
                 subirPagina();
+                $a('.submit-outra-pessoa').removeAttr('disabled');
+                $a(".submit-outra-pessoa").removeClass('disabled');
                   
             }
             else{
                 //alert("Else 1");
                 //alert(data);
                 msgErroBD(data);
+                $a('.submit-outra-pessoa').removeAttr('disabled');
+                $a(".submit-outra-pessoa").removeClass('disabled');
                 subirPagina();
             }
         }
@@ -332,7 +381,7 @@ function pessoaAjax(modalidade){
         //modalidade de modal
         else if(modalidade==2){
             if(data==1){
-                //alert("FOI"); 
+            
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa <b>'+nome+'</b> foi inserida no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar                
                 limparForm('.pessoaAjaxForm');  
@@ -371,6 +420,8 @@ function pessoaAjax(modalidade){
                 subirModal();
                 
                 setTimeout(function() {
+                    $a('.submit-pessoa-modal').removeAttr('disabled');
+                    $a(".submit-pessoa-modal").removeClass('disabled');
                     $a('#myModal').modal('toggle');
 
                 }, 3000);   
@@ -380,6 +431,8 @@ function pessoaAjax(modalidade){
                 //alert("Else 1");
                 //alert(data);
                 msgErroBD(data);
+                a('.submit-pessoa-modal').removeAttr('disabled');
+                $a(".submit-pessoa-modal").removeClass('disabled'); 
                 subirModal();
                 
             }
@@ -387,9 +440,9 @@ function pessoaAjax(modalidade){
         
         //modalidade de editar uma pessoa
         else if(modalidade==3){
-            //alert("modo 0");
+            
             if(data==1){
-                //alert("If 0"); 
+                
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A pessoa <b>'+nome+'</b> foi editada no sistema com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
                 
@@ -418,7 +471,9 @@ function pessoaAjax(modalidade){
                 //alert(url);
                            
                 setTimeout(function() {
-                    //limparForm('.pessoaAjaxForm');
+                    
+                    $a('.editar-pessoa').removeAttr('disabled');
+                    $a(".editar-pessoa").removeClass('disabled');
                     $a(window.document.location).attr('href',url);
 
                 }, 3000);          
@@ -428,6 +483,8 @@ function pessoaAjax(modalidade){
                 //alert("Else 0");
                 //alert(data);
                 msgErroBD(data);
+                $a('.editar-pessoa').removeAttr('disabled');
+                $a(".editar-pessoa").removeClass('disabled');
                 subirPagina();
                                
             }
@@ -789,32 +846,30 @@ function validaFormPessoaJS(){
     $a(".submit-pessoa").click(function(){ 
         var mandar = validaFormPessoaSubmit();  
         subirPagina();
-        if(mandar==true){
+         
+        if(mandar==true){            
+            
+            //impedir duplo clique
+            $a('.submit-pessoa').attr('disabled','disabled');
+            $a(".submit-pessoa").addClass('disabled');
             pessoaAjax(0);
+           
         }
         
         else{
         //alert(mandar);            
         }
     });   
-    $a(".edit-pessoa").click(function(){ 
-        var mandar = validaFormPessoaSubmit();  
-        subirPagina();
-        if(mandar==true){
-            pessoaAjax(0);
-        }
         
-        else{
-        //alert(mandar);            
-        }
-    });
-    
     
     //Apertar o botão para incluir + 1 pessoa
     $a(".submit-outra-pessoa").click(function(){ 
         var mandar = validaFormPessoaSubmit();  
         subirPagina();
         if(mandar==true){
+            
+            $a('.submit-outra-pessoa').attr('disabled','disabled');
+            $a(".submit-outra-pessoa").addClass('disabled');
             pessoaAjax(1); 
         }
         
@@ -829,6 +884,8 @@ function validaFormPessoaJS(){
         var mandar = validaFormPessoaSubmit();  
         subirModal();
         if(mandar==true){
+            $a('.submit-pessoa-modal').attr('disabled','disabled');
+            $a(".submit-pessoa-modal").addClass('disabled');
             pessoaAjax(2);
         }
         
@@ -842,6 +899,8 @@ function validaFormPessoaJS(){
         var mandar = validaFormPessoaSubmit();  
         subirPagina();
         if(mandar==true){
+            $a('.edit-pessoa').attr('disabled','disabled');
+            $a(".edit-pessoa").addClass('disabled');
             pessoaAjax(3);
         }
         
@@ -898,10 +957,45 @@ function validaFormAtoJS(){
         else{
         //alert(mandar);            
         }
-    });
-    
+    });    
     
 }
+
+//função que carrega os processos no grid no menu INICIO
+function loadProcessosMain(){
+    var id_pessoa = $a('#id_pessoa').val();
+    var url ='paginas/operacoes/Main/getProcessosMain.php';
+    
+    $a.post(url,{
+        id_pessoa:id_pessoa
+    },function(data){
+        if(data==0){
+            $a("<div id='alerta_ultimos_processos' class='alert alert-info'><p><h3>Nao ha processos cadastrados.</h3></p></div>").appendTo('#ultimos_processos');
+        }
+        else{
+            $a('#alerta_ultimos_processos').remove();
+            $a(data).appendTo('#ultimos_processos');
+        }
+    });
+}//function
+
+//função que carrega os processos no grid no menu INICIO
+function loadAudienciasMain(){
+    var id_pessoa = $a('#id_pessoa').val();
+    var url ='paginas/operacoes/Main/getAudienciasMain.php';
+    
+    $a.post(url,{
+        id_pessoa:id_pessoa
+    },function(data){
+        if(data==0){
+            $a("<div id='alerta_ultimas_audiencias' class='alert alert-info'><p><h3>Nao ha audiencias cadastradas.</h3></p></div>").appendTo('#ultimas_audiencias');
+        }
+        else{
+            $a('#alerta_ultimas_audiencias').remove();
+            $a(data).appendTo('#ultimas_audiencias');
+        }
+    });
+}//function
 
 //Função de JQUERY
 $a(document).ready(function(){   
@@ -918,6 +1012,9 @@ $a(document).ready(function(){
         alert('limpar');
         limparForm('.pessoaAjaxForm');  
     });
+    loadProcessosMain();
+    loadAudienciasMain();
+
 });
 
 //Função para limite de resultados em relações de pessoas físicas, jurídicas e advogados

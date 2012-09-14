@@ -1,6 +1,6 @@
 <?php
 
-include 'CConexao.php';
+require_once  'CConexao.php';
 
 class CProcesso_ato {
 
@@ -33,14 +33,15 @@ class CProcesso_ato {
         $conexao1->closeConexao();
     }
 
-    public function excluirProcesso_ato($id_processo_ato) {
+    public function excluirProcesso_ato($id_processo,$id_ato) {
         $conexao1 = new CConexao();
 
 
         $conexao = $conexao1->novaConexao();
         pg_exec($conexao, "delete 
-                                from processo_ato
-                                     where id_processo_ato=" . $id_processo_ato);
+                          from processo_ato
+                          where id_processo=". $id_processo.
+                          "and id_ato=".$id_ato);
 
         $conexao1->closeConexao();
     }
@@ -52,12 +53,14 @@ class CProcesso_ato {
 
         $conexao1 = $conexao->novaConexao();
 
-        $query = "SELECT to_char(data_atualizacao,'dd/mm/yyyy') as data_atualizacao, nome, previsao, descricao,flag_cliente from processo_ato inner join ato on
+        $query = "SELECT to_char(data_atualizacao,'dd/mm/yyyy') as data_atualizacao, nome, previsao, descricao,flag_cliente, ato.id_ato, processo_ato.id_processo from processo_ato inner join ato on
         processo_ato.id_processo = $id_processo and processo_ato.id_ato = ato.id_ato order by data_atualizacao desc limit $limite";
         
         $pesq_ato_proc = pg_query($conexao1, $query);
         
         return($pesq_ato_proc);
+        
+        $conexao->closeConexao();
         
     }
 

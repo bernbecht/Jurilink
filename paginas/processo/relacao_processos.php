@@ -29,7 +29,7 @@ require_once '../config.php';     //chama as configurações de página!
     </div>
     
     
-    <div class="row">
+    <div class="row row_relacao">
         <div id="tabela_container">
             <div id="tabela"> 
                 

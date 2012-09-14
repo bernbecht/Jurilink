@@ -37,10 +37,16 @@ $parcial = pg_num_rows($sql[0]);
 
 //echo "Parcial:" . $parcial;
 
-echo "<div id='tabela'>";
-echo "<table = 'processos' class=table table-striped table-condensed >";
-echo "<thead>";
-echo "<tr>
+//se nao tiver algum processo cadastrado, retorne 0
+if (!$resultado) {
+    echo 0;
+    
+} else {
+
+    echo "<div id='tabela'>";
+    echo "<table = 'processos' class=table table-striped table-condensed >";
+    echo "<thead>";
+    echo "<tr>
                 <th>N&uacute;mero</th>
                 <th>Data Distribui&ccedil;&atilde;o</th>
                 <th>Natureza</th>
@@ -49,9 +55,9 @@ echo "<tr>
                 <th>Tr&acirc;nsito em Julgado</th>
                 <th>A&ccedil;&otilde;es</th>
                 </tr></thead>";
-echo "<tbody>";
-do {
-    echo "<tr>	
+    echo "<tbody>";
+    do {
+        echo "<tr>	
                 <td><a href=view_processo.php?id=$resultado->id_processo>" . $resultado->numero_unificado . "</a></td>
                 <td>" . $resultado->data_distribuicao . "</td>
                 <td>" . $resultado->nome_natureza . "</td>
@@ -60,27 +66,28 @@ do {
                 <td>" . $resultado->transito_em_julgado . "</td>
                 <td> ACOES</td>
                 </tr>";
-} while ($resultado = pg_fetch_object($sql[0]));
-echo "</tbody>";
-echo "</table>";
-echo "</div>";
+    } while ($resultado = pg_fetch_object($sql[0]));
+    echo "</tbody>";
+    echo "</table>";
+    echo "</div>";
 
 
-if ($modalidade == 1 || $modalidade == 0 || $modalidade == -1) {
-    $_SESSION['count'] = $_SESSION['count'] + $parcial;
-    $_SESSION['last_parcial'] = $parcial;
-} else if ($modalidade == 2) {
-    //echo "modal 2";
-    $_SESSION['count'] = $_SESSION['count'] - $_SESSION['last_parcial'];
+
+    if ($modalidade == 1 || $modalidade == 0 || $modalidade == -1) {
+        $_SESSION['count'] = $_SESSION['count'] + $parcial;
+        $_SESSION['last_parcial'] = $parcial;
+    } else if ($modalidade == 2) {
+        //echo "modal 2";
+        $_SESSION['count'] = $_SESSION['count'] - $_SESSION['last_parcial'];
+    }
+
+    if ($offset == 0) {
+        echo "!2";
+    }
+    if ($_SESSION['count'] == $total) {
+        echo "!1";
+    }
 }
-
-if ($offset == 0) {
-    echo "!2";
-}
-if ($_SESSION['count'] == $total) {
-    echo "!1";
-}
-
 //echo " CONTA:" . $_SESSION['count'];
 //echo 'offset: '.$offset;
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-include 'CConexao.php';
+require_once 'CConexao.php';
 
 class CAudiencia {
 
@@ -28,8 +28,10 @@ class CAudiencia {
 
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
-        pg_query($conexao, $query);
+        $sql = pg_query($conexao, $query);
         $conexao1->closeConexao();
+        return $sql; 
+       
     }
 
     function getAudiencia($id_processo,$limite) {
@@ -37,11 +39,34 @@ class CAudiencia {
         $conexao = new CConexao();
         $conexao1 = $conexao->novaConexao();
 
-        $query = "SELECT to_char(data,'dd/mm/yyyy') as data, local, tipo, id_audiencia from audiencia where audiencia.id_processo = $id_processo order by id_audiencia desc limit $limite";
+        $query = "SELECT to_char(data,'dd/mm/yyyy') as data, local, tipo, id_audiencia, id_processo from audiencia where audiencia.id_processo = $id_processo order by id_audiencia desc limit $limite";
         $pesq_audiencias = pg_query($conexao1, $query);
-        return $pesq_audiencias;
+        return $pesq_audiencias;        
         
+    }
+    
+    function getTodasAudiencias($limite) {
         
+        $conexao = new CConexao();
+        $conexao1 = $conexao->novaConexao();
+
+        $query = "SELECT to_char(data,'dd/mm/yyyy') as data, local, tipo, id_audiencia, id_processo from audiencia order by data desc limit $limite";
+        $pesq_audiencias = pg_query($conexao1, $query);
+        return $pesq_audiencias;        
+        
+    }
+    
+    
+     public function excluirAudiencia($id_audiencia) {
+        $conexao1 = new CConexao();
+
+
+        $conexao = $conexao1->novaConexao();
+        pg_exec($conexao, "delete 
+                          from audiencia
+                          where id_audiencia=". $id_audiencia);
+
+        $conexao1->closeConexao();
     }
 
 }

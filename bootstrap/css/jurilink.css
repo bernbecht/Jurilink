@@ -15,7 +15,7 @@ body{
 
 .barra-titulo{
     height: 30px;
-    width: 562px;
+    width: 99%;
     margin: 3px;
     background-color: #c7bc89;
     border: 1px solid rgba(0, 0, 0, 0.05);
@@ -28,12 +28,13 @@ body{
 .esquerda{
     float: left;
     padding: 0 0 0 0px;
+    margin-left: 10px;
 }
 
 
 .esquerda > h3{    
-    color: #7f7858;
-    text-shadow: 1px 1px 0 white;
+    color: #1C1919;
+    /*text-shadow: 1px 1px 0 white;*/
 }
 
 .esquerda > h1{
@@ -189,14 +190,14 @@ form legend h1{
     color: #5A5A5A;
     padding-bottom: 0px;
     margin: 0 0 18px 0;
-    
-        
+
+
 }
 
 .header-pagina h1 {
     line-height: 40px;
     font-size: 36px;
-    
+
 }
 
 
@@ -219,23 +220,19 @@ form legend h1{
 .view_pessoa_legenda p{
     font-weight: bold;
     font-size: 14px;
-    
-    
+
+
 }
 
 .row_view{
     margin-top: 40px;
 }
 
-.opa{
-    margin-top: 30px;
-    margin-bottom: 20px;
-    text-align: center;
-}
+
 
 .centro{
     text-align: center;
-    
+
 }.paginacao{
     margin-bottom: 20px;
 }
@@ -243,12 +240,12 @@ form legend h1{
 .paginacao select{
     margin-bottom: 0;
     margin-right: 20px;
-    
+
 }
 
 .paginacao button{
     margin-right: 20px;
-    
+
 }
 
 .view_processo_campo_vazio{
@@ -258,4 +255,65 @@ form legend h1{
 .maximizar{
     height: 28px;
     margin-bottom: 5px;
+}
+
+#loading_content{
+    height: 36px;
+}
+
+.row_relacao{
+    margin-top: 25px;
+}
+
+/* cor do grid no inicio */
+.main [class*="span"]{
+    background-color: #FFF;
+    padding-bottom: 10px;
+    box-shadow:  1px 1px 10px #888;
+}
+
+.barra-titulo{
+    height: 30px;
+    width: 98.5585585586%;
+    margin: 3px;
+
+    /* Safari 5.1, Chrome 10+ */
+    background: -webkit-linear-gradient(top, #7FB2F0, #648CBD);
+
+    /* Firefox 3.6+ */
+    background: -moz-linear-gradient(top, #2F2727, #1a82f7);    
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;   
+}
+
+
+.main .alert{
+    margin: 10px 3px 0 3px;
+    width: 89.7297297297%;
+}
+
+.main table{
+    width: 98.5585585586%;
+    margin: 5px 3px;
+}
+
+.main .table td{
+    font-size: 12px;
+}
+
+.main .table th{
+    font-size: 14px;
+}
+
+.subnav{
+    font-size: 12px;
+    font-style: normal;
+    font-weight: bold;  
+}
+
+.opa{
+    width:30px;
+    height: 30px;
 }

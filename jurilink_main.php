@@ -51,7 +51,7 @@ if (!isset($_SESSION['usuario']))
                     <li class="active" id="inicio"><a class="aba" href="jurilink_main.php">Inicio</a></li>
 
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pessoas
+                        <a href="#" class="dropdown-toggle " data-toggle="dropdown">Pessoas
                             <b class="caret"></b></a>
                         <ul id="pessoas_menu_dropdown" class="dropdown-menu">
                             <li><a class="aba drop" href="paginas/pessoa/relacao_pfisica.php">F&iacute;sica</a></li>
@@ -79,112 +79,83 @@ if (!isset($_SESSION['usuario']))
         </div>
 
 
-        <div class="container"  >
-            <div class="row show-grid">
-                <div class="span6 drop">
-                    <div class="drag">
-                        <div class="barra-titulo">
-                            <div class="esquerda">
-                                <h3>
-                                    Ultimos Lancamentos de Processo
-                                </h3>
-                            </div>
-                            <div class="direita">
-                                <a class="btn btn-small btn-success" href="#">
-                                    <i class="icon-plus icon-white"></i>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="tabela"> 
-                            <table class="table table-striped table-condensed" >                        
-                                <thead>
-                                    <tr >
-                                        <th >NProcesso</th>
-                                        <th>Categoria</th>
-                                        <th>Cliente</th>
-                                        <th>Advogado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry the Bird</td>
-                                        <td>Ber</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div> 
+        <div class="container" >
 
-                <div class="span6 drop">
-                    <div class="drag">
-                        <div class="barra-titulo">
-                            <div class="esquerda">
-                                <h3>
-                                    Ultimos Lancamentos de Processo
-                                </h3>
-                            </div>
-                            <div class="direita">
-                                <a class="btn btn-small btn-success" href="#">
-                                    <i class="icon-plus icon-white"></i>
+            <div class="row show-grid main ">
+                <div class="span6 ">
+                    <div class="barra-titulo" >
+                        <div class="esquerda">
+                            <h3>
+                                Ultimos Lancamentos de Processo
+                            </h3>
+                        </div>
+                        <div class="direita">
+                            <div class="">
+                                <a class="btn" href="#">
+                                    <i class="icon-plus "></i>
                                 </a>
                             </div>
-                        </div>
-                        <div class="tabela"> 
-                            <table class="table table-striped table-condensed" >                        
-                                <thead>
-                                    <tr >
-                                        <th >NProcesso</th>
-                                        <th>Categoria</th>
-                                        <th>Cliente</th>
-                                        <th>Advogado</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry the Bird</td>
-                                        <td>Ber</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                        </div>                        
+                    </div>
+                    <div id="ultimos_processos">
+
                     </div>
                 </div>
 
-            </div> <!-- Div de linha --->
+                <div class="span6 ">
+                    <div class="barra-titulo">
+                        <div class="esquerda">
+                            <h3>
+                                Proximas Audiencias
+                            </h3>
+                        </div>
+                        <div class="direita">
+                            <a class="btn btn-small btn-success" href="#">
+                                <i class="icon-plus icon-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="ultimas_audiencias">
 
-            <div class="row show-grid">
-                <div class="span12 drop">
+                    </div>
                 </div>
             </div>
+
+            <div class="row show-grid main ">
+                <div class="span6 ">
+                    <div class="barra-titulo">
+                        <div class="esquerda">
+                            <h3>
+                                Ultimos Lancamentos de Processo
+                            </h3>
+                        </div>
+                        <div class="direita">
+                            <a class="btn btn-small btn-success" href="#">
+                                <i class="icon-plus icon-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="span6 ">
+                    <div class="barra-titulo">
+                        <div class="esquerda">
+                            <h3>
+                                Proximas Audiencias
+                            </h3>
+                        </div>
+                        <div class="direita">
+                            <a class="btn btn-small btn-success" href="#">
+                                <i class="icon-plus icon-white"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+
+            <input type="hidden" id="id_pessoa" value="<?php echo $_SESSION['id_usuario'] ?>" />
+
+
         </div>
 
 

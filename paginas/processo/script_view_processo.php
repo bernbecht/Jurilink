@@ -14,7 +14,8 @@
             }, function(data){
                 //alert(data);
                 $a(".tabela_at").remove();
-                $a(data).appendTo("#tabela_ato");                
+                $a(data).appendTo("#tabela_ato"); 
+                excluirAto();
             });            
             
         });
@@ -36,13 +37,66 @@
             $a(".tabela_at").remove();
             $a(data).appendTo("#tabela_ato");     
             todosAtos();
+            excluirAto();
         });          
 
     }
     
     function retornaNumAtos(){
         $a('#max_ato').click(function(){
+         
             loadAtos();                     
+            
+        });
+    }
+    
+    function excluirAto(){
+        $a('.excluir-ato').click(function(){
+            //alert('opa');
+            
+            var dado = $a(this).find('input').val();  
+            
+         
+            var dado_split = dado.split('|');
+            var id_processo = dado_split[1];
+            var id_ato = dado_split[0];
+         
+            var url = '../operacoes/CProcesso_ato/excluir_ato_op.php';
+            
+          
+            
+            $a.post(url,{
+                id_processo:id_processo,
+                id_ato:id_ato               
+            }, function(data){
+                loadAtos();
+                
+            });
+            
+            
+        });
+    }
+    
+    function excluirAudiencia(){
+        $a('.excluir-audiencia').click(function(){            
+            
+            var dado = $a(this).find('input').val();  
+          
+            var id_audiencia = dado;
+         
+            var url = '../operacoes/CAudiencia/excluir_audiencia_op.php';
+            
+          
+            
+            $a.post(url,{
+                id_audiencia:id_audiencia              
+            }, function(data){
+            
+                loadAudiencia();
+                excluirAudiencia();
+                
+            });
+            
             
         });
     }
@@ -63,7 +117,9 @@
             }, function(data){
                 //alert(data);
                 $a(".tabela_aud").remove();
-                $a(data).appendTo("#tabela_audiencia");                
+                $a(data).appendTo("#tabela_audiencia");  
+                excluirAudiencia();
+                
             });            
             
         });
@@ -87,13 +143,15 @@
             $a(".tabela_aud").remove();
             $a(data).appendTo("#tabela_audiencia");    
             todasAudiencia();
+            excluirAudiencia();
         });          
 
     }
     
     function retornaNumAudiencia(){
         $a('#max_audiencia').click(function(){
-            loadAudiencia();                   
+            loadAudiencia();   
+            excluirAudiencia();
             
         });
     }
@@ -107,6 +165,8 @@
         loadAtos();
         retornaNumAtos();
         retornaNumAudiencia();
+        excluirAto();
+        excluirAudiencia();
        
         // alert("OI");
  

@@ -189,6 +189,7 @@ $user = pg_fetch_object($pesq_user);
 </div>
 
 <input id="id" type="hidden" value="<?php echo $id_pessoa ?>"/>
+<input id="tipo_pessoa" type="hidden" value="<?php echo $_SESSION['tipo_usuario'] ?>"/>
 </body>
 <?php
 require_once '../template/scripts.php'; //chama scripts comuns as paginas

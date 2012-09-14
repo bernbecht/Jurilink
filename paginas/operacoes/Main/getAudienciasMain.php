@@ -1,30 +1,28 @@
 <?php
 
-require_once '../classes/CAudiencia.php';
+require_once '../../classes/CAudiencia.php';
 
-require_once '../config.php';
+require_once '../../config.php';
 
 session_start();
 
 $id_processo = $_POST['id_processo'];
-$limite = $_POST['limite'];
+
 
 $audiencia = new CAudiencia();
 
-$sql = $audiencia->getAudiencia($id_processo, $limite);
+$sql = $audiencia->getTodasAudiencias(5);
 $audiencia = pg_fetch_object($sql);
 
-echo '<div class="tabela_aud"> ';
-if ($audiencia->local != '') {
 
+if (pg_num_rows($sql)>0) {
+    echo '<div class="tabela_aud"> ';
     echo "<table = 'audiencia' class='table table-striped table-condensed' >";
     echo "<thead>";
     echo "<tr>
                             <th>Data</th>
                             <th>Local</th>
-                            <th>Tipo</th>";
-    if ($_SESSION['tipo_usuario'] == 2)
-        echo "<th>Acoes</th>
+                            <th>Tipo</th>    
                             </tr>
                             </thead>";
     echo "<tbody>";
@@ -34,9 +32,7 @@ if ($audiencia->local != '') {
         echo "<tr>	
                     <td>" . $audiencia->data . "</a></td>
                     <td>" . $audiencia->local . "</td>
-                    <td>" . $audiencia->tipo . "</td>";
-        if ($_SESSION['tipo_usuario'] == 2)
-            echo "<td><a href=#><i class='icon-remove-circle excluir-audiencia'><input type='hidden' value = '".$audiencia->id_audiencia."'/></i></a></td>
+                    <td>" . $audiencia->tipo . "</td>
                     </tr>";
     } while ($audiencia = pg_fetch_object($sql));
 
@@ -44,8 +40,9 @@ if ($audiencia->local != '') {
     echo "</tbody>";
     echo "</table>";
     echo "<p class='centro'><button id='todas_audiencias' class='btn btn-primary'>Ver todas as Audiencias</button></p>";
+    echo'</div>';
 } else {
-    echo'<div class="alert alert-info"><h4>Nao ha audiencias no momento</h4></div>';
+    echo 0;
 }
-echo'</div>';
+
 ?>

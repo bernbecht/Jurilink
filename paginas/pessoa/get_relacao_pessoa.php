@@ -40,87 +40,88 @@ $parcial = pg_num_rows($sql[0]);
 
 //echo "Parcial:" . $parcial;
 
+if (!$resultado) {
+    echo 0;
+} else {
 
-
-echo "<div id='tabela'>";
-echo "<table = 'fisica' class=table table-striped table-condensed >";
-echo "<thead>";
-echo "<tr>
+    echo "<div id='tabela'>";
+    echo "<table = 'fisica' class=table table-striped table-condensed >";
+    echo "<thead>";
+    echo "<tr>
   <th>Nome</th>
   <th>CPF/CNPJ</th>";
 
-if ($tipo == 0 || $tipo == 2) {
-    echo '<th>RG</th>';
-}
-if($tipo == 2){
-   echo '<th>OAB</th>'; 
-}
+    if ($tipo == 0 || $tipo == 2) {
+        echo '<th>RG</th>';
+    }
+    if ($tipo == 2) {
+        echo '<th>OAB</th>';
+    }
 
-echo "<th>E-mail</th>
+    echo "<th>E-mail</th>
   <th>Telefone</th>
   <th>Cidade</th>
   <th>Estado</th>
   <th>A&ccedil;&otilde;es</th>
   </tr></thead>";
-echo "<tbody>";
+    echo "<tbody>";
 
-do {
-    if ($tipo == 0 || $tipo == 2) {
-        $dado_imposto = $resultado->cpf;
-    } else {
-        $dado_imposto = $resultado->cnpj;
-    }
-    
-    if($tipo == 0 ){
-        $url = 'view_pessoafisica.php?id=';
-    }
-    else if($tipo == 1){
-        $url = 'view_pessoajuridica.php?id=';
-    }
-    else if($tipo == 2){
-        $url = 'view_advogado.php?id=';
-    }
-    
-    echo "<tr>
+    do {
+        if ($tipo == 0 || $tipo == 2) {
+            $dado_imposto = $resultado->cpf;
+        } else {
+            $dado_imposto = $resultado->cnpj;
+        }
+
+        if ($tipo == 0) {
+            $url = 'view_pessoafisica.php?id=';
+        } else if ($tipo == 1) {
+            $url = 'view_pessoajuridica.php?id=';
+        } else if ($tipo == 2) {
+            $url = 'view_advogado.php?id=';
+        }
+
+        echo "<tr>
   <td><a href=$url$resultado->id_pessoa>" . $resultado->nome_pessoa . "</a></td>
   <td>" . $dado_imposto . "</td>";
-  
-    if ($tipo == 0 || $tipo == 2) {
-        echo "<td>" . $resultado->rg . "</td>";
-    }
-    
-    if ($tipo == 2) {
-        echo "<td>" . $resultado->oab . "</td>";
-    }
-    
-  
-   echo"<td>" . $resultado->email . "</td>
+
+        if ($tipo == 0 || $tipo == 2) {
+            echo "<td>" . $resultado->rg . "</td>";
+        }
+
+        if ($tipo == 2) {
+            echo "<td>" . $resultado->oab . "</td>";
+        }
+
+
+        echo"<td>" . $resultado->email . "</td>
   <td>" . $resultado->tel . "</td>
   <td>" . $resultado->cidade . "</td>
   <td>" . $resultado->nome_estado . "</td>
   <td>ACOES</td>
   </tr>";
-} while ($resultado = pg_fetch_object($sql[0]));
-echo "</tbody>";
-echo "</table>";
-echo "</div>";
+    } while ($resultado = pg_fetch_object($sql[0]));
+    echo "</tbody>";
+    echo "</table>";
+    echo "</div>";
 
 
 
 
-if ($modalidade == 1 || $modalidade == 0 || $modalidade == -1) {
-    $_SESSION['count'] = $_SESSION['count'] + $parcial;
-    $_SESSION['last_parcial'] = $parcial;
-} else if ($modalidade == 2) {
-    //echo "modal 2";
-    $_SESSION['count'] = $_SESSION['count'] - $_SESSION['last_parcial'];
-}
+    if ($modalidade == 1 || $modalidade == 0 || $modalidade == -1) {
+        $_SESSION['count'] = $_SESSION['count'] + $parcial;
+        $_SESSION['last_parcial'] = $parcial;
+    } else if ($modalidade == 2) {
+        //echo "modal 2";
+        $_SESSION['count'] = $_SESSION['count'] - $_SESSION['last_parcial'];
+    }
 
-if ($offset == 0) {
-    echo "!2";
-}
-if ($_SESSION['count'] == $total) {
-    echo "!1";
+    if ($offset == 0) {
+        echo "!2";
+    }
+    if ($_SESSION['count'] == $total) {
+        echo "!1";
+    }
 }
 
 //echo " CONTA:" . $_SESSION['count'];

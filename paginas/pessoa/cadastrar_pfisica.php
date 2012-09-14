@@ -14,7 +14,14 @@ $resultado = pg_fetch_object($pesq_uf);
         <fieldset>
             <!--Campos formulário -->
 
-            <legend><h1>Cadastrar Nova Pessoa Fisica</h1></legend> 
+            <legend>
+                <div class="esquerda">
+                    <h1>Cadastrar Nova Pessoa Fisica</h1>
+                </div>
+                <div id="loading_content">  
+                    
+                </div>                
+            </legend> 
 
             <div id="msg_resultado"></div>
             <br/>

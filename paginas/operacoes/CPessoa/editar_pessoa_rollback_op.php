@@ -2,17 +2,19 @@
 
 ini_set('display_errors', 0);
 
-include '../../classes/CPessoa.php';
+require_once '../../classes/CPessoa.php';
 
-include '../../classes/CJuridica.php';
+require_once '../../classes/CJuridica.php';
 
-include '../../classes/CFisica.php';
+require_once '../../classes/CFisica.php';
 
-include '../../classes/CUsuario.php';
+require_once '../../classes/CUsuario.php';
 
-include '../../classes/CAdvogado.php';
+require_once '../../classes/CAdvogado.php';
 
-include_once '../../classes/CConexao.php';
+require_once '../../classes/CConexao.php';
+
+require_once '../../classes/CEmail.php';
 
 function geraSenha($tamanho = 8, $maiusculas = true, $numeros = true, $simbolos = false) {
 
@@ -178,17 +180,16 @@ if ($erro != "") {
     $conexao1 = new CConexao();
 
     $conexao = $conexao1->novaConexao();
-   
+
     $user_editar = new CUsuario();
-    
+
     $ehUser = $user_editar->ehUser($id_pessoa);
 
     if ($ehUser->id_pessoa == '') {
         $ehUser = 0;
         //echo "n user!";
-    }
-    else{
-        $ehUser = 1;      
+    } else {
+        $ehUser = 1;
         //echo "eh user!";
     }
     //variável que vai nos dizer se foi editado ou não
@@ -240,6 +241,19 @@ if ($erro != "") {
 
             $editar = $user_editar->incluirUser($conexao, $id_pessoa, $senha, $em);
             if (!$editar) {
+                $db_error.= " " . pg_last_error($conexao);
+            } else {
+                $email = new CEmail();
+                $mandar = $email->enviarSenha($em, $em, $senha);
+
+                if ($mandar == 0) {
+                    $editar = null;
+                    $db_error = 'email_editar';
+                }
+            }
+        } else {
+            $editar = $user_editar->editarUser($conexao, $id_pessoa, 0, $em);
+             if (!$editar) {
                 $db_error.= " " . pg_last_error($conexao);
             }
         }
