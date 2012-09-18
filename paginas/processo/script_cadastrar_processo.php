@@ -5,6 +5,8 @@
     var $a = jQuery.noConflict();
     
     
+    
+    
     //função de teste para ajax e caixa diferente
     function processoAjax1(){
 
@@ -663,6 +665,8 @@
         //muda o tipo de pessoa no formulário de cadastro de pessoa
         // na pagina de cadastro de processo
         mudarTipoPessoaForm();
+        
+     
         
         
     });      

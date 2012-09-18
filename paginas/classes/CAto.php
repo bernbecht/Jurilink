@@ -27,7 +27,7 @@ class CAto {
                 .$this->flag_cliente."','"
                 .$this->nome."','"
                 .$this->descricao."')");
-        echo "Ato cadastrado!";
+        
         }
         else {
             pg_exec($conexao, "insert into ato(previsao,flag_cliente,nome,descricao)
@@ -36,7 +36,7 @@ class CAto {
                  '0','"     //Manda flag FALSE para user
                 .$this->nome."','"
                 .$this->descricao."')");
-        echo "Ato cadastrado!";            
+                 
             
         }
         

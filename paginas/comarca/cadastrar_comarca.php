@@ -4,25 +4,28 @@ require_once ( '../config.php');     //chama as configurações de página!
 ?>
 
 <div class="container content">
-    <form id="form_pessoa" class="form-horizontal" method="post" action="../operacoes/CComarca/incluir_comarca_op.php">
+    <form id="form_comarca" class="form-horizontal" method="post" action="../operacoes/CComarca/incluir_comarca_op.php">
         <fieldset>
 
             <!--Campos formul�rio -->
 
-            <legend>Cadastrar nova comarca</legend>
+            <legend><h1>Cadastrar nova comarca</h1></legend>
+            <div id="msg_resultado_processo">
+               
+            </div>  
 
             <div id="nome" class="control-group">
                 <label class="control-label" for="Nome">Nome</label>
                 <div class="controls">
-                    <input type="text" class="input-xlarge" id="nome_input" name="nome">                       
-                    <span  class="help-inline "></span>                    
+                    <input type="text" class="input-xlarge aviso" id="nome_input" name="nome">                       
+                    <span  class="help-inline ">Minimo 2 caracteres</span>                    
                 </div>
             </div>
 
             <!--Bot�es do formul�rio -->
             <div class="form-actions">
-                <button  id ="enviar"  type="submit" class="btn btn-primary">Salvar</button>
-                <button  type="button" class="btn">Cancelar</button>
+                <button  id ="submit-comarca"  type="button" class="btn btn-primary">Salvar</button>
+                <button  type="button" class="btn cancelar-processo">Cancelar</button>
             </div>
 
         </fieldset>
@@ -31,8 +34,11 @@ require_once ( '../config.php');     //chama as configurações de página!
         </div>
     </form>
 </div>
+</html>
 
 <?php
 require_once '../template/scripts.php';
+require_once 'scripts_comarca.php';
 //require_once 'scripts_cadastrar_pessoa.php';
 ?>
+</body>

@@ -1,5 +1,8 @@
 <?php
 
+//nao está sendo verificado se a comarca está REALMENTE sendo grava
+//apenas se ela tem os parametros certos
+
 include '../../classes/CComarca.php';
 
 $n = $_POST['nome'];
@@ -11,19 +14,14 @@ if (strlen($n) < 2) {
 }
 
 if ($erro != "") {
-    echo $erro;
+    echo 0;
 } 
 else {
     $comarca = new CComarca();
 
     $comarca->incluirComarca($n);
     
-    echo "Comarca cadastrada!";
+    echo 1;
 }
 ?>
 
-<html>
-<head>
-<meta http-equiv="refresh" content="1 ;URL=../../../jurilink_main.php">
-</head>
-</html>

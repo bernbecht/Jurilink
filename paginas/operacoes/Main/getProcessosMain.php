@@ -32,7 +32,7 @@ if(pg_num_rows($processo)>0) {
     do {
         echo "<tr>	
                     <td>" . $processos_advocacia->data_distribuicao . "</td>
-                    <td><a href=../processo/view_processo.php?id=$processos_advocacia->id_processo>" . $processos_advocacia->numero_unificado . "</a></td>
+                    <td><a href=paginas/processo/view_processo.php?id=$processos_advocacia->id_processo>" . $processos_advocacia->numero_unificado . "</a></td>
                     <td>" . $processos_advocacia->nome_natureza . "</td>
                     <td>" . $processos_advocacia->nome_autor . "</td>
                     <td>" . $processos_advocacia->nome_reu . "</td>

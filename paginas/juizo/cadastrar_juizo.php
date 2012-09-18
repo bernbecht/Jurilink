@@ -18,23 +18,27 @@ if (!$result) {
 
 
 <div class="container content">
-    <form name = "formulario_juizo" form id="form_juizo" class="form-horizontal" method="post" action="../operacoes/CJuizo/incluir_juizo_op.php">
+    <form name = "form_juizo" form id="form_juizo" class="form-horizontal" method="post" action="../operacoes/CJuizo/incluir_juizo_op.php">
         <fieldset>
             <!--Campos formul�rio -->
 
-            <legend>Cadastrar novo Juizo</legend>
+            <legend><h1>Cadastrar novo Juizo</h1></legend>
+            
+            <div id="msg_resultado">
+               
+            </div>   
 
             <div id="nome" class="control-group">
                 <label class="control-label" for="Nome">Nome</label>
                 <div class="controls">
                     <input type="text" class="input-xlarge" id="nome_input" name="nome">                       
-                    <span  class="help-inline "></span>                    
+                    <span  class="help-inline ">Minimo 2 caracteres</span>                    
                 </div>
             </div>
-           <div class="control-group">
+           <div id="comarca" class="control-group">
                 <label class="control-label" for="comarca">Comarca</label>
                 <div class="controls">                    
-                    <select  name="id_comarca" id="juizo">
+                    <select  name="id_comarca" id="comarca_option">
                         <option value="-1">-</option>
                         <?php
                         if ($result->id_comarca != NULL) {
@@ -49,8 +53,8 @@ if (!$result) {
 
             <!--Bot�es do formul�rio -->
             <div class="form-actions">
-                <button  id ="enviar"  type="submit" class="btn btn-primary">Salvar</button>
-                <button  type="button" class="btn">Cancelar</button>
+                <button  id ="submit-juizo"  type="button" class="btn btn-primary">Salvar</button>
+                <button  type="button" class="btn cancelar-juizo">Cancelar</button>
             </div>
 
         </fieldset>
@@ -59,7 +63,9 @@ if (!$result) {
         </div>
     </form>
 </div>
-
+</html>
 <?php
 require_once '../template/scripts.php';
+require_once 'scripts_juizo.php';
 ?>
+</body>

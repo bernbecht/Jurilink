@@ -942,6 +942,18 @@ function botaoMaximizar(){
             $a(this).find("i").removeClass("icon-minus").addClass("icon-plus");
         }
     });
+    
+    $a(".maxi_main").click(function(){
+        
+        var classe = $a(this).find("i").attr("class");
+        
+        if(classe == "icon-plus"){
+            $a(this).find("i").removeClass("icon-plus").addClass("icon-minus");
+        }
+        else{
+            $a(this).find("i").removeClass("icon-minus").addClass("icon-plus");
+        }
+    });
 }
    
 
@@ -965,10 +977,12 @@ function validaFormAtoJS(){
 function loadProcessosMain(){
     var id_pessoa = $a('#id_pessoa').val();
     var url ='paginas/operacoes/Main/getProcessosMain.php';
+    $a('<img class="loading_img_processo" src="bootstrap/img/loading.gif" height="80" width="80" />').appendTo('#ultimos_processos'); // appendTo é pra por em algum lugar                
     
     $a.post(url,{
         id_pessoa:id_pessoa
     },function(data){
+        $a('.loading_img_processo').remove();
         if(data==0){
             $a("<div id='alerta_ultimos_processos' class='alert alert-info'><p><h3>Nao ha processos cadastrados.</h3></p></div>").appendTo('#ultimos_processos');
         }
@@ -983,10 +997,13 @@ function loadProcessosMain(){
 function loadAudienciasMain(){
     var id_pessoa = $a('#id_pessoa').val();
     var url ='paginas/operacoes/Main/getAudienciasMain.php';
+    $a('<img class="loading_img_audiencia" src="bootstrap/img/loading.gif" height="80" width="80" />').appendTo('#ultimas_audiencias'); // appendTo é pra por em algum lugar                
+    
     
     $a.post(url,{
         id_pessoa:id_pessoa
     },function(data){
+        $a('.loading_img_audiencia').remove();
         if(data==0){
             $a("<div id='alerta_ultimas_audiencias' class='alert alert-info'><p><h3>Nao ha audiencias cadastradas.</h3></p></div>").appendTo('#ultimas_audiencias');
         }

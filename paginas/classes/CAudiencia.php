@@ -50,7 +50,12 @@ class CAudiencia {
         $conexao = new CConexao();
         $conexao1 = $conexao->novaConexao();
 
-        $query = "SELECT to_char(data,'dd/mm/yyyy') as data, local, tipo, id_audiencia, id_processo from audiencia order by data desc limit $limite";
+        $query = "SELECT to_char(data,'dd/mm/yyyy') as data, local, tipo, audiencia.id_processo, numero_unificado 
+        from audiencia
+        inner join processo
+        on audiencia.id_processo = processo.id_processo
+        order by data desc 
+        limit $limite";
         $pesq_audiencias = pg_query($conexao1, $query);
         return $pesq_audiencias;        
         

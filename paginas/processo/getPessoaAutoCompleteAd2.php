@@ -33,14 +33,23 @@ if ($nome != "" || $nome != " ") {
         $resultadoA = pg_fetch_object($sqlAd);
     } else {
 
+        $nome[0] = strtoupper($nome[0]);   
         $sql = $Pessoa->getPessoaNomeTipo($nome,2);
         $resultado = pg_fetch_object($sql);
+        
+        $nomeMinus = $nome;
+
+        $nomeMinus[0] = strtolower($nomeMinus[0]);
+
+        $sqlMinus = $Pessoa->getPessoaNomeTipo($nomeMinus,2);
+
+        $resultadoMinus = pg_fetch_object($sqlMinus);
     }
 
     echo "<ul>";
 
     if ($resultado == NULL && $resultadoF == NULL && $resultadoA == NULL) {
-        echo "<li>Dado nao Encontrado</li>";
+        
     } else {
 
         if (is_numeric($nome)) {
@@ -60,6 +69,11 @@ if ($nome != "" || $nome != " ") {
                 do {
                     echo "<li>" . $resultado->nome . "</li>";
                 } while ($resultado = pg_fetch_object($sql));
+            }
+            else{
+                do {
+                    echo "<li>" . $resultadoMinus->nome . "</li>";
+                } while ($resultadoMinus = pg_fetch_object($sqlMinus));
             }
         }
     }

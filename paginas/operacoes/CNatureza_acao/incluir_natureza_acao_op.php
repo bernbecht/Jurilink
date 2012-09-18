@@ -10,7 +10,7 @@ if (strlen($n) < 2) {
 
 
 if ($erro != "") {
-    echo $erro;
+    echo 0;
 }
 
  
@@ -19,12 +19,7 @@ else {
 
     $natureza_acao->incluirNatureza_acao($n);
     
-    echo "Natureza cadastrada!";
+    echo 1;
 }
 ?>
-<html>
-<head>
-<meta http-equiv="refresh" content="1 ;URL=../../../jurilink_main.php">
-</head>
-</html>
 

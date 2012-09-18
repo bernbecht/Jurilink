@@ -450,7 +450,9 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
 
     <div class="row">
         <div id='tabela_audiencia' class="collapse in">
-            <div class="tabela_aud">                
+            <div class="tabela_aud"> 
+                
+               
 
             </div>
         </div>

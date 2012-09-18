@@ -86,18 +86,16 @@ if (!isset($_SESSION['usuario']))
                     <div class="barra-titulo" >
                         <div class="esquerda">
                             <h3>
-                                Ultimos Lancamentos de Processo
+                                Processos Recentes
                             </h3>
                         </div>
-                        <div class="direita">
-                            <div class="">
-                                <a class="btn" href="#">
-                                    <i class="icon-plus "></i>
-                                </a>
-                            </div>
+                        <div class="direita">                            
+                                <button class="btn btn-small maxi_main" data-toggle="collapse" data-target="#ultimos_processos">
+                                    <i class="icon-minus "></i>
+                                </button>                           
                         </div>                        
                     </div>
-                    <div id="ultimos_processos">
+                    <div id="ultimos_processos" class="collapse in">
 
                     </div>
                 </div>
@@ -110,13 +108,15 @@ if (!isset($_SESSION['usuario']))
                             </h3>
                         </div>
                         <div class="direita">
-                            <a class="btn btn-small btn-success" href="#">
-                                <i class="icon-plus icon-white"></i>
-                            </a>
+                           
+                                <button class="btn btn-small maxi_main" data-toggle="collapse" data-target="#ultimas_audiencias">
+                                    <i class="icon-minus "></i>
+                                </button>
+                           
                         </div>
                     </div>
-                    <div id="ultimas_audiencias">
-
+                    <div id="ultimas_audiencias" class="collapse in">
+                          
                     </div>
                 </div>
             </div>
@@ -130,9 +130,14 @@ if (!isset($_SESSION['usuario']))
                             </h3>
                         </div>
                         <div class="direita">
-                            <a class="btn btn-small btn-success" href="#">
-                                <i class="icon-plus icon-white"></i>
-                            </a>
+                            <a class="btn btn-small btn-inverse" href="#">
+                                    <i class="icon-plus icon-white"></i>
+                                    Adicionar um Novo Processo
+                                </a>
+                                <a class="btn btn-small" href="#">
+                                    <i class="icon-plus "></i>
+                                </a>
+                           
                         </div>
                     </div>
                 </div>

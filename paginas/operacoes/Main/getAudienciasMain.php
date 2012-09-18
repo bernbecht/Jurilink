@@ -20,6 +20,7 @@ if (pg_num_rows($sql)>0) {
     echo "<table = 'audiencia' class='table table-striped table-condensed' >";
     echo "<thead>";
     echo "<tr>
+                            <th>Processo</th>
                             <th>Data</th>
                             <th>Local</th>
                             <th>Tipo</th>    
@@ -30,6 +31,7 @@ if (pg_num_rows($sql)>0) {
 
     do {
         echo "<tr>	
+                    <td><a href=paginas/processo/view_processo.php?id=$audiencia->id_processo>" . $audiencia->numero_unificado . "</a></td>
                     <td>" . $audiencia->data . "</a></td>
                     <td>" . $audiencia->local . "</td>
                     <td>" . $audiencia->tipo . "</td>
@@ -39,7 +41,7 @@ if (pg_num_rows($sql)>0) {
 
     echo "</tbody>";
     echo "</table>";
-    echo "<p class='centro'><button id='todas_audiencias' class='btn btn-primary'>Ver todas as Audiencias</button></p>";
+   
     echo'</div>';
 } else {
     echo 0;
