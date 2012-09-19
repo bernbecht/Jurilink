@@ -1,6 +1,11 @@
 <?php
 require_once '../template/header.php'; //chama o header
 require_once ( '../config.php');     //chama as configurações de página!
+require_once "../classes/CConexao.php";
+
+$conexao = new CConexao();
+$conexao1 = $conexao->novaConexao();
+
 
 
 $pesq_uf = pg_exec($conexao1, "select * from uf order by nome");
@@ -17,7 +22,7 @@ $resultado = pg_fetch_object($pesq_uf);
 
             <legend>
                 <div class="esquerda">
-                    <h1>Cadastrar Nova Pessoa Juridica</h1>
+                    <h1>Cadastrar Nova Pessoa Jurídica</h1>
                 </div>
                 <div id="loading_content">  
                     
@@ -43,7 +48,7 @@ $resultado = pg_fetch_object($pesq_uf);
                         <label class="control-label" for="cnpj">CNPJ</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge aviso" id="cnpj_input" name="cnpj">                       
-                            <span  class="help-inline ">Apenas digitos</span>                    
+                            <span  class="help-inline ">Apenas dígitoss</span>                    
                         </div>
                     </div>
                 </div>
@@ -53,7 +58,7 @@ $resultado = pg_fetch_object($pesq_uf);
             <div class="row">
                 <div class="span5" >
                     <div id="endereco"class="control-group">
-                        <label class="control-label" for="endereco">Endereco</label>
+                        <label class="control-label" for="endereco">Endereço</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge aviso" id="endereco_input" name="endereco">     
                             <span  class="help-inline "></span> 
@@ -129,7 +134,7 @@ $resultado = pg_fetch_object($pesq_uf);
                         <label class="control-label" for="telefone">Telefone</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge aviso" id="telefone_input" name="telefone">    
-                            <span  class="help-inline ">Apenas digitos</span> 
+                            <span  class="help-inline ">Apenas dígitoss</span> 
                         </div>
                     </div>
                 </div>
@@ -143,7 +148,7 @@ $resultado = pg_fetch_object($pesq_uf);
                         <div class="controls">
                             <label class="checkbox">
                                 <input type="checkbox" name="userCheckbox" id="userCheckbox" value="1">
-                                A pessoa cadastrada tera acesso ao sistema
+                                A pessoa cadastrada terá acesso ao sistema
                             </label>
                         </div>                    
                     </div>

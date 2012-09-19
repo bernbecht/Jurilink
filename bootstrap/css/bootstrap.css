@@ -404,7 +404,8 @@ h6 {
     color: #5A5A5A;
     padding-bottom: 17px;
     margin: 18px 0;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid #DDD;
+    /*border-bottom: 1px solid #DDD;*/
 }
 .page-header h1 {
     line-height: 40px;
@@ -624,7 +625,7 @@ select,
 .uneditable-input {
     display: inline-block;
     width: 210px;
-    height: 28px; /*height: 18px;*/
+    height: 20px; /*height: 18px;*/
     padding: 4px;
     margin-bottom: 9px;
     font-size: 13px;
@@ -782,10 +783,10 @@ select:focus {
     width: 150px;
 }
 .input-large {
-    width: 244px; /*210px*/
+    width: 242px; /*210px*/
 }
 .input-xlarge {
-    width: 270px;
+    width: 260px;
 }
 .input-xxlarge {
     width: 530px;
@@ -1022,7 +1023,7 @@ select:focus:required:invalid:focus {
     /*height: 18px;*/
     height: 14px;
     /*padding: 4px 5px;*/
-    padding: 6px 5px;
+    padding: 7px 5px;
     
     font-weight: normal;
     line-height: 18px;
@@ -1864,7 +1865,6 @@ table .span24 {
     color: #ffffff;
     text-decoration: none;
     background-color: #0088cc;
-    
 }
 .dropdown.open {
     *z-index: 1000;

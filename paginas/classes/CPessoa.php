@@ -175,7 +175,7 @@ class CPessoa {
                  
                 $resultado = pg_fetch_object($sql);
                 
-                if (!$resultado->id_pessoa) {
+                if ($resultado->id_pessoa == '') {
                     return -1;
                 } else {
                     //$resultado = pg_fetch_object($sql);

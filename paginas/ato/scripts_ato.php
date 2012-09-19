@@ -8,16 +8,18 @@
         nome = $form.find( 'input[name="nome"]' ).val(),
         previsao = $form.find( 'input[name="previsao"]' ).val(),
         descricao = $form.find( 'input[name="descricao"]' ).val(),
-        user = $form.find( 'input[name="flag_user"]:checked' ).val(),
+        user = $form.find( 'input[name="flag_userCheckbox"]:checked' ).val(),
         url = $form.attr( 'action' );
+        
+        //alert(user);
         
         $a.post(url,{
             nome:nome,
             previsao:previsao,
             descricao:descricao,
             user:user
-        },function(data){
-          
+        },function(data){         
+       
             if(data == 0){
                 $a('.alert').remove();
                 $a('<div class="alert alert-error fade in"><p>O ato <b>'+nome+'</b> nao foi inserido no sistema.</p></div>').appendTo('#msg_resultado_processo');

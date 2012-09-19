@@ -47,7 +47,7 @@ require_once '../config.php';     //chama as configurações de página!
                 <option value=15>15</option>
                 <option value=20>20</option>
             </select>
-            <button type ="button" class="btn" id="botao_proximo">Proximo<i class=icon-chevron-right></i></button>
+            <button type ="button" class="btn" id="botao_proximo">Próximo<i class=icon-chevron-right></i></button>
         </p>
     </div>   
     

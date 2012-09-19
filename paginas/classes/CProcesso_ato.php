@@ -23,12 +23,16 @@ class CProcesso_ato {
         $pesq_data = pg_query($conexao, $query);
         $da = pg_fetch_object($pesq_data);
         $this->data_atualizacao = $da->date;
+        
+        $sql = null;
 
-        pg_exec($conexao, "insert into processo_ato(id_processo,id_ato,data_atualizacao)
+        $sql = pg_exec($conexao, "insert into processo_ato(id_processo,id_ato,data_atualizacao)
                          values("
                 . $this->id_processo . ","
                 . $this->id_ato . ",'"
                 . $this->data_atualizacao . "')");
+        
+        return $sql;
 
         $conexao1->closeConexao();
     }

@@ -6,7 +6,7 @@ require_once '../config.php';     //chama as configurações de página!
 
 <div class="container content">
     <div class="row">
-        <div class ="esquerda"> <h1>Pessoa Juridica</h1> </div>        
+        <div class ="esquerda"> <h1>Pessoa Jurídica</h1> </div>        
     </div>
     <div class="divisor_horizontal_view"></div>
 
@@ -15,7 +15,7 @@ require_once '../config.php';     //chama as configurações de página!
             <a href="cadastrar_pjuridica.php">
                 <button type="button" class="btn btn-small btn-success">
                     <i class="icon-plus icon-white"></i>
-                    INCLUIR PESSOA JURIDICA       
+                    INCLUIR PESSOA JURÍDICA       
                 </button>
             </a> 
         </div>   
@@ -46,7 +46,7 @@ require_once '../config.php';     //chama as configurações de página!
                 <option value=15>15</option>
                 <option value=20>20</option>
             </select>
-            <button type ="button" class="btn" id="botao_proximo">Proximo<i class=icon-chevron-right></i></button>
+            <button type ="button" class="btn" id="botao_proximo">Próximo<i class=icon-chevron-right></i></button>
         </p>
     </div>
 

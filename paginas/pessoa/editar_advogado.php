@@ -1,6 +1,10 @@
 <?php
 require_once '../template/header.php'; //chama o header
 require_once ( '../config.php');     //chama as configurações de página!
+require_once "../classes/CConexao.php";
+
+$conexao = new CConexao();
+$conexao1 = $conexao->novaConexao();
 
 //GET para ID da pessoa
 if(isset($_GET['id'])) $id_pessoa = $_GET['id'];

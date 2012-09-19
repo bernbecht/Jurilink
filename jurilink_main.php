@@ -1,13 +1,15 @@
 <?php
-require_once ( 'paginas/config.php');
+
 session_start();
 if (!isset($_SESSION['usuario']))
-    header("location:main.php");
+    header("location:index.php");
 ?>
 
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
     <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>JuriLink ~ Basic</title>       
         <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
         <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css" />
@@ -104,7 +106,7 @@ if (!isset($_SESSION['usuario']))
                     <div class="barra-titulo">
                         <div class="esquerda">
                             <h3>
-                                Proximas Audiencias
+                                Próximas Audiências
                             </h3>
                         </div>
                         <div class="direita">
@@ -161,13 +163,11 @@ if (!isset($_SESSION['usuario']))
             <input type="hidden" id="id_pessoa" value="<?php echo $_SESSION['id_usuario'] ?>" />
 
 
-        </div>
+        </div>      
 
-
-
-
-
-        <!------ Scripts -->
+    </body>
+    
+     <!------ Scripts -->
 
         <script type="text/javascript" src="drag/src/prototype.js"></script>
         <script type="text/javascript"  src="drag/src/scriptaculous.js" ></script> 
@@ -178,6 +178,5 @@ if (!isset($_SESSION['usuario']))
         <script type="text/javascript">                                                        
                               
         </script>
-
-    </body>
+    
 </html>

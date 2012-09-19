@@ -45,7 +45,7 @@ if ($audiencia->local != '') {
     echo "</table>";
     echo "<p class='centro'><button id='todas_audiencias' class='btn btn-primary'>Ver todas as Audiencias</button></p>";
 } else {
-    echo'<div class="alert alert-info"><h4>Nao ha audiencias no momento</h4></div>';
+    echo'<div class="alert alert-info"><h4>Não há audiências no momento.</h4></div>';
 }
 echo'</div>';
 ?>

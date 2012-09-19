@@ -62,7 +62,7 @@ if (!$resultado) {
   <th>Telefone</th>
   <th>Cidade</th>
   <th>Estado</th>
-  <th>A&ccedil;&otilde;es</th>
+  
   </tr></thead>";
     echo "<tbody>";
 
@@ -98,7 +98,7 @@ if (!$resultado) {
   <td>" . $resultado->tel . "</td>
   <td>" . $resultado->cidade . "</td>
   <td>" . $resultado->nome_estado . "</td>
-  <td>ACOES</td>
+
   </tr>";
     } while ($resultado = pg_fetch_object($sql[0]));
     echo "</tbody>";

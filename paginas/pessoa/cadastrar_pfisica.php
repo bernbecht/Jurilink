@@ -1,6 +1,11 @@
 <?php
 require_once '../template/header.php'; //chama o header
 require_once ( '../config.php');     //chama as configurações de página!
+require_once "../classes/CConexao.php";
+
+$conexao = new CConexao();
+$conexao1 = $conexao->novaConexao();
+
 
 
 $pesq_uf = pg_exec($conexao1, "select * from uf order by nome");

@@ -66,11 +66,98 @@ function pegaId(){
     alert(this.id);
 }
 
+
+/**********************************************/
+
+
+function loginAjax(){   
+    
+    var $form = $a('#form_login'),
+    usuario = $form.find( 'input[name="usuario"]' ).val(),
+    senha = $form.find( 'input[name="senha"]' ).val(),
+    url = $form.attr( 'action' );
+    
+    $a.post(url,{
+        usuario:usuario,
+        senha:senha           
+    },function(data){
+        //alert(data);
+        $a('#alert_login').remove();
+        if(data == 0){
+            //limparForm('.pessoaAjaxForm');
+            $a('#submit-login').removeAttr('disabled');
+            $a("#submit-login").removeClass('disabled');
+            $a('<div id="alert_login" class="alert alert-error fade in"><p><b>Usuário</b> ou Senha </b> deve estar incorreto.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar           
+        }
+        else if(data==1){
+            $a(window.document.location).attr('href','jurilink_main.php');
+        }
+        else if(data == 2){
+            $a(window.document.location).attr('href','paginas/pessoa/view_user.php');
+        }
+    });
+}
+
+function validaFormLoginSubmit(){
+    
+    $a('#alert_login').remove();
+    
+    var dataRegex = /^([0-9]{2}\/[0-9]{2}\/[0-9]{4})$/;
+    
+    var $form = $a('#form_login'),
+    usuario = $form.find( 'input[name="usuario"]' ).val(),
+    senha = $form.find( 'input[name="senha"]' ).val();
+    
+    var mandar = true;
+    
+    if(usuario.length <=5){
+        $a('#usuario').removeClass("control-group").addClass("control-group error"); 
+        mandar =false;
+    }        
+    else{
+        $a('#usuario').removeClass("control-group error").addClass("control-group");  
+    }
+    
+    if(senha.length <1){
+        $a('#password').removeClass("control-group").addClass("control-group error"); 
+        mandar =false;
+    }        
+    else{
+        $a('#password').removeClass("control-group error").addClass("control-group");  
+    }
+    
+    return mandar;
+        
+    
+    
+}
+
+function validaFormLoginJS(){    
+
+    //Apertar o botão para login
+    $a("#submit-login").click(function(){ 
+        var mandar = validaFormLoginSubmit();  
+        subirPagina();     
+         
+        if(mandar==true){            
+            
+            //impedir duplo clique
+            $a('.submit-login').attr('disabled','disabled');
+            $a(".submit-login").addClass('disabled');
+            loginAjax();
+           
+        }
+        
+        else{
+            $a('<div id="alert_login" class="alert alert-error fade in"><p><b>Usuário</b> ou <b>Senha</b> deve estar incorreto.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar           
+        }
+    });  
+}
+
+//Inicializa o form de cadastro de pessoa
 function initFormPessoa(){
     $a("#nome_input").focus();
-    $a('#senha').hide();
-    
-    
+//$a('#senha').hide();
 }
 
 //faz uma pagina inteira subir
@@ -125,51 +212,51 @@ function msgErroBD(data){
                
     $a('.alert').remove();
     if(data_split_rg[11]=='"check_cpf"'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado eh invalido.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado é inválido.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cpf').removeClass("").addClass("error");
     }
     else if(data_split_rg[2]=="RG"){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>RG</b> digitado ja foi cadastrado.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>RG</b> digitado já foi cadastrado.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#rg').removeClass("").addClass("error");
     }
                 
     else if(split1[11]=='"check_cpf"'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado eh invalido.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado é inválido.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cpf').removeClass("").addClass("error");
     }
                
     else if(split1[12]=='"email_unico"'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>E-MAIL</b> digitado ja esta em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>E-MAIL</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#email').removeClass("").addClass("error");
     }
     else if(split1[12]=='"indice_cnpj"'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CNPJ</b> digitado ja esta em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CNPJ</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cnpj').removeClass("").addClass("error"); 
     } 
     else if(split1[11]=='"indice_cnpj"'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CNPJ</b> digitado ja esta em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CNPJ</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cnpj').removeClass("").addClass("error"); 
     } 
     else if(split1[12]=='"indice_cpf"'){        
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado ja esta em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cpf').removeClass("").addClass("error");
     } 
     else if(split1[11]=='"indice_cpf"'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado ja esta em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cpf').removeClass("").addClass("error");
     } 
     else if(data_split[11]=='"rg_tamanho"'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>RG</b> digitado e invalido.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>RG</b> digitado é inválido.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#rg').removeClass("").addClass("error");
     }
     
     else if(data == 'email_editar'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Nao foi possivel mandar um <b>E-MAIL</b> de confirmação de usuario. As alterações não serão gravadas.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Não foi possível mandar um <b>E-MAIL</b> de confirmação de usuário. As alterações não serão gravadas.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         
     }
     
     else if(data == 'email_incluir'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Nao foi possivel mandar um <b>E-MAIL</b> de confirmação de usuario. O usuario nao sera incluido.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Não foi possível mandar um <b>E-MAIL</b> de confirmação de usuário. O usuário não será incluído.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         
     }
                 
@@ -189,29 +276,45 @@ function atoAjax(modalidade){
     
     $a('.submit-ato-modal').attr('disabled','disabled');
     $a(".submit-ato-modal").addClass('disabled');
+    $a('<img id="loading_img" src="../../bootstrap/img/loading.gif" height="27" width="27" />').appendTo('#loading_content'); // appendTo é pra por em algum lugar                
     
     $a.post(url,{
         id_ato:id_ato,
         id_processo:id_processo
     },function(data){ 
+        $a("#loading_img").remove();
+        //alert(data);
         if (data == 1){
             $a('<div id="alert_ato" class="alert alert-success fade in"><p>O ato foi inserido no sistema com sucesso.</p></div>').appendTo('#msg_resultado_ato'); // appendTo é pra por em algum lugar                
             
             //espera um tempo e desliga a modal
             setTimeout(function() {
                 loadAtos();
-                $a('#myModal').modal('toggle');
+                $a('#myModal').modal('hide');
                 limparForm('#form_atualiza_ato');
                 $a('#alert_ato').remove();
                 $a('.submit-ato-modal').removeAttr('disabled');
                 $a(".submit-ato-modal").removeClass('disabled');                
-            }, 2000); 
-        }//if
+            }, 2500); 
+        }//if        
+       
         
-        else{
-            $a('<div id="alert_ato" class="alert alert-danger fade in"><p>'+data+'</p></div>').appendTo('#msg_resultado_ato'); // appendTo é pra por em algum lugar                
+        else if(data==0){
+            $a('<div id="alert_ato" class="alert alert-danger fade in"><p>O <b>ato</b> não pode ser incluído no sistema. Verifique se ele já não foi cadastrado anteriormente.</p></div>').appendTo('#msg_resultado_ato'); // appendTo é pra por em algum lugar                
             $a('.submit-ato-modal').removeAttr('disabled');
             $a(".submit-ato-modal").removeClass('disabled');
+        }
+        
+        else {
+            $a('<div id="alert_ato" class="alert alert-warning fade in"><p>Não foi possível localizar o <b>e-mail</b> do cliente. O ato será gravado no sistema mas o cliente não será notificado.</p></div>').appendTo('#msg_resultado_ato'); // appendTo é pra por em algum lugar                
+            setTimeout(function() {
+                loadAtos();
+                $a('#myModal').modal('hide');
+                limparForm('#form_atualiza_ato');
+                $a('#alert_ato').remove();
+                $a('.submit-ato-modal').removeAttr('disabled');
+                $a(".submit-ato-modal").removeClass('disabled');                
+            }, 2900); 
         }
         
         
@@ -258,7 +361,7 @@ function audienciaAjax(modalidade){
         }//if
         else{
            
-            $a('<div id="alert_audiencia" class="alert alert-danger fade in"><p>Nao foi possivel inserir audiencia. Verifique se a <b>data da audiencia</b> eh anterior a <b>data de distribuicao.</b></p></div>').appendTo('#msg_resultado_audiencia'); // appendTo é pra por em algum lugar                
+            $a('<div id="alert_audiencia" class="alert alert-danger fade in"><p>Não foi possível inserir audiência. Verifique se a <b>data da audiência</b> é anterior a <b>data de distribuição.</b></p></div>').appendTo('#msg_resultado_audiencia'); // appendTo é pra por em algum lugar                
         
             $a('.submit-audiencia-modal').removeAttr('disabled');
             $a(".submit-audiencia-modal").removeClass('disabled');
@@ -910,7 +1013,7 @@ function validaFormPessoaJS(){
     });
 }
 
-function habilitarSenha(){
+/*function habilitarSenha(){
     
     $a('#senha').hide();
     
@@ -927,6 +1030,7 @@ function habilitarSenha(){
         }
     }); 
 }
+ */
 
 function botaoMaximizar(){
     
@@ -984,7 +1088,7 @@ function loadProcessosMain(){
     },function(data){
         $a('.loading_img_processo').remove();
         if(data==0){
-            $a("<div id='alerta_ultimos_processos' class='alert alert-info'><p><h3>Nao ha processos cadastrados.</h3></p></div>").appendTo('#ultimos_processos');
+            $a("<div id='alerta_ultimos_processos' class='alert alert-info'><p><h3>Não há processos cadastrados.</h3></p></div>").appendTo('#ultimos_processos');
         }
         else{
             $a('#alerta_ultimos_processos').remove();
@@ -1005,7 +1109,7 @@ function loadAudienciasMain(){
     },function(data){
         $a('.loading_img_audiencia').remove();
         if(data==0){
-            $a("<div id='alerta_ultimas_audiencias' class='alert alert-info'><p><h3>Nao ha audiencias cadastradas.</h3></p></div>").appendTo('#ultimas_audiencias');
+            $a("<div id='alerta_ultimas_audiencias' class='alert alert-info'><p><h3>Não há audiências cadastradas.</h3></p></div>").appendTo('#ultimas_audiencias');
         }
         else{
             $a('#alerta_ultimas_audiencias').remove();
@@ -1013,6 +1117,18 @@ function loadAudienciasMain(){
         }
     });
 }//function
+
+function tooltip(){
+    $a('.tooltip_class').hover(
+        function () {
+            $a(this).tooltip('show');
+        }, 
+        function () {
+         
+            $a(this).tooltip('hide');
+        }
+        );
+}
 
 //Função de JQUERY
 $a(document).ready(function(){   
@@ -1022,7 +1138,7 @@ $a(document).ready(function(){
     trocarAbaSubnav();
     initFormPessoa();
     botaoMaximizar();
-    habilitarSenha();
+    // habilitarSenha();
     validaFormAtoJS();
     validaFormAudienciaJS();
     $a('.clear-form').click(function(){
@@ -1031,6 +1147,11 @@ $a(document).ready(function(){
     });
     loadProcessosMain();
     loadAudienciasMain();
+    validaFormLoginJS();
+    tooltip();
+  
+    
+ 
 
 });
 

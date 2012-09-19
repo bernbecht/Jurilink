@@ -198,7 +198,7 @@ class CProcesso {
             inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel=0)
             inner join pessoa preu on reu.id_pessoa = preu.id_pessoa)
             inner join pessoa pautor on autor.id_pessoa = pautor.id_pessoa)
-            order by data_distribuicao limit $limite offset $offset";
+            order by numero_unificado limit $limite offset $offset";
 
         $pesq_processo = pg_exec($conexao1, $query);
         //$resultado = pg_fetch_object($pesq_processo);

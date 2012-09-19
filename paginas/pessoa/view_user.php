@@ -1,7 +1,10 @@
 <?php
 require_once '../template/header_user.php'; //chama o header
 require_once '../config.php';     //chama as configurações de página!
+require_once "../classes/CConexao.php";
 
+$conexao = new CConexao();
+$conexao1 = $conexao->novaConexao();
 
 $id_pessoa = $_SESSION['id_usuario'];
 

@@ -1,6 +1,10 @@
 <?php
 require_once '../template/header.php'; //chama o header
 require_once '../config.php';     //chama as configurações de página!
+require_once "../classes/CConexao.php";
+
+$conexao = new CConexao();
+$conexao1 = $conexao->novaConexao();
 
 //GET para ID de processo
 if(isset($_GET['id'])) $id_processo = $_GET['id'];
@@ -177,6 +181,16 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
             </div>
 
             <div class="divisor_horizontal"></div>
+            
+            <div class="row">
+                <div id="msg_resultado_dica">
+                    <div class="alert alert-info fade in">
+                        <button type="button" class="close" data-dismiss="alert">x</button>
+                        <p><b>Dica:</b> Você pode adicionar mais de uma pessoa por campo. Basta adicionar uma vírgula após o nome. Ex: João<b>,</b>Maria
+                        </p>
+                    </div>
+                </div>  
+            </div>
 
 
             <div class="row">

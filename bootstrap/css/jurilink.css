@@ -5,7 +5,7 @@ body{
 }
 
 .body_login{
-    background: url('../../header_login.png') repeat-x ;
+    background: url('../img/header_login.png') repeat-x ;
     background-color: #FFF;
 }
 
@@ -42,7 +42,7 @@ body{
 
 
 .esquerda > h3{    
-    color: #1C1919;
+    color: #FFF;
     /*text-shadow: 1px 1px 0 white;*/
 }
 
@@ -348,7 +348,7 @@ form legend h1{
 /*Mexendo na largura da content na página de login*/
 .container_login{
     width: 800px;  
-    margin-top: 300px;
+    margin-top: 200px;
     
 }
 
@@ -364,6 +364,10 @@ do bootstrap, entao, estou fazendo manualmente*/
 
 .page_header_login{
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.float{
+    float: left;
 }
 
 

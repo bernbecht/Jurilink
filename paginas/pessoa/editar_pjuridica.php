@@ -1,6 +1,11 @@
 <?php
 require_once '../template/header.php'; //chama o header
 require_once ( '../config.php');     //chama as configurações de página!
+require_once "../classes/CConexao.php";
+
+$conexao = new CConexao();
+$conexao1 = $conexao->novaConexao();
+
 //GET para ID da pessoa
 if (isset($_GET['id']))
     $id_pessoa = $_GET['id'];
@@ -175,8 +180,8 @@ $e_user = pg_fetch_object($pesq_user);
             <!--Botões do formulário -->
             <div class="form-actions">
                 <button  id ="enviar"  type="button" class="btn btn-primary edit-pessoa">Salvar</button>
-<                <a href="view_pessoajuridica.php?id=<?php echo $id_pessoa ?>"><button  type="button" class="btn">Cancelar</button></a>
-=           </div>            
+                <a href="view_pessoajuridica.php?id=<?php echo $id_pessoa ?>"><button  type="button" class="btn">Cancelar</button></a>
+          </div>            
 
         </fieldset>
 

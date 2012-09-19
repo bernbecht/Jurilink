@@ -10,6 +10,13 @@ $f = $_POST['user'];
 
 $erro = "";
 
+if($f==1){
+    $f= true;
+}
+else{
+    $f= false; 
+}
+
 
 if (strlen($n) < 2) {
     $erro.= "nome menos que 2";

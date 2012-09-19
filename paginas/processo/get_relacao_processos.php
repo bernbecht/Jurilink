@@ -53,7 +53,7 @@ if (!$resultado) {
                 <th>Autor(es)</th>
                 <th>R&eacute;u(s)</th>
                 <th>Tr&acirc;nsito em Julgado</th>
-                <th>A&ccedil;&otilde;es</th>
+                
                 </tr></thead>";
     echo "<tbody>";
     do {
@@ -64,7 +64,7 @@ if (!$resultado) {
                 <td>" . $resultado->autor . "</td>
                 <td>" . $resultado->reu . "</td>
                 <td>" . $resultado->transito_em_julgado . "</td>
-                <td> ACOES</td>
+                
                 </tr>";
     } while ($resultado = pg_fetch_object($sql[0]));
     echo "</tbody>";

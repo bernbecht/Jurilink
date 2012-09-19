@@ -5,6 +5,11 @@ include '../../classes/CPessoa.php';
 include '../../classes/CProcesso.php';
 include '../../classes/CProcesso_Pessoa.php';
 include '../../config.php';
+require_once "../../classes/CConexao.php";
+
+$conexao = new CConexao();
+$conexao1 = $conexao->novaConexao();
+
 
 function mandarBD($conexao1, $editar, $db_error) {
     if ($editar) {

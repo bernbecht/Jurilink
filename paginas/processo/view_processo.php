@@ -1,19 +1,18 @@
 <?php
 require_once '../config.php';     //chama as configurações de página!
+require_once "../classes/CConexao.php";
+
+$conexao = new CConexao();
+$conexao1 = $conexao->novaConexao();
 
 if ($_SESSION['tipo_usuario'] == 2)
     require_once '../template/header.php'; //chama o header
 else
     include '../template/header_user.php'; //chama o header
-
-
-
     
 //GET para ID do processo
 if (isset($_GET['id']))
     $id_processo = $_GET['id'];
-
-
 
 /** TRATAMENTO DE PROCESSOS COM MAIS DE UM AUTOR OU RÉU* */
 $query = "SELECT count(*) from autor where id_processo = $id_processo and flag_papel = 0";
@@ -185,7 +184,7 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
         <div class="span2 offset1">
             <div class="view_pessoa">
                 <div class="view_pessoa_legenda">
-                    <p>Data de Distribuicao</p>
+                    <p>Data de Distribuição</p>
                     <p>Autor(es)</p>
                     <?php
                     if ($num_autores->count > 1) {
@@ -197,7 +196,7 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
                     }
                     ?>
                     <p>Advogado Autor(es)</p>
-                    <p>Valor da causa</p>
+                    <p>Valor da Causa</p>
                     <p>Deposito Judicial</p>
                     <p>Auto da Penhora</p>
 
@@ -287,10 +286,19 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
             <div class="view_pessoa">
                 <div class="view_pessoa_legenda">
                     <p>Transito em Julgado</p>
-                    <p>Reu(s)</p>  
-                    <p>Advogado Reu(s)</p>
+                    <p>Reu(s)</p> 
+                    <?php
+                    if ($num_reus->count > 1) {
+                        $i = 1;
+                        while ($i < $num_reus->count) {
+                            echo"<p class='view_processo_campo_vazio'></p>";
+                            $i++;
+                        }
+                    }
+                    ?>
+                    <p>Advogado Réu(s)</p>
                     <p>Natureza</p>                    
-                    <p>Juizo</p>
+                    <p>Juízo</p>
                     <p>Comarca</p>
                 </div>                
             </div>
@@ -428,7 +436,7 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
 
     <div class="row row_view">
         <div class="esquerda">
-            <h2>Audiencias</h2>
+            <h2>Audiências</h2>
         </div>
         <div class="direita">
             <?php
@@ -451,8 +459,8 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
     <div class="row">
         <div id='tabela_audiencia' class="collapse in">
             <div class="tabela_aud"> 
-                
-               
+
+
 
             </div>
         </div>
@@ -465,7 +473,12 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
 <div id="myModal" class="modal hide">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">x</button>
-        <h3>Atualizar Ato</h3>
+        <h3 class="float">Atualizar Ato            
+        </h3>
+        <div id="loading_content">  
+                
+            </div>  
+
     </div>
     <div class="modal-body">
         <form id="form_atualiza_ato" class="form-horizontal AtoAjaxForm" method="post" action="../operacoes/CProcesso_ato/incluir_processo_ato_op.php">
@@ -498,7 +511,7 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
             </fieldset>
         </form> 
 
-        <div class="modal-footer"> 
+        <div class="modal-footer">             
             <a href="#" class="btn cancelar-modal" data-dismiss="modal">Cancelar</a>
             <button  id ="enviar"  type="button" class="btn btn-primary submit-ato-modal">Salvar</button>
         </div>

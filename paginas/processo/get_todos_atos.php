@@ -54,7 +54,7 @@ if ($ato_proc->nome != '') {
     echo "</table>";
     echo "<p class='centro'><button id='todos_atos' class='btn btn-primary'>Ver todos os atos</button></p>";
 } else {
-    echo'<div class="alert alert-info"><h4>Nao ha atos no momento</h4></div>';
+    echo'<div class="alert alert-info"><h4>Não há atos no momento.</h4></div>';
 }
 
 echo '</div>';

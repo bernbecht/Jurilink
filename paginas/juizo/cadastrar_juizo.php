@@ -1,10 +1,11 @@
 <?php
 require_once '../template/header.php'; //chama o header
 require_once ( '../config.php');     //chama as configura��es de p�gina!
-?>
+require_once "../classes/CConexao.php";
 
-<!------ Conex�o com o BD e busca comarcas para inser��o do Ju�zo na respectiva -->
-<?php
+$conexao = new CConexao();
+$conexao1 = $conexao->novaConexao();
+
 
 $pesq = pg_query($conexao1, "SELECT id_comarca, nome FROM comarca");
 $result = pg_fetch_object($pesq);
