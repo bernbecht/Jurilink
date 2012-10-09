@@ -5,10 +5,10 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
        
 
-        <title>JuriLink ~ Basic</title>       
-        <link rel="stylesheet" href="bootstrap/css/bootstrap.css" />
-        <link rel="stylesheet" href="bootstrap/css/bootstrap-responsive.css" />
-        <link rel="stylesheet" href="bootstrap/css/jurilink.css" />  
+        <title>JuriLink - Login</title>       
+        <link rel="stylesheet" href="jurilink/bootstrap/css/bootstrap.css" />
+        <link rel="stylesheet" href="jurilink/bootstrap/css/bootstrap-responsive.css" />
+        <link rel="stylesheet" href="jurilink/bootstrap/css/jurilink.css" />  
 
     </head>
 
@@ -38,7 +38,7 @@
                     </div>
                     <div class="row-fluid">
                         <div class="span6">
-                            <form id ="form_login" action="login.php" method="post">
+                            <form id ="form_login" action="jurilink/login.php" method="post">
                                 <fieldset>
                                     <div class="row">
                                         <div class="span5">
@@ -83,10 +83,12 @@
                             <div class="alert alert-info">
                                 <p>
                                     <h3>Esqueceu a senha?</h3>
-                                    Não se preocupe. Clicando no botão abaixo, você poderá recebê-la no e-mail cadastrado no sistema.                                    
+                                    Não se preocupe. Mandamos outra para você. Basta clicar no botão abaixo e digitar o e-mail que está cadastrado no sistema.                                  
                                 </p>
-                                <p>
-                                    <button type="button" class="btn btn-primary">Recuperar Senha</button>
+                                <p id='campo_recuperar_senha'>
+                                    <button id="lembrar_senha_button" type="button" class="btn btn-primary">Recuperar Senha</button>
+									
+									
                                 </p>
                             </div>
                         </div>                                
@@ -96,11 +98,11 @@
     </body>
      <!------ Scripts -->
 
-        <script type="text/javascript" src="drag/src/prototype.js"></script>
-        <script type="text/javascript"  src="drag/src/scriptaculous.js" ></script> 
-        <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>    
-        <script type="text/javascript" src="jurilink_js.js"></script>    
+        <script type="text/javascript" src="jurilink/drag/src/prototype.js"></script>
+        <script type="text/javascript"  src="jurilink/drag/src/scriptaculous.js" ></script> 
+        <script type="text/javascript" src="jurilink/bootstrap/js/jquery.js"></script>
+        <script type="text/javascript" src="jurilink/bootstrap/js/bootstrap.js"></script>    
+        <script type="text/javascript" src="jurilink/jurilink_js.js"></script>    
 
         <script type="text/javascript">                                                        
                               
