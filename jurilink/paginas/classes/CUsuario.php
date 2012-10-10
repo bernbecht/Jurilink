@@ -7,7 +7,7 @@ class CUsuario {
     protected $id_pessoa;
     protected $email;
     protected $senha;
-
+    
     public function editarUser($conexao, $id_pessoa, $s, $em) {
         $this->id_pessoa = $id_pessoa;
         if ($s == 0) {

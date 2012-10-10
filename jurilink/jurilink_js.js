@@ -226,7 +226,7 @@ function validaFormLoginJS(){
 //Inicializa o form de cadastro de pessoa
 function initFormPessoa(){
     $a("#nome_input").focus();
-//$a('#senha').hide();
+
 }
 
 //faz uma pagina inteira subir
@@ -429,6 +429,59 @@ function audienciaAjax(modalidade){
     
 }
 
+//Função que manda o form de edição de conta por AJAX
+function contaAjax(){
+    var $form = $a( '.editConta' ),
+    id_pessoa = $form.find('input[name="id_pessoa"]').val(),
+    email = $form.find( 'input[name = "email"]').val(),
+    tel = $form.find('input[name="telefone"]').val(),
+    endereco = $form.find('input[name="endereco"]').val(),
+    bairro = $form.find('input[name="bairro"]').val(),
+    cidade = $form.find('input[name="cidade"]').val(),
+    estado = $form.find( 'option').filter(':selected' ).val(),
+    tipo = $form.find('input[name="tipo_usuario"]').val(),
+    url = $form.attr( 'action' );
+    
+    $a('<img id="loading_img" src="../../bootstrap/img/loading.gif" height="36" width="36" />').appendTo('#loading_content'); // appendTo é pra por em algum lugar
+
+    $a.post(url,{
+        id_pessoa:id_pessoa,
+        email:email,
+        tel:tel,
+        endereco:endereco,
+        bairro:bairro,
+        cidade:cidade,
+        estado:estado
+     },function(data){ 
+         $a('#loading_img').remove();
+         subirPagina();
+         $a('.alert').remove();
+         if(data == 1){
+            $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Seus dados foram alterados com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+
+            if (tipo == 2)
+                var url = "../../index.php";
+
+            else var url = "view_user.php";
+
+            setTimeout(function() {
+                $a('.edit-conta').removeAttr('disabled');
+                $a(window.document.location).attr('href',url);
+            }, 1000);          
+         }
+        else{
+                //alert("Else 0");
+                //alert(data);
+                msgErroBD(data);
+                $a('.edit-conta').removeAttr('disabled');
+                $a(".edit-conta").removeClass('disabled');
+                subirPagina();
+                               
+            }
+    });
+}
+
+
 //Função que manda o form de cadastro de pessoa por AJAX
 function pessoaAjax(modalidade){
     var $form = $a( '.pessoaAjaxForm' ),
@@ -453,8 +506,6 @@ function pessoaAjax(modalidade){
      
     $a('<img id="loading_img" src="../../bootstrap/img/loading.gif" height="36" width="36" />').appendTo('#loading_content'); // appendTo é pra por em algum lugar                
     
-       
-       
     $a.post(url,{
         id_pessoa:id_pessoa,
         nome:nome,
@@ -761,6 +812,90 @@ function validaFormAudienciaSubmit(){
     return mandar;
 }
 
+function validaFormEditConta(){
+    $a('.alert').remove();
+
+    var intRegex = /^\d+$/;
+    
+    var $form = $a( '.editConta' ),
+    id_pessoa = $form.find('input[name="id_pessoa"]').val(),
+    email = $form.find( 'input[name = "email"]').val(),
+    tel = $form.find('input[name="telefone"]').val(),
+    endereco = $form.find('input[name="endereco"]').val(),
+    bairro = $form.find('input[name="bairro"]').val(),
+    cidade = $form.find('input[name="cidade"]').val(),
+    estado = $form.find( 'option').filter(':selected' ).val();
+    
+    var mandar = true;
+    if(tel.length  == 8){            
+        if(intRegex.test(tel)) {
+            $a('#telefone').removeClass("error").addClass("");            
+        }
+            
+        else{
+            $a('#telefone').removeClass("").addClass("error");
+            mandar =false;
+        }
+        
+        
+    }   
+    else if (tel.length  == 10){            
+        if(intRegex.test(tel)) {
+            $a('#telefone').removeClass("error").addClass("");            
+        }
+            
+        else{
+            $a('#telefone').removeClass("").addClass("error");
+            mandar =false;
+        } 
+    }
+    else{
+        $a('#telefone').removeClass("success").addClass("error");  
+        mandar =false;            
+    }
+    
+    if(email.length  < 7){
+            $a('#email').removeClass("").addClass("error"); 
+            mandar =false;
+        }
+        else{
+            $a('#email').removeClass("error").addClass("");
+    }
+    if(cidade.length <=2){
+        $a('#cidade').removeClass("control-group").addClass("control-group error");  
+        mandar =false;
+    }        
+    else{
+        $a('#cidade').removeClass("control-group error").addClass("control-group");  
+    }
+        
+    if(estado == -1){            
+        $a('#estado').removeClass("control-group").addClass("control-group error");  
+        mandar =false;
+    }        
+    else{
+        $a('#estado').removeClass("control-group error").addClass("control-group");  
+    }
+            
+    if(endereco.length <=2){
+        $a('#endereco').removeClass("control-group").addClass("control-group error");  
+        mandar =false;
+    }        
+    else{
+        $a('#endereco').removeClass("control-group error").addClass("control-group");  
+    }
+        
+    if(bairro.length <=2){
+        $a('#bairro').removeClass("").addClass("error");  
+        mandar =false;
+    }        
+    else{
+        $a('#bairro').removeClass("error").addClass("control-group");  
+    }
+    return mandar;
+        
+}
+
 /*Função que valida o form de Pessoa no evento SUBMIT*/
 function validaFormPessoaSubmit(){
     
@@ -993,6 +1128,29 @@ function validaFormAudienciaJS(){
         }
     }); 
 }
+//-------------------------------------------------------------------------------------------------------
+function validaFormConta(){
+    //Apertar botão para Salvar alterações
+    $a(".edit-conta").click(function(){ 
+        var mandar = validaFormEditConta();
+        subirPagina();
+         
+        if(mandar==true){            
+            
+            //impedir duplo clique
+            $a('.edit-conta').attr('disabled','disabled');
+            $a(".edit-conta").addClass('disabled');
+            contaAjax();
+           
+        }
+        
+        else{
+        //alert(mandar);            
+        }
+    });
+    
+}
+
 
 //Função que contém os eventos para validação do cadastro de uma pessoa
 function validaFormPessoaJS(){  
@@ -1208,7 +1366,6 @@ function tooltip(){
 //Função de JQUERY
 $a(document).ready(function(){   
     
-    
     validaFormPessoaJS();
     trocarAbaSubnav();
     initFormPessoa();
@@ -1225,6 +1382,7 @@ $a(document).ready(function(){
     validaFormLoginJS();
     tooltip();
     esqueci_senha();
+    validaFormConta();
   
     
  

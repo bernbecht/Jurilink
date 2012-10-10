@@ -29,7 +29,7 @@ if(!isset($_SESSION['usuario'])) header("location:../../logout.php");
                                 <b class="caret"></b></a>
                             <ul id="menu2" class=" nav-list dropdown-menu">
                                 <li>
-                                    <a href="#">
+                                    <a href="../pessoa/view_conta.php">
                                         <i class="icon-user"></i>
                                         Conta
                                     </a>
@@ -72,7 +72,7 @@ if(!isset($_SESSION['usuario'])) header("location:../../logout.php");
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gerenciar Dados
                         <b class="caret"></b></a>
                     <ul id="dados_menu_dropdown" class="dropdown-menu">
-                        <li><a  href="../comarca/cadastrar_comarca.php">Comarca</a></li>
+                        <li><a  href="../comarca/relacao_comarcas.php">Comarca</a></li>
                         <li><a  href="../juizo/cadastrar_juizo.php">Juízo</a></li>
                         <li><a  href="../natureza_acao/cadastrar_natureza_acao.php">Natureza</a></li>
                         <li><a  href="../ato/cadastrar_ato.php">Ato</a></li>                        

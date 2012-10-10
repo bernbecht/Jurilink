@@ -28,7 +28,7 @@ if ($_SESSION['tipo_usuario'] == 2) header("location:../../logout.php");
                                 <b class="caret"></b></a>
                             <ul id="menu2" class=" nav-list dropdown-menu">
                                 <li>
-                                    <a href="#">
+                                    <a href="../pessoa/view_conta.php">
                                         <i class="icon-user"></i>
                                         Conta
                                     </a>

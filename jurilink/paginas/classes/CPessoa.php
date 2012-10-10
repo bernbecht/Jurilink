@@ -18,6 +18,32 @@ class CPessoa {
         
     }
 
+    public function editarConta($conexao,$email,$telefone,$estado,$endereco,$cidade,$bairro,$id_pessoa){
+        $this->email = $email;
+        $this->telefone = $telefone;
+        $this->uf = $estado;
+        $this->endereco = $endereco;
+        $this->cidade = $cidade;
+        $this->bairro = $bairro;
+        $this->id_pessoa=$id_pessoa;
+        $editar = null;
+        
+        $query = "UPDATE pessoa SET endereco = '".$this->endereco."',
+                                 cidade ='".$this->cidade."',
+                                 tel = '".$this->telefone."',
+                                 bairro = '".$this->bairro."',
+                                 email = '".$this->email."',
+                                 id_uf = ".$this->uf."
+                WHERE pessoa.id_pessoa = $this->id_pessoa";
+
+        $editar = pg_query($conexao,$query);
+        
+        return $editar;
+        
+        
+    }
+    
+    
     public function editarPessoa($conexao,$id_pessoa, $n, $e, $em, $t, $c, $uf, $b, $tipo) {
         $this->nome = $n;
         $this->endereco = $e;
