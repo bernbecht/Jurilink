@@ -154,7 +154,7 @@ $uf_pessoa = pg_fetch_object($pesq_uf_pessoa);
         </fieldset>
 
     </form> 
-    <form id="form_senha" class="form-horizontal trocaSenha" method="post" action="../operacoes/CPessoa/editar_pessoa_rollback_op.php">
+    <form id="form_senha" class="form-horizontal trocaSenha" method="post" action="../operacoes/CUsuario/editar_senha_op.php">
         <fieldset>
             
             <div class="divisor_horizontal_view"></div>
@@ -162,19 +162,12 @@ $uf_pessoa = pg_fetch_object($pesq_uf_pessoa);
                 <div class="esquerda">
                         <h1>Trocar Senha</h1>
                 </div>
-            </div>
-            <div class ="row">
-                <div class="span5" >
-                    <div id="senha_atual" class="control-group ">
-                        <label class="control-label" for="senha_atual">Atual</label>
-                        <div class="controls">
-                            <input type="password" class="input-xlarge aviso" id="senha_input" name="senha_atual">    
-                            <span  class="help-inline ">Insira senha atual</span> 
-                        </div>
-                    </div>                       
-                </div>
+               <div id="loading_content_senha">  
+                    
+            </div>   
                 
             </div>
+            <div id="msg_resultado_senha"></div>
               <div class ="row">
                 <div class="span5" >
                     <div id="nova_senha" class="control-group ">
@@ -195,7 +188,8 @@ $uf_pessoa = pg_fetch_object($pesq_uf_pessoa);
                     </div>                       
                 </div>
             </div>
-             <input value="<?php $id_pessoa?>" type="hidden" class="input-xlarge" id="id_pessoa_input" name="id_pessoa">
+             <input value="<?php echo $id_pessoa?>" type="hidden" class="input-xlarge" id="id_pessoa_input" name="id_pessoa">
+             <input type="hidden" class="input-xlarge" id="id_tipo_usuario_input" name="tipo_usuario" value="<?php echo $tipo_usuario?>" >
 
             <!--Botões do formulário -->
             <div class="form-actions">

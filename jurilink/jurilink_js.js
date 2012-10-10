@@ -429,6 +429,50 @@ function audienciaAjax(modalidade){
     
 }
 
+//Função que manda o formulário de alteração de senha por AJAX
+function senhaAjax(){
+    
+    var $form = $a( '.trocaSenha' ),
+    nova_senha = $form.find( 'input[name = "nova_senha"]').val(),
+    id_pessoa = $form.find('input[name="id_pessoa"]').val(),
+    tipo = $form.find('input[name="tipo_usuario"]').val(),
+    url = $form.attr( 'action' );
+    
+    
+    $a('<img id="loading_img" src="../../bootstrap/img/loading.gif" height="36" width="36" />').appendTo('#loading_content_senha'); // appendTo é pra por em algum lugar
+    
+    $a.post(url,{
+        id_pessoa:id_pessoa,
+        nova_senha:nova_senha        
+     },function(data){ 
+         $a('#loading_img').remove();
+         $a('.alert').remove();
+         if(data == 1){
+            $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Senha alterada com sucesso.</p></div>').appendTo('#msg_resultado_senha'); // appendTo é pra por em algum lugar
+            if (tipo == 2)
+                var url = "../../index.php";
+
+            else var url = "view_user.php";
+
+            setTimeout(function() {
+                $a('.edit-conta').removeAttr('disabled');
+                $a(window.document.location).attr('href',url);
+            }, 1000); 
+         
+     }
+     else{
+           
+            $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>ERRO</p></div>').appendTo('#msg_resultado_senha'); // appendTo é pra por em algum lugar
+        
+            $a('.troca-senha').removeAttr('disabled');
+            $a(".troca-senha").removeClass('disabled');
+        }
+         
+     });
+
+}
+
+
 //Função que manda o form de edição de conta por AJAX
 function contaAjax(){
     var $form = $a( '.editConta' ),
@@ -812,6 +856,43 @@ function validaFormAudienciaSubmit(){
     return mandar;
 }
 
+function validaFormTrocaSenha(){
+    var $form = $a( '.trocaSenha' ),
+    nova_senha = $form.find( 'input[name = "nova_senha"]').val(),
+    c_nova_senha = $form.find('input[name="c_nova_senha"]').val();
+    
+    
+    var mandar = true;
+    
+    //Se forem diferentes
+    if (nova_senha!=c_nova_senha){
+        $a('.alert').remove();
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Senhas diferentes</p></div>').appendTo('#msg_resultado_senha'); // appendTo é pra por em algum lugar
+        $a('#c_nova_senha').removeClass("control-group").addClass("control-group error"); 
+        $a('#nova_senha').removeClass("control-group").addClass("control-group error"); 
+        mandar = false;
+    }
+    //Se forem iguais
+    else {
+        $a('.alert').remove();
+        $a('nova_senha').removeClass("control-group error").addClass("control-group");  
+        $a('c_nova_senha').removeClass("control-group error").addClass("control-group");          
+        if(nova_senha.length <8){
+            $a('.alert').remove();
+            $a('#nova_senha').removeClass("control-group").addClass("control-group error"); 
+            $a('#c_nova_senha').removeClass("control-group").addClass("control-group error"); 
+            mandar =false;
+        }        
+        else{
+            $a('.alert').remove();
+            $a('#nova_senha').removeClass("control-group error").addClass("control-group");  
+            $a('#c_nova_senha').removeClass("control-group error").addClass("control-group");  
+        }
+    }
+    return mandar;
+}
+
+
 function validaFormEditConta(){
     $a('.alert').remove();
 
@@ -1128,6 +1209,26 @@ function validaFormAudienciaJS(){
         }
     }); 
 }
+
+
+
+function validaFormSenha(){
+    $a(".troca-senha").click(function(){ 
+        var mandar = validaFormTrocaSenha();
+        //subirPagina();
+         
+        if(mandar==true){            
+            //impedir duplo clique
+            $a('.troca-senha').attr('disabled','disabled');
+            $a(".troca-senha").addClass('disabled');
+            senhaAjax();
+           
+        }
+    });
+    
+    
+}
+
 //-------------------------------------------------------------------------------------------------------
 function validaFormConta(){
     //Apertar botão para Salvar alterações
@@ -1383,6 +1484,7 @@ $a(document).ready(function(){
     tooltip();
     esqueci_senha();
     validaFormConta();
+    validaFormSenha();
   
     
  

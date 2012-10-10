@@ -13,7 +13,9 @@ class CUsuario {
         if ($s == 0) {
             $query = "UPDATE usuario SET  email = '" . $em . "'
             WHERE id_pessoa = " . $this->id_pessoa . "";
-        } else {
+        } 
+       
+        else {
             $this->senha = $s;
             $query = "UPDATE usuario SET  email = '" . $em . "',
               senha='" . $this->senha . "' 
@@ -41,6 +43,19 @@ class CUsuario {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
 
+
+        $editar = pg_query($conexao, $query);
+        return $editar;
+    }
+    public function alterarSenha($conexao,$id_pessoa,$senha) {
+
+        $this->senha = $senha;
+        $this->id_pessoa = $id_pessoa;
+        
+        $query = "UPDATE usuario SET  senha = '" . $this->senha . "'
+            WHERE id_pessoa = '" . $this->id_pessoa . "'";
+
+        $editar = null;
 
         $editar = pg_query($conexao, $query);
         return $editar;
