@@ -6,9 +6,18 @@
     var frente = true;
     var tras = true;
     
-    function setarLimite(){
+    function setarLimiteEvento(){
 
         $a('#limite').change(function(){
+            
+            setarLimiteAjax();
+            removeAlerta();
+        });     
+                
+    }//FUNCTION    
+    
+    function setarLimiteAjax(){
+    
             var limite = $a('#limite :selected').val();         
             var url = 'get_relacao_processos.php';
             var modalidade = 0;            
@@ -43,10 +52,9 @@
                 else{
                     $a('#botao_anterior').removeClass('disabled');
                     tras= true;
-                }
-                
+                }               
             });
-        });     
+           
                 
     }//FUNCTION    
     
@@ -164,7 +172,7 @@
             
             //se tiver nenhum processo, mostre
             if(data==0){
-                 $a('<div id="alert_ato" class="alert alert-info fade in"><p><h4>Não há <b>processos</b> cadastrados.</h4></p></div>').appendTo('#tabela_container'); // appendTo é pra por em algum lugar                
+                $a('<div id="alert_ato" class="alert alert-info fade in"><p><h4>Não há <b>processos</b> cadastrados.</h4></p></div>').appendTo('#tabela_container'); // appendTo é pra por em algum lugar                
             }            
             else{
                 split_data = data.split('!');
@@ -198,11 +206,53 @@
         });
     }
     
+    function buscaProcessoAjax(){    
+     
+        $a("#busca-input").keyup(function() {
+            var txt =  $a("#busca-input").val();
+            var url = 'getProcessosFiltro.php';            
+            $a.post(url,
+            {
+                txt:txt 
+            },function(data){
+                removeAlerta();
+                
+                if(data==1){
+                    $a('#tabela').remove();
+                    $a('.centro').show();
+                    setarLimiteAjax();
+                }                
+                else if(data==0){
+                     $a('#tabela').remove();
+                     $a('.centro').hide();
+                    $a('<div id="alert_filtro" class="alert alert-info fade in"><p><h4>Processo não existe.</h4></p></div>').appendTo('#tabela_container'); // appendTo é pra por em algum lugar                
+                } 
+                
+                else{
+                    $a('#tabela').remove();
+                    $a('.centro').hide();                  
+                    $a(data).appendTo('#tabela_container');
+                }
+                
+            });//post
+        });//keyup       
+
+    } 
+    
+    function removeAlerta(){
+        $a('#alert_filtro').remove();
+    }
+    
+    
+    
     $a(document).ready(function (){   
         loadInicial();
-        setarLimite();
+        setarLimiteEvento();
         irPraFrente();
         irPraTras();
+        buscaProcessoAjax();
+    
+        
     }); 
 
 </script>

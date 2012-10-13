@@ -222,6 +222,89 @@ class CProcesso {
 
         return array($pesq_processo, $total);
     }
+    
+    //pega os processos, nomes das partes e detalhes passando o numero unificado
+    function getProcessoRelacaoComNumUni($n) {
+        $conexao = new CConexao();
+        $conexao1 = $conexao->novaConexao();
+
+
+
+        $query = "select processo.id_processo, data_distribuicao as d_indice, numero_unificado,  data_distribuicao,
+           transito_em_julgado, natureza_acao.nome as nome_natureza,
+            pautor.nome as autor, preu.nome as reu
+            from (((((processo 
+            inner join natureza_acao
+            on processo.id_natureza_acao = natureza_acao.id_natureza_acao and CAST (numero_unificado AS TEXT) like '{$n}%' )
+            inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel=0)
+            inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel=0)
+            inner join pessoa preu on reu.id_pessoa = preu.id_pessoa)
+            inner join pessoa pautor on autor.id_pessoa = pautor.id_pessoa)
+            order by data_distribuicao desc";
+
+        $pesq_total = pg_query($conexao1, $query);  
+
+        return $pesq_total;
+    }
+    
+     //pega os processos, nomes das partes e detalhes passando o nome da pessoa
+    function getProcessoPessoa($nome) {
+        $conexao = new CConexao();
+        $conexao1 = $conexao->novaConexao();
+
+
+
+        $query = "select processo.id_processo, data_distribuicao as d_indice, numero_unificado,  data_distribuicao,
+           transito_em_julgado, natureza_acao.nome as nome_natureza,
+            pautor.nome as autor, preu.nome as reu
+            from (((((processo 
+            inner join natureza_acao
+            on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
+            inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel=0)
+            inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel=0)
+            inner join pessoa preu on reu.id_pessoa = preu.id_pessoa and preu.nome ~* '{$nome}')
+            inner join pessoa pautor on autor.id_pessoa = pautor.id_pessoa)
+            
+            union 
+
+            select processo.id_processo, data_distribuicao as d_indice, numero_unificado,  data_distribuicao,
+           transito_em_julgado, natureza_acao.nome as nome_natureza,
+            pautor.nome as autor, preu.nome as reu
+            from (((((processo 
+            inner join natureza_acao
+            on processo.id_natureza_acao = natureza_acao.id_natureza_acao )
+            inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel=0)
+            inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel=0)
+            inner join pessoa preu on reu.id_pessoa = preu.id_pessoa)
+            inner join pessoa pautor on autor.id_pessoa = pautor.id_pessoa  and pautor.nome ~* '{$nome}')
+           ";
+
+        $pesq_total = pg_query($conexao1, $query);  
+
+        return $pesq_total;
+    }
+    
+    //pega os processos, nomes das partes e detalhes passando a data
+    function getProcessoData($data) {
+        $conexao = new CConexao();
+        $conexao1 = $conexao->novaConexao();
+
+        $query = "select processo.id_processo, data_distribuicao as d_indice, numero_unificado,  data_distribuicao,
+           transito_em_julgado, natureza_acao.nome as nome_natureza,
+            pautor.nome as autor, preu.nome as reu
+            from (((((processo 
+            inner join natureza_acao
+            on processo.id_natureza_acao = natureza_acao.id_natureza_acao and processo.data_distribuicao = '{$data}')
+            inner join autor on processo.id_processo = autor.id_processo and autor.flag_papel=0)
+            inner join reu on processo.id_processo = reu.id_processo and reu.flag_papel=0)
+            inner join pessoa preu on reu.id_pessoa = preu.id_pessoa)
+            inner join pessoa pautor on autor.id_pessoa = pautor.id_pessoa)
+            ";
+
+        $pesq_total = pg_query($conexao1, $query);  
+
+        return $pesq_total;
+    }
 
 }
 

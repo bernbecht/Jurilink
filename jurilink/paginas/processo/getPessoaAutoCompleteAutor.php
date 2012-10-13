@@ -17,6 +17,7 @@ if ($nome != "" ) {
 
     $Pessoa = new CPessoa();
     $resultado = NULL;
+    $resultadoMinus = NULL;
     $qtd_id = 0;
 
 
@@ -60,10 +61,7 @@ if ($nome != "" ) {
     }
 
     echo "<ul>";
-	
-	
-		echo "<li>".$nome."</li>";
-	
+
 
     if ($resultado == NULL && $resultadoMinus == NULL && $qtd_id == 0) {
         echo "";

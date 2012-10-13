@@ -172,11 +172,7 @@
         retornaNumAtos();
         retornaNumAudiencia();
         excluirAto();
-        excluirAudiencia();
-       
-        // alert("OI");
- 
- 
+        excluirAudiencia();       
     
     }); 
 

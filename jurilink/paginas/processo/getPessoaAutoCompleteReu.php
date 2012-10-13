@@ -17,6 +17,7 @@ if ($nome != "" ) {
 
     $Pessoa = new CPessoa();
     $resultado = NULL;
+    $resultadoMinus = NULL;
     $qtd_id = 0;
 
 
