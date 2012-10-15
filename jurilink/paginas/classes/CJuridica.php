@@ -53,6 +53,23 @@ class CJuridica {
 
         return $sql;
     }
+    
+    public function getJuridicaCNPJFiltro($n) {
+        $conexao1 = new CConexao();
+        $conexao = $conexao1->novaConexao();
+
+        $sql = pg_exec($conexao, "select *, uf.nome as estado, pessoa.nome as nome  
+            from juridica 
+            INNER JOIN pessoa 
+            ON juridica.id_pessoa = pessoa.id_pessoa 
+            and (CAST (juridica.cnpj AS TEXT) like '{$n}%') 
+            INNER JOIN uf
+            ON pessoa.id_uf = uf.id_uf");
+
+        $conexao1->closeConexao();
+
+        return $sql;
+    }
 
     public function getProcessosJuridicaComAdvocacia($id_pessoa) {
 
@@ -200,6 +217,27 @@ class CJuridica {
         $pesq_proc_advocacia = pg_query($conexao, $query);
         
         return $pesq_proc_advocacia;
+    }
+    
+     //retorna FISICA passando nome
+    public function getJuridicaPorNome($n) {
+        $conexao1 = new CConexao();
+        $conexao = $conexao1->novaConexao();
+
+
+        $sql = pg_exec($conexao, "select *, uf.nome as estado, pessoa.nome as nome  
+            from ((juridica
+            INNER JOIN pessoa 
+            ON juridica.id_pessoa = pessoa.id_pessoa 
+            and pessoa.nome ~* '{$n}'             
+            and pessoa.tipo = 1)
+            INNER JOIN uf
+            ON pessoa.id_uf = uf.id_uf)
+          ");
+
+        $conexao1->closeConexao();
+
+        return $sql;
     }
 
 }

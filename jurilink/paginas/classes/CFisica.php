@@ -1,4 +1,5 @@
 <?php
+
 include_once 'CConexao.php';
 
 class CFisica {
@@ -8,24 +9,22 @@ class CFisica {
     protected $rg;
     protected $orgao_expedidor;
 
-    
     public function editarFisica($conexao, $id_pessoa, $c, $r, $oe) {
         $this->id_pessoa = $id_pessoa;
         $this->cpf = $c;
         $this->rg = $r;
         $this->orgao_expedidor = $oe;
-        
-        pg_query($conexao,"UPDATE fisica SET rg = '000000000' WHERE fisica.id_pessoa = ".$this->id_pessoa." ");
-        
-        $query = "UPDATE fisica SET cpf = '".$this->cpf."', rg = '".$this->rg."',
-            orgao_expedidor = '".$this->orgao_expedidor."' WHERE fisica.id_pessoa = ".$this->id_pessoa." ";
+
+        pg_query($conexao, "UPDATE fisica SET rg = '000000000' WHERE fisica.id_pessoa = " . $this->id_pessoa . " ");
+
+        $query = "UPDATE fisica SET cpf = '" . $this->cpf . "', rg = '" . $this->rg . "',
+            orgao_expedidor = '" . $this->orgao_expedidor . "' WHERE fisica.id_pessoa = " . $this->id_pessoa . " ";
 
         $editar = pg_query($conexao, $query);
-        
+
         return $editar;
-        
     }
-     
+
     public function incluirFisica($conexao, $id_pessoa, $c, $r, $oe) {
 
         $this->id_pessoa = $id_pessoa;
@@ -90,7 +89,74 @@ class CFisica {
         return $sql;
     }
 
-    /*Retorna os processos com a advocacia passando o id*/
+    //retorna FISICA passando CPF ou RG
+    //$n é o CPF/RG e o $t é o tipo da pessoa (física ou advogado)
+    //Usado no filtro de PESSOAS (tipo2 pq tô com medo de ferrar com outra função)
+    public function getFisicaCpfRGTipo2($n, $t) {
+        $conexao1 = new CConexao();
+        $conexao = $conexao1->novaConexao();
+
+        switch ($t) {
+            case 0:
+
+                $sql = pg_exec($conexao, "select *, uf.nome as estado, pessoa.nome as nome  
+            from ((fisica 
+            INNER JOIN pessoa 
+            ON fisica.id_pessoa = pessoa.id_pessoa 
+            and (CAST ( fisica.rg AS TEXT) like '{$n}%' 
+            or CAST ( fisica.cpf AS TEXT) like '{$n}%') 
+            and pessoa.tipo = 0)
+            INNER JOIN uf
+            ON pessoa.id_uf = uf.id_uf)
+          ");
+                break;
+
+            case 2:
+                
+                $sql = pg_exec($conexao, "select *, uf.nome as estado, pessoa.nome as nome  
+            from (((fisica 
+            INNER JOIN pessoa 
+            ON fisica.id_pessoa = pessoa.id_pessoa 
+            and (CAST ( fisica.rg AS TEXT) like '{$n}%' 
+            or CAST ( fisica.cpf AS TEXT) like '{$n}%') 
+            and pessoa.tipo = 2)
+            INNER JOIN uf
+            ON pessoa.id_uf = uf.id_uf)
+            INNER JOIN advogado
+            ON fisica.id_pessoa = advogado.id_pessoa)
+          ");
+                break;
+        }
+
+
+        $conexao1->closeConexao();
+
+        return $sql;
+    }
+
+    //retorna FISICA passando nome
+    public function getFisicaPorNome($n) {
+        $conexao1 = new CConexao();
+        $conexao = $conexao1->novaConexao();
+
+
+        $sql = pg_exec($conexao, "select *, uf.nome as estado, pessoa.nome as nome  
+            from ((fisica 
+            INNER JOIN pessoa 
+            ON fisica.id_pessoa = pessoa.id_pessoa 
+            and pessoa.nome ~* '{$n}'             
+            and pessoa.tipo = 0)
+            INNER JOIN uf
+            ON pessoa.id_uf = uf.id_uf)
+          ");
+
+        $conexao1->closeConexao();
+
+        return $sql;
+    }
+
+    /* Retorna os processos com a advocacia passando o id */
+
     public function getProcessosFisicaComAdvocacia($id_pessoa) {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
@@ -128,7 +194,8 @@ class CFisica {
         return $pesq_proc_advocacia;
     }
 
-    /*Retorna os processos com a advocacia passando o id*/
+    /* Retorna os processos com a advocacia passando o id */
+
     public function getProcessosFisicaContraAdvocacia($id_pessoa) {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
@@ -165,7 +232,7 @@ class CFisica {
 
         return $pesq_proc_advocacia;
     }
-    
+
     public function getProcessosFisicaComAdvocaciaTotal($id_pessoa) {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
@@ -202,8 +269,9 @@ class CFisica {
 
         return $pesq_proc_advocacia;
     }
-    
-    /*Retorna os processos com a advocacia passando o id*/
+
+    /* Retorna os processos com a advocacia passando o id */
+
     public function getProcessosFisicaContraTotal($id_pessoa) {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
@@ -242,4 +310,5 @@ class CFisica {
     }
 
 }
+
 ?>

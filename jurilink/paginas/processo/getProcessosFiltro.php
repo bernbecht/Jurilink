@@ -6,13 +6,26 @@ require_once '../classes/CProcesso.php';
 
 $txt = $_POST['txt'];
 
-if ($txt == '' || $txt == ' ') {
+
+//expressão regular pra não deixar incluir caracteres que podem dar problema na query
+$dadoRegex = "/^[a-zA-Z0-9]+|\/$/";
+
+
+if ($txt == '') {
     echo 1;
-} else {
+} 
+
+else if (!preg_match($dadoRegex, $txt)) {
+        
+    echo -1;
+    }
+
+else {
 
     $processo = new CProcesso;
     $dataRegex = "/^([0-9]{2}\/[0-9]{2}\/[0-9]{4})$/";
 
+    //se for data
     if (preg_match($dataRegex, $txt)) {
                 
         $data = explode("/",$txt);
@@ -27,15 +40,15 @@ if ($txt == '' || $txt == ' ') {
         
         //echo $newData;
     }
-
+    //se for numero
     else if (is_numeric($txt)) {
 
         $sql = $processo->getProcessoRelacaoComNumUni($txt);
 
         $resultado = pg_fetch_object($sql);
-    } else {
-
-
+    } 
+    //se for nome
+    else {
         $sql = $processo->getProcessoPessoa($txt);
 
         $resultado = pg_fetch_object($sql);

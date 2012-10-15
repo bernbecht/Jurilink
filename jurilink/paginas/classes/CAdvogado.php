@@ -12,20 +12,20 @@ class CAdvogado {
         $this->id_pessoa = $id_pessoa;
         $this->oab = $oab;
         $this->flag = $flag;
-        
-        $query = "UPDATE advogado SET oab = '".$this->oab."', 
+
+        $query = "UPDATE advogado SET oab = '" . $this->oab . "', 
             flag_func = {$this->flag}
             WHERE id_pessoa = {$this->id_pessoa}";
 
         $editar = pg_query($conexao, $query);
-        
+
         return $editar;
-        
     }
-    public function incluirAdvogado($conexao, $id, $o,$f){
-        $this->id_pessoa= $id;
-        $this->oab=$o;
-        $this->flag=$f;        
+
+    public function incluirAdvogado($conexao, $id, $o, $f) {
+        $this->id_pessoa = $id;
+        $this->oab = $o;
+        $this->flag = $f;
         $incluir = null;
 
 
@@ -95,7 +95,7 @@ class CAdvogado {
 
         return $pesq_proc_advocacia;
     }
-    
+
     public function getProcessosAdvogadoTotal($id_pessoa) {
 
 
@@ -133,8 +133,8 @@ class CAdvogado {
 
         return $pesq_proc_advocacia;
     }
-    
-     public function getProcessosAdvogadoLimite($id_pessoa) {
+
+    public function getProcessosAdvogadoLimite($id_pessoa) {
 
 
         $conexao1 = new CConexao();
@@ -168,13 +168,59 @@ class CAdvogado {
             order by data_distribuicao desc limit 5 ";
 
         $pesq_proc_advocacia = pg_exec($conexao, $query);
-        
+
 
         return $pesq_proc_advocacia;
     }
+
+    public function oi() {
+        return "oi";
+    }
+
+    //usado para filtro de advogados em Relação Advogados
+    //passa o começo oab e retorna o advogado
+    public function getAdvogadoOabFiltro($n) {
+        $conexao1 = new CConexao();
+        $conexao = $conexao1->novaConexao();
+
+
+        $sql = pg_exec($conexao, "select *, uf.nome as estado, pessoa.nome as nome  
+            from (((fisica 
+            INNER JOIN pessoa 
+            ON fisica.id_pessoa = pessoa.id_pessoa             
+            and pessoa.tipo = 2)
+            INNER JOIN uf
+            ON pessoa.id_uf = uf.id_uf)
+            INNER JOIN advogado
+            ON CAST ( advogado.oab AS TEXT) like '{$n}%'
+            and  pessoa.id_pessoa = advogado.id_pessoa )
+          ");
+
+        $conexao1->closeConexao();
+
+        return $sql;
+    }
     
-    public function oi(){
-         return "oi";
+    //passa o começo do nome e pega o advogado
+     public function getAdvogadoPassaNome($n) {
+        $conexao1 = new CConexao();
+        $conexao = $conexao1->novaConexao();
+
+
+        $sql = pg_exec($conexao, "select *, uf.nome as estado, pessoa.nome as nome             
+            from (((fisica 
+            INNER JOIN pessoa 
+            ON fisica.id_pessoa = pessoa.id_pessoa 
+            and pessoa.nome ~* 'dani'             
+            and pessoa.tipo = 2)
+            INNER JOIN uf
+            ON pessoa.id_uf = uf.id_uf)
+            INNER JOIN advogado
+            ON fisica.id_pessoa = advogado.id_pessoa) ");
+
+        $conexao1->closeConexao();
+
+        return $sql;
     }
 
 }

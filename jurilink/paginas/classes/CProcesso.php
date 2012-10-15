@@ -252,6 +252,7 @@ class CProcesso {
         $conexao = new CConexao();
         $conexao1 = $conexao->novaConexao();
 
+        $nome = pg_escape_string($nome);
 
 
         $query = "select processo.id_processo, data_distribuicao as d_indice, numero_unificado,  data_distribuicao,

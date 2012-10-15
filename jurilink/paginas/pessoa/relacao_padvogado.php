@@ -1,7 +1,6 @@
 <?php
 require_once '../template/header.php'; //chama o header
 require_once '../config.php';     //chama as configurações de página!
-
 ?>
 
 <div class="container content">
@@ -20,7 +19,8 @@ require_once '../config.php';     //chama as configurações de página!
             </a> 
         </div>   
         <div class ="direita">
-            
+            <input id="busca-input" type="text" class="input-medium search-query">
+
         </div>
         <br/>
     </div>
@@ -28,7 +28,7 @@ require_once '../config.php';     //chama as configurações de página!
     <div class="row row_relacao">
         <div id="tabela_container">
             <div id="tabela"> 
-                
+
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@ require_once '../config.php';     //chama as configurações de página!
         <p class="centro">
             <button class="btn" id="botao_anterior"><i class=icon-chevron-left></i>Anterior</button>
             <select class ="span1" id="limite" >
-                
+
                 <option value=5>5</option>
                 <option value=10>10</option>
                 <option value=15>15</option>

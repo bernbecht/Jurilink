@@ -221,7 +221,12 @@
                     $a('#tabela').remove();
                     $a('.centro').show();
                     setarLimiteAjax();
-                }                
+                } 
+                
+                else if(data==-1){
+                     
+                } 
+                
                 else if(data==0){
                      $a('#tabela').remove();
                      $a('.centro').hide();
