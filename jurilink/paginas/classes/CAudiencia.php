@@ -45,6 +45,7 @@ class CAudiencia {
         
     }
     
+    //lista todas as audiencias da advocacia ordenada por data ascendente
     function getTodasAudiencias($limite) {
         
         $conexao = new CConexao();
@@ -54,6 +55,23 @@ class CAudiencia {
         from audiencia
         inner join processo
         on audiencia.id_processo = processo.id_processo
+        order by data asc limit $limite";
+        $pesq_audiencias = pg_query($conexao1, $query);
+        return $pesq_audiencias;        
+        
+    }
+    
+    //lista todas próximas audiencias da advocacia ordenada por data ascendente
+    function getProximasAudiencias($limite, $hoje) {
+        
+        $conexao = new CConexao();
+        $conexao1 = $conexao->novaConexao();
+
+        $query = "SELECT data, local, tipo, audiencia.id_processo, numero_unificado 
+        from audiencia
+        inner join processo
+        on audiencia.id_processo = processo.id_processo
+        and data >= '$hoje'
         order by data asc limit $limite";
         $pesq_audiencias = pg_query($conexao1, $query);
         return $pesq_audiencias;        

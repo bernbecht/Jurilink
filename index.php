@@ -45,7 +45,7 @@
                                             <div id="usuario" class="control-group">
                                                 <label class="control-label" for="usuario">Login</label>
                                                 <div class="controls">
-                                                    <input type="text" class="input-xlarge aviso" id=usuario_input" name="usuario">                       
+                                                    <input type="text" class="input-xlarge aviso" id=usuario_input" name="usuario" placeholder="Login" />                       
                                                         <span  class="help-inline "></span>                    
                                                 </div>
                                             </div>    
@@ -57,7 +57,7 @@
                                             <div id="password" class="control-group">
                                                 <label class="control-label" for="password">Senha</label>
                                                 <div class="controls">
-                                                    <input type="password" class="input-xlarge aviso" id=senha_input" name="senha">                       
+                                                    <input type="password" class="input-xlarge aviso" id=senha_input" name="senha" placeholder="Senha"/>                       
                                                         <span  class="help-inline "></span>                    
                                                 </div>
                                             </div>    
