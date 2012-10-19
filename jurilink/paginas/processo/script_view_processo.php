@@ -16,7 +16,7 @@
                 $a(".tabela_at").remove();
                 $a(data).appendTo("#tabela_ato"); 
                 excluirAto();
-				tooltip();
+                tooltip();
             });            
             
         });
@@ -39,7 +39,7 @@
             $a(data).appendTo("#tabela_ato");     
             todosAtos();
             excluirAto();
-			tooltip();
+            tooltip();
         });          
 
     }
@@ -48,7 +48,7 @@
         $a('#max_ato').click(function(){
          
             loadAtos();   
-			tooltip();			
+            tooltip();			
             
         });
     }
@@ -66,15 +66,21 @@
          
             var url = '../operacoes/CProcesso_ato/excluir_ato_op.php';
             
+            //espera o evento do clique do botão de confirmação
+            $a('.confirm-excluir-ato').click(function(){
+                $a.post(url,{
+                    id_processo:id_processo,
+                    id_ato:id_ato               
+                }, function(data){               
+                    //para fazer com que a dica de EXCLUIR suma.
+                    $a('.tooltip_class').tooltip('hide');
+                    $a('#exclusaoAtoModal').modal('hide');
+                    loadAtos();  
+                }); 
+            });
           
             
-            $a.post(url,{
-                id_processo:id_processo,
-                id_ato:id_ato               
-            }, function(data){
-                loadAtos();
-                
-            });
+            
             
             
         });
@@ -93,11 +99,10 @@
             
             $a.post(url,{
                 id_audiencia:id_audiencia              
-            }, function(data){
-            
-                loadAudiencia();
-                excluirAudiencia();
+            }, function(data){               
                 
+                loadAudiencia();
+                excluirAudiencia();               
             });
             
             
@@ -122,7 +127,7 @@
                 $a(".tabela_aud").remove();
                 $a(data).appendTo("#tabela_audiencia");  
                 excluirAudiencia();
-				tooltip();
+                tooltip();
                 
             });            
             
@@ -148,7 +153,7 @@
             $a(data).appendTo("#tabela_audiencia");    
             todasAudiencia();
             excluirAudiencia();
-			tooltip();
+            tooltip();
         });          
 
     }
@@ -157,7 +162,7 @@
         $a('#max_audiencia').click(function(){
             loadAudiencia();   
             excluirAudiencia();
-			tooltip();
+            tooltip();
             
         });
     }

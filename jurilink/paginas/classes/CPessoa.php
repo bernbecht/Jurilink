@@ -53,8 +53,8 @@ class CPessoa {
         $incluir = pg_exec($conexao, "insert into pessoa(nome,endereco,tel,cidade,id_uf,email,tipo,bairro)
                          values('"
                 . $this->nome . "','"
-                . $this->endereco . "','"
-                . $this->telefone . "','"
+                . $this->endereco . "',"
+                . $this->telefone . ",'"
                 . $this->cidade . "',"
                 . $this->uf . ",'"
                 . $this->email . "', "

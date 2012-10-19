@@ -257,7 +257,7 @@ function msgErroBD(data){
     }    
 }
 
-
+//faz a inclusão do ato na página view_processo
 function atoAjax(modalidade){
     var $form = $a( '.AtoAjaxForm' ),
     id_ato = $form.find( 'option').filter(':selected' ).val(),
@@ -305,14 +305,11 @@ function atoAjax(modalidade){
                 $a('.submit-ato-modal').removeAttr('disabled');
                 $a(".submit-ato-modal").removeClass('disabled');                
             }, 2900); 
-        }
-        
-        
-    });
-    
-    
+        }     
+    });        
 }
 
+//faz a audiência do ato na página view_processo
 function audienciaAjax(modalidade){
     var $form = $a( '.AudienciaAjaxForm' ),
     id_processo = $form.find( 'input[name="id_processo"]' ).val(),
@@ -323,10 +320,6 @@ function audienciaAjax(modalidade){
     
     $a('.submit-audiencia-modal').attr('disabled','disabled');
     $a(".submit-audiencia-modal").addClass('disabled');
-    
-    
-    
-    
     
     $a.post(url,{
         id_processo:id_processo,
@@ -384,8 +377,6 @@ function pessoaAjax(modalidade){
      
     $a('<img id="loading_img" src="../../bootstrap/img/loading.gif" height="36" width="36" />').appendTo('#loading_content'); // appendTo é pra por em algum lugar                
     
-       
-       
     $a.post(url,{
         id_pessoa:id_pessoa,
         nome:nome,
@@ -443,8 +434,7 @@ function pessoaAjax(modalidade){
                 msgErroBD(data);
                 $a('.submit-pessoa').removeAttr('disabled');
                 $a(".submit-pessoa").removeClass('disabled');
-                subirPagina();
-                               
+                subirPagina();                               
             }
         }
         
@@ -582,14 +572,8 @@ function pessoaAjax(modalidade){
                                
             }
         }
-        
-        
-        
-        
-    });  
-    
+    });      
 }
-
 
 //Função que diz qual NAV está selecionada
 function trocarAbaSubnav(){
@@ -729,21 +713,21 @@ function validaFormPessoaSubmit(){
         $a('#nome').removeClass("control-group error").addClass("control-group");  
     }
         
-    if(endereco.length <=2){
+    /*if(endereco.length <=2){
         $a('#endereco').removeClass("control-group").addClass("control-group error");  
         mandar =false;
     }        
     else{
         $a('#endereco').removeClass("control-group error").addClass("control-group");  
-    }
+    }*/
         
-    if(bairro.length <=2){
+    /*if(bairro.length <=2){
         $a('#bairro').removeClass("control-group").addClass("control-group error");  
         mandar =false;
     }        
     else{
         $a('#bairro').removeClass("control-group error").addClass("control-group");  
-    }
+    }*/
         
     if(cidade.length <=2){
         $a('#cidade').removeClass("control-group").addClass("control-group error");  
@@ -760,8 +744,12 @@ function validaFormPessoaSubmit(){
     else{
         $a('#estado').removeClass("control-group error").addClass("control-group");  
     }
-        
-    if(tel.length  == 8){            
+      
+    if(tel.length  == 0){
+        mandar =true;
+    }
+      
+    else if(tel.length  == 8){            
         if(intRegex.test(tel)) {
             $a('#telefone').removeClass("error").addClass("");            
         }
@@ -899,10 +887,7 @@ function validaFormPessoaSubmit(){
         }        
     }       
     
-    
-    
-    return mandar;
-    
+    return mandar;    
 }
 
 function validaFormAudienciaJS(){  
@@ -962,7 +947,6 @@ function validaFormPessoaJS(){
             $a('.submit-pessoa').attr('disabled','disabled');
             $a(".submit-pessoa").addClass('disabled');
             pessoaAjax(0);
-           
         }
         
         else{
@@ -1136,7 +1120,7 @@ function tooltip(){
         );
 }
 
-//Função de JQUERY
+//ON LOAD
 $a(document).ready(function(){   
     
     
@@ -1156,9 +1140,6 @@ $a(document).ready(function(){
     validaFormLoginJS();
     tooltip();
     esqueci_senha();
-  
-    
- 
 
 });
 

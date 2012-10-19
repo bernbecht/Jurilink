@@ -37,7 +37,7 @@ if ($audiencia->local != '') {
                     <td>" . $audiencia->local . "</td>
                     <td>" . $audiencia->tipo . "</td>";
         if ($_SESSION['tipo_usuario'] == 2)
-            echo "<td><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir esta audiências' href=#><i class='icon-remove-circle excluir-audiencia'><input type='hidden' value = '".$audiencia->id_audiencia."'/></i></a></td>
+            echo "<td><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir esta audiência' href=#><i class='icon-remove-circle excluir-audiencia'><input type='hidden' value = '".$audiencia->id_audiencia."'/></i></a></td>
                     </tr>";
     } while ($audiencia = pg_fetch_object($sql));
 

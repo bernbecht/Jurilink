@@ -71,21 +71,25 @@ if (strlen($n) < 2) {
     $erro.= "nome menos que 2";
 }
 
-if (strlen($e) < 2) {
-    $erro.= "endereço menos que 2";
+/* if (strlen($e) < 2) {
+  $erro.= "endereço menos que 2";
+  } */
+
+if (strlen($t) == 0) {
+    $t = "NULL";
+} else {
+    if (strlen($t) < 8) {
+        $erro.= "telefone menos que 8";
+    }
+
+    if (strlen($t) > 10) {
+        $erro.= "telefone mais que 10";
+    }
 }
 
-if (strlen($t) < 8) {
-    $erro.= "telefone menos que 8";
-}
-
-if (strlen($t) > 10) {
-    $erro.= "telefone mais que 10";
-}
-
-if (!is_numeric($t)) {
-    $erro.= "telefone nao eh numero";
-}
+/* if (!is_numeric($t) && strlen($t)!=0) {
+  $erro.= "telefone nao eh numero";
+  } */
 
 // if (strlen($em) < 2) {
 //$erro.= "email menos que 2";
@@ -96,9 +100,9 @@ if (strlen($em) > 0) {
         $erro.= "email menos que 7";
 }
 
-if (strlen($b) < 2) {
-    $erro.= "Escreva um bairros";
-}
+/* if (strlen($b) < 2) {
+  $erro.= "Escreva um bairros";
+  } */
 
 if (strlen($c) < 2) {
     $erro.= "cidade menos que 2";
@@ -242,16 +246,16 @@ if ($erro != "") {
         $user = new CUsuario();
         $incluir = $user->incluirUser($conexao, $id_pessoa, $senha, $em);
         if (!$incluir) {
-            $db_error.= " " . pg_last_error($conexao);            
-        }else {
-                $email = new CEmail();
-                $mandar = $email->enviarSenha($em, $em, $senha);
+            $db_error.= " " . pg_last_error($conexao);
+        } else {
+            $email = new CEmail();
+            $mandar = $email->enviarSenha($em, $em, $senha);
 
-                if ($mandar == 0) {
-                    $incluir = null;
-                    $db_error = 'email_incluir';
-                }
+            if ($mandar == 0) {
+                $incluir = null;
+                $db_error = 'email_incluir';
             }
+        }
     }
 
 

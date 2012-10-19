@@ -28,7 +28,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
 
             <!--Campos formulário -->
 
-            <legend><h1>Cadastrar Novo processo</h1></legend>
+            <legend><h1>Cadastrar Novo Processo</h1></legend>
 
             <div id="msg_resultado_processo">
                 <div class="alert alert-block fade in">

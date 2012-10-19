@@ -382,6 +382,10 @@ do bootstrap, entao, estou fazendo manualmente*/
     width: 50px;
 }
 
+.alertModalExcluirAtoAudiencia{
+    margin-bottom: 0;
+}
+
 @media (min-width: 1000px) and (max-width: 1199px){
 
     .input-xlarge{
@@ -393,99 +397,157 @@ do bootstrap, entao, estou fazendo manualmente*/
 
     .span5 {
         width: 400px;
-        
+
     }
 
     .divisor_maior{       
         margin: 0 0 0 30px;       
     }
-    
+
     .divisor{      
         margin: 0 0 0 30px;     
     }
-    
+
     .span6 {
         width: 450px;
     }
-    
+
     .table{
         font-size: 14px;
     }
-    
+
 
 } 
 
-@media (min-width: 768px) and (max-width: 999px) {
-    
+@media (min-width: 767px) and (max-width: 999px) {
+
     .row_cadastro_pessoa{
         height: 95px;
     }
-    
+
     .input-xlarge{
         width: 200px;
     }    
     .input-large{
         width: 175px;
     } 
-    
+
     .divisor_maior{       
         margin: 0;  
         width: 0;
     }
-    
+
     .divisor{      
         margin: 0;     
         width: 0;
     }
-    
+
     .table{
         font-size: 14px;
     }
-    
     .span6 {
         width: auto;
         margin-top: 20px;
-        
     }   
     
-     
+    /*Spans que quando usadas numa resolução menor, continuam FLOAT*/
+     .ficaFloat{
+        float: left;
+    }
+    
+    /*Diminui o tamanho da fonte em VIEW PROCESSO*/
+    .view_pessoa_legenda p{       
+        font-size: 13px;
+    }
+    
+    .ficaFloat .offset1{
+        margin-left: 20px;
+    }
+    
+     .ficaFloat .span2 {
+        width: 140px;
+        
+    }
+    
+    .ficaFloat .view_pessoa_legenda, .ficaFloat .view_pessoa_dados {
+        padding: 5px 2px;
+    }
+    
 }
 
 
 @media (max-width: 767px) {
-    
+
     .row_cadastro_pessoa{
         height: 95px;
     }
-    
+
     .input-xlarge{
         width: 200px;
     }    
     .input-large{
         width: 175px;
     } 
-    
+
     .divisor_maior{       
         margin: 0;  
         width: 0;
     }
-    
+
     .divisor{      
         margin: 0;     
         width: 0;
     }
-    
+
     .table{
         font-size: 12px;
     }
-    
+
     #limite{
         width: 50px;
     }
-    
+
     .span6 {
         width: auto;
         margin-top: 20px;
-        
     }  
+
+    .modal{
+        max-height: 500px;
+    }
+
+    .modal-body{
+        max-height: 300px;
+    }
+    
+    /*Spans que quando usadas numa resolução menor, continuam FLOAT*/
+     .ficaFloat{
+        float: left;
+        margin-left: 30px;
+    }
+    
+    /*Diminui o tamanho da fonte em VIEW PROCESSO*/
+    .view_pessoa_legenda p{       
+        font-size: 13px;
+    }
+    
+    .ficaFloat .offset1{
+       
+    }
+    
+     .ficaFloat .span2, .ficaFloat .span3{
+        width: 250px;
+        
+    }
+    
+    .ficaFloat .span2 {
+        margin-left: 25px;
+        
+    }
+    
+    
+    .ficaFloat .view_pessoa_legenda, .ficaFloat .view_pessoa_dados {
+        padding: 5px 5px;
+    }
+    
 }

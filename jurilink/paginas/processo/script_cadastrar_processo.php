@@ -2,10 +2,8 @@
 
 <script type="text/javascript">  
     
-    var $a = jQuery.noConflict();
-    
-    
-    
+    var $a = jQuery.noConflict();  
+       
     
     //função de teste para ajax e caixa diferente
     function processoAjax1(){
@@ -80,7 +78,7 @@
     
     function validaFormProcessoSubmit(){
         
-        $a('.alert').remove();
+        $a('#msg_resultado_processo').remove();
     
         var intRegex = /^\d+$/;
         var floatRegex = /^([0-9]*\,[0-9]{2})$/;
@@ -418,7 +416,7 @@
             if(modalidade == 1){
                 if(data==1){
                     //alert("OK");
-                    $a('.alert').remove();
+                    $a('#msg_resultado_processo').remove();
                     $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O processo <b>'+num+'</b> foi inserido no sistema com sucesso.</p></div>').appendTo('#msg_resultado_processo');
                     
                     subirPagina();

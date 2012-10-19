@@ -35,7 +35,7 @@ if ($ato_proc->nome != '') {
                 echo "<tr>	
                     <td>" . $ato_proc->nome . "</a></td>
                     <td>" . $ato_proc->data_atualizacao . "</td>                    
-                        <td><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir este ato' href=#><i class='icon-remove-circle excluir-ato'><input type='hidden' value = '".$ato_proc->id_ato."|".$ato_proc->id_processo."'/></i></a></td>
+                        <td><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir este ato' data-toggle='modal' href='#exclusaoAtoModal'><i class='icon-remove-circle excluir-ato'><input type='hidden' value = '".$ato_proc->id_ato."|".$ato_proc->id_processo."'/></i></a></td>
                     </tr>";
             } else if ($_SESSION['tipo_usuario'] == 1 || $_SESSION['tipo_usuario'] == 0) {
                 if ($ato_proc->flag_cliente == 't') {

@@ -79,60 +79,69 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
 
 
     <div class="row show-grid">
-        <div class="span2 offset1">
-            <div class="view_pessoa">
-                <div class="view_pessoa_legenda">
-                    <p><strong>Nome</strong></p>
-                    <p><strong>CPF/CNPJ</strong></p>
-                    <p><strong>RG</strong></p>
-                    <p><strong>E-mail</strong></p>
-                    <p><strong>User</strong></p>
-                </div>
-            </div>
 
-        </div>
-
-        <div class="span3">
-            <div class="view_pessoa">
-                <div class="view_pessoa_dados">
-                    <p><?php echo $pessoa->nome ?></p>
-                    <p><?php echo $fisica->cpf ?></p>
-                    <p><?php echo $fisica->rg ?></p>
-                    <?php
-                    if ($pessoa->email == '') {
-                        echo '<p>Nao cadastrado</p>';
-                    } else {
-                        echo '<p>' . $pessoa->email . '</p>';
-                    }
-                    if ($user)
-                        echo "<p>Sim</p>";
-                    else
-                        echo "<p>Nao</p>";
-                    ?>                    
+        <div class="ficaFloat">
+            <div class="span2 offset1">
+                <div class="view_pessoa">
+                    <div class="view_pessoa_legenda">
+                        <p><strong>Nome</strong></p>
+                        <p><strong>CPF/CNPJ</strong></p>
+                        <p><strong>RG</strong></p>
+                        <p><strong>E-mail</strong></p>
+                        <p><strong>User</strong></p>
+                    </div>
                 </div>
+
             </div>
         </div>
 
-        <div class="span2">
-            <div class="view_pessoa">
-                <div class="view_pessoa_legenda">
-                    <p><strong>Telefone</strong></p>
-                    <p><strong>Endereco</strong></p>
-                    <p><strong>Bairro</strong></p>                    
-                    <p><strong>Cidade</strong></p>
-                    <p><strong>Estado</strong></p>                                       
+        <div class="ficaFloat">
+            <div class="span3">
+                <div class="view_pessoa">
+                    <div class="view_pessoa_dados">
+                        <p><?php echo $pessoa->nome ?></p>
+                        <p><?php echo $fisica->cpf ?></p>
+                        <p><?php echo $fisica->rg ?></p>
+                        <?php
+                        if ($pessoa->email == '') {
+                            echo '<p>Nao cadastrado</p>';
+                        } else {
+                            echo '<p>' . $pessoa->email . '</p>';
+                        }
+                        if ($user)
+                            echo "<p>Sim</p>";
+                        else
+                            echo "<p>Nao</p>";
+                        ?>                    
+                    </div>
+                </div>
+            </div
+        </div>
+
+        <div class="ficaFloat">
+            <div class="span2">
+                <div class="view_pessoa">
+                    <div class="view_pessoa_legenda">
+                        <p><strong>Telefone</strong></p>
+                        <p><strong>Endereco</strong></p>
+                        <p><strong>Bairro</strong></p>                    
+                        <p><strong>Cidade</strong></p>
+                        <p><strong>Estado</strong></p>                                       
+                    </div>
                 </div>
             </div>
         </div>
 
-        <div class="span3">
-            <div class="view_pessoa">
-                <div class="view_pessoa_dados">
-                    <p><?php echo $pessoa->tel ?></p>
-                    <p><?php echo $pessoa->endereco ?></p>
-                    <p><?php echo $pessoa->bairro ?></p>
-                    <p><?php echo $pessoa->cidade ?></p>
-                    <p><?php echo $estado->nome_estado ?></p>
+        <div class="ficaFloat">
+            <div class="span3">
+                <div class="view_pessoa">
+                    <div class="view_pessoa_dados">
+                        <p><?php echo $pessoa->tel ?></p>
+                        <p><?php echo $pessoa->endereco ?></p>
+                        <p><?php echo $pessoa->bairro ?></p>
+                        <p><?php echo $pessoa->cidade ?></p>
+                        <p><?php echo $estado->nome_estado ?></p>
+                    </div>
                 </div>
             </div>
         </div>
