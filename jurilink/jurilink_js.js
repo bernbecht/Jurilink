@@ -1534,7 +1534,6 @@ $a(document).ready(function(){
     esqueci_senha();
     validaFormConta();
     validaFormSenha();
-    init_modal_senha();
 //checa_senha();
 });
 
