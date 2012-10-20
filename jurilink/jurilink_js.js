@@ -444,10 +444,10 @@ function senhaAjax(){
     $a.post(url,{
         id_pessoa:id_pessoa,
         nova_senha:nova_senha        
-     },function(data){ 
-         $a('#loading_img').remove();
-         $a('.alert').remove();
-         if(data == 1){
+    },function(data){ 
+        $a('#loading_img').remove();
+        $a('.alert').remove();
+        if(data == 1){
             $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Senha alterada com sucesso.</p></div>').appendTo('#msg_resultado_senha'); // appendTo é pra por em algum lugar
             if (tipo == 2)
                 var url = "../../index.php";
@@ -459,8 +459,8 @@ function senhaAjax(){
                 $a(window.document.location).attr('href',url);
             }, 1000); 
          
-     }
-     else{
+        }
+        else{
            
             $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>ERRO</p></div>').appendTo('#msg_resultado_senha'); // appendTo é pra por em algum lugar
         
@@ -468,7 +468,7 @@ function senhaAjax(){
             $a(".troca-senha").removeClass('disabled');
         }
          
-     });
+    });
 
 }
 
@@ -496,11 +496,11 @@ function contaAjax(){
         bairro:bairro,
         cidade:cidade,
         estado:estado
-     },function(data){ 
-         $a('#loading_img').remove();
-         subirPagina();
-         $a('.alert').remove();
-         if(data == 1){
+    },function(data){ 
+        $a('#loading_img').remove();
+        subirPagina();
+        $a('.alert').remove();
+        if(data == 1){
             $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Seus dados foram alterados com sucesso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
 
             if (tipo == 2)
@@ -512,16 +512,16 @@ function contaAjax(){
                 $a('.edit-conta').removeAttr('disabled');
                 $a(window.document.location).attr('href',url);
             }, 1000);          
-         }
+        }
         else{
-                //alert("Else 0");
-                //alert(data);
-                msgErroBD(data);
-                $a('.edit-conta').removeAttr('disabled');
-                $a(".edit-conta").removeClass('disabled');
-                subirPagina();
+            //alert("Else 0");
+            //alert(data);
+            msgErroBD(data);
+            $a('.edit-conta').removeAttr('disabled');
+            $a(".edit-conta").removeClass('disabled');
+            subirPagina();
                                
-            }
+        }
     });
 }
 
@@ -936,11 +936,11 @@ function validaFormEditConta(){
     }
     
     if(email.length  < 7){
-            $a('#email').removeClass("").addClass("error"); 
-            mandar =false;
-        }
-        else{
-            $a('#email').removeClass("error").addClass("");
+        $a('#email').removeClass("").addClass("error"); 
+        mandar =false;
+    }
+    else{
+        $a('#email').removeClass("error").addClass("");
     }
     if(cidade.length <=2){
         $a('#cidade').removeClass("control-group").addClass("control-group error");  
@@ -1211,45 +1211,77 @@ function validaFormAudienciaJS(){
 }
 
 
+function checa_senhaAjax(modalidade){
+    
+    var $form = $a( '.checa_senha_AjaxForm' ),
+    senha_digitada = $form.find( 'input[name = "senha"]').val(),
+    url = $form.attr( 'action' );
+    
+    $a.post(url,{
+        senha_digitada:senha_digitada
+    },function(data){ 
+        if (data == 1){
+            $a('#myModal').modal('toggle');
+            //Alterar dados da conta
+            if (modalidade == 0){
+                var mandar = validaFormEditConta();
+                subirPagina();
+   
+                if(mandar==true){            
+                    //impedir duplo clique
+                    $a('.edit-conta').attr('disabled','disabled');
+                    $a(".edit-conta").addClass('disabled');
+                    contaAjax();
+           
+                }
+            }
+            if(modalidade == 1){
+                var mandar = validaFormTrocaSenha();
+                
+                if(mandar==true){            
+                    //impedir duplo clique
+                    $a('.troca-senha').attr('disabled','disabled');
+                    $a(".troca-senha").addClass('disabled');
+                    senhaAjax();
+           
+                }
+                
+            }
+        }
+        
+        else {
+            $a('.alert').remove();
+            $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Senha inválida</p></div>').appendTo('#msg_resultado_confirma_senha'); // appendTo é pra por em algum lugar
+            $a('#senha_atual_input').focus();
+        }
+        
+    });
+
+}
+
+
+function checa_senha(modalidade){
+    $a('#myModal').modal('toggle');
+    $a('#senha_atual_input').focus();
+    $a(".checa-senha").click(function(){ 
+        checa_senhaAjax(modalidade);
+    });
+}    
+
 
 function validaFormSenha(){
     $a(".troca-senha").click(function(){ 
-        var mandar = validaFormTrocaSenha();
-        //subirPagina();
-         
-        if(mandar==true){            
-            //impedir duplo clique
-            $a('.troca-senha').attr('disabled','disabled');
-            $a(".troca-senha").addClass('disabled');
-            senhaAjax();
-           
-        }
+        checa_senha(1);
     });
-    
     
 }
 
-//-------------------------------------------------------------------------------------------------------
 function validaFormConta(){
     //Apertar botão para Salvar alterações
-    $a(".edit-conta").click(function(){ 
-        var mandar = validaFormEditConta();
-        subirPagina();
-         
-        if(mandar==true){            
-            
-            //impedir duplo clique
-            $a('.edit-conta').attr('disabled','disabled');
-            $a(".edit-conta").addClass('disabled');
-            contaAjax();
-           
-        }
-        
-        else{
-        //alert(mandar);            
-        }
+    $a(".edit-conta").click(function(){
+        checa_senha(0);
     });
-    
+     
 }
 
 
@@ -1464,6 +1496,23 @@ function tooltip(){
         );
 }
 
+function botao_clicado_edita_conta(){
+    $a(".edit-conta").click(function(){       
+        var button = 0;
+    });
+    return button;    
+    
+}
+
+function botao_clicado_edita_senha(){
+    $a(".edit-senha").click(function(){       
+        var button = 1;
+    });    
+    return button;
+    
+}
+
+
 //Função de JQUERY
 $a(document).ready(function(){   
     
@@ -1485,11 +1534,10 @@ $a(document).ready(function(){
     esqueci_senha();
     validaFormConta();
     validaFormSenha();
-  
-    
- 
-
+    init_modal_senha();
+//checa_senha();
 });
+
 
 //Função para limite de resultados em relações de pessoas físicas, jurídicas e advogados
 function valor(){
