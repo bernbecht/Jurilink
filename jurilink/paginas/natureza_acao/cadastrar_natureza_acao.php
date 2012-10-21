@@ -26,7 +26,7 @@ require_once ( '../config.php');     //chama as configura��es de p�gina!
 			<!--Bot�es do formul�rio -->
             <div class="form-actions">
                 <button  id ="submit-natureza"  type="button" class="btn btn-primary">Salvar</button>
-                <button  type="button" class="btn cancelar-processo">Cancelar</button>
+                <button  type="button" class="btn cancelar-natureza">Cancelar</button>
             </div>
 
         </fieldset>

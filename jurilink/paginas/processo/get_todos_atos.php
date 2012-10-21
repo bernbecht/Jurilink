@@ -23,7 +23,7 @@ if ($ato_proc->nome != '') {
     echo "<tr>
                 <th>Ato</th>
                 <th>Data de Modifica&ccedil;&atilde;o</th>";
-                
+
     if ($_SESSION['tipo_usuario'] == 2)
         echo "<th>Ações</th>
              </tr>
@@ -35,7 +35,7 @@ if ($ato_proc->nome != '') {
                 echo "<tr>	
                     <td>" . $ato_proc->nome . "</a></td>
                     <td>" . $ato_proc->data_atualizacao . "</td>                    
-                        <td><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir este ato' href=#><i class='icon-remove-circle excluir-ato'><input type='hidden' value = '".$ato_proc->id_ato."|".$ato_proc->id_processo."'/></i></a></td>
+                    <td><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir este ato' href=#><i class='icon-remove-circle excluir-ato'><input type='hidden' value = '" . $ato_proc->id_ato . "|" . $ato_proc->id_processo . "'/></i></a></td>
                     </tr>";
             } else if ($_SESSION['tipo_usuario'] == 1 || $_SESSION['tipo_usuario'] == 0) {
                 if ($ato_proc->flag_cliente == 't') {
@@ -51,7 +51,6 @@ if ($ato_proc->nome != '') {
     echo "</tbody>";
     echo "</table>";
     echo "<p class='centro'><button id='todos_atos' class='btn btn-primary'>Ver todos os Atos</button></p>";
-	
 } else {
     echo'<div class="alert alert-info"><h4>Não há atos no momento.</h4></div>';
 }

@@ -72,9 +72,9 @@ if (!isset($_SESSION['usuario']))
                             <b class="caret"></b></a>
                         <ul id="dados_menu_dropdown" class="dropdown-menu">
                             <li><a class="aba drop" href="paginas/comarca/relacao_comarcas.php">Comarca</a></li>
-                            <li><a class="aba drop" href="paginas/juizo/cadastrar_juizo.php">Juizo</a></li>
-                            <li><a class="aba drop" href="paginas/natureza_acao/cadastrar_natureza_acao.php">Natureza</a></li>
-                            <li><a class="aba drop" href="paginas/ato/cadastrar_ato.php">Ato</a></li>                        
+                            <li><a class="aba drop" href="paginas/juizo/relacao_juizos.php">Juizo</a></li>
+                            <li><a class="aba drop" href="paginas/natureza_acao/relacao_naturezas.php">Natureza</a></li>
+                            <li><a class="aba drop" href="paginas/ato/relacao_atos.php">Ato</a></li>                        
                         </ul>
                     </li>                          
                 </ul>       

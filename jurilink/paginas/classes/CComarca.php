@@ -35,6 +35,15 @@ class CComarca {
 
         $conexao1->closeConexao();
     }
+    
+    public function getRelacaoComarca(){
+        $conexao1 = new CConexao();
+        
+        $conexao = $conexao1->novaConexao();
+        $query ="SELECT * FROM comarca order by nome";
+        $resultado = pg_query($conexao,$query);
+        return $resultado;
+    }
 
 }
 

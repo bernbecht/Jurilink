@@ -35,6 +35,15 @@ class CNatureza_acao {
         $conexao1->closeConexao();
     }
 
+    public function getRelacaoNatureza() {
+        $conexao1 = new CConexao();
+
+        $conexao = $conexao1->novaConexao();
+        $query = "SELECT * FROM natureza_acao order by nome";
+        $resultado = pg_query($conexao, $query);
+        return $resultado;
+    }
+
 }
 
 ?>

@@ -6,17 +6,17 @@ require_once '../config.php';     //chama as configurações de página!
 
 <div class="container content">
     <div class="row">
-        <div class ="esquerda"> <h1>Comarcas</h1> </div>        
+        <div class ="esquerda"> <h1>Naturezas de Ação</h1> </div>        
     </div>
     
     <div class="divisor_horizontal_view"></div>
     
     <div class="row">
         <div class ="esquerda"> 
-            <a href="cadastrar_comarca.php">
+            <a href="cadastrar_natureza_acao.php">
                 <button type="button" class="btn btn-small btn-success">
                     <i class="icon-plus icon-white"></i>
-                    INCLUIR COMARCA     
+                    INCLUIR NATUREZA DE AÇÃO     
                 </button>
             </a> 
         </div>   
@@ -43,6 +43,6 @@ require_once '../config.php';     //chama as configurações de página!
 </body>
 <?php
 require_once '../template/scripts.php'; //chama scripts comuns as paginas
-require_once 'script_relacao_comarca.php'; //chama scripts comuns as paginas
+require_once 'script_relacao_natureza.php'; //chama scripts comuns as paginas
 ?>
 </html>
