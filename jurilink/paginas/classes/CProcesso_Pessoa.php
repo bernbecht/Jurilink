@@ -12,7 +12,7 @@ class CProcesso_Pessoa {
     public function excluirParte($conexao, $id_processo, $flag, $tipo) {
         $this->id_processo = $id_processo;
         $this->id_pessoa = $id_pessoa;
-        $this->flag_papel = $flag;
+        $this->flag_papel = $flag; //0 pessoa, 1 advogado, 2 representante
         $this->tipo = $tipo; //tipo 0 autor, 1 reu
 
         if ($this->tipo == 0)

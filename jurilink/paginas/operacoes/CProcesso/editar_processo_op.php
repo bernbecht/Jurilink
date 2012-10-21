@@ -255,6 +255,11 @@ if ($erro != '') {
                 $incluir = null;
             }
         }
+        else {
+            $processo_pessoa->excluirParte($conexao1,$id_processo,2,0);
+            
+            
+        }
 
         if (strlen($reu_rep) > 0) {
             //Pegando IDs dos representantes autor
@@ -278,6 +283,7 @@ if ($erro != '') {
                 $incluir = null;
             }
         }
+        else $processo_pessoa->excluirParte($conexao1,$id_processo,2,1);
     }
     
     if ($incluir) {
