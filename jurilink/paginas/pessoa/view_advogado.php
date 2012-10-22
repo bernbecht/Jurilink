@@ -175,7 +175,7 @@ $user = pg_fetch_object($pesq_user);
                     <td>" . $processos_advocacia->nome_autor . "</td>
                     <td>" . $processos_advocacia->nome_reu . "</td>
                     <td>" . $processos_advocacia->nome_adv . "</td>
-                    <td>" . $processos_advocacia->valor_causa . "</td> 
+                    <td><div class = 'direita'\>" . $processos_advocacia->valor_causa . "</td> 
                     </tr>";
                     } while ($processos_advocacia = pg_fetch_object($pesq_proc_advocacia));
 

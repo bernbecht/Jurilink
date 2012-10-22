@@ -39,7 +39,7 @@ if ($href == 'pessoafisica' || $tipo_pessoa== 0) {
                     <td>" . $processos_advocacia->nome_autor . "</td>
                     <td>" . $processos_advocacia->nome_reu . "</td>
                     <td>" . $processos_advocacia->nome_adv . "</td>
-                    <td>" . $processos_advocacia->valor_causa . "</td> 
+                    <td><div class = 'direita'\>" . $processos_advocacia->valor_causa . "</td> 
                     </tr>";
     } while ($processos_advocacia = pg_fetch_object($processo));
     echo "</tbody>";
@@ -73,7 +73,7 @@ if ($href == 'pessoafisica' || $tipo_pessoa== 0) {
                     <td>" . $processos_advocacia->nome_autor . "</td>
                     <td>" . $processos_advocacia->nome_reu . "</td>
                     <td>" . $processos_advocacia->nome_adv . "</td>
-                    <td>" . $processos_advocacia->valor_causa . "</td> 
+                    <td><div class = 'direita'\>" . $processos_advocacia->valor_causa . "</td> 
                     </tr>";
     } while ($processos_advocacia = pg_fetch_object($processo));
     echo "</tbody>";

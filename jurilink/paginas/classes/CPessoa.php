@@ -28,19 +28,10 @@ class CPessoa {
         $this->id_pessoa = $id_pessoa;
         $editar = null;
 
-        if ($this->telefone == '') {
+        if ($this->telefone == '') $this->telefone='NULL';
             $query = "UPDATE pessoa SET endereco = '" . $this->endereco . "',
                                  cidade ='" . $this->cidade . "',
-                                 tel = NULL,
-                                 bairro = '" . $this->bairro . "',
-                                 email = '" . $this->email . "',
-                                 id_uf = " . $this->uf . "
-                WHERE pessoa.id_pessoa = $this->id_pessoa";
-        }
-        else
-            $query = "UPDATE pessoa SET endereco = '" . $this->endereco . "',
-                                 cidade ='" . $this->cidade . "',
-                                 tel = '" . $this->telefone . "',
+                                 tel = " . $this->telefone . ",
                                  bairro = '" . $this->bairro . "',
                                  email = '" . $this->email . "',
                                  id_uf = " . $this->uf . "

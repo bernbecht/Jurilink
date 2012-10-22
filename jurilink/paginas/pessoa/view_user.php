@@ -60,7 +60,7 @@ inner join pessoa padv on padv.id_pessoa = advreu.id_pessoa)
 inner join autor on autor.id_processo = processo.id_processo and autor.flag_papel = 0)
 inner join pessoa pautor on pautor.id_pessoa = autor.id_pessoa)
 inner join advogado on padv.id_pessoa = advogado.id_pessoa and advogado.flag_func = TRUE
-order by data_distribuicao";
+order by data_distribuicao desc";
 
 $pesq_proc_advocacia = pg_query($conexao1, $query);
 $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
@@ -175,7 +175,7 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
             <div id="tabela_processo_cliente" >
                 <?php
                 if (pg_num_rows($pesq_proc_advocacia) > 0) {
-                    echo "<table = 'processos' class='table table-striped' >";
+                    echo "<table = 'processos' class='table table-striped table-condensed' >";
                     echo "<thead>";
                     echo "<tr>
                     <th>Data Distribui&ccedil;&atilde;o</th>
