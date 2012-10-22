@@ -208,11 +208,7 @@ $_SESSION['conta_senha'] = $pessoa->senha;
                 else
                     echo "<a href='view_user.php'><button type='button' class='btn'>Cancelar</button></a>";
                 ?>
-
-
             </div>
-
-
 
         </fieldset>
 
@@ -225,11 +221,13 @@ $_SESSION['conta_senha'] = $pessoa->senha;
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">x</button>
         <h3>Insira sua senha</h3>
-    </div>
-    <div id="msg_resultado_confirma_senha"></div>
+    </div>   
     <div class="modal-body">
         <form id="form_senha" class="form-horizontal checa_senha_AjaxForm" method="post" action="../operacoes/CUsuario/checa_senha_op.php">
             <fieldset>
+                
+                 <div id="msg_resultado_confirma_senha"></div>
+                 
                 <!--Campos formulário --> 
                 <div id="senha" class="control-group ">
                     <label class="control-label" for="senha">Senha</label>
@@ -252,4 +250,5 @@ $_SESSION['conta_senha'] = $pessoa->senha;
 </html>
 <?php
 require_once '../template/scripts.php'; //chama scripts comuns as paginas
+require_once 'script_view_conta.php'; 
 ?>

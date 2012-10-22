@@ -15,7 +15,7 @@ if (!$resultado) {
 } else {
 
     echo "<div id='tabela'>";
-    echo "<table = 'natureza' class=table table-striped table-condensed >";
+    echo "<table = 'natureza' class='table table-striped table-condensed' >";
     echo "<thead>";
     echo "<tr>
                 <th>Nome</th>
@@ -25,7 +25,7 @@ if (!$resultado) {
     do {
         echo "<tr>	
                 <td>" . $resultado->nome . "</td>
-                <td><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir esta natureza' href=#><i class='icon-remove-circle excluir-ato'></i></a></td>
+                <td><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir esta Natureza' href=#><i class='icon-remove-circle excluir-ato'></i></a></td>
                 </tr>";
     } while ($resultado = pg_fetch_object($sql));
     echo "</tbody>";

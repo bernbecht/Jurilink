@@ -487,7 +487,6 @@ function contaAjax(){
     url = $form.attr( 'action' );
     
     $a('<img id="loading_img" src="../../bootstrap/img/loading.gif" height="36" width="36" />').appendTo('#loading_content'); // appendTo é pra por em algum lugar
-
     $a.post(url,{
         id_pessoa:id_pessoa,
         email:email,
@@ -906,34 +905,36 @@ function validaFormEditConta(){
     bairro = $form.find('input[name="bairro"]').val(),
     cidade = $form.find('input[name="cidade"]').val(),
     estado = $form.find( 'option').filter(':selected' ).val();
-    
     var mandar = true;
-    if(tel.length  == 8){            
-        if(intRegex.test(tel)) {
-            $a('#telefone').removeClass("error").addClass("");            
-        }
+    if(tel.length != 0){             //Se foi digitado um telefone, deve acontecer a validação
+        if(tel.length  == 8){            
+            if(intRegex.test(tel)) {
+                $a('#telefone').removeClass("error").addClass("");            
+            }
             
-        else{
-            $a('#telefone').removeClass("").addClass("error");
-            mandar =false;
-        }
+            else{
+                $a('#telefone').removeClass("").addClass("error");
+                mandar =false;
+            }
         
         
-    }   
-    else if (tel.length  == 10){            
-        if(intRegex.test(tel)) {
-            $a('#telefone').removeClass("error").addClass("");            
-        }
+        }   
+        else if (tel.length  == 10){            
+            if(intRegex.test(tel)) {
+                $a('#telefone').removeClass("error").addClass("");            
+            }
             
-        else{
-            $a('#telefone').removeClass("").addClass("error");
-            mandar =false;
-        } 
+            else{
+                $a('#telefone').removeClass("").addClass("error");
+                mandar =false;
+            } 
+        }
     }
-    else{
+    
+    /*else{
         $a('#telefone').removeClass("success").addClass("error");  
         mandar =false;            
-    }
+    }*/
     
     if(email.length  < 7){
         $a('#email').removeClass("").addClass("error"); 
@@ -958,20 +959,25 @@ function validaFormEditConta(){
         $a('#estado').removeClass("control-group error").addClass("control-group");  
     }
             
-    if(endereco.length <=2){
-        $a('#endereco').removeClass("control-group").addClass("control-group error");  
-        mandar =false;
-    }        
-    else{
-        $a('#endereco').removeClass("control-group error").addClass("control-group");  
+    if (endereco.length > 0){ //Se endereço for digitado, faz a validação
+        if(endereco.length <=2){
+            $a('#endereco').removeClass("control-group").addClass("control-group error");  
+            mandar =false;
+        }
+    
+        else{
+            $a('#endereco').removeClass("control-group error").addClass("control-group");  
+        }
     }
-        
-    if(bairro.length <=2){
-        $a('#bairro').removeClass("").addClass("error");  
-        mandar =false;
-    }        
-    else{
-        $a('#bairro').removeClass("error").addClass("control-group");  
+     
+    if (bairro.length > 0){
+        if(bairro.length <=2){
+            $a('#bairro').removeClass("").addClass("error");  
+            mandar =false;
+        }        
+        else{
+            $a('#bairro').removeClass("error").addClass("control-group");  
+        }
     }
     return mandar;
         

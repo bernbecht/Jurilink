@@ -17,6 +17,9 @@ function loadInicial(){
             else{
                 $a('#tabela').remove();
                 $a(data).appendTo('#tabela_container');
+                
+                 //como a tabela de dados é algo dinâmico, é associá-la com o método 
+                tooltip();
             }
                 
         });

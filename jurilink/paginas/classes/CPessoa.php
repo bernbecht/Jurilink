@@ -18,33 +18,40 @@ class CPessoa {
         
     }
 
-    public function editarConta($conexao,$email,$telefone,$estado,$endereco,$cidade,$bairro,$id_pessoa){
+    public function editarConta($conexao, $email, $telefone, $estado, $endereco, $cidade, $bairro, $id_pessoa) {
         $this->email = $email;
         $this->telefone = $telefone;
         $this->uf = $estado;
         $this->endereco = $endereco;
         $this->cidade = $cidade;
         $this->bairro = $bairro;
-        $this->id_pessoa=$id_pessoa;
+        $this->id_pessoa = $id_pessoa;
         $editar = null;
-        
-        $query = "UPDATE pessoa SET endereco = '".$this->endereco."',
-                                 cidade ='".$this->cidade."',
-                                 tel = '".$this->telefone."',
-                                 bairro = '".$this->bairro."',
-                                 email = '".$this->email."',
-                                 id_uf = ".$this->uf."
+
+        if ($this->telefone == '') {
+            $query = "UPDATE pessoa SET endereco = '" . $this->endereco . "',
+                                 cidade ='" . $this->cidade . "',
+                                 tel = NULL,
+                                 bairro = '" . $this->bairro . "',
+                                 email = '" . $this->email . "',
+                                 id_uf = " . $this->uf . "
+                WHERE pessoa.id_pessoa = $this->id_pessoa";
+        }
+        else
+            $query = "UPDATE pessoa SET endereco = '" . $this->endereco . "',
+                                 cidade ='" . $this->cidade . "',
+                                 tel = '" . $this->telefone . "',
+                                 bairro = '" . $this->bairro . "',
+                                 email = '" . $this->email . "',
+                                 id_uf = " . $this->uf . "
                 WHERE pessoa.id_pessoa = $this->id_pessoa";
 
-        $editar = pg_query($conexao,$query);
-        
+        $editar = pg_query($conexao, $query);
+
         return $editar;
-        
-        
     }
-    
-    
-    public function editarPessoa($conexao,$id_pessoa, $n, $e, $em, $t, $c, $uf, $b, $tipo) {
+
+    public function editarPessoa($conexao, $id_pessoa, $n, $e, $em, $t, $c, $uf, $b, $tipo) {
         $this->nome = $n;
         $this->endereco = $e;
         $this->email = $em;
@@ -55,15 +62,15 @@ class CPessoa {
         $this->tipo = $tipo;
         $this->id_pessoa = $id_pessoa;
         $editar = null;
-        
-        $query = "UPDATE pessoa SET nome = '".$this->nome."', endereco = '".$this->endereco."',
-            tel = '".$this->telefone."', cidade = '".$this->cidade."',id_uf =".$this->uf.",
-            email = '".$this->email."',bairro = '".$this->bairro."' WHERE pessoa.id_pessoa = $this->id_pessoa";
-        
-        $editar = pg_query($conexao,$query);
+
+        $query = "UPDATE pessoa SET nome = '" . $this->nome . "', endereco = '" . $this->endereco . "',
+            tel = '" . $this->telefone . "', cidade = '" . $this->cidade . "',id_uf =" . $this->uf . ",
+            email = '" . $this->email . "',bairro = '" . $this->bairro . "' WHERE pessoa.id_pessoa = $this->id_pessoa";
+
+        $editar = pg_query($conexao, $query);
         return $editar;
     }
-    
+
     public function incluirPessoa($conexao, $n, $e, $em, $t, $c, $uf, $b, $tipo) {
         $this->nome = $n;
         $this->endereco = $e;
@@ -183,7 +190,7 @@ class CPessoa {
         $array_data = explode(',', $p);
         $n = count($array_data);
         $i = 0;
-        
+
         while ($i < $n) {
             if ($array_data[$i] != '') {
                 $array_data[$i] = ltrim($array_data[$i]);
@@ -192,15 +199,15 @@ class CPessoa {
             $i++;
         }
         $i = 0;
-        
+
         while ($i < $n) {
             if ($array_data[$i] != '') {
                 $sql = pg_query($conexao1, "select * 
                         from pessoa 
                         where nome = '{$array_data[$i]}' ");
-                 
+
                 $resultado = pg_fetch_object($sql);
-                
+
                 if ($resultado->id_pessoa == '') {
                     return -1;
                 } else {
@@ -247,7 +254,7 @@ class CPessoa {
     public function getPessoas($tipo, $limite, $offset) {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
-        
+
         $pesquisa = null;
         $query = null;
         $registros = null;
@@ -295,7 +302,7 @@ class CPessoa {
                 $registros = pg_exec($conexao, $query);
 
                 return array($pesquisa, $registros);
-                break;        
+                break;
         }
     }
 
