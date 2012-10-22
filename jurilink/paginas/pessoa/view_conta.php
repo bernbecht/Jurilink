@@ -28,6 +28,8 @@ $pesq_uf_pessoa = pg_exec($conexao1, "SELECT uf.id_uf, uf.nome from uf, pessoa w
 $uf_pessoa = pg_fetch_object($pesq_uf_pessoa);
 
 $_SESSION['conta_senha'] = $pessoa->senha;
+
+
 ?>
 
 
@@ -241,7 +243,7 @@ $_SESSION['conta_senha'] = $pessoa->senha;
         </form> 
 
         <div class="modal-footer"> 
-            <a href="#" class="btn cancelar-modal" data-dismiss="modal">Cancelar</a>
+            <a href="#" class="btn cancelar-modal-senha" data-dismiss="modal">Cancelar</a>
             <button id ="enviar" type="button" class="btn btn-primary checa-senha">OK</button>
         </div>
     </div>

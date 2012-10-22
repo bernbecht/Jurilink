@@ -45,7 +45,7 @@ if (!$resultado) {
 } else {
 
     echo "<div id='tabela'>";
-    echo "<table = 'fisica' class=table table-striped table-condensed >";
+    echo "<table = 'fisica' class='table table-striped table-condensed' >";
     echo "<thead>";
     echo "<tr>
   <th>Nome</th>

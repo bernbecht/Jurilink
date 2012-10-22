@@ -19,13 +19,13 @@ if (!$resultado) {
     echo "<thead>";
     echo "<tr>
                 <th>Nome</th>
-                <th>Ações</th>
+                <th class = 'centro'>Ações</th>
                 </tr></thead>";
     echo "<tbody>";
     do {
         echo "<tr>	
                 <td>" . $resultado->nome . "</td>
-                <td><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir esta Natureza' href=#><i class='icon-remove-circle excluir-ato'></i></a></td>
+                <td class = 'centro'><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir esta Natureza' href=#><i class='icon-remove-circle excluir-ato'></i></a></td>
                 </tr>";
     } while ($resultado = pg_fetch_object($sql));
     echo "</tbody>";

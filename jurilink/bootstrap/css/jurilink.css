@@ -336,6 +336,13 @@ form legend h1{
     font-size: 14px;
 }
 
+td.centro{
+    text-align: center;
+}
+
+th.centro{
+    text-align: center;    
+}
 /*Alteraando estilo da fonte da subnav e shadow no fim*/
 .subnav{
     font-size: 12px;

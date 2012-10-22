@@ -118,9 +118,9 @@ $user = pg_fetch_object($pesq_user);
         <div class="span3">
             <div class="view_pessoa">
                 <div class="view_pessoa_dados">
-                    <p><?php echo $pessoa->tel ?></p>
-                    <p><?php echo $pessoa->endereco ?></p>
-                    <p><?php echo $pessoa->bairro ?></p>
+                    <p><?php if ($pessoa->tel == '') echo "<br/>"; else echo $pessoa->tel;?></p>
+                    <p><?php if ($pessoa->endereco == '') echo "<br/>"; else echo $pessoa->endereco;?></p>
+                    <p><?php if ($pessoa->bairro == '') echo "<br/>"; else echo $pessoa->bairro;?></p>
                     <p><?php echo $pessoa->cidade ?></p>
                     <p><?php echo $estado->nome_estado ?></p>
                 </div>
@@ -150,7 +150,7 @@ $user = pg_fetch_object($pesq_user);
             <div id="tabela_processo_cliente" >
                 <?php
                 if ($processos_advocacia != '') {
-                    echo "<table = 'processos' class='table table-striped' >";
+                    echo "<table = 'processos' class='table table-striped table-condensed' >";
                     echo "<thead>";
                     echo "<tr>
                     <th>Data Distribui&ccedil;&atilde;o</th>
@@ -207,7 +207,7 @@ $user = pg_fetch_object($pesq_user);
                 <?php
                 if ($processos_c_advocacia != '') {
 
-                    echo "<table = 'processos_contra' class='table table-striped ' >";
+                    echo "<table = 'processos_contra' class='table table-striped table-condensed ' >";
                     echo "<thead>";
                     echo "<tr>
                 <th>Data Distribui&ccedil;&atilde;o</th>

@@ -32,6 +32,7 @@ if ($_SESSION['tipo_usuario'] == 0) {
     $pesq_juridica = pg_query($conexao1, $query);
     $juridica = pg_fetch_object($pesq_juridica);
 }
+$tipo_usuario = $_SESSION['tipo_usuario'];
 
 /* Seleciona processos do usuário */
 $query = "SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
@@ -96,8 +97,22 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
             <div class="view_pessoa">
                 <div class="view_pessoa_dados">
                     <p><?php echo $pessoa->nome ?></p>
-                    <p><?php echo $fisica->cpf ?></p>
-                    <p><?php echo $fisica->rg ?></p>
+                    <p>
+                        <?php
+                        if ($tipo_usuario == 0)
+                            echo $fisica->cpf;
+                        else
+                            echo $juridica->cnpj;
+                        ?>
+                    </p>
+                    <p>
+                        <?php
+                        if ($tipo_usuario == 0)
+                            echo $fisica->rg;
+                        else
+                            echo "<br/>";
+                        ?>
+                    </p>
                     <?php
                     if ($pessoa->email == '') {
                         echo '<p>Nao cadastrado</p>';
@@ -128,9 +143,9 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
         <div class="span3">
             <div class="view_pessoa">
                 <div class="view_pessoa_dados">
-                    <p><?php echo $pessoa->tel ?></p>
-                    <p><?php echo $pessoa->endereco ?></p>
-                    <p><?php echo $pessoa->bairro ?></p>
+                    <p><?php if ($pessoa->tel == '') echo "<br/>"; else echo $pessoa->tel; ?></p>
+                    <p><?php if ($pessoa->endereco == '') echo "<br/>"; else echo $pessoa->endereco; ?></p>
+                    <p><?php if ($pessoa->bairro == '') echo "<br/>"; else echo $pessoa->bairro; ?></p>
                     <p><?php echo $pessoa->cidade ?></p>
                     <p><?php echo $estado->nome_estado ?></p>
                 </div>

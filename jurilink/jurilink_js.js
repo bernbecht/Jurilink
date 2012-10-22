@@ -252,6 +252,7 @@ function limparForm(form){
     $a(form).find(':input').each(function(){
         switch(this.type){
             case 'password':
+            case 'senha':
             case 'select-multiple':
             case 'select-one':
             case 'text':
@@ -919,7 +920,7 @@ function validaFormEditConta(){
         
         
         }   
-        else if (tel.length  == 10){            
+        else if (tel.length  == 10){
             if(intRegex.test(tel)) {
                 $a('#telefone').removeClass("error").addClass("");            
             }
@@ -929,13 +930,12 @@ function validaFormEditConta(){
                 mandar =false;
             } 
         }
+        else if(tel.length!=8 && tel.length!=10){
+            $a('#telefone').removeClass("").addClass("error");
+            mandar =false;
+            
+        }
     }
-    
-    /*else{
-        $a('#telefone').removeClass("success").addClass("error");  
-        mandar =false;            
-    }*/
-    
     if(email.length  < 7){
         $a('#email').removeClass("").addClass("error"); 
         mandar =false;
@@ -946,7 +946,8 @@ function validaFormEditConta(){
     if(cidade.length <=2){
         $a('#cidade').removeClass("control-group").addClass("control-group error");  
         mandar =false;
-    }        
+    }
+    
     else{
         $a('#cidade').removeClass("control-group error").addClass("control-group");  
     }
@@ -1227,31 +1228,18 @@ function checa_senhaAjax(modalidade){
         senha_digitada:senha_digitada
     },function(data){ 
         if (data == 1){
-            $a('#myModal').modal('toggle');
+            limparForm('.checa_senha_AjaxForm')
+            $a('#myModal').modal('hide');
+            
             //Alterar dados da conta
             if (modalidade == 0){
-                var mandar = validaFormEditConta();
-                subirPagina();
-   
-                if(mandar==true){            
-                    //impedir duplo clique
-                    $a('.edit-conta').attr('disabled','disabled');
-                    $a(".edit-conta").addClass('disabled');
-                    contaAjax();
-           
-                }
+                $a('#loading_img').remove();
+                contaAjax();
             }
+            //Alterar Senha
             if(modalidade == 1){
-                var mandar = validaFormTrocaSenha();
-                
-                if(mandar==true){            
-                    //impedir duplo clique
-                    $a('.troca-senha').attr('disabled','disabled');
-                    $a(".troca-senha").addClass('disabled');
-                    senhaAjax();
-           
-                }
-                
+                $a('#loading_img').remove();
+                senhaAjax();
             }
         }
         
@@ -1259,6 +1247,7 @@ function checa_senhaAjax(modalidade){
             $a('.alert').remove();
             $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>Senha inválida</p></div>').appendTo('#msg_resultado_confirma_senha'); // appendTo é pra por em algum lugar
             $a('#senha_atual_input').focus();
+            
         }
         
     });
@@ -1267,7 +1256,7 @@ function checa_senhaAjax(modalidade){
 
 
 function checa_senha(modalidade){
-    $a('#myModal').modal('toggle');
+    $a('#myModal').modal('show');
     $a('#senha_atual_input').focus();
     $a(".checa-senha").click(function(){ 
         checa_senhaAjax(modalidade);
@@ -1277,7 +1266,16 @@ function checa_senha(modalidade){
 
 function validaFormSenha(){
     $a(".troca-senha").click(function(){ 
-        checa_senha(1);
+        var mandar = validaFormTrocaSenha();
+                
+        if(mandar==true){            
+            //impedir duplo clique
+            /*$a('.troca-senha').attr('disabled','disabled');
+            $a(".troca-senha").addClass('disabled');
+            */
+            checa_senha(1);
+        }
+        
     });
     
 }
@@ -1285,7 +1283,17 @@ function validaFormSenha(){
 function validaFormConta(){
     //Apertar botão para Salvar alterações
     $a(".edit-conta").click(function(){
-        checa_senha(0);
+        
+        var mandar = validaFormEditConta();
+        
+        if(mandar == true){
+            //impedir duplo clique
+            /* $a('.edit-conta').attr('disabled','disabled');
+            $a(".edit-conta").addClass('disabled');*/
+            checa_senha(0);
+            
+            
+        }
     });
      
 }
@@ -1316,6 +1324,11 @@ function validaFormPessoaJS(){
     $a(".cancelar-modal").click(function(){
         limparForm('.pessoaAjaxForm');
     });
+    
+    $a(".cancelar-modal-senha").click(function(){
+        limparForm('.checa_senha_AjaxForm');
+    });
+    
      
     //Apertar o botão para incluir 1 pessoa
     $a(".submit-pessoa").click(function(){ 
@@ -1502,7 +1515,7 @@ function tooltip(){
         );
 }
 
-function botao_clicado_edita_conta(){
+/*function botao_clicado_edita_conta(){
     $a(".edit-conta").click(function(){       
         var button = 0;
     });
@@ -1516,7 +1529,7 @@ function botao_clicado_edita_senha(){
     });    
     return button;
     
-}
+}*/
 
 
 //Função de JQUERY
