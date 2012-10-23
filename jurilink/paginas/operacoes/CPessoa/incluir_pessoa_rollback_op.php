@@ -63,46 +63,24 @@ $comarca = $_POST['comarca'];
 
 $erro = "";
 
-
-
-
-
 if (strlen($n) < 2) {
     $erro.= "nome menos que 2";
 }
 
-/* if (strlen($e) < 2) {
-  $erro.= "endereço menos que 2";
-  } */
-
 if (strlen($t) == 0) {
     $t = "NULL";
 } else {
-    if (strlen($t) < 8) {
+    if (strlen($t) != 8 && strlen($t) != 10 && strlen($t) != 11) {
         $erro.= "telefone menos que 8";
-    }
-
-    if (strlen($t) > 10) {
-        $erro.= "telefone mais que 10";
-    }
+    }    
 }
 
-/* if (!is_numeric($t) && strlen($t)!=0) {
-  $erro.= "telefone nao eh numero";
-  } */
+//se for passado um email ele deve ser pelo menos 7
 
-// if (strlen($em) < 2) {
-//$erro.= "email menos que 2";
-// }
-//se for passado um email ele deve ser pelo menos 2
 if (strlen($em) > 0) {
     if (strlen($em) < 7)
         $erro.= "email menos que 7";
 }
-
-/* if (strlen($b) < 2) {
-  $erro.= "Escreva um bairros";
-  } */
 
 if (strlen($c) < 2) {
     $erro.= "cidade menos que 2";

@@ -73,13 +73,9 @@ if (strlen($n) < 2) {
 if (strlen($t) == 0) {
     $t = "NULL";
 } else {
-    if (strlen($t) < 8) {
+    if (strlen($t) != 8 && strlen($t) != 10 && strlen($t) != 11) {
         $erro.= "telefone menos que 8";
-    }
-
-    if (strlen($t) > 10) {
-        $erro.= "telefone mais que 10";
-    }
+    }    
 }
 
 //se for passado um email ele deve ser pelo menos 2
@@ -88,9 +84,6 @@ if (strlen($em) > 0) {
         $erro.= "email menos que 7";
 }
 
-/*if (strlen($b) < 2) {
-    $erro.= "Escreva um bairros";
-}*/
 
 if (strlen($c) < 2) {
     $erro.= "cidade menos que 2";

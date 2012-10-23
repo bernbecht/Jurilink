@@ -79,7 +79,7 @@ $user = pg_fetch_object($pesq_user);
                 <div class="view_pessoa">
                     <div class="view_pessoa_legenda">
                         <p><strong>Nome</strong></p>
-                        <p><strong>CPF/CNPJ</strong></p>
+                        <p><strong>CPF</strong></p>
                         <p><strong>RG</strong></p>
                         <p><strong>E-mail</strong></p>
                         <p><strong>User</strong></p>
@@ -94,7 +94,18 @@ $user = pg_fetch_object($pesq_user);
                 <div class="view_pessoa">
                     <div class="view_pessoa_dados">
                         <p><?php echo $pessoa->nome ?></p>
-                        <p><?php echo $fisica->cpf ?></p>
+                        <?php
+                        echo"<p>";                           
+                                $cpf = $fisica->cpf;                                
+                                for ($i = 0; $i < 12; $i++) {
+                                    if ($i == 3 || $i == 6 )
+                                        echo ".";
+                                    echo $cpf[$i];
+                                    if ($i == 8)
+                                        echo "-";
+                                }                            
+                            echo"</p>";
+                        ?>    
                         <p><?php echo $fisica->rg ?></p>
                         <?php
                         if ($pessoa->email == '') {
@@ -131,22 +142,56 @@ $user = pg_fetch_object($pesq_user);
                 <div class="view_pessoa">
                     <div class="view_pessoa_dados">
                         <?php
-                        if($pessoa->tel =='')
+                        if ($pessoa->tel == '')
+                            echo '<p>Não Cadastrado</p>';
+                        else {
+                            echo"<p>";
+                            if (strlen($pessoa->tel) == 11) {
+                                $tele = $pessoa->tel;
+                                echo "(";
+                                for ($i = 0; $i < 11; $i++) {
+                                    if ($i == 3)
+                                        echo ") ";
+                                    echo $tele[$i];
+                                    if ($i == 6)
+                                        echo "-";
+                                }
+                            }
+                            
+                            else if (strlen($pessoa->tel) == 10) {
+                                $tele = $pessoa->tel;
+                                echo "(";
+                                for ($i = 0; $i < 10; $i++) {
+                                    if ($i == 2)
+                                        echo ") ";
+                                    echo $tele[$i];
+                                    if ($i == 5)
+                                        echo "-";
+                                }
+                            }
+                            
+                            else if (strlen($pessoa->tel) == 8) {
+                                $tele = $pessoa->tel;                                
+                                for ($i = 0; $i < 8; $i++) {                                    
+                                    echo $tele[$i];
+                                    if ($i == 3)
+                                        echo "-";
+                                }
+                            }
+                            echo "</p>";
+                        }
+
+                        if ($pessoa->endereco == '')
                             echo '<p>Não Cadastrado</p>';
                         else
-                            echo "<p>$pessoa->tel</p>";
-                        
-                        if($pessoa->endereco == '')
-                             echo '<p>Não Cadastrado</p>';
-                        else
                             echo "<p>$pessoa->endereco</p>";
-                        
-                        if($pessoa->bairro == '')
-                             echo '<p>Não Cadastrado</p>';
+
+                        if ($pessoa->bairro == '')
+                            echo '<p>Não Cadastrado</p>';
                         else
-                            echo "<p>$pessoa->bairro</p>";                        
+                            echo "<p>$pessoa->bairro</p>";
                         ?>
-                        
+
                         <p><?php echo $pessoa->cidade ?></p>
                         <p><?php echo $estado->nome_estado ?></p>
                     </div>

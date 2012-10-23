@@ -10,7 +10,6 @@ $conexao1 = $conexao->novaConexao();
 
 $pesq_uf = pg_exec($conexao1, "select * from uf order by nome");
 $resultado = pg_fetch_object($pesq_uf);
-
 ?>
 
 <div class="container content">   
@@ -25,11 +24,17 @@ $resultado = pg_fetch_object($pesq_uf);
                     <h1>Cadastrar Nova Pessoa Jurídica</h1>
                 </div>
                 <div id="loading_content">  
-                    
+
                 </div>                
             </legend> 
-            
-            <div id="msg_resultado"></div>
+
+            <div id="msg_resultado">
+                <div class="alert alert-block fade in">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <p>Todos os itens com a tarja <b>amarela</b> são obrigatórios.</p></div>
+            </div>
+
+            <br/>
 
             <div class="row">
                 <div class="span5" >
@@ -57,31 +62,6 @@ $resultado = pg_fetch_object($pesq_uf);
 
             <div class="row">
                 <div class="span5" >
-                    <div id="endereco"class="control-group">
-                        <label class="control-label" for="endereco">Endereço</label>
-                        <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="endereco_input" name="endereco">     
-                            <span  class="help-inline "></span> 
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="divisor_maior"></div>
-
-                <div class="span5" >
-                    <div id="bairro"class="control-group">
-                        <label class="control-label" for="bairro">Bairro</label>
-                        <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="bairro_input" name="bairro">     
-                            <span  class="help-inline "></span> 
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="span5" >
                     <div id="cidade" class="control-group">
                         <label class="control-label" for="cidade">Cidade</label>
                         <div class="controls">
@@ -89,7 +69,7 @@ $resultado = pg_fetch_object($pesq_uf);
                             <span  class="help-inline "></span> 
                         </div>
                     </div>
-                    
+
                 </div>
 
                 <div class="divisor_maior"></div>
@@ -98,7 +78,7 @@ $resultado = pg_fetch_object($pesq_uf);
                     <div id="estado" class="control-group">
                         <label class="control-label" for="Estado">Estado</label>
                         <div class="controls">                    
-                            <select  name="estado" id="estado_input" class="aviso">
+                            <select  name="estado" id="estado_input" class="comboBox_small aviso">
                                 <option value="-1">-</option>
                                 <?php
                                 if ($resultado->id_uf != NULL) {
@@ -113,6 +93,32 @@ $resultado = pg_fetch_object($pesq_uf);
                     </div>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="span5" >
+                    <div id="endereco"class="control-group">
+                        <label class="control-label" for="endereco">Endereço</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="endereco_input" name="endereco">     
+                            <span  class="help-inline "></span> 
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="divisor_maior"></div>
+
+                <div class="span5" >
+                    <div id="bairro"class="control-group">
+                        <label class="control-label" for="bairro">Bairro</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="bairro_input" name="bairro">     
+                            <span  class="help-inline "></span> 
+                        </div>
+                    </div>
+                </div>
+            </div>
+
 
             <div class="row">
                 <div class="span5" >
@@ -133,7 +139,7 @@ $resultado = pg_fetch_object($pesq_uf);
                     <div id="telefone" class="control-group ">
                         <label class="control-label" for="telefone">Telefone</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="telefone_input" name="telefone">    
+                            <input type="text" class="input-xlarge" id="telefone_input" name="telefone">    
                             <span  class="help-inline ">Apenas dígitoss</span> 
                         </div>
                     </div>
@@ -155,7 +161,7 @@ $resultado = pg_fetch_object($pesq_uf);
                 </div>
             </div> 
 
-            
+
 
 
             <input value="1" type="hidden" class="input-xlarge" id="tipo_input" name="tipo">  

@@ -75,8 +75,8 @@ $user = pg_fetch_object($pesq_user);
                 <div class="view_pessoa">
                     <div class="view_pessoa_legenda">
                         <p><strong>Nome</strong></p>
-                        <p><strong>CPF/CNPJ</strong></p>
-                        <p><strong>RG</strong></p>
+                        <p><strong>CNPJ</strong></p>
+                       
                         <p><strong>E-mail</strong></p>
                         <p><strong>User</strong></p>
                     </div>
@@ -90,8 +90,21 @@ $user = pg_fetch_object($pesq_user);
                 <div class="view_pessoa">
                     <div class="view_pessoa_dados">
                         <p><?php echo $pessoa->nome ?></p>
-                        <p><?php echo $juridica->cnpj ?></p>
-                        <p>Não cadastrado</p>
+                         <?php
+                        echo"<p>";                           
+                                $cnpj = $juridica->cnpj;                               
+                                for ($i = 0; $i < 14; $i++) {
+                                    if ($i == 3 || $i == 6 )
+                                        echo ".";
+                                    echo $cnpj[$i];
+                                    if ($i == 8)
+                                        echo "/";
+                                    if ($i == 12)
+                                        echo "-";
+                                }                            
+                            echo"</p>";
+                        ?> 
+                     
                         <?php
                         if ($pessoa->email == '') {
                             echo '<p>Não cadastrado</p>';
@@ -129,8 +142,43 @@ $user = pg_fetch_object($pesq_user);
                         <?php
                         if($pessoa->tel =='')
                             echo '<p>Não Cadastrado</p>';
-                        else
-                            echo "<p>$pessoa->tel</p>";
+                        else{
+                            echo"<p>";
+                            if (strlen($pessoa->tel) == 11) {
+                                $tele = $pessoa->tel;
+                                echo "(";
+                                for ($i = 0; $i < 11; $i++) {
+                                    if ($i == 3)
+                                        echo ") ";
+                                    echo $tele[$i];
+                                    if ($i == 6)
+                                        echo "-";
+                                }
+                            }
+                            
+                            else if (strlen($pessoa->tel) == 10) {
+                                $tele = $pessoa->tel;
+                                echo "(";
+                                for ($i = 0; $i < 10; $i++) {
+                                    if ($i == 2)
+                                        echo ") ";
+                                    echo $tele[$i];
+                                    if ($i == 5)
+                                        echo "-";
+                                }
+                            }
+                            
+                            else if (strlen($pessoa->tel) == 8) {
+                                $tele = $pessoa->tel;                                
+                                for ($i = 0; $i < 8; $i++) {                                    
+                                    echo $tele[$i];
+                                    if ($i == 3)
+                                        echo "-";
+                                }
+                            }
+                            echo "</p>";
+                        }
+                            
                         
                         if($pessoa->endereco == '')
                              echo '<p>Não Cadastrado</p>';

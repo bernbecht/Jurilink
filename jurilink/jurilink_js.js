@@ -747,6 +747,7 @@ function validaFormPessoaSubmit(){
       
     if(tel.length  == 0){
         mandar =true;
+        $a('#telefone').removeClass("error").addClass(""); 
     }
       
     else if(tel.length  == 8){            
@@ -768,7 +769,19 @@ function validaFormPessoaSubmit(){
             $a('#telefone').removeClass("").addClass("error");
             mandar =false;
         } 
-    }   
+    }
+    
+    else if(tel.length  == 11){            
+        if(intRegex.test(tel)) {
+            $a('#telefone').removeClass("error").addClass("");            
+        }
+            
+        else{
+            $a('#telefone').removeClass("").addClass("error");
+            mandar =false;
+        }
+    } 
+    
     else{
         $a('#telefone').removeClass("success").addClass("error");  
         mandar =false;            

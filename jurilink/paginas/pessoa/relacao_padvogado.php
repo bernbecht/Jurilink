@@ -19,7 +19,7 @@ require_once '../config.php';     //chama as configurações de página!
             </a> 
         </div>   
         <div class ="direita">
-            <input id="busca-input" type="text" class="input-medium search-query">
+            <input id="busca-input" type="text" class="input-medium search-query" placeholder="Filtro">
 
         </div>
         <br/>

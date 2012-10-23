@@ -357,22 +357,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                         <span  class="help-inline ">Mínimo 4 dígitos</span>                    
                     </div>
                 </div>
-
-                <div id="endereco"class="control-group ">
-                    <label class="control-label" for="endereco">Endereço</label>
-                    <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="endereco_input" name="endereco">     
-                        <span  class="help-inline "></span> 
-                    </div>
-                </div>
-
-                <div id="bairro"class="control-group ">
-                    <label class="control-label" for="bairro">Bairro</label>
-                    <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="bairro_input" name="bairro">     
-                        <span  class="help-inline "></span> 
-                    </div>
-                </div>
+                
 
                 <div id="cidade" class="control-group ">
                     <label class="control-label" for="cidade">Cidade</label>
@@ -385,7 +370,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                 <div id="estado" class="control-group">
                     <label class="control-label" for="Estado">Estado</label>
                     <div class="controls">                    
-                        <select  name="estado" id="estado_input" class="aviso">
+                        <select  name="estado" id="estado_input" class="aviso comboBox_small">
                             <option value="-1">-</option>
                             <?php
                             if ($resultado->id_uf != NULL) {
@@ -398,11 +383,27 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                         <span  class="help-inline "></span>
                     </div>
                 </div>
+                
+                <div id="endereco"class="control-group ">
+                    <label class="control-label" for="endereco">Endereço</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge" id="endereco_input" name="endereco">     
+                        <span  class="help-inline "></span> 
+                    </div>
+                </div>
+
+                <div id="bairro"class="control-group ">
+                    <label class="control-label" for="bairro">Bairro</label>
+                    <div class="controls">
+                        <input type="text" class="input-xlarge " id="bairro_input" name="bairro">     
+                        <span  class="help-inline "></span> 
+                    </div>
+                </div>
 
                 <div id="telefone" class="control-group ">
                     <label class="control-label" for="telefone">Telefone</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="telefone_input" name="telefone">    
+                        <input type="text" class="input-xlarge" id="telefone_input" name="telefone">    
                         <span  class="help-inline ">Use apenas dígitos</span> 
                     </div>
                 </div>

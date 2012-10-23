@@ -24,11 +24,16 @@ $resultado = pg_fetch_object($pesq_uf);
                     <h1>Cadastrar Nova Pessoa Fisica</h1>
                 </div>
                 <div id="loading_content">  
-                    
+
                 </div>                
             </legend> 
 
-            <div id="msg_resultado"></div>
+            <div id="msg_resultado">
+                <div class="alert alert-block fade in">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <p>Todos os itens com a tarja <b>amarela</b> são obrigatórios.</p></div>
+            </div>
+            
             <br/>
 
             <div class="row row_cadastro_pessoa">
@@ -77,32 +82,7 @@ $resultado = pg_fetch_object($pesq_uf);
                         </div>
                     </div>                
                 </div>
-            </div>
-
-            <div class="row row_cadastro_pessoa">             
-                <div class="span5" >
-                    <div id="endereco"class="control-group">
-                        <label class="control-label" for="endereco">Endereço</label>
-                        <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="endereco_input" name="endereco">     
-                            <span  class="help-inline "></span> 
-                        </div>
-                    </div>                    
-                </div>
-                <div class="divisor_maior"></div>               
-
-                <div class="span5" >
-                    <div id="bairro"class="control-group">
-                        <label class="control-label" for="bairro">Bairro</label>
-                        <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="bairro_input" name="bairro">     
-                            <span  class="help-inline "></span> 
-                        </div>
-                    </div>                    
-                </div>
-
-
-            </div>
+            </div>            
 
 
             <div class="row row_cadastro_pessoa">
@@ -138,13 +118,38 @@ $resultado = pg_fetch_object($pesq_uf);
                 </div>
             </div>
 
+            <div class="row row_cadastro_pessoa">             
+                <div class="span5" >
+                    <div id="endereco"class="control-group">
+                        <label class="control-label" for="endereco">Endereço</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="endereco_input" name="endereco">     
+                            <span  class="help-inline "></span> 
+                        </div>
+                    </div>                    
+                </div>
+                <div class="divisor_maior"></div>               
+
+                <div class="span5" >
+                    <div id="bairro"class="control-group">
+                        <label class="control-label" for="bairro">Bairro</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="bairro_input" name="bairro">     
+                            <span  class="help-inline "></span> 
+                        </div>
+                    </div>                    
+                </div>
+
+
+            </div>
+
 
             <div class="row row_cadastro_pessoa">
                 <div class="span5" >
                     <div id="telefone" class="control-group ">
                         <label class="control-label" for="telefone">Telefone</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="telefone_input" name="telefone">    
+                            <input type="text" class="input-xlarge" id="telefone_input" name="telefone">    
                             <span  class="help-inline ">Apenas digitos</span> 
                         </div>
                     </div>                       
@@ -180,7 +185,7 @@ $resultado = pg_fetch_object($pesq_uf);
                 </div>
             </div> 
 
-            
+
 
             <input value="0" type="hidden" class="input-xlarge" id="tipo_input" name="tipo">  
 
@@ -189,7 +194,7 @@ $resultado = pg_fetch_object($pesq_uf);
                 <button  id ="enviar"  type="button" class="btn btn-primary submit-pessoa">Salvar</button>
                 <button  id ="enviar"  type="button" class="btn btn-primary submit-outra-pessoa">Salvar e Adicionar Outro</button>
                 <button  type="button" class="btn cancelar">Cancelar</button>
-                
+
             </div>
 
 
