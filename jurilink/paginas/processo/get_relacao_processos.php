@@ -44,7 +44,7 @@ if (!$resultado) {
 } else {
 
     echo "<div id='tabela'>";
-    echo "<table = 'processos' class='table table-striped table-condensed' >";
+    echo "<table = 'processos' class='table table-striped' >";
     echo "<thead>";
     echo "<tr>
                 <th>N&uacute;mero</th>

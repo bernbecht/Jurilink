@@ -7,9 +7,11 @@ require_once '../config.php';     //chama as configurações de página!
     <div class="row">
         <div class ="esquerda"> <h1>Naturezas de Ação</h1> </div>        
     </div>
-    <div id="aviso">    </div>
+    
 
     <div class="divisor_horizontal_view"></div>
+    
+    <div id="aviso">    </div>
 
     <div class="row">
         <div class ="esquerda"> 
