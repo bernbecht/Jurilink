@@ -13,7 +13,6 @@ $resultado = pg_fetch_object($sql);
 if (!$resultado) {
     echo 0;
 } else {
-
     echo "<div id='tabela'>";
     echo "<table = 'comarcas' class='table table-striped table-condensed' >";
     echo "<thead>";
@@ -25,12 +24,11 @@ if (!$resultado) {
     do {
         echo "<tr>	
                 <td>" . $resultado->nome . "</td>
-                <td class = 'centro'><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir esta Comarca' href=#><i class='icon-remove-circle excluir-ato'></i></a></td>
-                </tr>";
+                <td class='centro'><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Editar comarca' href='#'><i class='icon-pencil editar-comarca'><input type='hidden' value = '" .$resultado->nome."|".$resultado->id_comarca."'/></i></a></td>
+             </tr>";
     } while ($resultado = pg_fetch_object($sql));
     echo "</tbody>";
     echo "</table>";
     echo "</div>";
 }
-
 ?>

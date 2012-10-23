@@ -25,7 +25,7 @@ if (!$resultado) {
     do {
         echo "<tr>	
                 <td>" . $resultado->nome . "</td>
-                <td class = 'centro'><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir esta Natureza' href=#><i class='icon-remove-circle excluir-ato'></i></a></td>
+                <td class = 'centro'><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Editar natureza' href=#><i class='icon-pencil editar-natureza'><input type='hidden' value = '" .$resultado->nome."|".$resultado->id_natureza_acao."'/></i></a></td>
                 </tr>";
     } while ($resultado = pg_fetch_object($sql));
     echo "</tbody>";

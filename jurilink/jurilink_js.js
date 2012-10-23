@@ -1515,22 +1515,6 @@ function tooltip(){
         );
 }
 
-/*function botao_clicado_edita_conta(){
-    $a(".edit-conta").click(function(){       
-        var button = 0;
-    });
-    return button;    
-    
-}
-
-function botao_clicado_edita_senha(){
-    $a(".edit-senha").click(function(){       
-        var button = 1;
-    });    
-    return button;
-    
-}*/
-
 
 //Função de JQUERY
 $a(document).ready(function(){   

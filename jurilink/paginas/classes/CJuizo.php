@@ -44,7 +44,7 @@ class CJuizo {
 
         $conexao = $conexao1->novaConexao();
 
-        $query = "select juizo.nome as nome, comarca.nome as comarca from juizo inner join 
+        $query = "select juizo.nome as nome, comarca.nome as comarca, comarca.id_comarca as comarca_id from juizo inner join 
             comarca on comarca.id_comarca = juizo.id_comarca order by nome";
         $resultado = pg_query($conexao, $query);
         return $resultado;

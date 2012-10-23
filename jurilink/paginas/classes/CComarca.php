@@ -11,6 +11,20 @@ class CComarca {
         
     }
 
+    public function editarComarca($nome,$id_comarca){
+        $this->id_comarca = $id_comarca;
+        $this->nome = $nome;
+        
+        $conexao1 = new CConexao();
+
+        $conexao = $conexao1->novaConexao();
+        
+        pg_query($conexao, "UPDATE comarca SET nome = '".$this->nome."' WHERE id_comarca = '".$this->id_comarca."'");
+                
+        $conexao1->closeConexao();
+        
+        
+    }
     public function incluirComarca($n) {
         $this->nome = $n;
 

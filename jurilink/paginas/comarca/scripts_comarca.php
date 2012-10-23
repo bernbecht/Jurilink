@@ -80,11 +80,12 @@
             }
         });
     }
+
     
     $a(document).ready(function (){              
              
         validaFormComarcaJS();
-        
+
     });      
 
 </script>
