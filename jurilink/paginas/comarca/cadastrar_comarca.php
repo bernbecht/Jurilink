@@ -13,7 +13,7 @@ require_once ( '../config.php');     //chama as configurações de página!
             <div id="msg_resultado_processo">
                
             </div>  
-
+            <br/>
             <div id="nome" class="control-group">
                 <label class="control-label" for="Nome">Nome</label>
                 <div class="controls">
@@ -25,7 +25,7 @@ require_once ( '../config.php');     //chama as configurações de página!
             <!--Bot�es do formul�rio -->
             <div class="form-actions">
                 <button  id ="submit-comarca"  type="button" class="btn btn-primary">Salvar</button>
-                <button  type="button" class="btn cancelar-processo">Cancelar</button>
+                <button  type="button" class="btn cancelar-comarca">Cancelar</button>
             </div>
 
         </fieldset>

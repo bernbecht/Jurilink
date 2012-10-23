@@ -79,7 +79,7 @@
         
             limparForm('#form_juizo');
         
-            var url = 'relacao_processos.php';
+            var url = 'relacao_juizos.php';
             
             
             $a(window.document.location).attr('href',url);

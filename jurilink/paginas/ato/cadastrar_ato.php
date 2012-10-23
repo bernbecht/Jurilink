@@ -49,7 +49,7 @@ require_once ( '../config.php');     //chama as configurações de página!
             <!--Bot�es do formul�rio -->
             <div class="form-actions">
                 <button  id ="submit-ato"  type="button" class="btn btn-primary">Salvar</button>
-                <button  type="button" class="btn cancelar-processo">Cancelar</button>
+                <button  type="button" class="btn cancelar-ato">Cancelar</button>
             </div>
 
         </fieldset>

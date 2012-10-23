@@ -1226,7 +1226,6 @@ table {
 }
 .table-condensed th,
 .table-condensed td {
-    text-align: center;
     padding: 4px 5px;
 }
 .table-bordered {

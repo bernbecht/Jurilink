@@ -24,7 +24,7 @@ if ($audiencia->local != '') {
                             <th>Local</th>
                             <th>Tipo</th>";
     if ($_SESSION['tipo_usuario'] == 2)
-        echo "<th>Ações</th>
+        echo "<th class='centro'>Ações</th>
                             </tr>
                             </thead>";
     echo "<tbody>";
@@ -37,7 +37,9 @@ if ($audiencia->local != '') {
                     <td>" . $audiencia->local . "</td>
                     <td>" . $audiencia->tipo . "</td>";
         if ($_SESSION['tipo_usuario'] == 2)
+
             echo "<td><a class='tooltip_class' rel='tooltip' data-placement='top' data-original-title='Excluir esta audiência' data-toggle='modal' href='#exclusaoAudienciaModal'><i class='icon-remove-circle excluir-audiencia'><input type='hidden' value = '".$audiencia->id_audiencia."'/></i></a></td>
+
                     </tr>";
     } while ($audiencia = pg_fetch_object($sql));
 

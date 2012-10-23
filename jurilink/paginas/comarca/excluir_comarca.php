@@ -1,6 +1,6 @@
 <?php
-	require_once ('../config.php');
-    require_once ( '../template/header.php');       
+require_once ('../config.php');
+require_once ( '../template/header.php');
 ?>
 
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en">
@@ -17,17 +17,17 @@
         <div class="container"  >
             <div class="row show-grid">
                 <!------ Conex�o com o BD e busca -->
-				<?php 
-					$conexao1 = new CConexao();
-					$conexao = $conexao1->novaConexao();
-					$result = pg_query($conexao, "SELECT nome, id_comarca FROM comarca");
+                <?php
+                $conexao1 = new CConexao();
+                $conexao = $conexao1->novaConexao();
+                $result = pg_query($conexao, "SELECT nome, id_comarca FROM comarca");
 
-					if (!$result) {
-						echo "Um erro ocorreu.\n";
-						exit;
-					}
-				?>
-				
+                if (!$result) {
+                    echo "Um erro ocorreu.\n";
+                    exit;
+                }
+                ?>
+
                 <div class="span6 drop">
                     <div class="drag">
                         <div class="barra-titulo">
@@ -39,37 +39,37 @@
                             <div class="direita">
                                 <a class="btn btn-small btn-success" href="#">
                                     <i class="icon-plus icon-white"></i>
-									
+
                                 </a>
                             </div>
                         </div>
                         <div class="tabela"> 
-			<?php
+                            <?php
                             echo "<table = 'teste' class=table table-striped table-condensed >";
                             echo "<thead>";
                             echo "<tr><th>Nome</th></tr></thead>";
                             echo "<tbody>";
                             while ($row = pg_fetch_row($result)) {
                                 echo "<tr>
-				<td>".$row[0]."</td>
+				<td>" . $row[0] . "</td>
 				<td>
 				<a class=btn btn-small btn-success href= '#' onClick='getIdComarca($row[1])'>
 					<i class=icon-minus icon-white></i>
 				</a>
 				</td>
 				</tr>";
-			}
+                            }
                             echo "</tbody>";
                             echo "</table>";
-			?>
-			</div>
-			<form name = "formulario_comarca_excluir" action="../operacoes/CComarca/excluir_comarca_op.php" method="post">
-				<input type="hidden" name="id_comarca_excluir" value="-1">
-			</form>
+                            ?>
+                        </div>
+                        <form name = "formulario_comarca_excluir" action="../operacoes/CComarca/excluir_comarca_op.php" method="post">
+                            <input type="hidden" name="id_comarca_excluir" value="-1">
+                        </form>
                     </div>
                 </div>
-            
-                       </div> <!-- Div de linha --->
+
+            </div> <!-- Div de linha --->
 
             <div class="row show-grid">
                 <div class="span12 drop">
@@ -77,9 +77,9 @@
             </div>
         </div>
 
-        
 
-       
+
+
 
         <!------ Scripts -->
 

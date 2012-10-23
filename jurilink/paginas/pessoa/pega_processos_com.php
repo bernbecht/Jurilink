@@ -18,7 +18,7 @@ if ($href == 'pessoafisica' || $tipo_pessoa== 0) {
     $processo = $fisica->getProcessosFisicaComAdvocaciaTotal($id_pessoa);
     $processos_advocacia = pg_fetch_object($processo);
 
-    echo "<table = 'processos' class='table table-striped ' >";
+    echo "<table = 'processos' class='table table-striped table-condensed' >";
     echo "<thead>";
     echo "<tr>
                     <th>Data Distribui&ccedil;&atilde;o</th>
@@ -40,7 +40,7 @@ if ($href == 'pessoafisica' || $tipo_pessoa== 0) {
                     <td>" . $processos_advocacia->nome_autor . "</td>
                     <td>" . $processos_advocacia->nome_reu . "</td>
                     <td>" . $processos_advocacia->nome_adv . "</td>
-                    <td>" . $processos_advocacia->valor_causa . "</td> 
+                    <td><div class = 'direita'\>" . $processos_advocacia->valor_causa . "</td> 
                     </tr>";
     } while ($processos_advocacia = pg_fetch_object($processo));
     echo "</tbody>";
@@ -53,7 +53,7 @@ else if ($href == 'pessoajuridica' || $tipo_pessoa== 1) {
     $processo = $fisica->getProcessosJuridicaComAdvocaciaTotal($id_pessoa);
     $processos_advocacia = pg_fetch_object($processo);
 
-    echo "<table = 'processos' class='table table-striped ' >";
+    echo "<table = 'processos' class='table table-striped table-condensed ' >";
     echo "<thead>";
     echo "<tr>
                     <th>Data Distribui&ccedil;&atilde;o</th>
@@ -75,7 +75,7 @@ else if ($href == 'pessoajuridica' || $tipo_pessoa== 1) {
                     <td>" . $processos_advocacia->nome_autor . "</td>
                     <td>" . $processos_advocacia->nome_reu . "</td>
                     <td>" . $processos_advocacia->nome_adv . "</td>
-                    <td>" . $processos_advocacia->valor_causa . "</td> 
+                    <td><div class = 'direita'\>" . $processos_advocacia->valor_causa . "</td> 
                     </tr>";
     } while ($processos_advocacia = pg_fetch_object($processo));
     echo "</tbody>";
@@ -89,7 +89,7 @@ else if ($href == 'advogado' || $tipo_pessoa== 2) {
     $processo = $fisica->getProcessosAdvogadoTotal($id_pessoa);
     $processos_advocacia = pg_fetch_object($processo);
 
-    echo "<table = 'processos' class='table table-striped ' >";
+    echo "<table = 'processos' class='table table-striped  table-condensed' >";
     echo "<thead>";
     echo "<tr>
                     <th>Data Distribui&ccedil;&atilde;o</th>
@@ -111,7 +111,7 @@ else if ($href == 'advogado' || $tipo_pessoa== 2) {
                     <td>" . $processos_advocacia->nome_autor . "</td>
                     <td>" . $processos_advocacia->nome_reu . "</td>
                     <td>" . $processos_advocacia->nome_adv . "</td>
-                    <td>" . $processos_advocacia->valor_causa . "</td> 
+                    <td><div class = 'direita'\>" . $processos_advocacia->valor_causa . "</td> 
                     </tr>";
     } while ($processos_advocacia = pg_fetch_object($processo));
     echo "</tbody>";

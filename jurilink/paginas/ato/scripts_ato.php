@@ -91,11 +91,11 @@
         
         //botao que cancela  as operações do formulário de cadastro
         //redireciona para a página anterior
-        $a(".cancelar-processo").click(function(){
+        $a(".cancelar-ato").click(function(){
         
             limparForm('#form_ato');
         
-            var url = 'relacao_processos.php';
+            var url = 'relacao_atos.php';
             
             
             $a(window.document.location).attr('href',url);

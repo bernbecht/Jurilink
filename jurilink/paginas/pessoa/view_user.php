@@ -32,6 +32,7 @@ if ($_SESSION['tipo_usuario'] == 0) {
     $pesq_juridica = pg_query($conexao1, $query);
     $juridica = pg_fetch_object($pesq_juridica);
 }
+$tipo_usuario = $_SESSION['tipo_usuario'];
 
 /* Seleciona processos do usuário */
 $query = "SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
@@ -59,7 +60,7 @@ inner join pessoa padv on padv.id_pessoa = advreu.id_pessoa)
 inner join autor on autor.id_processo = processo.id_processo and autor.flag_papel = 0)
 inner join pessoa pautor on pautor.id_pessoa = autor.id_pessoa)
 inner join advogado on padv.id_pessoa = advogado.id_pessoa and advogado.flag_func = TRUE
-order by data_distribuicao";
+order by data_distribuicao desc";
 
 $pesq_proc_advocacia = pg_query($conexao1, $query);
 $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
@@ -95,28 +96,46 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
             </div>
         </div>
 
+
         <div class="ficaFloat">
+
             <div class="span3">
                 <div class="view_pessoa">
                     <div class="view_pessoa_dados">
                         <p><?php echo $pessoa->nome ?></p>
-                        <p><?php echo $fisica->cpf ?></p>
-                        <p><?php echo $fisica->rg ?></p>
+                        <p>
+                            <?php
+                            if ($tipo_usuario == 0)
+                                echo $fisica->cpf;
+                            else
+                                echo $juridica->cnpj;
+                            ?>
+                        </p>
+                        <p>
+                            <?php
+                            if ($tipo_usuario == 0)
+                                echo $fisica->rg;
+                            else
+                                echo "<br/>";
+                            ?>
+                        </p>
                         <?php
                         if ($pessoa->email == '') {
-                            echo '<p>Não Cadastrado</p>';
+                            echo '<p>Nao cadastrado</p>';
                         } else {
                             echo '<p>' . $pessoa->email . '</p>';
                         }
                         if ($user)
                             echo "<p>Sim</p>";
                         else
-                            echo "<p>Não</p>";
+                            echo "<p>Nao</p>";
                         ?>                    
+
                     </div>
                 </div>
-            </div
+            </div>
         </div>
+
 
         <div class="ficaFloat">
             <div class="span2">
@@ -132,14 +151,15 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
             </div>
         </div>
 
+
         <div class="ficaFloat">
             <div class="span3">
                 <div class="view_pessoa">
                     <div class="view_pessoa_dados">
                         <?php
-                        if($pessoa->tel =='')
+                        if ($pessoa->tel == '')
                             echo '<p>Não Cadastrado</p>';
-                        else{
+                        else {
                             echo"<p>";
                             if (strlen($pessoa->tel) == 11) {
                                 $tele = $pessoa->tel;
@@ -152,7 +172,7 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
                                         echo "-";
                                 }
                             }
-                            
+
                             else if (strlen($pessoa->tel) == 10) {
                                 $tele = $pessoa->tel;
                                 echo "(";
@@ -164,10 +184,10 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
                                         echo "-";
                                 }
                             }
-                            
+
                             else if (strlen($pessoa->tel) == 8) {
-                                $tele = $pessoa->tel;                                
-                                for ($i = 0; $i < 8; $i++) {                                    
+                                $tele = $pessoa->tel;
+                                for ($i = 0; $i < 8; $i++) {
                                     echo $tele[$i];
                                     if ($i == 3)
                                         echo "-";
@@ -175,21 +195,22 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
                             }
                             echo "</p>";
                         }
-                            
-                        
-                        if($pessoa->endereco == '')
-                             echo '<p>Não Cadastrado</p>';
+
+
+                        if ($pessoa->endereco == '')
+                            echo '<p>Não Cadastrado</p>';
                         else
                             echo "<p>$pessoa->endereco</p>";
-                        
-                        if($pessoa->bairro == '')
-                             echo '<p>Não Cadastrado</p>';
+
+                        if ($pessoa->bairro == '')
+                            echo '<p>Não Cadastrado</p>';
                         else
-                            echo "<p>$pessoa->bairro</p>";                        
+                            echo "<p>$pessoa->bairro</p>";
                         ?>
                         <p><?php echo $pessoa->cidade ?></p>
                         <p><?php echo $estado->nome_estado ?></p>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -217,7 +238,7 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
             <div id="tabela_processo_cliente" >
                 <?php
                 if (pg_num_rows($pesq_proc_advocacia) > 0) {
-                    echo "<table = 'processos' class='table table-striped' >";
+                    echo "<table = 'processos' class='table table-striped table-condensed' >";
                     echo "<thead>";
                     echo "<tr>
                     <th>Data Distribui&ccedil;&atilde;o</th>

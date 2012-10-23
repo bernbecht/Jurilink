@@ -58,11 +58,11 @@
   
         //botao que cancela  as operações do formulário de cadastro
         //redireciona para a página anterior
-        $a(".cancelar-processo").click(function(){
+        $a(".cancelar-natureza").click(function(){
         
             limparForm('#form_natureza');
         
-            var url = 'relacao_processos.php';
+            var url = 'relacao_naturezas.php';
             
             
             $a(window.document.location).attr('href',url);

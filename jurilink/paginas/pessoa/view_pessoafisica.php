@@ -137,6 +137,7 @@ $user = pg_fetch_object($pesq_user);
             </div>
         </div>
 
+
         <div class="ficaFloat">
             <div class="span3">
                 <div class="view_pessoa">
@@ -195,6 +196,7 @@ $user = pg_fetch_object($pesq_user);
                         <p><?php echo $pessoa->cidade ?></p>
                         <p><?php echo $estado->nome_estado ?></p>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -222,7 +224,7 @@ $user = pg_fetch_object($pesq_user);
             <div id="tabela_processo_cliente" >
                 <?php
                 if (pg_num_rows($pesq_proc_advocacia) > 0) {
-                    echo "<table = 'processos' class='table table-striped' >";
+                    echo "<table = 'processos' class='table table-striped table-condensed' >";
                     echo "<thead>";
                     echo "<tr>
                     <th>Data Distribui&ccedil;&atilde;o</th>
@@ -244,7 +246,7 @@ $user = pg_fetch_object($pesq_user);
                     <td>" . $processos_advocacia->nome_autor . "</td>
                     <td>" . $processos_advocacia->nome_reu . "</td>
                     <td>" . $processos_advocacia->nome_adv . "</td>
-                    <td>" . $processos_advocacia->valor_causa . "</td> 
+                    <td><div class = 'direita'>" . $processos_advocacia->valor_causa . "</div></td> 
                     </tr>";
                     } while ($processos_advocacia = pg_fetch_object($pesq_proc_advocacia));
 
@@ -279,7 +281,7 @@ $user = pg_fetch_object($pesq_user);
                 <?php
                 if (pg_num_rows($pesq_proc_c_advocacia) > 0) {
 
-                    echo "<table class='table table-striped ' >";
+                    echo "<table class='table table-striped table-condensed ' >";
                     echo "<thead>";
                     echo "<tr>
                 <th>Data Distribui&ccedil;&atilde;o</th>
@@ -301,7 +303,7 @@ $user = pg_fetch_object($pesq_user);
                     <td>" . $processos_c_advocacia->nome_autor . "</td>
                     <td>" . $processos_c_advocacia->nome_reu . "</td>
                     <td>" . $processos_c_advocacia->nome_adv . "</td>
-                    <td>" . $processos_c_advocacia->valor_causa . "</td> 
+                    <td><div class = 'direita'>" . $processos_c_advocacia->valor_causa . "</div></td> 
                     </tr>";
                     } while ($processos_c_advocacia = pg_fetch_object($pesq_proc_c_advocacia));
 

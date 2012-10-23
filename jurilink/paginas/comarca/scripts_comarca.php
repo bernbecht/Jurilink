@@ -58,11 +58,11 @@
   
         //botao que cancela  as operações do formulário de cadastro
         //redireciona para a página anterior
-        $a(".cancelar-processo").click(function(){
+        $a(".cancelar-comarca").click(function(){
         
             limparForm('#form_comarca');
         
-            var url = 'relacao_processos.php';
+            var url = 'relacao_comarcas.php';
             
             
             $a(window.document.location).attr('href',url);
@@ -80,11 +80,12 @@
             }
         });
     }
+
     
     $a(document).ready(function (){              
              
         validaFormComarcaJS();
-        
+
     });      
 
 </script>

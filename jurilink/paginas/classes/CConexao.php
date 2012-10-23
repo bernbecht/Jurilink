@@ -1,15 +1,6 @@
 <?php
 
 class CConexao {
-  /* -- Configurações André - Estágio --*/
-  /*
-  protected $Host='177.101.20.68';
-  protected $User='jlink';
-  protected $Password='senha';
-  protected $Porta='5432';
-  protected $DbName='Jlink';
-  protected $Conexao=null; 
-  */
   /* -- Configurações André--*/
   /*
   protected $Host='localhost';
@@ -31,14 +22,14 @@ class CConexao {
   
   
    /* -- Configurações server--*/
-    /*
-   protected $Host='pgsql.jurilink.com.br';
+   /*
+  protected $Host='pgsql.jurilink.com.br';
   protected $User='jurilink';
   protected $Password='jurilink123bernardoandre';
   protected $Porta='5432';
   protected $DbName='jurilink';  
   protected $Conexao=null;
-     * */
+  */
  
   
 

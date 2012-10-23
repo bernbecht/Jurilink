@@ -251,7 +251,6 @@ form legend h1{
 /*uma classe para por coisas no centro*/
 .centro{
     text-align: center;
-
 }
 
 /*margim para o botao de paginação nas RELAÇÕES*/
@@ -334,6 +333,19 @@ form legend h1{
 }
 
 .main .table th{
+    font-size: 14px;
+}
+
+td.centro{
+    text-align: center;
+}
+
+th.centro{
+    text-align: center;    
+}
+
+span.direita{
+    text-align: right;
     font-size: 14px;
 }
 
