@@ -76,9 +76,10 @@
         });
     }
     
+    //procedimentos que validam o formulário de processo (cadastro/edição)
     function validaFormProcessoSubmit(){
         
-        $a('#msg_resultado_processo').remove();
+        $a('#alert_resultado_processo').remove();
     
         var intRegex = /^\d+$/;
         var floatRegex = /^([0-9]*\,[0-9]{2})$/;
@@ -103,12 +104,14 @@
        
         var mandar = true;
         var focus = false;
+        var msg_erro = "";
         
         if(num.length !=21){
             $a('#numero_unificado').removeClass("control-group").addClass("control-group error");
             $a('#numero_unificado_input').focus();
             focus=true;
             mandar =false;
+            msg_erro+="Número Unificado não possui 21 dígitos.\n";
         } 
         else{
             $a('#numero_unificado').removeClass("control-group error").addClass("control-group");  
@@ -124,6 +127,7 @@
                 focus=true;
             }
             mandar =false;
+            msg_erro+="Data de distribuição errada.\n";
         }
         
         if(juizo_val == -1){
@@ -303,6 +307,13 @@
             $a('#auto_penhora').removeClass("error").addClass("");           
         }
         
+        if(mandar==true){
+            $a('#alert_resultado_processo').remove;
+        }
+        else{
+            $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>'+msg_erro+'</p></div>').appendTo('#msg_resultado_processo');
+        }
+        
         subirPagina();
             
         
@@ -312,33 +323,33 @@
     
     function msgErroProcessoBD(data){
         if(data=="ERRADO AUTOR"){
-            $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>AUTOR</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+            $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>AUTOR</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
             $a('#autor').addClass("error");      
             $a('#autor_input').focus();
         }
         else if(data=="ERRADO REU"){
-            $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>REU</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+            $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>REU</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
             $a('#reu').addClass("error"); 
             $a('#reu_input').focus();
         }
         else if(data=="ERRADO ADVOGADO AUTOR"){
-            $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>ADVOGADO AUTOR</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+            $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>ADVOGADO AUTOR</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
             $a('#autor_advogado').addClass("error");  
             $a('#autor_ad_input').focus();
         }
         else if(data=="ERRADO ADVOGADO REU"){
-            $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>ADVOGADO REU</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+            $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>ADVOGADO REU</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
             $a('#reu_advogado').addClass("error");    
             $a('#reu_ad_input').focus();
         }
         else if(data=="ERRADO REPRESENTANTE AUTOR"){
-            $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>REPRESENTANTE AUTOR</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+            $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>REPRESENTANTE AUTOR</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
             $a('#autor_rep').addClass("error");    
             $a('#autor_rep_input').focus();
             
         }
         else if(data=="ERRADO REPRESENTANTE REU"){
-            $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>REPRESENTANTE REU</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+            $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O campo <b>REPRESENTANTE REU</b> possui pelo menos um dado incorreto.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
             $a('#reu_rep').addClass("error");  
             $a('#reu_rep_input').focus();
         }
@@ -347,23 +358,23 @@
             data_split_aux = data.split('\n');
             data_split = data_split_aux[0].split(' ');
             if(data_split[8]=='"num_unico"'){
-                $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Numero Unificado</b> ja esta em uso.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Numero Unificado</b> ja esta em uso.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
                 $a('#numero_unificado').removeClass("control-group").addClass("control-group error");
                 $a('#numero_unificado_input').focus();
             }
             else if(data_split[8]=='"num_unificado_index"'){
-                $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Numero Unificado</b> ja esta em uso.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Numero Unificado</b> ja esta em uso.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
                 $a('#numero_unificado').removeClass("control-group").addClass("control-group error");
                 $a('#numero_unificado_input').focus();
             }
              else if(data_split[2]=='Trânsito'){
-                $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Transito em Julgado</b> nao pode ser maior que a data atual.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Transito em Julgado</b> nao pode ser maior que a data atual.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
                 $a('#transito_em_julgado').removeClass("control-group").addClass("control-group error");
                 $a('#tej_input').focus();
             }
             
             else if(data_split[2]=='Data'){
-                $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Transito em Julgado</b> nao pode ser menor que a <b>Data de Distribuicao</b></p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Transito em Julgado</b> nao pode ser menor que a <b>Data de Distribuicao</b></p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
                 $a('#transito_em_julgado').removeClass("control-group").addClass("control-group error");
                 $a('#tej_input').focus();
             }
@@ -416,8 +427,8 @@
             if(modalidade == 1){
                 if(data==1){
                     //alert("OK");
-                    $a('#msg_resultado_processo').remove();
-                    $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O processo <b>'+num+'</b> foi inserido no sistema com sucesso.</p></div>').appendTo('#msg_resultado_processo');
+                    $a('#alert_resultado_processo').remove();
+                    $a('<div id="alert_resultado_processo" class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O processo <b>'+num+'</b> foi inserido no sistema com sucesso.</p></div>').appendTo('#msg_resultado_processo');
                     
                     subirPagina();
                     
@@ -440,10 +451,11 @@
                 }
             } 
             
+            //adicionar outro
             else if(modalidade ==2){
                 if(data==1){
-                    $a('.alert').remove();
-                    $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O processo <b>'+num+'</b> foi inserido no sistema com sucesso.</p></div>').appendTo('#msg_resultado_processo');
+                    $a('#alert_resultado_processo').remove();
+                    $a('<div id="alert_resultado_processo" class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O processo <b>'+num+'</b> foi inserido no sistema com sucesso.</p></div>').appendTo('#msg_resultado_processo');
                     
                     subirPagina();
                     
@@ -462,10 +474,12 @@
             
             }
             
+            //modalidade editar
             else if(modalidade ==3){
                 if(data==1){
-                    $a('.alert').remove();
-                    $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O processo <b>'+num+'</b> foi editado no sistema com sucesso.</p></div>').appendTo('#msg_resultado_processo');
+                    $a('#alert_resultado_processo').remove();
+                    $a('#alert_dica').remove();
+                    $a('<div id="alert_resultado_processo" class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O processo <b>'+num+'</b> foi editado no sistema com sucesso.</p></div>').appendTo('#msg_resultado_processo');
                     
                     subirPagina();
                   

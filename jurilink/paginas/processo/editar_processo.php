@@ -88,12 +88,17 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
             <!--Campos formulário -->
 
             <legend><h1>Editar processo</h1></legend>
-
+            
             <div id="msg_resultado_processo">
-                <div class="alert alert-block fade in">
-                    <button type="button" class="close" data-dismiss="alert">x</button>
-                    <p>Todos os itens com a tarja <b>amarela</b> sao obrigatorios</p></div>
+                
             </div>   
+
+            <div id="alert_dica">
+                <div id="" class="alert alert-block fade in">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    <p>Todos os itens com a tarja <b>amarela</b> são obrigatórios</p></div>
+            </div>   
+            
             <br/>
             <div class="controls">
                 <input type="hidden" class="input-xlarge aviso" id="id_input" name="id_processo" value= "<?php echo $id_processo ?>">
@@ -468,13 +473,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                     </div>                    
                 </div>
 
-                <div id="senha" class="control-group ">
-                    <label class="control-label" for="telefone">Senha</label>
-                    <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="senha_input" name="senha">    
-                        <span  class="help-inline ">Minimo de 7 digitos alfanumericos</span> 
-                    </div>
-                </div>   
+                 
 
                 <input type="hidden" class="input-xlarge" id="tipo_input" name="tipo">    
 
@@ -483,7 +482,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
         </form> 
 
         <div class="modal-footer"> 
-            <a href="#" class="btn cancelar-modal" data-dismiss="modal">Close</a>
+            <a href="#" class="btn cancelar-modal" data-dismiss="modal">Cancelar</a>
             <button  id ="enviar"  type="button" class="btn btn-primary submit-pessoa-modal">Salvar</button>
         </div>
     </div>

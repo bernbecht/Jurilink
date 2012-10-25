@@ -200,23 +200,23 @@ class CAdvogado {
 
         return $sql;
     }
-    
+
     //passa o começo do nome e pega o advogado
-     public function getAdvogadoPassaNome($n) {
+    public function getAdvogadoPassaNome($n) {
         $conexao1 = new CConexao();
         $conexao = $conexao1->novaConexao();
 
 
-        $sql = pg_exec($conexao, "select *, uf.nome as estado, pessoa.nome as nome             
-            from (((fisica 
-            INNER JOIN pessoa 
-            ON fisica.id_pessoa = pessoa.id_pessoa 
-            and pessoa.nome ~* 'dani'             
-            and pessoa.tipo = 2)
-            INNER JOIN uf
-            ON pessoa.id_uf = uf.id_uf)
-            INNER JOIN advogado
-            ON fisica.id_pessoa = advogado.id_pessoa) ");
+        $sql = pg_exec($conexao, "select *, uf.nome as estado, pessoa.nome as nome 
+from (((fisica 
+INNER JOIN pessoa 
+ON fisica.id_pessoa = pessoa.id_pessoa 
+and pessoa.nome ~* '{$n}' 
+and pessoa.tipo = 2)
+INNER JOIN uf
+ON pessoa.id_uf = uf.id_uf)
+INNER JOIN advogado
+ON fisica.id_pessoa = advogado.id_pessoa) ");
 
         $conexao1->closeConexao();
 

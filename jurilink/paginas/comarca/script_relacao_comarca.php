@@ -31,6 +31,8 @@
         $a('.editar-comarca').click(function(){
             // Mostra modal para alteração
             
+            $a('.alert').remove();
+            
             $a('#myModal').modal('show');
             $a('#nome_input').focus();
             $a('#nome').removeClass("error");
@@ -56,7 +58,7 @@
         id_comarca = $form.find( 'input[name="id"]' ).val(),
         url = $form.attr( 'action' );
         
-        $a('#myModal').modal('hide');
+        
         
         $a.post(url,{
             nome:nome,
@@ -64,14 +66,16 @@
         },function(data){
             if(data == 0){
                 $a('.alert').remove();
-                $a('<div class="alert alert-error fade in"><p>A comarca <b>'+nome+'</b> nao foi inserida no sistema.</p></div>').appendTo('#aviso');
+                $a('<div class="alert alert-error fade in"><p>A comarca <b>'+nome+'</b> não foi inserida no sistema. Verifique se o nome está correto.</p></div>').appendTo('#msg_resultado_edita_comarca');
             }
             else if(data==1){
                 $a('.alert').remove();
-                $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A comarca <b>'+nome+'</b> foi editada no sistema com sucesso.</p></div>').appendTo('#aviso');
+                $a('<div class="alert alert-success fade in"><p>A comarca <b>'+nome+'</b> foi editada no sistema com sucesso.</p></div>').appendTo('#msg_resultado_edita_comarca');
                 
                 loadInicial();
-                
+                setTimeout(function() {
+                    $a('#myModal').modal('hide');
+                },2000);
             }
         });
             
@@ -90,7 +94,7 @@
     
     function valida_form_edita_comarca(){
         
-        var $form = $a( '.altera_comarca_Ajax' )
+        var $form = $a( '.altera_comarca_Ajax' ),
         nome = $form.find( 'input[name="nome"]' ).val(),
         id_comarca = $form.find( 'input[name="id"]' ).val();
             
@@ -104,10 +108,8 @@
         } else{
             $a('#nome').removeClass("error");
         }
-        return mandar;
-           
-        
-        
+        return mandar;       
+                
     }
 
     
@@ -116,6 +118,11 @@
     $a(document).ready(function (){   
      
         loadInicial();
+        $a('.altera_comarca_Ajax').keypress(function(e){
+            if(e.which==13) return false;
+            
+            if(e.which ==13) e.preventDefault();
+        });
 
     }); 
     
