@@ -158,7 +158,7 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="telefone" class="control-group ">
                         <label class="control-label" for="telefone">Telefone</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="telefone_input" name="telefone" value= "<?php echo $pessoa->tel ?>">    
+                            <input type="text" class="input-xlarge" id="telefone_input" name="telefone" value= "<?php echo $pessoa->tel ?>">    
                             <span  class="help-inline ">Apenas digitos</span> 
                         </div>
                     </div>                       

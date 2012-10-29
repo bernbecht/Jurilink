@@ -7,11 +7,11 @@
        var $form = $a( '#form_ato' ),
         nome = $form.find( 'input[name="nome"]' ).val(),
         previsao = $form.find( 'input[name="previsao"]' ).val(),
-        descricao = $form.find( 'input[name="descricao"]' ).val(),
+        descricao = $a("#descricao_input").val(),
         user = $form.find( 'input[name="flag_userCheckbox"]:checked' ).val(),
         url = $form.attr( 'action' );
         
-        //alert(user);
+       
         
         $a.post(url,{
             nome:nome,
@@ -45,7 +45,8 @@
         var $form = $a( '#form_ato' ),
         nome = $form.find( 'input[name="nome"]' ).val(),
         previsao = $form.find( 'input[name="previsao"]' ).val(),
-        desc = $form.find( 'input[name="descricao"]' ).val();
+        desc = $a("#descricao_input").val();
+        
         
         
         var mandar = true;

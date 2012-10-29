@@ -563,3 +563,8 @@ do bootstrap, entao, estou fazendo manualmente*/
     }
     
 }
+
+.textArea-xlarge{
+    width: 260px;
+    max-width: 500px;
+}

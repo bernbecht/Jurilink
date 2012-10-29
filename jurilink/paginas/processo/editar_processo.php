@@ -486,6 +486,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
             <button  id ="enviar"  type="button" class="btn btn-primary submit-pessoa-modal">Salvar</button>
         </div>
     </div>
+</body>
 
    <?php
     require_once '../template/scripts.php'; //chama scripts comuns as paginas

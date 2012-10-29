@@ -29,7 +29,7 @@
 
                     <div class="page-header page_header_login">
                         <h1>
-                            <b>Login</b>
+                            <b>Bem-vindo ao Jurilink</b>
                         </h1>
                     </div>
 
@@ -45,7 +45,7 @@
                                             <div id="usuario" class="control-group">
                                                 <label class="control-label" for="usuario">Login</label>
                                                 <div class="controls">
-                                                    <input type="text" class="input-xlarge aviso" id=usuario_input" name="usuario" placeholder="Login" />                       
+                                                    <input type="text" class="input-xlarge aviso" id=usuario_input" name="usuario" placeholder="usuario@jurilink.com.br" />                       
                                                         <span  class="help-inline "></span>                    
                                                 </div>
                                             </div>    

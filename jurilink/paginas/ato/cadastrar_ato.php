@@ -19,21 +19,22 @@ require_once ( '../config.php');     //chama as configurações de página!
                 <label class="control-label" for="Nome">Nome</label>
                 <div class="controls">
                     <input type="text" class="input-xlarge" id="nome_input" name="nome">                       
-                    <span  class="help-inline ">Minimo 2 caracteres</span>                    
+                    <span  class="help-inline ">Mínimo 2 caracteres</span>                    
                 </div>
             </div>
             <div id="previsao" class="control-group">
-                <label class="control-label" for="Previsao">Previsao</label>
+                <label class="control-label" for="Previsao">Previsão</label>
                 <div class="controls">
-                    <input type="text" class="input-xlarge" id="previsao_input" name="previsao">                       
-                    <span  class="help-inline ">Apenas numeros</span>                    
+                    <input type="text" class="input-xlarge" id="previsao_input" name="previsao" placeholder="Ex: 10">                       
+                    <span  class="help-inline ">Número de dias</span>                    
                 </div>
             </div>
             <div id="descricao" class="control-group">
                 <label class="control-label" for="Descricao">Descricao</label>
                 <div class="controls">
-                    <input type="text" class="input-xlarge" id="descricao_input" name="descricao">                       
-                    <span  class="help-inline ">Minimo 2 caracteres</span>                    
+                    <textarea class ="textArea-xlarge" rows="4"  id="descricao_input" name="descricao"></textarea>
+                   <!-- <input type="text" class="input-xlarge" id="descricao_input" name="descricao">  -->                     
+                    <span  class="help-inline ">Mínimo 2 caracteres</span>                    
                 </div>
             </div>
             <div id="flag_user" class="control-group">

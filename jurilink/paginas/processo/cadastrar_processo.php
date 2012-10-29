@@ -440,6 +440,8 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
         </div>
     </div>
 
+</body>
+
 
 
 

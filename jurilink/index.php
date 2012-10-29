@@ -1,9 +1,7 @@
 <?php
-
 session_start();
 if (!isset($_SESSION['usuario']))
     header("location:../index.php");
-
 ?>
 
 
@@ -23,7 +21,8 @@ if (!isset($_SESSION['usuario']))
                 <div class="container">                    
                     <a  class="brand" href="#">JuriLink</a>  
                     <ul class="nav  pull-right">
-                        <li><a href="#">Ajuda</a></li>
+                        <li><a data-toggle="modal" href="#helpModal">Ajuda</a></li>
+                        <li class="divider-vertical"></li>
                         <li class="dropdown">
                             <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['usuario']; ?>
                                 <b class="caret"></b></a>
@@ -93,9 +92,9 @@ if (!isset($_SESSION['usuario']))
                             </h3>
                         </div>
                         <div class="direita">                            
-                                <button class="btn btn-small maxi_main" data-toggle="collapse" data-target="#ultimos_processos">
-                                    <i class="icon-minus "></i>
-                                </button>                           
+                            <button class="btn btn-small maxi_main" data-toggle="collapse" data-target="#ultimos_processos">
+                                <i class="icon-minus "></i>
+                            </button>                           
                         </div>                        
                     </div>
                     <div id="ultimos_processos" class="collapse in">
@@ -111,38 +110,42 @@ if (!isset($_SESSION['usuario']))
                             </h3>
                         </div>
                         <div class="direita">
-                           
-                                <button class="btn btn-small maxi_main" data-toggle="collapse" data-target="#ultimas_audiencias">
-                                    <i class="icon-minus "></i>
-                                </button>
-                           
+
+                            <button class="btn btn-small maxi_main" data-toggle="collapse" data-target="#ultimas_audiencias">
+                                <i class="icon-minus "></i>
+                            </button>
+
                         </div>
                     </div>
                     <div id="ultimas_audiencias" class="collapse in">
-                          
+
                     </div>
                 </div>
             </div>
 
-           
+
 
             <input type="hidden" id="id_pessoa" value="<?php echo $_SESSION['id_usuario'] ?>" />
 
 
         </div>      
 
+<?php
+require_once 'paginas/template/help/help_index.php';
+?>
+        
     </body>
-    
-     <!------ Scripts -->
 
-        <script type="text/javascript" src="drag/src/prototype.js"></script>
-        <script type="text/javascript"  src="drag/src/scriptaculous.js" ></script> 
-        <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
-        <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>    
-        <script type="text/javascript" src="jurilink_js.js"></script>    
+    <!------ Scripts -->
 
-        <script type="text/javascript">                                                        
+    <script type="text/javascript" src="drag/src/prototype.js"></script>
+    <script type="text/javascript"  src="drag/src/scriptaculous.js" ></script> 
+    <script type="text/javascript" src="bootstrap/js/jquery.js"></script>
+    <script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>    
+    <script type="text/javascript" src="jurilink_js.js"></script>    
+
+    <script type="text/javascript">                                                        
                               
-        </script>
-    
+    </script>
+
 </html>

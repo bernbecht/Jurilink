@@ -149,7 +149,7 @@ $user = pg_fetch_object($pesq_user);
                                 $tele = $pessoa->tel;
                                 echo "(";
                                 for ($i = 0; $i < 11; $i++) {
-                                    if ($i == 3)
+                                    if ($i == 2)
                                         echo ") ";
                                     echo $tele[$i];
                                     if ($i == 6)

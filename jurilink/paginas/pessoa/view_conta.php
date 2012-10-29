@@ -52,10 +52,7 @@ $_SESSION['conta_senha'] = $pessoa->senha;
             </div>
             <div id="loading_content">  
 
-            </div>                
-
-
-            <div id="msg_resultado"></div>
+            </div> 
 
             <br/>
 
@@ -65,44 +62,13 @@ $_SESSION['conta_senha'] = $pessoa->senha;
                         <label class="control-label" for="email">E-mail</label>
                         <div class="controls">                        
                             <div class="input-prepend">
-                                <span class="add-on"><i class="icon-envelope"></i></span><input class="input-large" id="email_input" name="email" type="text" value= "<?php echo $pessoa->email ?>">
+                                <span class="add-on"><i class="icon-envelope"></i></span><input class="input-large aviso" id="email_input" name="email" type="text" value= "<?php echo $pessoa->email ?>">
                             </div>
                             <span class="help-inline"></span>
                         </div>
                     </div>  
-                </div> 
-                <div class="span5" >
-                    <div id="telefone" class="control-group ">
-                        <label class="control-label" for="telefone">Telefone</label>
-                        <div class="controls">
-                            <input type="text" class="input-small aviso" id="telefone_input" name="telefone" value= "<?php echo $pessoa->tel ?>">    
-                            <span  class="help-inline ">Apenas digitos</span> 
-                        </div>
-                    </div>                       
                 </div>
-            </div>
-
-
-            <div class ="row">
-                <div class="span5" >
-                    <div id="endereco" class="control-group ">
-                        <label class="control-label" for="endereco">Endereço</label>
-                        <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="endereco_input" name="endereco" value= "<?php echo $pessoa->endereco ?>">    
-                        </div>
-                    </div>                       
-                </div>
-                <div class="span5" >
-                    <div id="bairro" class="control-group ">
-                        <label class="control-label" for="bairro">Bairro</label>
-                        <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="bairro_input" name="bairro" value= "<?php echo $pessoa->bairro ?>">    
-                        </div>
-                    </div>                       
-                </div>
-            </div>
-
-            <div class ="row">
+                
                 <div class="span5" >
                     <div id="cidade" class="control-group ">
                         <label class="control-label" for="cidade">Cidade</label>
@@ -110,7 +76,12 @@ $_SESSION['conta_senha'] = $pessoa->senha;
                             <input type="text" class="input-xlarge aviso" id="cidade_input" name="cidade" value= "<?php echo $pessoa->cidade ?>">    
                         </div>
                     </div>                       
-                </div> 
+                </div>
+            </div>
+
+            
+
+            <div class ="row">                
                 <div class="span5" > 
                     <div id="estado" class="control-group">
                         <label class="control-label" for="Estado">Estado</label>
@@ -130,7 +101,38 @@ $_SESSION['conta_senha'] = $pessoa->senha;
                         </div>
                     </div>
                 </div>
+                
+                <div class="span5" >
+                    <div id="endereco" class="control-group ">
+                        <label class="control-label" for="endereco">Endereço</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="endereco_input" name="endereco" value= "<?php echo $pessoa->endereco ?>">    
+                        </div>
+                    </div>                       
+                </div>
             </div>
+            
+            <div class ="row">                
+                <div class="span5" >
+                    <div id="bairro" class="control-group ">
+                        <label class="control-label" for="bairro">Bairro</label>
+                        <div class="controls">
+                            <input type="text" class="input-xlarge" id="bairro_input" name="bairro" value= "<?php echo $pessoa->bairro ?>">    
+                        </div>
+                    </div>                       
+                </div>
+                
+                <div class="span5" >
+                    <div id="telefone" class="control-group ">
+                        <label class="control-label" for="telefone">Telefone</label>
+                        <div class="controls">
+                            <input type="text" class="input-small" id="telefone_input" name="telefone" value= "<?php echo $pessoa->tel ?>">    
+                            <span  class="help-inline ">Apenas digitos</span> 
+                        </div>
+                    </div>                       
+                </div>
+            </div>            
+            
             <input type="hidden" class="input-xlarge" id="id_pessoa_input" name="id_pessoa" value="<?php echo $id_pessoa ?>" >                  
             <input type="hidden" class="input-xlarge" id="id_tipo_usuario_input" name="tipo_usuario" value="<?php echo $tipo_usuario ?>" >                  
 
@@ -152,12 +154,9 @@ $_SESSION['conta_senha'] = $pessoa->senha;
                 ?>
 
             </div>
-
-
-
         </fieldset>
-
     </form> 
+
     <form id="form_senha" class="form-horizontal trocaSenha" method="post" action="../operacoes/CUsuario/editar_senha_op.php">
         <fieldset>
 
@@ -224,12 +223,12 @@ $_SESSION['conta_senha'] = $pessoa->senha;
         <button type="button" class="close" data-dismiss="modal">x</button>
         <h3>Insira sua senha</h3>
     </div>   
-    <div class="modal-body">
+    <div class="modal-body">       
+        
+        <div id="msg_resultado_confirma_senha"></div>
+        
         <form id="form_senha" class="form-horizontal checa_senha_AjaxForm" method="post" action="../operacoes/CUsuario/checa_senha_op.php">
-            <fieldset>
-                
-                 <div id="msg_resultado_confirma_senha"></div>
-                 
+            <fieldset>         
                 <!--Campos formulário --> 
                 <div id="senha" class="control-group ">
                     <label class="control-label" for="senha">Senha</label>
