@@ -1,0 +1,578 @@
+
+body{
+
+    background-color: #E7E7E7;
+    overflow-x: hidden;
+}
+
+.body_login{
+    background: url('../img/header_login.png') repeat-x ;
+    background-color: #FFF;
+}
+
+.content{
+    background-color: #FFF;
+    padding: 20px 20px;
+    border-radius: 5px;
+    /*box-shadow: 1px 0px 10px #67666A;*/
+    /*box-shadow: 5px 5px rgba(0,0,0,0.2);*/
+    -webkit-box-shadow:  1px 1px 10px #888;
+    -moz-box-shadow:  1px 1px 10px #888;
+    box-shadow:  1px 1px 10px #888;
+    margin-bottom: 50px;
+    margin-top: 28px;
+}
+
+.barra-titulo{
+    height: 30px;
+    width: 99%;
+    margin: 3px;
+    background-color: #c7bc89;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;   
+}
+
+
+.esquerda{
+    float: left;
+    padding: 0 0 0 0px;
+    margin-left: 10px;
+}
+
+
+.esquerda > h3{    
+    color: #FFF;
+    /*text-shadow: 1px 1px 0 white;*/
+}
+
+.esquerda > h1{
+    margin-bottom: 10px;
+}
+
+
+.direita{
+    float: right;
+    padding: 0 5px 0 0;
+    margin-top:  3px;
+
+}
+
+@media screen and (-webkit-min-device-pixel-ratio:0){    /*para o chrome */
+    .direita{
+        margin-top: 2px;
+
+    }
+}
+
+.direita > a{
+    margin-bottom: 5px;
+}
+
+.tabela{
+    margin: 7px  3px 0 3px;
+
+}
+
+.barra_titulo222 [class*="span"] {
+    background-color: #c7bc89;
+    text-align: center;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    min-height: 30px;
+    line-height: 30px;
+}
+
+.inicio-box{
+    padding: 5px;
+}
+
+.autocompleteBox {
+    position:absolute;
+    width:264px;
+    background-color:white;
+    border:1px solid #888;
+    margin:0px;
+    padding:0px;
+    box-shadow:  1px 1px 10px #888;
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+
+}
+.autocompleteBox ul {
+    list-style-type:none;
+    margin:0px;
+    padding:0px;
+}
+.autocompleteBox ul li.selected { 
+    background-color: #08C;
+    color: white;
+}
+.autocompleteBox ul li {
+    list-style-type:none;
+    display:block;
+    margin:0;
+    padding:2px;
+    /* height:32px; */
+    cursor:pointer;
+}
+
+/*Faz com que o titulo de um form não bata na divisão*/
+form legend h1{
+    margin-bottom: 10px;
+}
+
+
+/*Caixa no lugar de INPUT*/
+.box{
+    display: inline-block;
+    width: 260px;
+    height: 18px;
+    padding: 4px;
+    font-size: 13px;
+    line-height: 18px;
+    border: 1px solid #CCC;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    background-color: #FFF;
+}
+
+.box span{
+    display: inline-block;
+
+} 
+.error .box {
+    border: 1px solid #B94A48;
+}
+
+/*Cor dos campos obrigatórios*/
+.aviso{
+    /*color: #C09853;*/
+    border-color: #FFBF00;
+}
+
+.divisor{   
+    display: block;
+    float: left;
+    height:46px;
+    width: 1px;
+    margin: 0 0 0 70px;
+    overflow: hidden;
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
+}
+
+.divisor_maior{   
+    display: block;
+    float: left;
+    height:64px;
+    width: 1px;
+    margin: 0 0 0 70px;
+    overflow: hidden;
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
+}
+
+.help-inline{
+    font-size: 10px;
+}
+
+.control-group label{
+    font-weight: bold;    
+    font-size: 13px;
+    line-height: 18px;    
+    color: #404040;
+}
+
+
+.divisor_horizontal{
+    width: 100%;
+    display: block;
+    float: left;
+    height:1px;  
+    margin: 30px 0 40px 0px;
+    overflow: hidden;
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
+}
+
+.header-pagina{
+    color: #5A5A5A;
+    padding-bottom: 0px;
+    margin: 0 0 18px 0;
+
+
+}
+
+.header-pagina h1 {
+    line-height: 40px;
+    font-size: 36px;
+
+}
+
+
+.divisor_horizontal_view{
+    width: 100%;
+    display: block;
+    float: left;
+    height:1px;  
+    margin: 0px 0 18px 0px;
+    overflow: hidden;
+    background-color: #E5E5E5;
+    border-bottom: 1px solid white;
+}
+
+
+.view_pessoa p{
+    margin-top: 9px;
+}
+
+.view_pessoa_legenda p{
+    font-weight: bold;
+    font-size: 14px;
+
+
+}
+
+.row_view{
+    margin-top: 40px;
+}
+
+
+/*uma classe para por coisas no centro*/
+.centro{
+    text-align: center;
+}
+
+/*margim para o botao de paginação nas RELAÇÕES*/
+.paginacao{
+    margin-bottom: 20px;
+}
+
+/*Estilo/alinhamento para input SELECT nas telas de RELAÇÕES*/
+.paginacao select{
+    margin-bottom: 0;
+    margin-right: 20px;
+
+}
+
+/*Estilo/alinhamento para input SELECT nas telas de RELAÇÕES*/
+.paginacao button{
+    margin-right: 20px;
+
+}
+
+/*No view processo, quando o campo for vazio, dá um espaço*/
+.view_processo_campo_vazio{
+    height: 18px;
+}
+
+/*Alinhamento para o botao de MAXIMIZAR*/
+.maximizar{
+    height: 28px;
+    margin-bottom: 5px;
+}
+
+/*Tamanho da div que tem a img de LOADING em alguma pagina*/
+#loading_content{
+    height: 36px;
+}
+
+/*Espaço entre row nas paginas de relação*/
+.row_relacao{
+    margin-top: 25px;
+}
+
+/* cor do grid no inicio */
+.main [class*="span"]{
+    background-color: #FFF;
+    padding-bottom: 10px;
+    box-shadow:  1px 1px 10px #888;
+}
+
+/*Barra que vai em cada box na tela de RESUMo*/
+.barra-titulo{
+    height: 30px;
+    width: 98.5585585586%;
+    margin: 3px;
+    
+    background-color: #7FB2F0;
+
+    /* Safari 5.1, Chrome 10+ */
+    background: -webkit-linear-gradient(top, #7FB2F0, #648CBD);
+
+    /* Firefox 3.6+ */
+    background: -moz-linear-gradient(top, #7FB2F0, #648CBD);    
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;   
+}
+
+/*MAIN: Alterando algumas coisas para a tela de RESUMO*/
+
+.main .alert{
+    margin: 10px 3px 0 3px;
+    width: 89.7297297297%;
+}
+
+.main table{
+    width: 98.5585585586%;
+    margin: 5px 3px;
+}
+
+.main .table td{
+    font-size: 12px;
+}
+
+.main .table th{
+    font-size: 14px;
+}
+
+td.centro{
+    text-align: center;
+}
+
+th.centro{
+    text-align: center;    
+}
+
+span.direita{
+    text-align: right;
+    font-size: 14px;
+}
+
+/*Alteraando estilo da fonte da subnav e shadow no fim*/
+.subnav{
+    font-size: 12px;
+    font-style: normal;
+    font-weight: bold;
+    box-shadow:  0px 1px 10px #AAA;
+}
+
+/*Mexendo na largura da content na página de login*/
+.container_login{
+    width: 800px;  
+    margin-top: 200px;
+
+}
+
+.navbar{
+    box-shadow:  1px 1px 10px #111;
+}
+
+/*Deu alguma cagada com o tamanho da font das table 
+do bootstrap, entao, estou fazendo manualmente*/
+.table{
+    font-size: 16px;
+}
+
+.page_header_login{
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+.float{
+    float: left;
+}
+
+.erro_input{
+    border-color: #B94A48;
+}
+
+#campo_recuperar_senha  > button{
+    margin-right:7px;
+}
+
+.comboBox_small{
+    width: 57px;
+}
+
+.alertModalExcluirAtoAudiencia{
+    margin-bottom: 0;
+}
+
+@media (min-width: 1000px) and (max-width: 1199px){
+
+    .input-xlarge{
+        width: 200px;
+    }    
+    .input-large{
+        width: 175px;
+    } 
+
+    .span5 {
+        width: 400px;
+
+    }
+
+    .divisor_maior{       
+        margin: 0 0 0 30px;       
+    }
+
+    .divisor{      
+        margin: 0 0 0 30px;     
+    }
+
+    .span6 {
+        width: 450px;
+    }
+
+    .table{
+        font-size: 14px;
+    }
+
+
+} 
+
+@media (min-width: 767px) and (max-width: 999px) {
+
+    .row_cadastro_pessoa{
+        height: 95px;
+    }
+
+    .input-xlarge{
+        width: 200px;
+    }    
+    .input-large{
+        width: 175px;
+    } 
+
+    .divisor_maior{       
+        margin: 0;  
+        width: 0;
+    }
+
+    .divisor{      
+        margin: 0;     
+        width: 0;
+    }
+
+    .table{
+        font-size: 14px;
+    }
+    .span6 {
+        width: auto;
+        margin-top: 20px;
+    }   
+    
+    /*Spans que quando usadas numa resolução menor, continuam FLOAT*/
+     .ficaFloat{
+        float: left;
+    }
+    
+    /*Diminui o tamanho da fonte em VIEW PROCESSO*/
+    .view_pessoa_legenda p{       
+        font-size: 13px;
+    }
+    
+    .ficaFloat .offset1{
+        margin-left: 20px;
+    }
+    
+     .ficaFloat .span2 {
+        width: 140px;
+        
+    }
+    
+    .ficaFloat .view_pessoa_legenda, .ficaFloat .view_pessoa_dados {
+        padding: 5px 2px;
+    }
+    
+}
+
+
+@media (max-width: 767px) {
+
+    .row_cadastro_pessoa{
+        height: 95px;
+    }
+
+    .input-xlarge{
+        width: 200px;
+    }    
+    .input-large{
+        width: 175px;
+    } 
+
+    .divisor_maior{       
+        margin: 0;  
+        width: 0;
+    }
+
+    .divisor{      
+        margin: 0;     
+        width: 0;
+    }
+
+    .table{
+        font-size: 12px;
+    }
+
+    #limite{
+        width: 50px;
+    }
+
+    .span6 {
+        width: auto;
+        margin-top: 20px;
+    }  
+
+    .modal{
+        max-height: 500px;
+    }
+
+    .modal-body{
+        max-height: 300px;
+    }
+    
+    /*Spans que quando usadas numa resolução menor, continuam FLOAT*/
+     .ficaFloat{
+        float: left;
+        margin-left: 30px;
+    }
+    
+    /*Diminui o tamanho da fonte em VIEW PROCESSO*/
+    .view_pessoa_legenda p{       
+        font-size: 13px;
+    }
+    
+    .ficaFloat .offset1{
+       
+    }
+    
+     .ficaFloat .span2, .ficaFloat .span3{
+        width: 250px;
+        
+    }
+    
+    .ficaFloat .span2 {
+        margin-left: 25px;
+        
+    }
+    
+    
+    .ficaFloat .view_pessoa_legenda, .ficaFloat .view_pessoa_dados {
+        padding: 5px 5px;
+    }
+    
+}
+
+.textArea-xlarge{
+    width: 260px;
+    max-width: 500px;
+}
+
+.table-condensed-secundaria th,
+.table-condensed-secundaria td {
+    padding: 4px 5px;
+}
