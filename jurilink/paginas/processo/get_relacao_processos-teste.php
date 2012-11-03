@@ -13,7 +13,7 @@ if ($modalidade == -1 || $modalidade == 0) {
     $_SESSION['last_parcial'] = 0;
 } else if ($modalidade == 1) {
     $_SESSION['offset'] = $_SESSION['offset'] + $limite;
-
+    ;
     $offset = $_SESSION['offset'];
 } else if ($modalidade == 2) {
     $_SESSION['offset'] = $_SESSION['offset'] - $limite;
@@ -37,7 +37,7 @@ $parcial = pg_num_rows($sql[0]);
 $repetido = 0;
 //$num_anterior = $resultado->numero_unificado;
 $flag = 0;
-$id_anterior = " ";
+$num_anterior = "0";
 
 //se nao tiver algum processo cadastrado, retorne 0
 if (!$resultado) {
@@ -49,6 +49,7 @@ if (!$resultado) {
     echo "<thead>";
     echo "<tr>
                 <th>N&uacute;mero</th>
+                <th>N&uacute;mero Anterior</th>
                 <th>Data Distribui&ccedil;&atilde;o</th>
                 <th>Natureza</th>
                 <th>Autor(es)</th>
@@ -58,20 +59,38 @@ if (!$resultado) {
                 </tr></thead>";
     echo "<tbody>";
 
-    do {
+    $repetido;
+    $ativo = 0;
+    $valor;
 
+
+    do {
+        $num_atual = $resultado->numero_unificado;
         //$num_anterior = $resultado->numero_unificado;
-        if ($resultado->id_processo == $id_anterior)
-            $resultado->numero_unificado = "IGUAL";
+        /*if ($ativo == 1) {
+            $valor = $resultado->numero_unificado;
+            if ($repetido == $resultado->numero_unificado) {
+                $valor = "aaaaaaaaaaaaaaaaa ";
+            }
+            $ativo = 0;
+        }
+        if ($ativo == 0) {
+            $repetido = $resultado->numero_unificado;
+            $ativo = 1;
+        }*/
+        if($num_atual == $num_anterior)
+            $resultado->transito_em_julgado = "IGUAL";
+
         echo "<tr>	
-                <td><a href=view_processo.php?id=$resultado->id_processo>" . $resultado->numero_unificado . "</a></td>
+                <td><a href=view_processo.php?id=$resultado->id_processo>" . $num_atual . "</a></td>
+                <td>" . $num_anterior . "</td>
                 <td>" . $resultado->data_distribuicao . "</td>
                 <td>" . $resultado->nome_natureza . "</td>
                 <td>" . $resultado->autor . "</td>
                 <td>" . $resultado->reu . "</td>
                 <td>" . $resultado->transito_em_julgado . "</td>
                 </tr>";
-        $id_anterior = $resultado->id_processo;
+        $num_anterior = $resultado->numero_unificado;
     } while ($resultado = pg_fetch_object($sql[0]));
     echo "</tbody>";
     echo "</table>";

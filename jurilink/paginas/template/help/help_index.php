@@ -1,4 +1,4 @@
-<!-- MODAL para Ajuda INICIO-->
+<!-- MODAL para CADASTRO DE PESSOA-->
 <div id="helpModal" class="modal hide">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">x</button>

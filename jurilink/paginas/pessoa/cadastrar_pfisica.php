@@ -206,6 +206,12 @@ $resultado = pg_fetch_object($pesq_uf);
 </div> <!-- container -->
 
 <?php
+require_once '../template/help/help_cadastrar_fisica.php';
+?>
+
+</body>
+
+<?php
 require_once '../template/scripts.php';
 require_once 'scripts_cadastrar_pessoa.php';
 ?>

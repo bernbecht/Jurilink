@@ -5,7 +5,7 @@ require_once '../config.php';     //chama as configurações de página!
 
 <div class="container content">
     <div class="row">
-        <div class ="esquerda"> <h1>Pessoa Advogado</h1> </div>        
+        <div class ="esquerda"> <h1>Advogado</h1> </div>        
     </div>
     <div class="divisor_horizontal_view"></div>
 
@@ -14,7 +14,7 @@ require_once '../config.php';     //chama as configurações de página!
             <a href="cadastrar_padvogado.php">
                 <button type="button" class="btn btn-small btn-success">
                     <i class="icon-plus icon-white"></i>
-                    INCLUIR PESSOA ADVOGADO       
+                    INCLUIR ADVOGADO       
                 </button>
             </a> 
         </div>   
@@ -49,6 +49,10 @@ require_once '../config.php';     //chama as configurações de página!
 
     <input type="hidden" value="2" id="tipo" />
 </div><!-- container -->
+
+<?php
+require_once '../template/help/help_relacao_advogado.php'; 
+?>
 
 </body>
 <?php

@@ -39,7 +39,7 @@ class CAudiencia {
         $conexao = new CConexao();
         $conexao1 = $conexao->novaConexao();
 
-        $query = "SELECT data, local, tipo, id_audiencia, id_processo from audiencia where audiencia.id_processo = $id_processo order by data asc limit $limite";
+        $query = "SELECT data, local, tipo, id_audiencia, id_processo from audiencia where audiencia.id_processo = $id_processo order by data desc limit $limite";
         $pesq_audiencias = pg_query($conexao1, $query);
         return $pesq_audiencias;        
         
@@ -55,7 +55,7 @@ class CAudiencia {
         from audiencia
         inner join processo
         on audiencia.id_processo = processo.id_processo
-        order by data asc limit $limite";
+        order by data desc limit $limite";
         $pesq_audiencias = pg_query($conexao1, $query);
         return $pesq_audiencias;        
         

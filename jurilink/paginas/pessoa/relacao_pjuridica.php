@@ -50,6 +50,10 @@ require_once '../config.php';     //chama as configurações de página!
     <input type="hidden" value="1" id="tipo" />
 </div><!-- container -->
 
+<?php
+require_once '../template/help/help_relacao_juridica.php'; 
+?>
+
 </body>
 <?php
 require_once '../template/scripts.php'; //chama scripts comuns as paginas

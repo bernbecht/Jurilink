@@ -56,6 +56,10 @@ else {
     <input type="hidden" value="0" id="tipo" />
 </div><!-- container -->
 
+<?php
+require_once '../template/help/help_relacao_fisica.php'; 
+?>
+
 </body>
 <?php
 require_once '../template/scripts.php'; //chama scripts comuns as paginas
