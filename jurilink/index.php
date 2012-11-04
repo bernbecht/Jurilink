@@ -21,7 +21,7 @@ if (!isset($_SESSION['usuario']))
                 <div class="container">                    
                     <a  class="brand" href="#">JuriLink</a>  
                     <ul class="nav  pull-right">
-                        <li><a data-toggle="modal" href="#helpModal">Ajuda</a></li>
+                        <li><a id="ajudaLink" data-toggle="modal" href="#helpModal">Ajuda</a></li>
                         <li class="divider-vertical"></li>
                         <li class="dropdown">
                             <a href="#"  class="dropdown-toggle" data-toggle="dropdown"><?php echo $_SESSION['usuario']; ?>

@@ -71,69 +71,69 @@ function pegaId(){
 
 
 function mandarSenhaEmail(){
-	var email = $a('#email_input').val();
-	var url = 'jurilink/paginas/operacoes/Login/lembrar_senha_op.php';
+    var email = $a('#email_input').val();
+    var url = 'jurilink/paginas/operacoes/Login/lembrar_senha_op.php';
 	
-	 $a('<img id="loading_img" src="jurilink/bootstrap/img/loading.gif" height="36" width="36" />').appendTo('#campo_recuperar_senha'); // appendTo é pra por em algum lugar                
+    $a('<img id="loading_img" src="jurilink/bootstrap/img/loading.gif" height="36" width="36" />').appendTo('#campo_recuperar_senha'); // appendTo é pra por em algum lugar                
 	
-	$a('#cancelar_email').remove();	
-  $a('#enviar_email').remove();
-  $a('#email_input').remove();
+    $a('#cancelar_email').remove();	
+    $a('#enviar_email').remove();
+    $a('#email_input').remove();
 			
 			
 	
-	$a.post(url,{
-	email:email
-	},function(data){
-		$a('#loading_img').remove();
+    $a.post(url,{
+        email:email
+    },function(data){
+        $a('#loading_img').remove();
 	
-  $a('<button id="lembrar_senha_button" type="button" class="btn btn-primary">Recuperar Senha</button>').appendTo('#campo_recuperar_senha');
-  esqueci_senha();
-	});
+        $a('<button id="lembrar_senha_button" type="button" class="btn btn-primary">Recuperar Senha</button>').appendTo('#campo_recuperar_senha');
+        esqueci_senha();
+    });
 	
 
 }
 
 function esqueciSenhaSubmit(){
-	var email = $a('#email_input').val();
-	var mandar = true;
+    var email = $a('#email_input').val();
+    var mandar = true;
 	
-	if(email.length <5){	
-		$a('#email_input').addClass('erro_input');
-		mandar = false;
-	}
-	else{
-		$a('#email_input').removeClass('erro_input');	
-	}
+    if(email.length <5){	
+        $a('#email_input').addClass('erro_input');
+        mandar = false;
+    }
+    else{
+        $a('#email_input').removeClass('erro_input');	
+    }
 	
-	return mandar;
+    return mandar;
 }
 
 function esqueci_senha_botões(){
-  $a('#enviar_email').click(function(){
-		var mandar = esqueciSenhaSubmit();
-		if(mandar == true){
+    $a('#enviar_email').click(function(){
+        var mandar = esqueciSenhaSubmit();
+        if(mandar == true){
 		
-			mandarSenhaEmail();
-		}
-  });
-  $a('#cancelar_email').click(function(){
-  $a(this).remove();
-  $a('#enviar_email').remove();
-  $a('#email_input').remove();
-  $a('<button id="lembrar_senha_button" type="button" class="btn btn-primary">Recuperar Senha</button>').appendTo('#campo_recuperar_senha');
-  esqueci_senha();
-  });
+            mandarSenhaEmail();
+        }
+    });
+    $a('#cancelar_email').click(function(){
+        $a(this).remove();
+        $a('#enviar_email').remove();
+        $a('#email_input').remove();
+        $a('<button id="lembrar_senha_button" type="button" class="btn btn-primary">Recuperar Senha</button>').appendTo('#campo_recuperar_senha');
+        esqueci_senha();
+    });
 }
 
 function esqueci_senha(){
-$a('.recuperar_senha').hide();
+    $a('.recuperar_senha').hide();
 
- $a('#lembrar_senha_button').click(function(){
-	$a('<input type="text" class="input-xlarge recuperar_senha"  id="email_input" name="email"><button id="enviar_email" type="button" class="btn btn-primary recuperar_senha">Enviar</button><button id="cancelar_email" type="button" class="btn recuperar_senha">Cancelar</button>').appendTo('#campo_recuperar_senha');
-	$a(this).remove();
-	esqueci_senha_botões();
- });
+    $a('#lembrar_senha_button').click(function(){
+        $a('<input type="text" class="input-xlarge recuperar_senha"  id="email_input" name="email"><button id="enviar_email" type="button" class="btn btn-primary recuperar_senha">Enviar</button><button id="cancelar_email" type="button" class="btn recuperar_senha">Cancelar</button>').appendTo('#campo_recuperar_senha');
+        $a(this).remove();
+        esqueci_senha_botões();
+    });
 
 }
 
@@ -314,7 +314,7 @@ function msgErroBD(data){
         $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cpf').removeClass("").addClass("error");
     } 
-	else if(split1[10]=='"check_cpf"'){
+    else if(split1[10]=='"check_cpf"'){
         $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado é inválido.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cpf').removeClass("").addClass("error");
     } 
@@ -658,7 +658,7 @@ function pessoaAjax(modalidade){
             else{
                 //alert("Else 0");
                 //alert(data);
-				 $a('.edit-pessoa').removeAttr('disabled');
+                $a('.edit-pessoa').removeAttr('disabled');
                 $a(".edit-pessoa").removeClass('disabled');
 				
                 msgErroBD(data);
@@ -780,7 +780,7 @@ function validaFormAudienciaSubmit(){
 /*Função que valida o form de Pessoa no evento SUBMIT*/
 function validaFormPessoaSubmit(){
     
-    //alert("SUBMIT");
+    
     $a('.alert').remove();
     
     var intRegex = /^\d+$/;
@@ -814,18 +814,28 @@ function validaFormPessoaSubmit(){
         $a('#nome').removeClass("control-group error").addClass("control-group");  
     }
         
-    if(endereco.length <=2){
-        $a('#endereco').removeClass("control-group").addClass("control-group error");  
-        mandar =false;
-    }        
+    if(endereco.length !=0){
+        if(endereco.length <=2){
+            $a('#endereco').removeClass("control-group").addClass("control-group error");  
+            mandar =false;
+        }       
+        else{
+            $a('#endereco').removeClass("control-group error").addClass("control-group");  
+        }
+    }
     else{
         $a('#endereco').removeClass("control-group error").addClass("control-group");  
     }
         
-    if(bairro.length <=2){
-        $a('#bairro').removeClass("control-group").addClass("control-group error");  
-        mandar =false;
-    }        
+    if(bairro.length !=0){
+        if(bairro.length <=2){
+            $a('#bairro').removeClass("control-group").addClass("control-group error");  
+            mandar =false;
+        }     
+        else{
+            $a('#bairro').removeClass("control-group error").addClass("control-group");  
+        }
+    }
     else{
         $a('#bairro').removeClass("control-group error").addClass("control-group");  
     }
@@ -846,8 +856,9 @@ function validaFormPessoaSubmit(){
         $a('#estado').removeClass("control-group error").addClass("control-group");  
     }
         
-    if(tel.length  == 8){            
-		if(intRegex.test(tel)) {
+    if(tel.length  != 0){
+        if(tel.length  == 8){            
+            if(intRegex.test(tel)) {
                 $a('#telefone').removeClass("error").addClass("");            
             }
             
@@ -855,20 +866,51 @@ function validaFormPessoaSubmit(){
                 $a('#telefone').removeClass("").addClass("error");
                 mandar =false;
             }
-    }   
-    else if (tel.length  == 10){            
-        if(intRegex.test(tel)) {
+        }   
+        
+        else if (tel.length  == 9){            
+            if(intRegex.test(tel)) {
                 $a('#telefone').removeClass("error").addClass("");            
             }
+        
             
             else{
                 $a('#telefone').removeClass("").addClass("error");
                 mandar =false;
             } 
-    }   
+        }
+        
+        else if (tel.length  == 10){            
+            if(intRegex.test(tel)) {
+                $a('#telefone').removeClass("error").addClass("");            
+            }
+        
+            
+            else{
+                $a('#telefone').removeClass("").addClass("error");
+                mandar =false;
+            } 
+        } 
+        
+        else if (tel.length  == 11){            
+            if(intRegex.test(tel)) {
+                $a('#telefone').removeClass("error").addClass("");            
+            }
+        
+            
+            else{
+                $a('#telefone').removeClass("").addClass("error");
+                mandar =false;
+            } 
+        } 
+        
+        else{
+            $a('#telefone').removeClass("success").addClass("error");  
+            mandar =false;            
+        }
+    }
     else{
-        $a('#telefone').removeClass("success").addClass("error");  
-        mandar =false;            
+         $a('#telefone').removeClass("error");
     }
 
 
@@ -1240,7 +1282,7 @@ $a(document).ready(function(){
     loadAudienciasMain();
     validaFormLoginJS();
     tooltip();
-	esqueci_senha();
+    esqueci_senha();
   
     
  

@@ -1195,6 +1195,37 @@ function tooltip(){
         );
 }
 
+//função que inicializa o comportamento da modal de HELP
+function initHelpModal(){
+    
+    //quando clicar no botão de AJUDA, inicializar modal HELP do jeito certo
+    $a("#ajudaLink").click(function(){
+        $a("#helpVideo").hide();
+        $a("#content_help").show();
+    });
+    
+    $a("#helpVideo").hide();
+    $a("#content_help").show();
+    ativaVideoHelp();
+    voltaHelpEscrito();
+}
+//função para mostrar o vídeo de help
+function ativaVideoHelp(){
+    $a('#ativa_video_help_btn').click(function(){
+        $a("#helpVideo").show();
+        $a("#content_help").hide();
+    });
+}
+
+//função para voltar ao help escrito
+function voltaHelpEscrito(){
+    $a('#voltaHelpEscritoBtn').click(function(){
+        $a("#helpVideo").hide();
+        $a("#content_help").show();
+    });
+}
+
+
 
 //Função de JQUERY
 
@@ -1215,7 +1246,8 @@ $a(document).ready(function(){
     loadAudienciasMain();
     validaFormLoginJS();
     tooltip();
-    esqueci_senha();
+    esqueci_senha();    
+    initHelpModal();
 
 
 });

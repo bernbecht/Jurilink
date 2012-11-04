@@ -12,24 +12,24 @@ class CConexao {
   */
   
  /* -- Configurações Bernardo--*/
- /*
+ 
   protected $Host='localhost';
   protected $User='postgres';
   protected $Password='root';
   protected $Porta='5432';
   protected $DbName='jurilink';  
   protected $Conexao=null;
-  */
+  
   
    /* -- Configurações server--*/
-   
+   /*
   protected $Host='pgsql.jurilink.com.br';
   protected $User='jurilink';
   protected $Password='jurilink123bernardoandre';
   protected $Porta='5432';
   protected $DbName='jurilink';  
   protected $Conexao=null;
-  
+ */ 
  
   
 

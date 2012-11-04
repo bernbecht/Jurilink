@@ -136,7 +136,7 @@
     function loadAudiencia(){   
         
         var id_processo = $a('#id').val();       
-        var limite = 3;
+        var limite = 5;
         
         //alert(id_processo);
         var url = 'get_todas_audiencias.php';

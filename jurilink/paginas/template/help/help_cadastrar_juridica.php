@@ -14,18 +14,19 @@
         </div>
 
         <div id="content_help">
+
             <div class="page-header">
                 <h1>Cadastrar Pessoa Física<button id="ativa_video_help_btn" class="btn btn-info pull-right voltarTextoHelpBtn"><i class="icon-play-circle icon-white"></i> Vídeo</button></h1>
             </div>
             <p>
-                Nesta tela é possível cadastrar uma ou mais <span class="label label-info">pessoas físicas</span>
+                Nesta tela é possível cadastrar uma ou mais <span class="label label-info">pessoas jurídicas</span>
                 no sistema.
             </p>
             <div class="page-header">
                 <h1>Campos do Formulário </h1>
             </div>
             <p>
-                Para cadastrar uma nova pessoa física é necessário preencher pelo menos os campos obrigatórios indicicados pela cor
+                Para cadastrar uma nova pessoa jurídica é necessário preencher pelo menos os campos obrigatórios indicicados pela cor
                 amarela.
 
             <h3>Descrição dos Campos do Formulário</h3>
@@ -33,12 +34,8 @@
             <dl class="" >
                 <dt>Nome</dt>
                 <dd>Campo obrigatório. Deve possuir pelo menos 3 caracteres alfanúmericos.</dd>
-                <dt>CPF</dt>
-                <dd>Campo obrigatório. Deve conter apenas números. Não é permitido duas pessoas com o mesmo CPF no sistema.</dd>
-                <dt>RG</dt>
-                <dd>Campo obrigatório. Deve conter apenas números. Não é permitido duas pessoa com o mesmo RG no sistema.</dd>
-                <dt>Órgão Expedidor</dt>
-                <dd>Campo obrigatório. Órgão expedidor do RG. Deve possuir pelo menos 2 caracteres alfanúmericos.</dd>
+                <dt>CNPJ</dt>        
+                <dd>Campo obrigatório. Deve possuir apenas números. Não é permitido duas pessoas com o mesmo CNPJ no sistema.</dd>
                 <dt>Cidade</dt>
                 <dd>Campo obrigatório. Deve possuir pelo menos 3 caracteres alfanúmericos.</dd>
                 <dt>Estado</dt>
@@ -69,12 +66,12 @@
             <h3>Botões do Formulário</h3>
             <dl>
                 <dt>Salvar</dt>
-                <dd>Adiciona a pessoa ao sistema e retorna à tela com a relação das pessoas físicas cadastradas no
+                <dd>Adiciona a pessoa ao sistema e retorna à tela com a relação das pessoas jurídicas cadastradas no
                     sistema.</dd>
                 <dt>Salvar e Adicionar Outro</dt>
                 <dd>Adiciona a pessoa ao sistema e limpa o formulário para que se possa adicionar outra pessoa.</dd>
                 <dt>Cancelar</dt>
-                <dd>Cancela a operação e retorna à tela com a relação das pessoas físicas cadastradas no sistema.</dd>            
+                <dd>Cancela a operação e retorna à tela com a relação das pessoas jurídicas cadastradas no sistema.</dd>            
             </dl>
         </div>
     </div>

@@ -40,7 +40,7 @@ $resultado = pg_fetch_object($pesq_uf);
                     <button type="button" class="close" data-dismiss="alert">x</button>
                     <p>Todos os itens com a tarja <b>amarela</b> são obrigatórios.</p></div>
             </div>
-            
+
             <br/>
 
             <div class="row">
@@ -226,6 +226,12 @@ $resultado = pg_fetch_object($pesq_uf);
     </form> 
 
 </div> <!-- container -->
+
+<?php
+require_once '../template/help/help_cadastrar_advogado.php';
+?>
+
+</body>
 
 <?php
 require_once '../template/scripts.php';
