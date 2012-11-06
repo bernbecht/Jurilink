@@ -193,6 +193,16 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
                                         echo "-";
                                 }
                             }
+                            
+                            else if (strlen($pessoa->tel) == 9) {
+                                $tele = $pessoa->tel;                                
+                                for ($i = 0; $i < 9; $i++) {                                    
+                                    echo $tele[$i];
+                                    if ($i == 3)
+                                        echo "-";
+                                }
+                            }
+                            
                             echo "</p>";
                         }
 

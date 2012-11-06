@@ -34,6 +34,7 @@
             $a('#myModal').modal('show');
             $a('#nome_input').focus();
             $a('#nome').removeClass("error");
+            $a('.alert').remove();
             
             //Pega o nome da comarca junto com o ID da mesma
             var dado = $a(this).find('input').val();
@@ -56,8 +57,7 @@
         id_natureza = $form.find( 'input[name="id"]' ).val(),
         url = $form.attr( 'action' );
         
-        $a('#myModal').modal('hide');
-        
+              
         $a.post(url,{
             nome:nome,
             id_natureza:id_natureza
@@ -69,7 +69,12 @@
             else if(data==1){
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>A natureza de ação <b>'+nome+'</b> foi editada no sistema com sucesso.</p></div>').appendTo('#aviso');
+                
                 loadInicial();
+                setTimeout(function() {
+                    $a('.alert').remove();
+                    $a('#myModal').modal('hide');
+                },1200);
                 
             }
         });

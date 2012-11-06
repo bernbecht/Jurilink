@@ -52,9 +52,7 @@ require_once '../config.php';     //chama as configurações de página!
             <fieldset>
 
                 <div id="msg_resultado_edita_comarca">
-                    <div class="alert">
-                        oi
-                    </div>
+                   
                 </div>
 
                 <!--Campos formulário --> 

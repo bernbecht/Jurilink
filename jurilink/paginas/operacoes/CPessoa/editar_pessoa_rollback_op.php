@@ -73,7 +73,7 @@ if (strlen($n) < 2) {
 if (strlen($t) == 0) {
     $t = "NULL";
 } else {
-    if (strlen($t) != 8 && strlen($t) != 10 && strlen($t) != 11) {
+    if (strlen($t) != 8 && strlen($t) != 9 && strlen($t) != 10 && strlen($t) != 11) {
         $erro.= "telefone menos que 8";
     }    
 }

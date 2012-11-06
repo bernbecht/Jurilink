@@ -137,9 +137,10 @@
                 focus=true;
             }
             mandar =false;
+            msg_erro+="É necessário selecionara um juízo.\n";
         }
         else{
-            $a('#juizo-control').removeClass("error");            
+            $a('#juizo-control').removeClass("error");              
         }
         
         if(nat_val == -1){
@@ -149,6 +150,7 @@
                 $a('#natureza').focus();
                 focus=true;
             }
+            msg_erro+="É necessário selecionara um juízo.\n";
         }
         else{
             $a('#natureza-control').removeClass("error");            
@@ -164,6 +166,7 @@
                 focus=true;
             }
             mandar =false;
+            msg_erro+="Verifique o formato do Valor da Causa\n";
         }
         
         if(autor_val.length == 0){
@@ -173,6 +176,7 @@
                 $a('#autor_input').focus();
                 focus=true;
             }
+            msg_erro+="Campo Autor não pode ser vazio.\n";
         }
         else{
             $a('#autor').removeClass("error");
@@ -186,6 +190,7 @@
                 $a('#autor_ad_input').focus();
                 focus=true;
             }
+            msg_erro+="Campo Advogado do Autor não pode ser vazio.\n";
         }
         else{
             $a('#autor_advogado').removeClass("error");
@@ -217,6 +222,8 @@
                 $a('#reu_input').focus();
                 focus=true;
             }
+            
+            msg_erro+="Campo Réu não pode ser vazio.\n";
         }
         else{
             $a('#reu').removeClass("error");
@@ -230,6 +237,7 @@
                 $a('#reu_ad_input').focus();
                 focus=true;
             }
+            msg_erro+="Campo Advogado do Réu não pode ser vazio.\n";
         }
         else{
             $a('#reu_advogado').removeClass("error");
@@ -266,6 +274,7 @@
                     $a('#tej_input').focus();
                     focus=true;
                 }
+                msg_erro+="Verifique o formato do campo Trânsito em Julgado.\n";
             }
         }
         else{
@@ -284,6 +293,7 @@
                     $a('#deposito_judicial_input').focus();
                     focus=true;
                 }
+                msg_erro+="Verifique o formato do campo Depósito Judicial.\n";
             }
         }
         else{
@@ -301,6 +311,7 @@
                     $a('#auto_penhora_input').focus();
                     focus=true;
                 }
+                msg_erro+="Verifique o formato do campo Auto de Penhora.\n";
             }
         }
         else{
@@ -358,23 +369,23 @@
             data_split_aux = data.split('\n');
             data_split = data_split_aux[0].split(' ');
             if(data_split[8]=='"num_unico"'){
-                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Numero Unificado</b> ja esta em uso.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Número Unificado</b> já está em uso.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
                 $a('#numero_unificado').removeClass("control-group").addClass("control-group error");
                 $a('#numero_unificado_input').focus();
             }
             else if(data_split[8]=='"num_unificado_index"'){
-                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Numero Unificado</b> ja esta em uso.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Número Unificado</b> já está em uso.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
                 $a('#numero_unificado').removeClass("control-group").addClass("control-group error");
                 $a('#numero_unificado_input').focus();
             }
              else if(data_split[2]=='Trânsito'){
-                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Transito em Julgado</b> nao pode ser maior que a data atual.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Trânsito em Julgado</b> não pode ser menor que a data atual.</p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
                 $a('#transito_em_julgado').removeClass("control-group").addClass("control-group error");
                 $a('#tej_input').focus();
             }
             
             else if(data_split[2]=='Data'){
-                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Transito em Julgado</b> nao pode ser menor que a <b>Data de Distribuicao</b></p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
+                $a('<div id="alert_resultado_processo" class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>Trânsito em Julgado</b> não pode ser menor que a <b>Data de Distribuição</b></p></div>').appendTo('#msg_resultado_processo'); // appendTo é pra por em algum lugar
                 $a('#transito_em_julgado').removeClass("control-group").addClass("control-group error");
                 $a('#tej_input').focus();
             }

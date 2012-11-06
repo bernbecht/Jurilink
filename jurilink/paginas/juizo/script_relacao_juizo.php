@@ -33,6 +33,7 @@
             $a('#myModal').modal('show');
             $a('#nome_input').focus();
             $a('#nome').removeClass("error");
+            $a('.alert').remove();
             
             //Pega o nome da juizo junto com o ID da mesma
             var dado = $a(this).find('input').val();
@@ -64,7 +65,7 @@
         id_comarca = $form.find( '#comarca' ).find('option').filter(':selected').val(),
         url = $form.attr( 'action' );
         
-        $a('#myModal').modal('hide');   
+          
         
         $a.post(url,{
             nome:nome,
@@ -74,13 +75,17 @@
             
             if(data == 0){
                 $a('.alert').remove();
-                $a('<div class="alert alert-error fade in"><p>O juízo <b>'+nome+'</b> não foi editado no sistema.</p></div>').appendTo('#aviso');
+                $a('<div id="alert_editar_result" class="alert alert-error fade in"><p>O juízo <b>'+nome+'</b> não foi editado no sistema.</p></div>').appendTo('#msg_resultado');
             }
             else if(data==1){
                 $a('.alert').remove();
-                $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O juízo <b>'+nome+'</b> foi editado no sistema com sucesso.</p></div>').appendTo('#aviso');
+                $a('<div id="alert_editar_result" class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O juízo <b>'+nome+'</b> foi editado no sistema com sucesso.</p></div>').appendTo('#msg_resultado');
                 
                 loadInicial();
+                setTimeout(function() {
+                    $a('.alert').remove();
+                    $a('#myModal').modal('hide');
+                },1200);
                 
             }
         });

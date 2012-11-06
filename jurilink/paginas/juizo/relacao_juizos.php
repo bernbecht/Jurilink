@@ -22,9 +22,7 @@ if (!$result) {
         <div class ="esquerda"> <h1>Juízos</h1> </div>        
     </div>
 
-    <div class="divisor_horizontal_view"></div>
-    
-     <div id="aviso">    </div>
+    <div class="divisor_horizontal_view"></div>    
 
     <div class="row">
         <div class ="esquerda"> 
@@ -62,6 +60,11 @@ if (!$result) {
         <h3>Edição de Juízo</h3>
     </div>   
     <div class="modal-body">
+
+        <div id="msg_resultado">
+
+        </div>
+
         <form id="form_juizo" class="form-horizontal altera_juizo_Ajax" method="post" action="../operacoes/CJuizo/editar_juizo_op.php">
             <fieldset>
 

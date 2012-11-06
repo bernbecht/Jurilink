@@ -21,7 +21,7 @@ $resultado = pg_fetch_object($pesq_uf);
 
             <legend>
                 <div class="esquerda">
-                    <h1>Cadastrar Nova Pessoa Fisica</h1>
+                    <h1>Cadastrar Nova Pessoa Física</h1>
                 </div>
                 <div id="loading_content">  
 

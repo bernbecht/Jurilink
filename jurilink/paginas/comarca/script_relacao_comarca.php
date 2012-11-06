@@ -75,7 +75,7 @@
                 loadInicial();
                 setTimeout(function() {
                     $a('#myModal').modal('hide');
-                },2000);
+                },1200);
             }
         });
             

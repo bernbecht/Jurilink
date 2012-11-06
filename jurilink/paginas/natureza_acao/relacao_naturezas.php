@@ -9,9 +9,8 @@ require_once '../config.php';     //chama as configurações de página!
     </div>
     
 
-    <div class="divisor_horizontal_view"></div>
+    <div class="divisor_horizontal_view"></div>    
     
-    <div id="aviso">    </div>
 
     <div class="row">
         <div class ="esquerda"> 
@@ -49,6 +48,7 @@ require_once '../config.php';     //chama as configurações de página!
         <h3>Edição de Comarca</h3>
     </div>   
     <div class="modal-body">
+        <div id="aviso">    </div>
         <form id="form_natureza" class="form-horizontal altera_natureza_Ajax" method="post" action="../operacoes/CNatureza_acao/editar_natureza_acao_op.php">
             <fieldset>
 

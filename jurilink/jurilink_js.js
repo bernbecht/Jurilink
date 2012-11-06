@@ -217,7 +217,7 @@ function msgErroBD(data){
         $a('#cpf').removeClass("").addClass("error");
     }
     else if(data_split_rg[2]=="RG"){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>RG</b> digitado ja foi cadastrado.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>RG</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#rg').removeClass("").addClass("error");
     }
                 
@@ -226,24 +226,24 @@ function msgErroBD(data){
         $a('#cpf').removeClass("").addClass("error");
     }
                
-    else if(split1[12]=='"email_unico"'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>E-MAIL</b> digitado ja esta em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+    else if(split1[9]=='"email_user"'){
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>E-MAIL</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#email').removeClass("").addClass("error");
     }
-    else if(split1[12]=='"indice_cnpj"'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CNPJ</b> digitado ja esta em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+    else if(split1[9]=='"indice_cnpj"'){
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CNPJ</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cnpj').removeClass("").addClass("error"); 
     } 
     else if(split1[11]=='"indice_cnpj"'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CNPJ</b> digitado ja esta em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CNPJ</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cnpj').removeClass("").addClass("error"); 
     } 
-    else if(split1[12]=='"indice_cpf"'){        
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado ja esta em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+    else if(split1[8]=='"indice_cpf"'){        
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cpf').removeClass("").addClass("error");
     } 
     else if(split1[11]=='"indice_cpf"'){
-        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado ja esta em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
+        $a('<div class="alert alert-error fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O <b>CPF</b> digitado já está em uso.</p></div>').appendTo('#msg_resultado'); // appendTo é pra por em algum lugar
         $a('#cpf').removeClass("").addClass("error");
     } 
     else if(data_split[11]=='"rg_tamanho"'){
@@ -557,8 +557,8 @@ function pessoaAjax(modalidade){
                            
                 setTimeout(function() {
                     
-                    $a('.editar-pessoa').removeAttr('disabled');
-                    $a(".editar-pessoa").removeClass('disabled');
+                    $a('#enviar').removeAttr('disabled');
+                    $a("#enviar").removeClass('disabled');
                     $a(window.document.location).attr('href',url);
 
                 }, 3000);          
@@ -568,8 +568,8 @@ function pessoaAjax(modalidade){
                 //alert("Else 0");
                 //alert(data);
                 msgErroBD(data);
-                $a('.editar-pessoa').removeAttr('disabled');
-                $a(".editar-pessoa").removeClass('disabled');
+                $a('#enviar').removeAttr('disabled');
+                $a("#enviar").removeClass('disabled');
                 subirPagina();
                                
             }
@@ -753,21 +753,32 @@ function validaFormPessoaSubmit(){
         $a('#nome').removeClass("control-group error").addClass("control-group");  
     }
         
-    /*if(endereco.length <=2){
-        $a('#endereco').removeClass("control-group").addClass("control-group error");  
-        mandar =false;
-    }        
+    if(endereco.length !=0){
+        if(endereco.length <=2){
+            $a('#endereco').removeClass("control-group").addClass("control-group error");  
+            mandar =false;
+        }        
+        else{
+            $a('#endereco').removeClass("control-group error").addClass("control-group");  
+        }
+    }
     else{
         $a('#endereco').removeClass("control-group error").addClass("control-group");  
-    }*/
+    }
         
-    /*if(bairro.length <=2){
-        $a('#bairro').removeClass("control-group").addClass("control-group error");  
-        mandar =false;
-    }        
+    if(bairro.length !=0){
+        if(bairro.length <=2){
+            $a('#bairro').removeClass("control-group").addClass("control-group error");  
+            mandar =false;
+        }        
+        else{
+            $a('#bairro').removeClass("control-group error").addClass("control-group");  
+        }
+    }
     else{
         $a('#bairro').removeClass("control-group error").addClass("control-group");  
-    }*/
+    }
+    
         
     if(cidade.length <=2){
         $a('#cidade').removeClass("control-group").addClass("control-group error");  
@@ -799,7 +810,19 @@ function validaFormPessoaSubmit(){
             $a('#telefone').removeClass("").addClass("error");
             mandar =false;
         }
-    }   
+    } 
+    
+    else if (tel.length  == 9){            
+        if(intRegex.test(tel)) {
+            $a('#telefone').removeClass("error").addClass("");            
+        }
+            
+        else{
+            $a('#telefone').removeClass("").addClass("error");
+            mandar =false;
+        } 
+    }
+    
     else if (tel.length  == 10){            
         if(intRegex.test(tel)) {
             $a('#telefone').removeClass("error").addClass("");            

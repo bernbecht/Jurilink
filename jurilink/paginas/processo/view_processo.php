@@ -560,7 +560,7 @@ $ato_proc = pg_fetch_object($pesq_ato_proc);
                         <div id="data_audiencia" class="control-group">
                             <label class="control-label" for="data_audiencia">Data</label>
                             <div class="controls">
-                                <input type="text" class="input-xlarge aviso" id="data_audiencia_input" name="data_audiencia">                       
+                                <input type="text" maxlength="10" class="input-xlarge aviso" id="data_audiencia_input" name="data_audiencia">                       
                                 <span  class="help-inline ">Digite no formato dd/mm/aaaa Ex: 08/12/1990</span>                    
                             </div>
                         </div>

@@ -33,6 +33,7 @@
             // Mostra modal para alteração
             
             $a('#myModal').modal('show');
+            $a('.alert').remove();
             $a('#nome_input').focus();
             $a('#nome').removeClass("error");
             
@@ -49,7 +50,7 @@
             var $form = $a( '.altera_ato_Ajax' )
             $form.find( 'input[name="nome"]' ).val(nome),
             $form.find( 'input[name="id"]' ).val(id_ato),
-            $form.find( 'input[name="descricao"]' ).val(descricao),
+            $a("#descricao_input").val(descricao),
             $form.find( 'input[name="previsao"]' ).val(previsao);
             if (flag_cliente == 't'){
                 $form.find('input[name="flag_userCheckbox"]').attr ( "checked" , true );
@@ -66,14 +67,12 @@
         var $form = $a( '.altera_ato_Ajax' ),
         nome = $form.find( 'input[name="nome"]' ).val(),
         previsao = $form.find( 'input[name="previsao"]' ).val(),
-        desc = $form.find( 'input[name="descricao"]' ).val(),
+        desc = $a("#descricao_input").val(),
         id_ato = $form.find( 'input[name="id"]' ).val(),
         flag_cliente = $form.find( 'input[name="flag_userCheckbox"]:checked' ).val(),
         url = $form.attr( 'action' );
         
-        $a('#myModal').modal('hide');
-
-        
+         
         
         if(flag_cliente == undefined) flag_cliente=0;
         
@@ -93,7 +92,12 @@
                 $a('.alert').remove();
                 $a('<div class="alert alert-success fade in"><button type="button" class="close" data-dismiss="alert">x</button><p>O ato <b>'+nome+'</b> foi editado no sistema com sucesso.</p></div>').appendTo('#aviso');
                 
+               
                 loadInicial();
+                setTimeout(function() {
+                    $a('.alert').remove();
+                    $a('#myModal').modal('hide');
+                },1200);
                 
             }
         });
@@ -122,7 +126,7 @@
         var $form = $a( '.altera_ato_Ajax' ),
         nome = $form.find( 'input[name="nome"]' ).val(),
         previsao = $form.find( 'input[name="previsao"]' ).val(),
-        desc = $form.find( 'input[name="descricao"]' ).val();
+        desc = $a("#descricao_input").val();
         
         
         var mandar = true;
