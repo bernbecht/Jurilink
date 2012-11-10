@@ -101,17 +101,17 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
             
             <br/>
             <div class="controls">
-                <input type="hidden" class="input-xlarge aviso" id="id_input" name="id_processo" value= "<?php echo $id_processo ?>">
+                <input type="hidden" class="input-xlarge aviso" id="id_input" name="id_processo" value= "<?php echo $id_processo ?>" />
             </div>
             <div class="row">                
 
                 <div class="span5">
                     <!-- Campo numero unificado -->
                     <div id="numero_unificado" class="control-group">
-                        <label class="control-label" for="numero_unificado">Numero Unificado</label>
+                        <label class="control-label" for="numero_unificado">Número Unificado</label>
                         <div class="controls">
-                           <input type="text" class="input-xlarge aviso" id="numero_unificado_input" name="numero_unificado" value="<?php echo $processo->numero_unificado?>">                       
-                            <span  class="help-inline ">Apenas digitos</span>                    
+                            <input type="text" class="input-xlarge aviso" maxlength="21" id="numero_unificado_input" name="numero_unificado" value="<?php echo $processo->numero_unificado?>"/>                       
+                            <span  class="help-inline ">Apenas dígitos</span>                    
                         </div>
                     </div>        
                 </div>
@@ -119,10 +119,10 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 <div class="span5">
                     <!-- Campo data de distribuição -->
                     <div id="data_distribuicao" class="control-group">
-                        <label class="control-label" for="data distribuicao">Data Distribuicao</label>
+                        <label class="control-label" for="data distribuicao">Data Distribuiçãoo</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="data_dist_input" name="data_distribuicao" value="<?php echo $processo->data_distribuicao?>">                       
-                            <span  class="help-inline ">Digite no formato dd/dd/aaaa Ex: 12/10/2010</span>                    
+                            <input type="text" class="input-xlarge aviso data_input" maxlength="10" id="data_dist_input" name="data_distribuicao" value="<?php echo $processo->data_distribuicao?>" />                       
+                            <span  class="help-inline ">Ex: 12/10/2010</span>                    
                         </div>
                     </div>
                 </div>             
@@ -132,7 +132,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 <div class="span5">
                     <!-- Campo Juizo Combo -->
                     <div class="control-group" id="juizo-control">
-                        <label class="control-label" for="juizo">Juizo</label>
+                        <label class="control-label" for="juizo">Juízo</label>
                         <div class="controls">                    
                             <select  name="id_juizo" id="juizo" class="aviso">
                                 <?php echo "<option value=$processo->id_juizo>$processo->nome_juizo</option>" ?>
@@ -154,7 +154,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 <div class="span5">
                     <!-- Campo natureza COMBO -->
                     <div class="control-group" id="natureza-control">
-                        <label class="control-label" for="natureza">Natureza Acao</label>
+                        <label class="control-label" for="natureza">Natureza Ação</label>
                         <div class="controls">                    
                             <select name="id_natureza" id="natureza" class="aviso">
                                  <?php echo "<option value=$processo->id_natureza_acao>$processo->nome_natureza</option>" ?>
@@ -177,10 +177,10 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 <div class="span5">
                     <!-- Campo valor da causa -->
                     <div id="valor_causa"class="control-group ">
-                        <label class="control-label" for="valor_causa">Valor da causa</label>
+                        <label class="control-label" for="valor_causa">Valor da Causa</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge aviso" id="valor_causa_input" name="valor_causa" value="<?php echo $processo->valor_causa?>">     
-                            <span  class="help-inline ">O valor deve ter vigula Ex: 1200,00</span> 
+                            <span  class="help-inline ">O valor deve ter vírgula Ex: 1200,00</span> 
                         </div>
                     </div>      
                 </div>
@@ -239,7 +239,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 <div class="span5">
                     <!-- Campo Reu -->
                     <div id="reu"class="control-group ">
-                        <label class="control-label" for="reu">Reu</label>
+                        <label class="control-label" for="reu">Réu</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge aviso" id="reu_input" name="reu" 
                                    value="<?php $i = 0; while ($i<$n_reus) { echo $reus->nome; $i++; if ($i!=$n_reus) echo ", ";$reus=pg_fetch_object($pesq_reu);}?>"/>     
@@ -252,7 +252,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 <div class="span5">
                     <!-- Campo advogado Réu -->
                     <div id="reu_advogado"class="control-group ">
-                        <label class="control-label" for="ad2">Advogado do Reu</label>
+                        <label class="control-label" for="ad2">Advogado do Réu</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge aviso" id="reu_ad_input" name="reu_advogado" value="<?php echo $processo->nome_adv_reu?>"/>     
                             <span  class="help-inline "><a class="pessoa-modal" data-toggle="modal" href="#myModal"><i id="reu-ad-modal" class="icon-plus"></i></a></span> 
@@ -268,7 +268,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 <div class="span5">
                     <!-- Campo representante reu -->
                     <div id="reu_rep"class="control-group ">
-                        <label class="control-label" for="autor">Representante Reu</label>
+                        <label class="control-label" for="autor">Representante Réu</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="reu_rep_input" name="reu_rep"
                         value="<?php $i = 0; while ($i<$n_rep_reus) { echo $rep_reu->nome; $i++; if ($i!=$n_rep_reus) echo ", ";$rep_reu=pg_fetch_object($pesq_rep_reu);}?>"/>     
@@ -286,10 +286,10 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 <div class="span5">
                     <!-- Campo transito em julgado -->
                     <div id="transito_em_julgado" class="control-group">
-                        <label class="control-label" for="Transito em Julgado">Transito em Julgado</label>
+                        <label class="control-label" for="Transito em Julgado">Trânsito em Julgado</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="tej_input" name="transito_em_julgado" value="<?php echo $processo->transito_em_julgado?>">                       
-                            <span  class="help-inline ">Digite no formato dd/dd/aaaa Ex: 12/10/2010</span>                    
+                            <input type="text" class="input-xlarge data_input" maxlength="10" id="tej_input" name="transito_em_julgado" value="<?php echo $processo->transito_em_julgado?>">                       
+                            <span  class="help-inline ">Ex: 12/10/2010</span>                    
                         </div>
                     </div>
                 </div>
@@ -297,10 +297,10 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 <div class="span5">
                     <!-- Campo deposito -->
                     <div id="deposito_judicial" class="control-group">
-                        <label class="control-label" for="deposito judicial">Deposito Judicial</label>
+                        <label class="control-label" for="deposito judicial">Depósito Judicial</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge" id="deposito_judicial_input" name="deposito_judicial" value="<?php echo $processo->deposito_judicial?>">                       
-                            <span  class="help-inline ">O valor deve ter vigula Ex: 1200,00</span>                    
+                            <span  class="help-inline ">O valor deve ter vírgula Ex: 1200,00</span>                    
                         </div>
                     </div>   
                 </div>
@@ -315,7 +315,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                         <div class="controls">
                             <div class="input-prepend">
                                 <input type="text" class="input-large" id="auto_penhora_input" name="auto_penhora" value="<?php echo $processo->auto_penhora?>"/>                       
-                                <span  class="help-inline ">O valor deve ter vigula Ex: 1200,00</span>
+                                <span  class="help-inline ">O valor deve ter vírgula Ex: 1200,00</span>
                             </div>
                         </div>
                     </div>
@@ -361,14 +361,14 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                     <label class="control-label" for="Nome">Nome</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge aviso" id="nome_input" name="nome">                       
-                        <span  class="help-inline "></span>                    
+                        <span  class="help-inline ">Mínimo 3 caracteres</span>                    
                     </div>
                 </div>
 
                 <div id="cnpj" class="control-group">
                     <label class="control-label" for="cnpj">CNPJ</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="cnpj_input" name="cnpj">                       
+                        <input type="text" class="input-xlarge aviso cnpj_input" maxlength="14" id="cnpj_input" name="cnpj">                       
                         <span  class="help-inline ">Use apenas digitos</span>                    
                     </div>
                 </div>
@@ -376,7 +376,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 <div id="cpf" class="control-group">
                     <label class="control-label" for="cpf">CPF</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="cpf_input" name="cpf">                       
+                        <input type="text" class="input-xlarge aviso cpf_input" maxlength="11" id="cpf_input" name="cpf">                       
                         <span  class="help-inline ">Use apenas digitos</span>                    
                     </div>
                 </div>
@@ -384,15 +384,15 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 <div id="rg" class="control-group">
                     <label class="control-label" for="rg">RG</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="rg_input" name="rg">                       
+                        <input type="text" class="input-xlarge aviso rg_input" maxlength="11" id="rg_input" name="rg">                       
                         <span  class="help-inline ">Use apenas digitos</span>                    
                     </div>
                 </div>
 
                 <div id="comarca" class="control-group">
-                    <label class="control-label" for="rg">Orgao Expedidor</label>
+                    <label class="control-label" for="rg">Órgão Expedidor</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="comarca_input" name="comarca">                       
+                        <input type="text" class="input-xlarge aviso orgao_input" id="comarca_input" name="comarca">                       
                         <span  class="help-inline ">Minimo 2 caracteres</span>                    
                     </div>
                 </div>
@@ -408,7 +408,7 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                     <label class="control-label" for="cidade">Cidade</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge aviso" id="cidade_input" name="cidade">       
-                        <span  class="help-inline "></span> 
+                        <span  class="help-inline ">Mínimo 3 caracteres</span> 
                     </div>
                 </div>
 
@@ -430,10 +430,10 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                 </div>
                 
                 <div id="endereco"class="control-group ">
-                    <label class="control-label" for="endereco">Endereco</label>
+                    <label class="control-label" for="endereco">Endereço</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge aviso" id="endereco_input" name="endereco">     
-                        <span  class="help-inline "></span> 
+                        <span  class="help-inline ">Se digitado, mínimo 3 caracteres</span> 
                     </div>
                 </div>
 
@@ -441,30 +441,30 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
                     <label class="control-label" for="bairro">Bairro</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge" id="bairro_input" name="bairro">     
-                        <span  class="help-inline "></span> 
+                        <span  class="help-inline ">Se digitado, mínimo 3 caracteres</span> 
                     </div>
                 </div>
 
                 <div id="telefone" class="control-group ">
                     <label class="control-label" for="telefone">Telefone</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="telefone_input" name="telefone">    
+                        <input type="text" class="input-xlarge tel_input" maxlength="10" id="telefone_input" name="telefone">    
                         <span  class="help-inline ">Use apenas digitos</span> 
                     </div>
                 </div>
 
                 <div id="email" class="control-group ">
-                    <label class="control-label" for="email">Email</label>
+                    <label class="control-label" for="email">E-mail</label>
                     <div class="controls">                        
                         <div class="input-prepend">
                             <span class="add-on"><i class="icon-envelope"></i></span><input class="input-large" id="email_input" name="email" type="text">
                         </div>
-                        <span class="help-inline"></span>
+                        <span class="help-inline">Se digitado, mínimo 7 caracteres</span>
                     </div>
                 </div>                 
 
                 <div id="user" class="control-group">
-                    <label class="control-label" for="userCheckbox">User</label>
+                    <label class="control-label" for="userCheckbox">Usuário</label>
                     <div class="controls">
                         <label class="checkbox">
                             <input type="checkbox" name="userCheckbox" id="userCheckbox" value="1">
@@ -486,6 +486,11 @@ $processo = pg_fetch_object($pesq_processo); //Contem dados do processo
             <button  id ="enviar"  type="button" class="btn btn-primary submit-pessoa-modal">Salvar</button>
         </div>
     </div>
+	
+	<?php
+    require_once '../template/help/help-editar-processo.php';
+    ?>
+	
 </body>
 
    <?php

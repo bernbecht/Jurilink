@@ -61,21 +61,21 @@ require_once '../config.php';     //chama as configurações de página!
                 <div id="nome" class="control-group">
                     <label class="control-label" for="Nome">Nome</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="nome_input" name="nome">                       
+                        <input type="text" class="input-xlarge aviso" id="nome_input" name="nome">                       
                         <span  class="help-inline ">Mínimo 2 caracteres</span>                    
                     </div>
                 </div>
                 <div id="previsao" class="control-group">
                     <label class="control-label" for="Previsao">Previsão</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="previsao_input" name="previsao"> <br/>
+                        <input type="text" class="input-xlarge aviso" id="previsao_input" name="previsao"> <br/>
                         <span  class="help-inline ">Apenas números</span>                    
                     </div>
                 </div>
                 <div id="descricao" class="control-group">
                     <label class="control-label" for="Descricao">Descricao</label>
                     <div class="controls">
-                        <textarea class ="textArea-xlarge" rows="4"  id="descricao_input" name="descricao"></textarea>
+                        <textarea class ="textArea-xlarge aviso" rows="4"  id="descricao_input" name="descricao"></textarea>
                        <!-- <input type="text" class="input-xlarge" id="descricao_input" name="descricao">  -->                     
                         <span  class="help-inline ">Mínimo 2 caracteres</span>                    
                     </div>
@@ -89,7 +89,7 @@ require_once '../config.php';     //chama as configurações de página!
                         </label>
                     </div>                    
                 </div>  
-                <input type="hidden" class="input-xlarge aviso" id="id_input" name="id">    
+                <input type="hidden" class="input-xlarge" id="id_input" name="id">    
 
 
             </fieldset>
@@ -100,6 +100,11 @@ require_once '../config.php';     //chama as configurações de página!
             <button id ="nome" type="button" class="btn btn-primary ok-modal-ato">OK</button>
         </div>
     </div>
+</div>
+
+<?php
+require_once '../template/help/help_relacao_ato.php'; 
+?>
 
 </body>
 <?php

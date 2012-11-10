@@ -49,8 +49,8 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="nome" class="control-group">
                         <label class="control-label" for="Nome">Nome</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="nome_input" name="nome" value= "<?php echo $pessoa->nome ?>">
-                            <span  class="help-inline "></span>                    
+                            <input type="text" class="input-xlarge aviso" id="nome_input" name="nome" value= "<?php echo $pessoa->nome ?>" />
+                            <span  class="help-inline ">Mínimo 3 caracteres</span>                    
                         </div>
                     </div>
                 </div>
@@ -60,8 +60,8 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="cnpj" class="control-group">
                         <label class="control-label" for="cnpj">CNPJ</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="cnpj_input" name="cnpj" value= "<?php echo $pessoa->cnpj ?>">                       
-                            <span  class="help-inline ">Apenas digitos</span>                    
+                            <input type="text" class="input-xlarge aviso cnpj_input" id="cnpj_input" name="cnpj" maxlength="14" value= "<?php echo $pessoa->cnpj ?>" />                       
+                            <span  class="help-inline ">Apenas dígitos</span>                    
                         </div>
                     </div>
                 </div>
@@ -73,8 +73,8 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="cidade" class="control-group">
                         <label class="control-label" for="cidade">Cidade</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="cidade_input" name="cidade" value= "<?php echo $pessoa->cidade ?>">       
-                            <span  class="help-inline "></span> 
+                            <input type="text" class="input-xlarge aviso" id="cidade_input" name="cidade" value= "<?php echo $pessoa->cidade ?>" />       
+                            <span  class="help-inline ">Mínimo 3 caracteres</span> 
                         </div>
                     </div>
                 </div>
@@ -107,8 +107,8 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="endereco"class="control-group">
                         <label class="control-label" for="endereco">Endereco</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="endereco_input" name="endereco" value= "<?php echo $pessoa->endereco ?>">     
-                            <span  class="help-inline "></span> 
+                            <input type="text" class="input-xlarge" id="endereco_input" name="endereco" value= "<?php echo $pessoa->endereco ?>" />     
+                            <span  class="help-inline ">Se digitado, mínimo 3 caracteres</span> 
                         </div>
                     </div>
 
@@ -120,8 +120,8 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="bairro"class="control-group">
                         <label class="control-label" for="bairro">Bairro</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="bairro_input" name="bairro" value= "<?php echo $pessoa->bairro ?>">     
-                            <span  class="help-inline "></span> 
+                            <input type="text" class="input-xlarge" id="bairro_input" name="bairro" value= "<?php echo $pessoa->bairro ?>" />     
+                            <span  class="help-inline ">Se digitado, mínimo 3 caracteres</span> 
                         </div>
                     </div>
                 </div>
@@ -133,9 +133,9 @@ $e_user = pg_fetch_object($pesq_user);
                         <label class="control-label" for="email">E-mail</label>
                         <div class="controls">                        
                             <div class="input-prepend">
-                                <span class="add-on"><i class="icon-envelope"></i></span><input class="input-large" id="email_input" name="email" type="text" value= "<?php echo $pessoa->email ?>">
+                                <span class="add-on"><i class="icon-envelope"></i></span><input class="input-large" id="email_input" name="email" type="text" value= "<?php echo $pessoa->email ?>" />
                             </div>
-                            <span class="help-inline"></span>
+                            <span class="help-inline">Se digitado, mínimo 7 caracteres</span>
                         </div>
                     </div>  
                 </div>
@@ -146,7 +146,7 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="telefone" class="control-group ">
                         <label class="control-label" for="telefone">Telefone</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="telefone_input" name="telefone" value= "<?php echo $pessoa->tel ?>">    
+                            <input type="text" class="input-xlarge tel_input" id="telefone_input" maxlength="11" name="telefone" value= "<?php echo $pessoa->tel ?>">    
                             <span  class="help-inline ">Apenas digitos</span> 
                         </div>
                     </div>
@@ -157,7 +157,7 @@ $e_user = pg_fetch_object($pesq_user);
             <div class="row">
                 <div class="span5" >
                     <div id="user" class="control-group">
-                        <label class="control-label" for="userCheckbox">User</label>
+                        <label class="control-label" for="userCheckbox">Usuário</label>
                         <div class="controls">
                             <label class="checkbox">
                                 <?php

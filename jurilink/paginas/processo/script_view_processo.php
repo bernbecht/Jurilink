@@ -110,8 +110,7 @@
            
             $a.post(url,{
                 id_audiencia:id_audiencia            
-            }, function(data){              
-                alert('PostAud');
+            }, function(data){ 
                 loadAudiencia();
                 excluirAudiencia(); 
                 $a('#exclusaoAudienciaModal').modal('hide');                    

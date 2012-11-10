@@ -1,9 +1,15 @@
-<?php session_start() ?>
+<?php
+session_start();
+if (isset($_SESSION['usuario']))
+    if ($_SESSION['tipo_usuario'] == 2)
+        header("location:jurilink/index.php");
+    else header("location:jurilink/paginas/pessoa/view_user.php");
+?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-       
+
 
         <title>JuriLink - Login</title>       
         <link rel="stylesheet" href="jurilink/bootstrap/css/bootstrap.css" />
@@ -46,7 +52,7 @@
                                                 <label class="control-label" for="usuario">Login</label>
                                                 <div class="controls">
                                                     <input type="text" class="input-xlarge aviso" id=usuario_input" name="usuario" placeholder="usuario@jurilink.com.br" />                       
-                                                        <span  class="help-inline "></span>                    
+                                                    <span  class="help-inline "></span>                    
                                                 </div>
                                             </div>    
                                         </div>
@@ -58,7 +64,7 @@
                                                 <label class="control-label" for="password">Senha</label>
                                                 <div class="controls">
                                                     <input type="password" class="input-xlarge aviso" id=senha_input" name="senha" placeholder="Senha"/>                       
-                                                        <span  class="help-inline "></span>                    
+                                                    <span  class="help-inline "></span>                    
                                                 </div>
                                             </div>    
                                         </div>
@@ -78,7 +84,7 @@
                                 </fieldset>
                             </form>
                         </div>
-                        
+
                         <div class="span6">
                             <div class="alert alert-info">
                                 <p>
@@ -87,8 +93,8 @@
                                 </p>
                                 <p id='campo_recuperar_senha'>
                                     <button id="lembrar_senha_button" type="button" class="btn btn-primary">Recuperar Senha</button>
-									
-									
+
+
                                 </p>
                             </div>
                         </div>                                
@@ -96,15 +102,15 @@
                 </div>
             </div>
     </body>
-     <!------ Scripts -->
+    <!------ Scripts -->
 
-        <script type="text/javascript" src="jurilink/drag/src/prototype.js"></script>
-        <script type="text/javascript"  src="jurilink/drag/src/scriptaculous.js" ></script> 
-        <script type="text/javascript" src="jurilink/bootstrap/js/jquery.js"></script>
-        <script type="text/javascript" src="jurilink/bootstrap/js/bootstrap.js"></script>    
-        <script type="text/javascript" src="jurilink/jurilink_js.js"></script>    
+    <script type="text/javascript" src="jurilink/drag/src/prototype.js"></script>
+    <script type="text/javascript"  src="jurilink/drag/src/scriptaculous.js" ></script> 
+    <script type="text/javascript" src="jurilink/bootstrap/js/jquery.js"></script>
+    <script type="text/javascript" src="jurilink/bootstrap/js/bootstrap.js"></script>    
+    <script type="text/javascript" src="jurilink/jurilink_js.js"></script>    
 
-        <script type="text/javascript">                                                        
+    <script type="text/javascript">                                                        
                               
-        </script>
+    </script>
 </html>

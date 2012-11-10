@@ -14,11 +14,12 @@ require_once ( '../config.php');     //chama as configura��es de p�gina!
             <div id="msg_resultado_processo">
                
             </div>   
+            <br/>
 
             <div id="nome" class="control-group">
                 <label class="control-label" for="Nome">Nome</label>
                 <div class="controls">
-                    <input type="text" class="input-xlarge" id="nome_input" name="nome">                       
+                    <input type="text" class="input-xlarge aviso" id="nome_input" name="nome">                       
                     <span  class="help-inline ">Minimo 2 caracteres</span>                    
                 </div>
             </div>
@@ -35,6 +36,11 @@ require_once ( '../config.php');     //chama as configura��es de p�gina!
         </div>
     </form>
 </div>
+
+<?php
+require_once '../template/help/help_cadastrar_natureza.php';
+
+?>
 
 </body>
 

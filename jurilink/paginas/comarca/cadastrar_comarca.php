@@ -1,4 +1,5 @@
-<?php //
+<?php
+//
 require_once '../template/header.php'; //chama o header
 require_once ( '../config.php');     //chama as configurações de página!
 ?>
@@ -11,7 +12,7 @@ require_once ( '../config.php');     //chama as configurações de página!
 
             <legend><h1>Cadastrar Nova Comarca</h1></legend>
             <div id="msg_resultado_processo">
-               
+
             </div>  
             <br/>
             <div id="nome" class="control-group">
@@ -29,16 +30,23 @@ require_once ( '../config.php');     //chama as configurações de página!
             </div>
 
         </fieldset>
-        
+
         <div id="callback">
         </div>
     </form>
 </div>
-</html>
+
+<?php
+require_once '../template/help/help_cadastrar_comarca.php';
+?>
+
+
+</body>
+
 
 <?php
 require_once '../template/scripts.php';
 require_once 'scripts_comarca.php';
 //require_once 'scripts_cadastrar_pessoa.php';
 ?>
-</body>
+</html>

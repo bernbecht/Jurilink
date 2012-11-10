@@ -8,11 +8,12 @@ $tipo_usuario = $_SESSION['tipo_usuario'];
 
 
 
-if ($_SESSION['tipo_usuario'] == 2)
+if ($_SESSION['tipo_usuario'] == 2) {
     require_once '../template/header.php'; //chama o header
-else
+} else {
     include '../template/header_user.php'; //chama o header
-
+}
+require_once '../template/help/help-view-conta.php'; //texto do modal de ajuda
 
 $id_pessoa = $_SESSION['id_usuario'];
 
@@ -28,8 +29,6 @@ $pesq_uf_pessoa = pg_exec($conexao1, "SELECT uf.id_uf, uf.nome from uf, pessoa w
 $uf_pessoa = pg_fetch_object($pesq_uf_pessoa);
 
 $_SESSION['conta_senha'] = $pessoa->senha;
-
-
 ?>
 
 
@@ -68,7 +67,7 @@ $_SESSION['conta_senha'] = $pessoa->senha;
                         </div>
                     </div>  
                 </div>
-                
+
                 <div class="span5" >
                     <div id="cidade" class="control-group ">
                         <label class="control-label" for="cidade">Cidade</label>
@@ -79,7 +78,7 @@ $_SESSION['conta_senha'] = $pessoa->senha;
                 </div>
             </div>
 
-            
+
 
             <div class ="row">                
                 <div class="span5" > 
@@ -87,21 +86,21 @@ $_SESSION['conta_senha'] = $pessoa->senha;
                         <label class="control-label" for="Estado">Estado</label>
                         <div class="controls">                    
                             <select  name="estado" id="estado_input" class="input-small aviso">
-                                <?php echo "<option value= $uf_pessoa->id_uf>$uf_pessoa->nome</option>"; ?>
-                                <?php
-                                if ($resultado->id_uf != NULL) {
-                                    do {
-                                        if ($resultado->id_uf != $uf_pessoa->id_uf)
-                                            echo "<option value=$resultado->id_uf>$resultado->nome</option>";
-                                    } while ($resultado = pg_fetch_object($pesq_uf));
-                                }
-                                ?>                     
+<?php echo "<option value= $uf_pessoa->id_uf>$uf_pessoa->nome</option>"; ?>
+<?php
+if ($resultado->id_uf != NULL) {
+    do {
+        if ($resultado->id_uf != $uf_pessoa->id_uf)
+            echo "<option value=$resultado->id_uf>$resultado->nome</option>";
+    } while ($resultado = pg_fetch_object($pesq_uf));
+}
+?>                     
                             </select>
                             <span  class="help-inline "></span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="span5" >
                     <div id="endereco" class="control-group ">
                         <label class="control-label" for="endereco">Endereço</label>
@@ -111,7 +110,7 @@ $_SESSION['conta_senha'] = $pessoa->senha;
                     </div>                       
                 </div>
             </div>
-            
+
             <div class ="row">                
                 <div class="span5" >
                     <div id="bairro" class="control-group ">
@@ -121,7 +120,7 @@ $_SESSION['conta_senha'] = $pessoa->senha;
                         </div>
                     </div>                       
                 </div>
-                
+
                 <div class="span5" >
                     <div id="telefone" class="control-group ">
                         <label class="control-label" for="telefone">Telefone</label>
@@ -132,19 +131,19 @@ $_SESSION['conta_senha'] = $pessoa->senha;
                     </div>                       
                 </div>
             </div>            
-            
+
             <input type="hidden" class="input-xlarge" id="id_pessoa_input" name="id_pessoa" value="<?php echo $id_pessoa ?>" >                  
             <input type="hidden" class="input-xlarge" id="id_tipo_usuario_input" name="tipo_usuario" value="<?php echo $tipo_usuario ?>" >                  
 
 
             <div class="form-actions">
-                
-                <button  id ="enviar" type="button" class="btn btn-primary edit-conta">Salvar</button> 
-                
 
-                <?php
-                //    echo "<a href='#myModal' role='button' class='btn btn-primary edit-conta' data-toggle='modal'>Salvar</a>"
-                ?>
+                <button  id ="enviar" type="button" class="btn btn-primary edit-conta">Salvar</button> 
+
+
+<?php
+//    echo "<a href='#myModal' role='button' class='btn btn-primary edit-conta' data-toggle='modal'>Salvar</a>"
+?>
                 <?php
                 if ($_SESSION['tipo_usuario'] == 2) {
                     echo "<a href='../../index.php'><button type='button' class='btn'>Cancelar</button></a>";
@@ -196,12 +195,12 @@ $_SESSION['conta_senha'] = $pessoa->senha;
 
             <!--Botões do formulário -->
             <div class="form-actions">
-                
+
                 <button  id ="enviar"  type="button" class="btn btn-primary troca-senha" >Salvar</button>
-                
-                <?php
-                //echo "<a href='#myModal' role='button' class='btn btn-primary edit-senha' data-toggle='modal'>Salvar</a>"
-                ?>
+
+<?php
+//echo "<a href='#myModal' role='button' class='btn btn-primary edit-senha' data-toggle='modal'>Salvar</a>"
+?>
                 <?php
                 if ($_SESSION['tipo_usuario'] == 2) {
                     echo "<a href='../../index.php'><button type='button' class='btn'>Cancelar</button></a>";
@@ -224,9 +223,9 @@ $_SESSION['conta_senha'] = $pessoa->senha;
         <h3>Insira sua senha</h3>
     </div>   
     <div class="modal-body">       
-        
+
         <div id="msg_resultado_confirma_senha"></div>
-        
+
         <form id="form_senha" class="form-horizontal checa_senha_AjaxForm" method="post" action="../operacoes/CUsuario/checa_senha_op.php">
             <fieldset>         
                 <!--Campos formulário --> 
@@ -251,5 +250,5 @@ $_SESSION['conta_senha'] = $pessoa->senha;
 </html>
 <?php
 require_once '../template/scripts.php'; //chama scripts comuns as paginas
-require_once 'script_view_conta.php'; 
+require_once 'script_view_conta.php';
 ?>

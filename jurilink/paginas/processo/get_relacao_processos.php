@@ -62,7 +62,7 @@ if (!$resultado) {
 
         //$num_anterior = $resultado->numero_unificado;
         if ($resultado->id_processo == $id_anterior)
-            $resultado->numero_unificado = "IGUAL";
+            $resultado->numero_unificado = "<i class='icon-arrow-right'></i>";
         echo "<tr>	
                 <td><a href=view_processo.php?id=$resultado->id_processo>" . $resultado->numero_unificado . "</a></td>
                 <td>" . $resultado->data_distribuicao . "</td>

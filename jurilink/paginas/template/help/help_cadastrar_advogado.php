@@ -7,7 +7,7 @@
     <div class="modal-body">
 
         <div id='helpVideo'>
-            <iframe width="513" height="315" src="http://www.youtube.com/embed/m1TnzCiUSI0" frameborder="0" allowfullscreen></iframe>
+            <iframe width="513" height="315" src="http://www.youtube.com/embed/ZXgkhxJtONs" frameborder="0" allowfullscreen></iframe>
             <p class='centro'>
                 <button style="margin-top: 10px;" id="voltaHelpEscritoBtn" class="btn btn-info">Voltar ao texto anterior</button>
             </p>

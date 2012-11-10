@@ -64,9 +64,16 @@ if (!$result) {
         </div>
     </form>
 </div>
-</html>
+
+<?php
+require_once '../template/help/help_cadastrar_juizo.php';
+?>
+
+</body>
+
 <?php
 require_once '../template/scripts.php';
 require_once 'scripts_juizo.php';
 ?>
-</body>
+
+</html>

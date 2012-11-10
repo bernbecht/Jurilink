@@ -48,7 +48,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="numero_unificado" class="control-group">
                         <label class="control-label" for="numero_unificado">Número Unificado</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="numero_unificado_input" name="numero_unificado">                       
+                            <input type="text" class="input-xlarge aviso" id="numero_unificado_input" maxlength="21" name="numero_unificado" />                       
                             <span  class="help-inline ">Apenas dígitos</span>                    
                         </div>
                     </div>        
@@ -59,8 +59,8 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="data_distribuicao" class="control-group">
                         <label class="control-label" for="data distribuicao">Data de Distribuição</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="data_dist_input" name="data_distribuicao">                       
-                            <span  class="help-inline ">Digite no formato dd/dd/aaaa Ex: 12/10/2010</span>                    
+                            <input type="text" class="input-xlarge aviso data_input" maxlength="10" id="data_dist_input" name="data_distribuicao">                       
+                            <span  class="help-inline ">Ex: 12/10/2010</span>                    
                         </div>
                     </div>
                 </div>             
@@ -230,8 +230,8 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="transito_em_julgado" class="control-group">
                         <label class="control-label" for="Transito em Julgado">Trânsito em Julgado</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="tej_input" name="transito_em_julgado">                       
-                            <span  class="help-inline ">Digite no formato dd/dd/aaaa Ex: 12/10/2010</span>                    
+                            <input type="text" class="input-xlarge data_input" maxlength="10" id="tej_input" name="transito_em_julgado" />                       
+                            <span  class="help-inline ">Ex: 12/10/2010</span>                    
                         </div>
                     </div>
                 </div>
@@ -241,7 +241,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="deposito_judicial" class="control-group">
                         <label class="control-label" for="deposito judicial">Depósito Judicial</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="deposito_judicial_input" name="deposito_judicial">                       
+                            <input type="text" class="input-xlarge" id="deposito_judicial_input" name="deposito_judicial" />                       
                             <span  class="help-inline ">O valor deve ter vírgula Ex: 1200,00</span>                    
                         </div>
                     </div>   
@@ -276,7 +276,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
             -->
 
             <!-- Campo que dirá qual das pessoas (AUTOR, REU...) foi clicado -->
-            <input type="hidden" class="input-xlarge" id="campo-modal" name="campo-modal">                       
+            <input type="hidden" class="input-xlarge" id="campo-modal" name="campo-modal" />                       
 
             <!--Botões do formulário -->
             <div class="form-actions">
@@ -314,15 +314,15 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                 <div id="nome" class="control-group">
                     <label class="control-label" for="Nome">Nome</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="nome_input" name="nome">                       
-                        <span  class="help-inline "></span>                    
+                        <input type="text" class="input-xlarge aviso" id="nome_input" name="nome" />                       
+                        <span  class="help-inline ">Mínimo 3 caracteres</span>                    
                     </div>
                 </div>
 
                 <div id="cnpj" class="control-group">
                     <label class="control-label" for="cnpj">CNPJ</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="cnpj_input" name="cnpj">                       
+                        <input type="text" class="input-xlarge aviso cnpj_input" maxlength="" id="cnpj_input" name="cnpj">                       
                         <span  class="help-inline ">Use apenas dígitos</span>                    
                     </div>
                 </div>
@@ -330,7 +330,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                 <div id="cpf" class="control-group">
                     <label class="control-label" for="cpf">CPF</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="cpf_input" name="cpf">                       
+                        <input type="text" class="input-xlarge aviso cpf_input" maxlength="11" id="cpf_input" name="cpf">                       
                         <span  class="help-inline ">Use apenas dígitos</span>                    
                     </div>
                 </div>
@@ -338,16 +338,16 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                 <div id="rg" class="control-group">
                     <label class="control-label" for="rg">RG</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="rg_input" name="rg">                       
+                        <input type="text" class="input-xlarge aviso rg_input" maxlength="11" id="rg_input" name="rg">                       
                         <span  class="help-inline ">Use apenas dígitos</span>                    
                     </div>
                 </div>
 
                 <div id="comarca" class="control-group">
-                    <label class="control-label" for="rg">Orgao Expedidor</label>
+                    <label class="control-label" for="rg">Órgão Expedidor</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge aviso" id="comarca_input" name="comarca">                       
-                        <span  class="help-inline ">Minimo 2 caracteres</span>                    
+                        <input type="text" class="input-xlarge aviso orgao_input" id="comarca_input" name="comarca">                       
+                         <span  class="help-inline ">Minimo 2 caracteres</span>                    
                     </div>
                 </div>
                 <div id="oab" class="control-group">
@@ -363,7 +363,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <label class="control-label" for="cidade">Cidade</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge aviso" id="cidade_input" name="cidade">       
-                        <span  class="help-inline "></span> 
+                        <span  class="help-inline ">Mínimo 3 caracteres</span> 
                     </div>
                 </div>
 
@@ -388,22 +388,22 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <label class="control-label" for="endereco">Endereço</label>
                     <div class="controls">
                         <input type="text" class="input-xlarge" id="endereco_input" name="endereco">     
-                        <span  class="help-inline "></span> 
+                        <span  class="help-inline ">Se digitado, mínimo 3 caracteres</span> 
                     </div>
                 </div>
 
                 <div id="bairro"class="control-group ">
                     <label class="control-label" for="bairro">Bairro</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge " id="bairro_input" name="bairro">     
-                        <span  class="help-inline "></span> 
+                        <input type="text" class="input-xlarge " id="bairro_input" name="bairro"/>     
+                        <span  class="help-inline ">Se digitado, mínimo 3 caracteres</span> 
                     </div>
                 </div>
 
                 <div id="telefone" class="control-group ">
                     <label class="control-label" for="telefone">Telefone</label>
                     <div class="controls">
-                        <input type="text" class="input-xlarge" id="telefone_input" name="telefone">    
+                        <input type="text" class="input-xlarge tel_input" maxlength="10" id="telefone_input" name="telefone">    
                         <span  class="help-inline ">Use apenas dígitos</span> 
                     </div>
                 </div>
@@ -414,7 +414,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                         <div class="input-prepend">
                             <span class="add-on"><i class="icon-envelope"></i></span><input class="input-large" id="email_input" name="email" type="text">
                         </div>
-                        <span class="help-inline"></span>
+                        <span class="help-inline">Se digitado, mínimo 7 caracteres</span>
                     </div>
                 </div>                 
 

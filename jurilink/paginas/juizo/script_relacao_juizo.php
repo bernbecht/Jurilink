@@ -86,6 +86,9 @@
                     $a('.alert').remove();
                     $a('#myModal').modal('hide');
                 },1200);
+                setTimeout(function(){
+                    limparForm('.altera_juizo_Ajax');  
+                },1200);
                 
             }
         });

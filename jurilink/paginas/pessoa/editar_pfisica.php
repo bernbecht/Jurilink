@@ -43,15 +43,15 @@ $e_user = pg_fetch_object($pesq_user);
             <div id="msg_resultado"></div>
             <br/>
             <div class="controls">
-                <input type="hidden" class="input-xlarge aviso" id="id_input" name="id_pessoa" value= "<?php echo $id_pessoa ?>">
+                <input type="hidden" class="input-xlarge aviso" id="id_input" name="id_pessoa" value= "<?php echo $id_pessoa ?>" />
             </div>
             <div class="row">
                 <div class="span5" >
                     <div id="nome" class="control-group">
                         <label class="control-label" for="Nome">Nome</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="nome_input" name="nome" value= "<?php echo $pessoa->nome ?>">                       
-                            <span  class="help-inline "></span>                    
+                            <input type="text" class="input-xlarge aviso" id="nome_input" name="nome" value= "<?php echo $pessoa->nome ?>" />                       
+                            <span  class="help-inline ">Mínimo 3 caracteres</span>                    
                         </div>
                     </div>
                 </div>
@@ -62,7 +62,7 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="cpf" class="control-group">
                         <label class="control-label" for="cpf">CPF</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="cpf_input" name="cpf" value= "<?php echo $pessoa->cpf ?>"> 
+                            <input type="text" class="input-xlarge aviso cpf_input" maxlength="11" id="cpf_input" name="cpf" value= "<?php echo $pessoa->cpf ?>" /> 
                             <span  class="help-inline ">Apenas digitos</span>                    
                         </div>
                     </div>                   
@@ -74,7 +74,7 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="rg" class="control-group">
                         <label class="control-label" for="rg">RG</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="rg_input" name="rg" value= "<?php echo $pessoa->rg ?>">                       
+                            <input type="text" class="input-xlarge aviso rg_input" maxlength="11" id="rg_input" name="rg" value= "<?php echo $pessoa->rg ?>" />                       
                             <span  class="help-inline ">Apenas digitos</span>                    
                         </div>
                     </div>
@@ -86,7 +86,7 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="comarca" class="control-group">
                         <label class="control-label" for="rg">Órgão Expedidor</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="comarca_input" name="comarca" value= "<?php echo $pessoa->orgao_expedidor ?>">   
+                            <input type="text" class="input-xlarge aviso orgao_input" id="comarca_input" name="comarca" value= "<?php echo $pessoa->orgao_expedidor ?>" />   
                             <span  class="help-inline ">Minimo 2 caracteres</span>                    
                         </div>
                     </div>                
@@ -98,8 +98,8 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="cidade" class="control-group">
                         <label class="control-label" for="cidade">Cidade</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="cidade_input" name="cidade" value= "<?php echo $pessoa->cidade ?>">       
-                            <span  class="help-inline "></span> 
+                            <input type="text" class="input-xlarge aviso" id="cidade_input" name="cidade" value= "<?php echo $pessoa->cidade ?>" />       
+                            <span  class="help-inline ">Mínimo 3 caracteres</span> 
                         </div>
                     </div>                      
                 </div>
@@ -132,8 +132,8 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="endereco"class="control-group">
                         <label class="control-label" for="endereco">Endereco</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="endereco_input" name="endereco" value= "<?php echo $pessoa->endereco ?>">     
-                            <span  class="help-inline "></span> 
+                            <input type="text" class="input-xlarge" id="endereco_input" name="endereco" value= "<?php echo $pessoa->endereco ?>" />     
+                            <span  class="help-inline ">Se digitado, mínimo 3 caracteres</span> 
                         </div>
                     </div>                    
                 </div>
@@ -143,8 +143,8 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="bairro"class="control-group">
                         <label class="control-label" for="bairro">Bairro</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="bairro_input" name="bairro" value= "<?php echo $pessoa->bairro ?>">     
-                            <span  class="help-inline "></span> 
+                            <input type="text" class="input-xlarge" id="bairro_input" name="bairro" value= "<?php echo $pessoa->bairro ?>" />     
+                            <span  class="help-inline ">Se digitado, mínimo 3 caracteres</span> 
                         </div>
                     </div>                    
                 </div>
@@ -158,7 +158,7 @@ $e_user = pg_fetch_object($pesq_user);
                     <div id="telefone" class="control-group ">
                         <label class="control-label" for="telefone">Telefone</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="telefone_input" name="telefone" value= "<?php echo $pessoa->tel ?>">    
+                            <input type="text" class="input-xlarge tel_input" maxlength="11" id="telefone_input" name="telefone" value= "<?php echo $pessoa->tel ?>" />    
                             <span  class="help-inline ">Apenas digitos</span> 
                         </div>
                     </div>                       
@@ -171,9 +171,9 @@ $e_user = pg_fetch_object($pesq_user);
                         <label class="control-label" for="email">E-mail</label>
                         <div class="controls">                        
                             <div class="input-prepend">
-                                <span class="add-on"><i class="icon-envelope"></i></span><input class="input-large" id="email_input" name="email" type="text" value= "<?php echo $pessoa->email ?>">
+                                <span class="add-on"><i class="icon-envelope"></i></span><input class="input-large" id="email_input" name="email" type="text" value= "<?php echo $pessoa->email ?>" />
                             </div>
-                            <span class="help-inline"></span>
+                            <span class="help-inline">Se digitado, mínimo 7 caracteres</span>
                         </div>
                     </div>  
                 </div> 

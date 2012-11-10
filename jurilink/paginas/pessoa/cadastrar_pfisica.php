@@ -41,8 +41,8 @@ $resultado = pg_fetch_object($pesq_uf);
                     <div id="nome" class="control-group">
                         <label class="control-label" for="Nome">Nome</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="nome_input" name="nome">                       
-                            <span  class="help-inline "></span>                    
+                            <input type="text" class="input-xlarge aviso" id="nome_input" name="nome" />                       
+                            <span  class="help-inline ">Mínimo 3 caracteres</span>                    
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ $resultado = pg_fetch_object($pesq_uf);
                     <div id="cpf" class="control-group">
                         <label class="control-label" for="cpf">CPF</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="cpf_input" name="cpf">                       
+                            <input type="text" class="input-xlarge aviso cpf_input" id="cpf_input" name="cpf" maxlength="12" />                       
                             <span  class="help-inline ">Apenas digitos</span>                    
                         </div>
                     </div>                   
@@ -65,7 +65,7 @@ $resultado = pg_fetch_object($pesq_uf);
                     <div id="rg" class="control-group">
                         <label class="control-label" for="rg">RG</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="rg_input" name="rg">                       
+                            <input type="text" class="input-xlarge aviso rg_input" id="rg_input" name="rg" maxlength="12" />                       
                             <span  class="help-inline ">Apenas digitos</span>                    
                         </div>
                     </div>
@@ -77,7 +77,7 @@ $resultado = pg_fetch_object($pesq_uf);
                     <div id="comarca" class="control-group">
                         <label class="control-label" for="rg">Órgão Expedidor</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="comarca_input" name="comarca">                       
+                            <input type="text" class="input-xlarge aviso orgao_input" id="comarca_input" name="comarca" />                       
                             <span  class="help-inline ">Minimo 2 caracteres</span>                    
                         </div>
                     </div>                
@@ -90,8 +90,8 @@ $resultado = pg_fetch_object($pesq_uf);
                     <div id="cidade" class="control-group">
                         <label class="control-label" for="cidade">Cidade</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge aviso" id="cidade_input" name="cidade">       
-                            <span  class="help-inline "></span> 
+                            <input type="text" class="input-xlarge aviso" id="cidade_input" name="cidade" />       
+                            <span  class="help-inline ">Mínimo 3 caracteres</span> 
                         </div>
                     </div>                      
                 </div>
@@ -123,8 +123,8 @@ $resultado = pg_fetch_object($pesq_uf);
                     <div id="endereco"class="control-group">
                         <label class="control-label" for="endereco">Endereço</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="endereco_input" name="endereco">     
-                            <span  class="help-inline "></span> 
+                            <input type="text" class="input-xlarge" id="endereco_input" name="endereco" />     
+                            <span  class="help-inline ">Se digitado, mínimo 3 caracteres</span> 
                         </div>
                     </div>                    
                 </div>
@@ -134,8 +134,8 @@ $resultado = pg_fetch_object($pesq_uf);
                     <div id="bairro"class="control-group">
                         <label class="control-label" for="bairro">Bairro</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="bairro_input" name="bairro">     
-                            <span  class="help-inline "></span> 
+                            <input type="text" class="input-xlarge" id="bairro_input" name="bairro" />     
+                            <span  class="help-inline ">Se digitado, mínimo 3 caracteres</span> 
                         </div>
                     </div>                    
                 </div>
@@ -149,7 +149,7 @@ $resultado = pg_fetch_object($pesq_uf);
                     <div id="telefone" class="control-group ">
                         <label class="control-label" for="telefone">Telefone</label>
                         <div class="controls">
-                            <input type="text" class="input-xlarge" id="telefone_input" name="telefone">    
+                            <input type="text" class="input-xlarge tel_input" id="telefone_input" name="telefone" maxlength="11"/>    
                             <span  class="help-inline ">Apenas digitos</span> 
                         </div>
                     </div>                       
@@ -164,7 +164,7 @@ $resultado = pg_fetch_object($pesq_uf);
                             <div class="input-prepend">
                                 <span class="add-on"><i class="icon-envelope"></i></span><input class="input-large" id="email_input" name="email" type="text">
                             </div>
-                            <span class="help-inline"></span>
+                            <span class="help-inline">Se digitado, mínimo 7 caracteres</span>
                         </div>
                     </div>  
                 </div> 
@@ -174,7 +174,7 @@ $resultado = pg_fetch_object($pesq_uf);
             <div class="row row_cadastro_pessoa">
                 <div class="span5" >
                     <div id="user" class="control-group">
-                        <label class="control-label" for="userCheckbox">User</label>
+                        <label class="control-label" for="userCheckbox">Usuário</label>
                         <div class="controls">
                             <label class="checkbox">
                                 <input type="checkbox" name="userCheckbox" id="userCheckbox" value="1">
