@@ -102,11 +102,16 @@ if (!$result) {
             <button id ="nome" type="button" class="btn btn-primary ok-modal-juizo">OK</button>
         </div>
     </div>
+</div>
 
+<?php
+require_once '../template/help/help_relacao_juizo.php';
+?>    
 
 </body>
 <?php
 require_once '../template/scripts.php'; //chama scripts comuns as paginas
 require_once 'script_relacao_juizo.php'; //chama scripts comuns as paginas
 ?>
+
 </html>

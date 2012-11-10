@@ -981,7 +981,7 @@ function validaFormAudienciaJS(){
         }
         
         else{
-        //alert(mandar);            
+            //alert(mandar);            
         }
     }); 
 }
@@ -995,7 +995,7 @@ function validaFormSenha(){
             //impedir duplo clique
             /*$a('.troca-senha').attr('disabled','disabled');
             $a(".troca-senha").addClass('disabled');
-            */
+             */
             checa_senha(1);
         }
         
@@ -1048,7 +1048,7 @@ function validaFormPessoaJS(){
         }
         
         else{
-        //alert(mandar);            
+            //alert(mandar);            
         }
     });   
         
@@ -1065,7 +1065,7 @@ function validaFormPessoaJS(){
         }
         
         else{
-        //alert(mandar);            
+            //alert(mandar);            
             
         }
     }); 
@@ -1081,7 +1081,7 @@ function validaFormPessoaJS(){
         }
         
         else{
-        //alert(mandar);            
+            //alert(mandar);            
         }
     }); 
     
@@ -1096,7 +1096,7 @@ function validaFormPessoaJS(){
         }
         
         else{
-        //alert(mandar);            
+            //alert(mandar);            
         }
     });
 }
@@ -1159,7 +1159,7 @@ function validaFormAtoJS(){
         }
         
         else{
-        //alert(mandar);            
+            //alert(mandar);            
         }
     });    
     
@@ -1208,14 +1208,14 @@ function loadAudienciasMain(){
 
 function tooltip(){
     $a('.tooltip_class').hover(
-        function () {
-            $a(this).tooltip('show');
-        }, 
-        function () {
+    function () {
+        $a(this).tooltip('show');
+    }, 
+    function () {
          
-            $a(this).tooltip('hide');
-        }
-        );
+        $a(this).tooltip('hide');
+    }
+);
 }
 
 //função que inicializa o comportamento da modal de HELP
@@ -1248,6 +1248,15 @@ function voltaHelpEscrito(){
     });
 }
 
+function enterNoLogin(){
+  
+    
+    $a('#form_login').keypress(function(e){
+        if(e.which==13) loginAjax();
+
+    }); 
+}
+
 
 
 //Função de JQUERY
@@ -1271,6 +1280,7 @@ $a(document).ready(function(){
     tooltip();
     esqueci_senha();    
     initHelpModal();
+    enterNoLogin();
 
 
 });

@@ -163,7 +163,7 @@ class CFisica {
 
         /* Query para pegar processos com a advocacia */
         $query = "SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
-            natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, 
+            natureza_acao.nome as nome_natureza, data_distribuicao, 
             to_char(processo.valor_causa, 'R$999G999G999D99') as valor_causa, padv.id_pessoa as id_advogado
             from ((((((((processo
             inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
@@ -176,7 +176,7 @@ class CFisica {
             inner join advogado on padv.id_pessoa = advogado.id_pessoa and advogado.flag_func = TRUE)
             UNION
             SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
-            natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, 
+            natureza_acao.nome as nome_natureza, data_distribuicao, 
             to_char(processo.valor_causa, 'R$999G999G999D99') as valor_causa, padv.id_pessoa as id_advogado
             from (((((((processo
             inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
@@ -202,7 +202,7 @@ class CFisica {
 
         /* Query para pegar processos contra a advocacia */
         $query = "SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
-            natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, 
+            natureza_acao.nome as nome_natureza, data_distribuicao, 
             to_char(valor_causa, 'R$999G999G999D99') as valor_causa, padv.id_pessoa as id_advogado
             from (((((((processo
             inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
@@ -215,7 +215,7 @@ class CFisica {
             inner join advogado on padv.id_pessoa = advogado.id_pessoa and advogado.flag_func = FALSE
             UNION
             SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
-            natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, 
+            natureza_acao.nome as nome_natureza, data_distribuicao, 
             to_char(valor_causa, 'R$999G999G999D99') as valor_causa, padv.id_pessoa as id_advogado
             from(((((((processo
             inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
@@ -239,7 +239,7 @@ class CFisica {
 
         /* Query para pegar processos com a advocacia */
         $query = "SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
-            natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, 
+            natureza_acao.nome as nome_natureza, data_distribuicao, 
             to_char(processo.valor_causa, 'R$999G999G999D99') as valor_causa, padv.id_pessoa as id_advogado
             from ((((((((processo
             inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
@@ -252,7 +252,7 @@ class CFisica {
             inner join advogado on padv.id_pessoa = advogado.id_pessoa and advogado.flag_func = TRUE)
             UNION
             SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
-            natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, 
+            natureza_acao.nome as nome_natureza, data_distribuicao, 
             to_char(processo.valor_causa, 'R$999G999G999D99') as valor_causa, padv.id_pessoa as id_advogado
             from (((((((processo
             inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
@@ -278,7 +278,7 @@ class CFisica {
 
         /* Query para pegar processos contra a advocacia */
         $query = "SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
-            natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, 
+            natureza_acao.nome as nome_natureza, data_distribuicao, 
             to_char(valor_causa, 'R$999G999G999D99') as valor_causa, padv.id_pessoa as id_advogado
             from (((((((processo
             inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao)
@@ -291,7 +291,7 @@ class CFisica {
             inner join advogado on padv.id_pessoa = advogado.id_pessoa and advogado.flag_func = FALSE
             UNION
             SELECT processo.id_processo, processo.numero_unificado, pautor.nome as nome_autor, preu.nome as nome_reu, padv.nome as nome_adv, 
-            natureza_acao.nome as nome_natureza, to_char(data_distribuicao, 'DD/MM/YYYY') as data_distribuicao, 
+            natureza_acao.nome as nome_natureza, data_distribuicao, 
             to_char(valor_causa, 'R$999G999G999D99') as valor_causa, padv.id_pessoa as id_advogado
             from(((((((processo
             inner join natureza_acao on processo.id_natureza_acao = natureza_acao.id_natureza_acao)

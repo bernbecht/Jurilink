@@ -229,6 +229,12 @@ $e_user = pg_fetch_object($pesq_user);
 </div> <!-- container -->
 
 <input id="id" type="hidden" value="<?php echo $id_pessoa ?>"/>
+
+<?php
+require_once '../template/help/help_editar_advogado.php';
+
+?>
+
 </body>
 
 

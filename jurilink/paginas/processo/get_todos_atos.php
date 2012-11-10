@@ -9,6 +9,10 @@ session_start();
 $id_processo = $_POST['id_processo'];
 $limite = $_POST['limite'];
 
+if($_SESSION['tipo_usuario'] != 2){
+    $limite = 100000;
+}
+
 $ato = new CProcesso_ato();
 
 $sql = $ato->getProcesso_Ato($id_processo, $limite);
@@ -25,8 +29,9 @@ if ($ato_proc->nome != '') {
                 <th>Data de Modifica&ccedil;&atilde;o</th>";
 
     if ($_SESSION['tipo_usuario'] == 2)
-        echo "<th class='centro'>Ações</th>
-             </tr>
+        echo "<th class='centro'>Ações</th>";
+            
+    echo "</tr>
         </thead>";
     echo "<tbody>";
     if ($ato_proc->nome) {

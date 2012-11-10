@@ -16,25 +16,24 @@
         <div id="content_help">
 
             <div class="page-header">
-                <h1>Advogados<button id="ativa_video_help_btn" class="btn btn-info pull-right voltarTextoHelpBtn"><i class="icon-play-circle icon-white"></i> Vídeo</button></h1>
+                <h1>Processos<button id="ativa_video_help_btn" class="btn btn-info pull-right voltarTextoHelpBtn"><i class="icon-play-circle icon-white"></i> Vídeo</button></h1>
             </div>
             <p>
-                A tela <span class="label label-info">Advogados</span> lista
-                todas os <span class="label label-info">advogados</span>
-                cadastrados no sistema (funcionários e não-funcionários).
+                A tela  <span class="label label-info">Processos</span> possibilita visualizar as ações da advocacia que estão 
+                cadastradas no sistema.
                 <br />
-                Nesta página também é possível cadastrar novos advogados
-                clicando no botão verde <span class="label label-info">+ Incluir Advogado</span>.
+                Também é possível <span class="label label-info">adicionar</span> uma <span class="label label-info">Nova Ação</span>
+                clicando no botão <span class="label label-info">+ Incluir Processo</span>
                 <br />
-                Apenas os advogados que são funcionário terão acesso ao sistema.
+                Para visualizar um processo com detalhes, clique no <span class="label label-info">Número Unificado</span> em azul.
             </p>
             <div class="page-header">
-                <h1>Busca </h1>
+                <h1>Pesquisa</h1>
             </div>
             <p>
                 No canto superior direito existe um campo chamado <span class="label label-info">Pesquisa</span>.
-                Com ele, é possível buscar uma pessoa específica informando o <span class="label label-info">nome</span>,
-                <span class="label label-info">CPF</span>, <span class="label label-info">RG</span> ou <span class="label label-info">OAB</span>.
+                Com ele, é possível buscar um processo específico informando o <span class="label label-info">Data de Expedição</span>,
+                <span class="label label-info">Número Unificado</span> ou o <span class="label label-info">Nome de alguma parte</span> envolvida na ação.
                 Para voltar ao estado inicial da página ou tentar uma nova consulta, basta apagar o campo 
                 <span class="label label-info">Busca</span>.            
             </p>
@@ -42,8 +41,8 @@
                 <h1>Paginação </h1>
             </div>
             <p>
-                Como padrão, as 5 primeiras pessoas em ordem alfabética são listada. 
-                Para alterar a quantidade de pessoas por página, basta selecionar um outro valor na caixa seletora 
+                Como padrão, os 5 processos mais recentes são listados. 
+                Para alterar a quantidade de processos por página, basta selecionar um outro valor na caixa seletora 
                 localizada entre os botões <span class="label label-info">Anterior</span> e
                 <span class="label label-info">Próximo</span>.
             </p>

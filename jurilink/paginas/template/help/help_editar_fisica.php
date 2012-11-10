@@ -14,19 +14,18 @@
         </div>
 
         <div id="content_help">
-
             <div class="page-header">
-                <h1>Cadastrar Pessoa Jurídica<button id="ativa_video_help_btn" class="btn btn-info pull-right voltarTextoHelpBtn"><i class="icon-play-circle icon-white"></i> Vídeo</button></h1>
+                <h1>Editar Pessoa Física<button id="ativa_video_help_btn" class="btn btn-info pull-right voltarTextoHelpBtn"><i class="icon-play-circle icon-white"></i> Vídeo</button></h1>
             </div>
             <p>
-                Nesta tela é possível cadastrar uma ou mais <span class="label label-info">pessoas jurídicas</span>
+                Nesta tela é possível editar os dados cadastrais de uma <span class="label label-info">pessoa física</span>
                 no sistema.
             </p>
             <div class="page-header">
                 <h1>Campos do Formulário </h1>
             </div>
             <p>
-                Para cadastrar uma nova pessoa jurídica é necessário preencher pelo menos os campos obrigatórios indicicados pela cor
+                Para editar uma pessoa física é necessário preencher pelo menos os campos obrigatórios indicicados pela cor
                 amarela.
 
             <h3>Descrição dos Campos do Formulário</h3>
@@ -34,8 +33,12 @@
             <dl class="" >
                 <dt>Nome</dt>
                 <dd>Campo obrigatório. Deve possuir pelo menos 3 caracteres alfanúmericos.</dd>
-                <dt>CNPJ</dt>        
-                <dd>Campo obrigatório. Deve possuir apenas números. Não é permitido duas pessoas com o mesmo CNPJ no sistema.</dd>
+                <dt>CPF</dt>
+                <dd>Campo obrigatório. Deve conter apenas números. Não é permitido duas pessoas com o mesmo CPF no sistema.</dd>
+                <dt>RG</dt>
+                <dd>Campo obrigatório. Deve conter apenas números. Não é permitido duas pessoa com o mesmo RG no sistema.</dd>
+                <dt>Órgão Expedidor</dt>
+                <dd>Campo obrigatório. Órgão expedidor do RG. Deve possuir pelo menos 2 caracteres alfanúmericos.</dd>
                 <dt>Cidade</dt>
                 <dd>Campo obrigatório. Deve possuir pelo menos 3 caracteres alfanúmericos.</dd>
                 <dt>Estado</dt>
@@ -52,7 +55,7 @@
                 <dt>User</dt>
                 <dd>Campo opcional. Quando selecionado, a esta pessoa terá
                     acesso ao sistema e receberá, no e-mail cadadstrado, notificações a cada mudança de ato pertinente em seus processos. Uma senha é gerada pelo sistema e mandada automaticamente no e-mail
-                    cadastrado. Desta forma é necessário informar um e-mail válido para esta pessoa.
+                    cadastrado. Desta forma é necessário informar um e-mail válido para esta pessoa. 
                     <br/>
                     A senha poderá
                     ser alterada pelo cliente na opção <span class="label label-info">Conta</span> no menu localizado 
@@ -66,12 +69,10 @@
             <h3>Botões do Formulário</h3>
             <dl>
                 <dt>Salvar</dt>
-                <dd>Adiciona a pessoa ao sistema e retorna à tela com a relação das pessoas jurídicas cadastradas no
-                    sistema.</dd>
-                <dt>Salvar e Adicionar Outro</dt>
-                <dd>Adiciona a pessoa ao sistema e limpa o formulário para que se possa adicionar outra pessoa.</dd>
+                <dd>Adiciona a pessoa ao sistema e retorna à tela com a relação das pessoas físicas cadastradas no
+                    sistema.</dd>                
                 <dt>Cancelar</dt>
-                <dd>Cancela a operação e retorna à tela com a relação das pessoas jurídicas cadastradas no sistema.</dd>            
+                <dd>Cancela a operação e retorna à tela com as informçãoes cadastrais desta pessoa.</dd>            
             </dl>
         </div>
     </div>

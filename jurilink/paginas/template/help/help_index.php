@@ -82,13 +82,14 @@
                 No canto superior direito, ao lado do botão de <span class="label label-info">Ajuda</span>,
                 onde o seu e-mail pode ser visto, localiza-se a opção <span class="label label-info">Conta</span> 
                 e <span class="label label-info">Logout</span>:
+            </p>
             <dl class="dl-horizontal" style="">
                 <dt>Conta <i class="icon-user"></i></dt>
                 <dd>Edição dos dados pessoais para mantê-los sempre atualizados.</dd>
                 <dt>Logout <i class="icon-off"></i></dt>
                 <dd>Sair do sistema.</dd>           
             </dl>
-            </p>
+
         </div>
     </div><!-- content -->
 </div>

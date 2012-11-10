@@ -53,8 +53,8 @@
                 <dd>Campo opcional se a pessoa não for cliente e obrigatório se for cliente. Quando informado, 
                     deve possuir pelo menos 7 dígitos.</dd>
                 <dt>User</dt>
-                <dd>Campo opcional. Quando selecionado, a pessoa é interpretada como um cliente e terá
-                    acesso ao sistema. Uma senha é gerada pelo sistema e mandada automaticamente no e-mail
+                <dd>Campo opcional. Quando selecionado, a esta pessoa terá
+                    acesso ao sistema e receberá, no e-mail cadadstrado, notificações a cada mudança de ato pertinente em seus processos. Uma senha é gerada pelo sistema e mandada automaticamente no e-mail
                     cadastrado. Desta forma é necessário informar um e-mail válido para esta pessoa. 
                     <br/>
                     A senha poderá

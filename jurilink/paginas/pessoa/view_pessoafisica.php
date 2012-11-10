@@ -128,7 +128,7 @@ $user = pg_fetch_object($pesq_user);
                 <div class="view_pessoa">
                     <div class="view_pessoa_legenda">
                         <p><strong>Telefone</strong></p>
-                        <p><strong>Endereco</strong></p>
+                        <p><strong>Endereço</strong></p>
                         <p><strong>Bairro</strong></p>                    
                         <p><strong>Cidade</strong></p>
                         <p><strong>Estado</strong></p>                                       
@@ -331,6 +331,9 @@ $user = pg_fetch_object($pesq_user);
 <input id="id" type="hidden" value="<?php echo $id_pessoa ?>"/>
 <input id="tipo_pessoa" type="hidden" value="<?php echo $_SESSION['tipo_usuario'] ?>"/>
 
+<?php
+require_once '../template/help/help_view_pessoa.php';
+?>
 
 </body>
 <?php

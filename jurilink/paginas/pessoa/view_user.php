@@ -105,10 +105,33 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
                         <p><?php echo $pessoa->nome ?></p>
                         <p>
                             <?php
-                            if ($tipo_usuario == 0)
-                                echo $fisica->cpf;
-                            else
-                                echo $juridica->cnpj;
+                            if ($tipo_usuario == 0) {
+                                echo"<p>";
+                                $cpf = $fisica->cpf;
+                                for ($i = 0; $i < 12; $i++) {
+                                    if ($i == 3 || $i == 6)
+                                        echo ".";
+                                    echo $cpf[$i];
+                                    if ($i == 8)
+                                        echo "-";
+                                }
+                                echo"</p>";
+                            }
+
+                            else {
+                                echo"<p>";
+                                $cnpj = $juridica->cnpj;
+                                for ($i = 0; $i < 14; $i++) {
+                                    if ($i == 3 || $i == 6)
+                                        echo ".";
+                                    echo $cnpj[$i];
+                                    if ($i == 8)
+                                        echo "/";
+                                    if ($i == 12)
+                                        echo "-";
+                                }
+                                echo"</p>";
+                            }
                             ?>
                         </p>
                         <p>
@@ -142,7 +165,7 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
                 <div class="view_pessoa">
                     <div class="view_pessoa_legenda">
                         <p><strong>Telefone</strong></p>
-                        <p><strong>Endereco</strong></p>
+                        <p><strong>Endereço</strong></p>
                         <p><strong>Bairro</strong></p>                    
                         <p><strong>Cidade</strong></p>
                         <p><strong>Estado</strong></p>                                       
@@ -193,16 +216,16 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
                                         echo "-";
                                 }
                             }
-                            
+
                             else if (strlen($pessoa->tel) == 9) {
-                                $tele = $pessoa->tel;                                
-                                for ($i = 0; $i < 9; $i++) {                                    
+                                $tele = $pessoa->tel;
+                                for ($i = 0; $i < 9; $i++) {
                                     echo $tele[$i];
                                     if ($i == 3)
                                         echo "-";
                                 }
                             }
-                            
+
                             echo "</p>";
                         }
 
@@ -289,6 +312,10 @@ $processos_advocacia = pg_fetch_object($pesq_proc_advocacia);
 
 <input id="id" type="hidden" value="<?php echo $id_pessoa ?>"/>
 <input id="tipo_pessoa" type="hidden" value="<?php echo $_SESSION['tipo_usuario'] ?>"/>
+
+<?php
+require_once '../template/help/help_view_user.php';
+?>
 
 </body>
 <?php

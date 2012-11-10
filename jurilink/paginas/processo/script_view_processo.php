@@ -1,5 +1,10 @@
 <script type="text/javascript">
     
+    var id_audiencia_excluida = null;
+    var id_processo_excluido = null;
+    var id_ato_excluido = null;
+    
+    
     function todosAtos(){
         $a('#todos_atos').click(function(){
         
@@ -46,63 +51,81 @@
     
     function retornaNumAtos(){
         $a('#max_ato').click(function(){
-         
+            
             loadAtos();   
             tooltip();			
             
         });
     }
     
+    
+    //Função que pega o ID do ATO e do Processo num campo hidden e exclui o ATO
+    function confirmacaoExcluirAto(){
+        var url = '../operacoes/CProcesso_ato/excluir_ato_op.php';
+        
+        $a('#excluir-ato-button').click(function(){            
+                      
+            var id_processo = id_processo_excluido;
+            var id_ato = id_ato_excluido;
+                      
+            
+            $a.post(url,{
+                id_processo:id_processo,
+                id_ato:id_ato               
+            }, function(data){   
+                
+                //para fazer com que a dica de EXCLUIR suma.
+                $a('.tooltip_class').tooltip('hide');
+                $a('#exclusaoAtoModal').modal('hide');
+                loadAtos();  
+            }); 
+        });
+        
+    }
+    
+     
+    //função que pega o ID do Ato e do Processo e coloca num campo hidden no HTML
     function excluirAto(){
-        $a('.excluir-ato').click(function(){
-            //alert('opa');
+        $a('.excluir-ato').click(function(){            
             
-            var dado = $a(this).find('input').val();  
-            
-         
+            var target = $a(this); 
+            var dado = target.find('input').val();  
             var dado_split = dado.split('|');
             var id_processo = dado_split[1];
             var id_ato = dado_split[0];
-         
-            var url = '../operacoes/CProcesso_ato/excluir_ato_op.php';
             
-            //espera o evento do clique do botão de confirmação
-            $a('#excluir-ato-button').click(function(){
-                $a.post(url,{
-                    id_processo:id_processo,
-                    id_ato:id_ato               
-                }, function(data){               
-                    //para fazer com que a dica de EXCLUIR suma.
-                    $a('.tooltip_class').tooltip('hide');
-                    $a('#exclusaoAtoModal').modal('hide');
-                    loadAtos();  
-                }); 
+            id_processo_excluido = id_processo;
+            id_ato_excluido = id_ato;
+           
+        });
+    }
+    
+    function confirmacaoExcluirAudiencia(){
+      
+        var url = '../operacoes/CAudiencia/excluir_audiencia_op.php';
+    
+        $a('#excluir-audiencia-button').click(function(){    
+           
+            var id_audiencia = id_audiencia_excluida;
+           
+            $a.post(url,{
+                id_audiencia:id_audiencia            
+            }, function(data){              
+                alert('PostAud');
+                loadAudiencia();
+                excluirAudiencia(); 
+                $a('#exclusaoAudienciaModal').modal('hide');                    
             });
         });
     }
     
+    
     function excluirAudiencia(){
         $a('.excluir-audiencia').click(function(){            
-            
+                      
             var dado = $a(this).find('input').val();  
           
-            var id_audiencia = dado;
-         
-            var url = '../operacoes/CAudiencia/excluir_audiencia_op.php';
-            
-            $a('#excluir-audiencia-button').click(function(){
-            
-                $a.post(url,{
-                    id_audiencia:id_audiencia              
-                }, function(data){               
-                
-                    loadAudiencia();
-                    excluirAudiencia(); 
-                    $a('#exclusaoAudienciaModal').modal('hide');
-                });
-            });
-            
-            
+            id_audiencia_excluida = dado;
         });
     }
     
@@ -174,7 +197,9 @@
         retornaNumAtos();
         retornaNumAudiencia();
         excluirAto();
-        excluirAudiencia();       
+        excluirAudiencia();    
+        confirmacaoExcluirAto();
+        confirmacaoExcluirAudiencia();
     
     }); 
 

@@ -38,8 +38,8 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
 
 
             <br/>
-            
-            
+
+
 
             <div class="row">                
 
@@ -146,8 +146,8 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                         </div>                 
                     </div>   
                 </div>
-                
-               
+
+
                 <div class="span5">
                     <!-- Campo advogado autor -->
                     <div id="autor_advogado"class="control-group ">
@@ -186,7 +186,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                         <label class="control-label" for="reu">Réu</label>
                         <div class="controls">
                             <input type="text" class="input-xlarge aviso" id="reu_input" name="reu"/>     
-                           <span class="help-inline "><a rel="tooltip" data-placement="top" data-original-title="Adicionar um Réu não cadastrado" class="pessoa-modal tooltip_class" data-toggle="modal" href="#myModal"><i id="autor-modal" class="icon-plus"></i></a></span> 
+                            <span class="help-inline "><a rel="tooltip" data-placement="top" data-original-title="Adicionar um Réu não cadastrado" class="pessoa-modal tooltip_class" data-toggle="modal" href="#myModal"><i id="autor-modal" class="icon-plus"></i></a></span> 
                             <div id="autocompleteReu" class="autocompleteBox"></div>
                         </div>                 
                     </div>
@@ -255,10 +255,10 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                     <div id="auto_penhora" class="control-group">
                         <label class="control-label" for="auto_penhora">Auto da Penhora</label>
                         <div class="controls">
-                           
-                                <input type="text" class="input-xlarge" id="auto_penhora_input" name="auto_penhora" />                       
-                                <span  class="help-inline ">O valor deve ter vírgula Ex: 1200,00</span>
-                            
+
+                            <input type="text" class="input-xlarge" id="auto_penhora_input" name="auto_penhora" />                       
+                            <span  class="help-inline ">O valor deve ter vírgula Ex: 1200,00</span>
+
                         </div>
                     </div>
                 </div>
@@ -357,7 +357,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                         <span  class="help-inline ">Mínimo 4 dígitos</span>                    
                     </div>
                 </div>
-                
+
 
                 <div id="cidade" class="control-group ">
                     <label class="control-label" for="cidade">Cidade</label>
@@ -383,7 +383,7 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
                         <span  class="help-inline "></span>
                     </div>
                 </div>
-                
+
                 <div id="endereco"class="control-group ">
                     <label class="control-label" for="endereco">Endereço</label>
                     <div class="controls">
@@ -440,16 +440,15 @@ $resultado_natureza = pg_fetch_object($pesq_natureza);
         </div>
     </div>
 
+<?php
+require_once '../template/help/help-cadastrar-processo.php'; //chama scripts comuns as paginas
+?>
+
 </body>
 
-
-
-
-
-
-    <?php
-    require_once '../template/scripts.php'; //chama scripts comuns as paginas
-    require_once 'script_cadastrar_processo.php'; //chama o script da página
-    ?>
+<?php
+require_once '../template/scripts.php'; //chama scripts comuns as paginas
+require_once 'script_cadastrar_processo.php'; //chama o script da página
+?>
 
 

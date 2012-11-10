@@ -26,7 +26,7 @@ else {
             </a> 
         </div>   
         <div class ="direita">
-           <input id="busca-input" type="text" class="input-medium search-query" placeholder="Filtro">
+           <input id="busca-input" type="text" class="input-medium search-query" placeholder="Pesquisa">
         </div>
         <br/>
     </div>

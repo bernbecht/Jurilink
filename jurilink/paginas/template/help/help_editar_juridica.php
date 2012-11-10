@@ -16,17 +16,17 @@
         <div id="content_help">
 
             <div class="page-header">
-                <h1>Cadastrar Pessoa Jurídica<button id="ativa_video_help_btn" class="btn btn-info pull-right voltarTextoHelpBtn"><i class="icon-play-circle icon-white"></i> Vídeo</button></h1>
+                <h1>Editar Pessoa Jurídica<button id="ativa_video_help_btn" class="btn btn-info pull-right voltarTextoHelpBtn"><i class="icon-play-circle icon-white"></i> Vídeo</button></h1>
             </div>
             <p>
-                Nesta tela é possível cadastrar uma ou mais <span class="label label-info">pessoas jurídicas</span>
+                Nesta tela é possível editar os dados cadastrais de uma <span class="label label-info">pessoa jurídica</span>
                 no sistema.
             </p>
             <div class="page-header">
                 <h1>Campos do Formulário </h1>
             </div>
             <p>
-                Para cadastrar uma nova pessoa jurídica é necessário preencher pelo menos os campos obrigatórios indicicados pela cor
+                Para editar uma pessoa jurídica é necessário preencher pelo menos os campos obrigatórios indicicados pela cor
                 amarela.
 
             <h3>Descrição dos Campos do Formulário</h3>
@@ -67,11 +67,9 @@
             <dl>
                 <dt>Salvar</dt>
                 <dd>Adiciona a pessoa ao sistema e retorna à tela com a relação das pessoas jurídicas cadastradas no
-                    sistema.</dd>
-                <dt>Salvar e Adicionar Outro</dt>
-                <dd>Adiciona a pessoa ao sistema e limpa o formulário para que se possa adicionar outra pessoa.</dd>
+                    sistema.</dd>          
                 <dt>Cancelar</dt>
-                <dd>Cancela a operação e retorna à tela com a relação das pessoas jurídicas cadastradas no sistema.</dd>            
+                <dd>Cancela a operação e retorna à tela com os dados cadastrais desta pessoa.</dd>            
             </dl>
         </div>
     </div>

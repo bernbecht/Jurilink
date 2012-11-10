@@ -71,6 +71,11 @@ require_once '../config.php';     //chama as configurações de página!
             <button id ="nome" type="button" class="btn btn-primary ok-modal-natureza">OK</button>
         </div>
     </div>
+</div>
+
+<?php
+require_once '../template/help/help_relacao_natureza.php'; 
+?>
 
 </body>
 <?php

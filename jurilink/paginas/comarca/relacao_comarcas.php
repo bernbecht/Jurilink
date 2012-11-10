@@ -77,11 +77,13 @@ require_once '../config.php';     //chama as configurações de página!
     </div>
 </div>
 
+<?php
+require_once '../template/help/help_relacao_comarca.php'; 
+?>
 
 </body>
 <?php
 require_once '../template/scripts.php'; //chama scripts comuns as paginas
 require_once 'script_relacao_comarca.php'; //chama scripts comuns as paginas
-//require_once 'scripts_comarca.php'; //chama scripts comuns as paginas
 ?>
 </html>
